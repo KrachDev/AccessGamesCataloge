@@ -7,7 +7,7 @@
   <title>AccessGames — كتالوج الألعاب</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <style>
     *,
@@ -15,320 +15,390 @@
     *::after {
       box-sizing: border-box;
       margin: 0;
-      padding: 0
+      padding: 0;
     }
 
     :root {
-      --bg: #0a0c10;
-      --bg2: #111420;
-      --bg3: #181c2a;
-      --accent: #00d4ff;
-      --accent2: #7c3aed;
-      --new: #f59e0b;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --border: #1e2740;
-      --card: #13172180;
-      --radius: 12px;
+      --bg: #07090f;
+      --bg2: #0d1018;
+      --bg3: #121620;
+      --surface: #161b26;
+      --border: #1e2535;
+      --border2: #263044;
+      --accent: #00d9ff;
+      --accent-d: #0099bb;
+      --feat: #f59e0b;
+      --feat-d: #c97d08;
+      --text: #e8edf5;
+      --muted: #5a6880;
+      --muted2: #8898aa;
+      --radius: 10px;
+      --radius-lg: 16px;
     }
 
     body {
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'Outfit', 'Tajawal', sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* animated grid bg */
+    /* subtle noise grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .7;
+    }
+
+    /* faint grid */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(0, 217, 255, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, .025) 1px, transparent 1px);
+      background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
     }
 
-    .container {
+    .wrap {
       position: relative;
       z-index: 1;
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 20px
+      padding: 0 24px;
     }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header {
-      padding: 28px 0 20px;
-      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(10, 12, 16, 0.92);
-      backdrop-filter: blur(12px);
-      z-index: 100;
+      z-index: 200;
+      background: rgba(7, 9, 15, .88);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
     }
 
-    .header-inner {
+    .header-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      gap: 20px;
+      padding: 16px 0;
       flex-wrap: wrap;
     }
 
-    .logo {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), #0070ff);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px rgba(0, 217, 255, .3);
+      flex-shrink: 0;
+    }
+
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
+      color: #fff;
+    }
+
+    .brand-text {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 700;
       color: #fff;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      letter-spacing: .5px;
     }
 
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-      animation: pulse 2s ease-in-out infinite;
+    .brand-text span {
+      color: var(--accent);
     }
 
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-
-      50% {
-        opacity: .6;
-        transform: scale(1.3)
-      }
-    }
-
-    .tagline {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px
-    }
-
-    /* SEARCH */
-    .search-wrap {
-      display: flex;
-      align-items: center;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0 14px;
-      gap: 10px;
+    .header-search {
       flex: 1;
-      max-width: 360px;
-      transition: border-color .2s;
+      min-width: 200px;
+      max-width: 440px;
+      position: relative;
     }
 
-    .search-wrap:focus-within {
-      border-color: var(--accent)
-    }
-
-    .search-wrap svg {
+    .header-search svg {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
       color: var(--muted);
-      flex-shrink: 0;
       width: 16px;
-      height: 16px
+      height: 16px;
+      pointer-events: none;
+      transition: color .2s;
     }
 
     #search {
-      background: none;
-      border: none;
-      outline: none;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
       color: var(--text);
       font-family: 'Tajawal', sans-serif;
       font-size: 14px;
-      width: 100%;
-      padding: 11px 0;
+      padding: 10px 42px 10px 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
       direction: rtl;
     }
 
     #search::placeholder {
-      color: var(--muted)
-    }
-
-    /* STATS BAR */
-    .stats {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      padding: 14px 0;
-      font-size: 13px;
       color: var(--muted);
-      flex-wrap: wrap;
     }
 
-    .stat {
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 217, 255, .1);
+    }
+
+    #search:focus~svg {
+      color: var(--accent);
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .stat-item {
       display: flex;
       align-items: center;
-      gap: 6px
+      gap: 8px;
+      padding: 10px 24px 10px 0;
+      white-space: nowrap;
+      font-size: 13px;
+      color: var(--muted2);
     }
 
-    .stat-val {
-      color: var(--accent);
+    .stat-item:not(:last-child) {
+      margin-left: 24px;
+      border-left: 1px solid var(--border);
+      padding-left: 24px;
+    }
+
+    .stat-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
       font-weight: 700;
-      font-size: 15px
+      line-height: 1;
     }
 
-    /* FILTERS */
-    .filters {
+    .stat-num.cyan {
+      color: var(--accent);
+    }
+
+    .stat-num.amber {
+      color: var(--feat);
+    }
+
+    /* ── FILTERS ── */
+    .filters-bar {
       display: flex;
       gap: 8px;
+      padding: 14px 0;
       flex-wrap: wrap;
-      padding: 4px 0 16px;
+      align-items: center;
     }
 
-    .filter-btn {
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: transparent;
+    .filters-label {
+      font-size: 12px;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--muted2);
       font-family: 'Tajawal', sans-serif;
       font-size: 13px;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .18s;
+      white-space: nowrap;
     }
 
-    .filter-btn:hover {
+    .pill:hover {
       border-color: var(--accent);
-      color: var(--accent)
+      color: var(--accent);
     }
 
-    .filter-btn.active {
+    .pill.active {
       background: var(--accent);
       color: #000;
       border-color: var(--accent);
       font-weight: 700;
     }
 
-    .filter-btn.new-filter.active {
-      background: var(--new);
-      border-color: var(--new);
-      color: #000
+    .pill.feat-pill.active {
+      background: var(--feat);
+      border-color: var(--feat);
+      color: #000;
     }
 
-    /* GRID */
+    /* ── RESULTS LABEL ── */
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .results-row strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── GRID ── */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-      padding-bottom: 60px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+      padding-bottom: 80px;
     }
 
-    /* CARD */
+    /* ── CARD ── */
     .card {
-      background: var(--card);
+      background: var(--bg2);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0;
-      cursor: pointer;
-      transition: transform .18s, border-color .18s, box-shadow .18s;
-      position: relative;
+      border-radius: var(--radius-lg);
       overflow: hidden;
+      cursor: default;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
       animation: fadeUp .4s both;
       display: flex;
       flex-direction: column;
-    }
-
-    .card-img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-      background: var(--bg2);
-    }
-
-    .card-content {
-      padding: 18px 16px 14px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), transparent 60%);
-      opacity: 0;
-      transition: opacity .2s;
-      pointer-events: none;
+      position: relative;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 212, 255, 0.4);
-      box-shadow: 0 8px 32px rgba(0, 212, 255, 0.08);
+      transform: translateY(-5px);
+      border-color: rgba(0, 217, 255, .35);
+      box-shadow: 0 12px 40px rgba(0, 217, 255, .07), 0 4px 12px rgba(0, 0, 0, .4);
     }
 
-    .card:hover::before {
-      opacity: 1
+    .card.feat {
+      border-color: rgba(245, 158, 11, .2);
     }
 
-    .card.new-game {
-      border-color: rgba(245, 158, 11, 0.25)
-    }
-
-    .card.new-game:hover {
-      border-color: rgba(245, 158, 11, 0.6);
-      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.1)
-    }
-
-    .card.new-game::before {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), transparent 60%)
+    .card.feat:hover {
+      border-color: rgba(245, 158, 11, .5);
+      box-shadow: 0 12px 40px rgba(245, 158, 11, .08), 0 4px 12px rgba(0, 0, 0, .4);
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(16px)
+        transform: translateY(18px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0);
       }
     }
 
-    .badge-new {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: var(--new);
-      color: #000;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: 4px;
-      letter-spacing: .5px;
+    /* cover */
+    .card-cover {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      background: var(--bg3);
+      flex-shrink: 0;
     }
 
-    .game-name {
+    .card-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s;
+    }
+
+    .card:hover .card-cover img {
+      transform: scale(1.04);
+    }
+
+    .cover-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          transparent 40%,
+          rgba(7, 9, 15, .6) 70%,
+          rgba(7, 9, 15, .95) 100%);
+    }
+
+    /* badge */
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      padding: 3px 9px;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    .badge-feat {
+      background: var(--feat);
+      color: #000;
+    }
+
+    /* card body */
+    .card-body {
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+
+    .game-title {
+      font-family: 'Rajdhani', sans-serif;
       font-size: 15px;
       font-weight: 700;
       color: #fff;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      padding-left: 0;
-    }
-
-    .card.new-game .game-name {
-      padding-top: 4px
+      line-height: 1.25;
+      direction: ltr;
+      text-align: right;
     }
 
     /* editions */
@@ -336,287 +406,215 @@
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
-      margin-bottom: 14px;
     }
 
-    .edition-tag {
+    .ed-tag {
+      font-family: 'Outfit', sans-serif;
       font-size: 11px;
+      font-weight: 500;
       padding: 3px 9px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all .15s;
+      border-radius: 5px;
+      border: 1px solid var(--border2);
+      color: var(--muted2);
       cursor: pointer;
-      font-family: 'Tajawal', sans-serif;
+      transition: all .15s;
+      direction: ltr;
     }
 
-    .edition-tag:hover,
-    .edition-tag.selected {
+    .ed-tag:hover {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(0, 212, 255, 0.08);
     }
 
-    .card.new-game .edition-tag:hover,
-    .card.new-game .edition-tag.selected {
-      border-color: var(--new);
-      color: var(--new);
-      background: rgba(245, 158, 11, 0.08);
+    .ed-tag.sel {
+      background: rgba(0, 217, 255, .12);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    /* price + cta */
+    .card.feat .ed-tag:hover {
+      border-color: var(--feat);
+      color: var(--feat);
+    }
+
+    .card.feat .ed-tag.sel {
+      background: rgba(245, 158, 11, .1);
+      border-color: var(--feat);
+      color: var(--feat);
+    }
+
+    /* footer */
     .card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: auto;
       border-top: 1px solid var(--border);
-      padding-top: 12px;
+      padding-top: 10px;
+      margin-top: auto;
+    }
+
+    .price-wrap {}
+
+    .price-label {
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 1px;
+      font-family: 'Tajawal', sans-serif;
     }
 
     .price {
       font-family: 'Rajdhani', sans-serif;
       font-size: 22px;
       font-weight: 700;
+      line-height: 1;
       color: var(--accent);
     }
 
-    .card.new-game .price {
-      color: var(--new)
-    }
-
-    .price-label {
-      font-size: 11px;
-      color: var(--muted);
-      display: block;
-      line-height: 1
+    .card.feat .price {
+      color: var(--feat);
     }
 
     .wa-btn {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #25d366;
+      background: #1db954;
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 8px 14px;
+      padding: 8px 13px;
       font-family: 'Tajawal', sans-serif;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: background .15s, transform .1s;
       text-decoration: none;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      white-space: nowrap;
     }
 
     .wa-btn:hover {
-      background: #1ebe5d;
-      transform: scale(1.04)
-    }
-
-    .wa-btn:active {
-      transform: scale(.97)
+      background: #1ed760;
+      transform: scale(1.04);
+      box-shadow: 0 4px 14px rgba(29, 185, 84, .35);
     }
 
     .wa-btn svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
     }
 
-    /* EMPTY */
+    /* cover placeholder */
+    .cover-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg3);
+      color: var(--border2);
+    }
+
+    .cover-ph svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* ── EMPTY STATE ── */
     .empty {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 60px 20px;
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 80px 20px;
       color: var(--muted);
+      text-align: center;
     }
 
     .empty svg {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 16px;
-      opacity: .4
+      width: 52px;
+      height: 52px;
+      opacity: .3;
     }
 
-    /* MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .7);
-      backdrop-filter: blur(4px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-overlay.open {
-      display: flex
-    }
-
-    .modal {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      max-width: 420px;
-      width: 90%;
-      animation: modalIn .2s ease;
-    }
-
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: scale(.94)
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1)
-      }
-    }
-
-    .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 6px
-    }
-
-    .modal-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px
-    }
-
-    .modal-game {
+    .empty h3 {
       font-size: 16px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 4px
+      color: var(--muted2);
+      font-weight: 600;
     }
 
-    .modal-edition {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px
-    }
-
-    .modal-select-label {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px
-    }
-
-    .modal-editions {
+    /* ── LOADING ── */
+    .loader {
+      grid-column: 1 / -1;
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px
-    }
-
-    .modal-ed-btn {
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      font-family: 'Tajawal', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all .15s;
-    }
-
-    .modal-ed-btn.active {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-      font-weight: 700
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 4px
-    }
-
-    .modal-wa {
-      flex: 1;
-      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: #25d366;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 12px;
-      font-family: 'Tajawal', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background .15s;
-      text-decoration: none;
-    }
-
-    .modal-wa:hover {
-      background: #1ebe5d
-    }
-
-    .modal-close {
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: transparent;
+      gap: 16px;
+      padding: 80px 20px;
       color: var(--muted);
-      font-family: 'Tajawal', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all .15s;
     }
 
-    .modal-close:hover {
-      border-color: var(--muted);
-      color: var(--text)
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
     }
 
-    /* scrollbar */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar {
-      width: 6px
+      width: 5px;
     }
 
     ::-webkit-scrollbar-track {
-      background: var(--bg)
+      background: var(--bg);
     }
 
     ::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 3px
+      background: var(--border2);
+      border-radius: 3px;
     }
 
-    /* responsive */
-    @media(max-width:600px) {
-      .header-inner {
-        gap: 12px
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 0 14px;
       }
 
-      .logo {
-        font-size: 20px
+      .brand-text {
+        font-size: 18px;
       }
 
-      .search-wrap {
+      .header-search {
         max-width: 100%;
-        flex: unset;
-        width: 100%
+        min-width: 0;
+        flex: 1 1 100%;
+        order: 3;
       }
 
       .grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 10px
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 11px;
       }
 
-      .card {
-        padding: 14px 12px 12px
+      .stat-item {
+        padding: 8px 14px 8px 0;
+      }
+
+      .stat-item:not(:last-child) {
+        margin-left: 14px;
+        padding-left: 14px;
       }
     }
   </style>
@@ -625,182 +623,205 @@
 <body>
 
   <header>
-    <div class="container">
-      <div class="header-inner">
-        <div>
-          <div class="logo">
-            <span class="logo-dot"></span>
-            AccessGames
+    <div class="wrap">
+      <div class="header-row">
+        <a class="brand" href="#">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="3" />
+              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
+            </svg>
           </div>
-          <div class="tagline">110 لعبة بأفضل الأسعار — تفعيل أوفلاين فوري</div>
-        </div>
-        <div class="search-wrap">
+          <div class="brand-text">Access<span>Games</span></div>
+        </a>
+
+        <div class="header-search">
+          <input type="text" id="search" placeholder="ابحث عن لعبة..." autocomplete="off">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
           </svg>
-          <input type="text" id="search" placeholder="ابحث عن لعبة..." autocomplete="off">
         </div>
       </div>
-      <div class="stats">
-        <div class="stat"><span class="stat-val" id="total-count">110</span><span>لعبة متاحة</span></div>
-        <div class="stat"><span class="stat-val">40</span><span>درهم — الألعاب العادية</span></div>
-        <div class="stat"><span class="stat-val" style="color:var(--new)">60</span><span>درهم — الألعاب الجديدة</span>
+
+      <div class="stats-strip">
+        <div class="stat-item">
+          <span class="stat-num cyan" id="total-count">—</span>
+          <span>لعبة متاحة</span>
         </div>
-      </div>
-      <div class="filters">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn new-filter" data-filter="new">🆕 جديدة</button>
-        <button class="filter-btn" data-filter="40">40 درهم</button>
-        <button class="filter-btn" data-filter="60">60 درهم</button>
+        <div class="stat-item">
+          <span class="stat-num cyan">40</span>
+          <span>درهم — الألعاب العادية</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num amber">60</span>
+          <span>درهم — المميزة</span>
+        </div>
+        <div class="stat-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="color:var(--accent)">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+          <span>تفعيل أوفلاين فوري</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <div class="container">
-    <div class="grid" id="grid"></div>
-  </div>
+  <div class="wrap">
+    <div class="filters-bar">
+      <span class="filters-label">تصفية</span>
+      <button class="pill active" data-f="all">الكل</button>
+      <button class="pill feat-pill" data-f="feat">⭐ مميزة</button>
+      <button class="pill" data-f="40">40 د</button>
+      <button class="pill" data-f="60">60 د</button>
+    </div>
 
-  <!-- Modal -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal">
-      <div class="modal-title">اطلب اللعبة عبر واتساب</div>
-      <div class="modal-subtitle">اختر الإصدار وسنتواصل معك فوراً</div>
-      <div class="modal-game" id="modal-game-name"></div>
-      <div class="modal-select-label">اختر الإصدار:</div>
-      <div class="modal-editions" id="modal-editions"></div>
-      <div class="modal-actions">
-        <a class="modal-wa" id="modal-wa-link" href="#" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-          اطلب الآن
-        </a>
-        <button class="modal-close" id="modal-close">إلغاء</button>
+    <div class="results-row">
+      <span id="results-label"></span>
+    </div>
+
+    <div class="grid" id="grid">
+      <div class="loader">
+        <div class="spinner"></div>
+        <span>جاري تحميل الكتالوج…</span>
       </div>
     </div>
   </div>
 
   <script>
-    // ── CONFIG — change these ──────────────────────────────────────────────
-    const WA_NUMBER = '212659978011'; // your WhatsApp number with country code, no +
-    const PLATFORM = 'PC (Offline)'; // default platform shown in message
-    // ──────────────────────────────────────────────────────────────────────
+    const WA = '212659978011';
+    const PLATFORM = 'PC (Offline)';
 
-    const CATALOG = [{ "name": "Alan Wake 2", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Anno", "tier": "low", "editions": ["Standard", "Gold"], "prices": { "Standard": 40, "Gold": 50 } }, { "name": "Armored Core VI: Fires of Rubicon", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Assassin\u2019s Creed", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Assassin\u2019s Creed Shadows", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "Atlas Fallen", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Atomfall", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Avatar: Frontiers of Pandora", "tier": "low", "editions": ["Standard", "Gold", "Ultimate"], "prices": { "Standard": 40, "Gold": 50, "Ultimate": 50 } }, { "name": "Avowed", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "Baldur's Gate 3", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Battlefield", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "BeamNG.drive", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Black Myth: Wukong", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Borderlands 4", "tier": "low", "editions": ["Standard", "Deluxe", "Super Deluxe"], "prices": { "Standard": 40, "Deluxe": 50, "Super Deluxe": 50 } }, { "name": "Clair Obscur: Expedition 33", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Code Vein II", "tier": "high", "editions": ["Standard", "Deluxe", "Ultimate"], "prices": { "Standard": 60, "Deluxe": 70, "Ultimate": 70 } }, { "name": "Crimson Desert", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "Cronos: The New Dawn", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Cyberpunk 2077", "tier": "high", "editions": ["Standard"], "prices": { "Standard": 60 } }, { "name": "Dead Space", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Death Stranding", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Doom", "tier": "low", "editions": ["Standard", "Deluxe", "Premium"], "prices": { "Standard": 40, "Deluxe": 50, "Premium": 50 } }, { "name": "Dragon Age: The Veilguard", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Dragon's Dogma 2", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Dying Light", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "EA SPORTS FC 24", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "EA SPORTS FC 25", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "EA SPORTS FC 26", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Elden Ring", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Elden Ring Nightreign", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Elder Scrolls", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Enshrouded", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Europa Universalis V", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "F1 25", "tier": "low", "editions": ["Standard", "Premium", "Ultimate"], "prices": { "Standard": 40, "Premium": 50, "Ultimate": 50 } }, { "name": "Far Cry", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Final Fantasy XVI", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Football Manager", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Forza Horizon", "tier": "low", "editions": ["Standard", "Premium", "Ultimate"], "prices": { "Standard": 40, "Premium": 50, "Ultimate": 50 } }, { "name": "Forza Motorsport (2023)", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Ghost of Tsushima", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "God of War", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Grounded", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Hollow Knight", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Horizon", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Indiana Jones and the Great Circle", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "Jurassic World Evolution 3", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Killing Floor", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Kingdom Come: Deliverance", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Lies of P", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Life is Strange: Double Exposure", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Life is Strange: Reunion", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Little Nightmares", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Lords of the Fallen", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Lost Soul Aside", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Mafia", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Manor Lords", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Metal Gear", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Metaphor: ReFantazio", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "MiSide", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Monster Hunter Wilds", "tier": "low", "editions": ["Standard", "Deluxe", "Premium"], "prices": { "Standard": 40, "Deluxe": 50, "Premium": 50 } }, { "name": "Mortal Kombat 1", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "Ninja Gaiden 4", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Nioh 3", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Only Up!", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Outlast", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Persona", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Pragmata", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "R.E.P.O.", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Reanimal", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Remnant 2", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Resident Evil", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "Resident Evil 4", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "Resident Evil Requiem", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "Resident Evil Village", "tier": "high", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 60, "Deluxe": 70 } }, { "name": "RoboCop: Rogue City", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Sid Meier's Civilization 7", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Silent Hill 2", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Silent Hill f", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Sniper Elite", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Sonic Racing: CrossWorlds", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Sonic X Shadow Generations", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "South of Midnight", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "Spider-Man", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Split Fiction", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Star Wars", "tier": "low", "editions": ["Standard", "Gold"], "prices": { "Standard": 40, "Gold": 50 } }, { "name": "Starfield", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "Stellar Blade", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Tainted Grail: The Fall of Avalon", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "The Alters", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "The First Berserker: Khazan", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "The Last of Us", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "The Outer Worlds", "tier": "low", "editions": ["Standard", "Premium"], "prices": { "Standard": 40, "Premium": 50 } }, { "name": "The Witcher 3: Wild Hunt", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Titan Quest", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "Tomb Raider", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Uncharted", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Undisputed", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Until Dawn", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Vampire: The Masquerade - Bloodlines 2", "tier": "low", "editions": ["Standard", "Deluxe", "Premium"], "prices": { "Standard": 40, "Deluxe": 50, "Premium": 50 } }, { "name": "Wallpaper Engine", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Warhammer", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Warhammer 40,000: Space Marine 2", "tier": "low", "editions": ["Standard", "Ultimate"], "prices": { "Standard": 40, "Ultimate": 50 } }, { "name": "Watch Dogs", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Wuchang: Fallen Feathers", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }, { "name": "Yakuza", "tier": "low", "editions": ["Standard", "Deluxe"], "prices": { "Standard": 40, "Deluxe": 50 } }, { "name": "inZOI", "tier": "low", "editions": ["Standard"], "prices": { "Standard": 40 } }];
+    let CATALOG = [];
+    let filter = 'all';
+    let selEditions = {};
 
-    let currentFilter = 'all';
-    let selectedEditions = {};
+    function slugify(n) {
+      return n.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').trim();
+    }
 
-    function waLink(gameName, edition, price) {
-      const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${gameName}\n📦 ${edition} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم`;
-      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    function waHref(name, ed, price) {
+      const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${name}\n📦 ${ed} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم`;
+      return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     }
 
     function buildCard(game, idx) {
-      const isHigh = game.tier === 'high';
-      const selEd = selectedEditions[game.name] || game.editions[0];
-      const selPrice = game.prices[selEd];
-      const delay = Math.min(idx * 30, 600);
+      const isFeat = game.tier === 'high';
+      const selEd = selEditions[game.name] || game.editions[0];
+      const price = game.prices[selEd];
+      const delay = Math.min(idx * 25, 500);
+      const slug = slugify(game.name);
+      const safeId = game.name.replace(/[^a-z0-9]/gi, '_');
 
-      const editionBtns = game.editions.map(ed =>
-        `<span class="edition-tag${ed === selEd ? ' selected' : ''}" data-game="${game.name}" data-ed="${ed}">${ed} — ${game.prices[ed]}د</span>`
+      const edBtns = game.editions.map(ed =>
+        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د">${ed}</span>`
       ).join('');
 
-      const normName = game.name.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').trim();
-      const imgSrc = `assets/covers/${normName}.webp`;
-
       return `
-  <div class="card${isHigh ? ' new-game' : ''}" data-name="${game.name.toLowerCase()}" data-tier="${game.tier}" data-price="${selPrice}" style="animation-delay:${delay}ms">
-    <img src="${imgSrc}" loading="lazy" alt="${game.name}" class="card-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 300 450\\' fill=\\'%23111420\\'%3E%3Crect width=\\'300\\' height=\\'450\\'/%3E%3C/svg%3E'">
-    ${isHigh ? '<span class="badge-new">مميز</span>' : ''}
-    <div class="card-content">
-      <div class="game-name">${game.name}</div>
-      <div class="editions">${editionBtns}</div>
-      <div class="card-footer">
-        <div>
-          <span class="price-label">السعر</span>
-          <span class="price" id="price-${game.name.replace(/[^a-z0-9]/gi, '_')}">${selPrice} درهم</span>
+      <div class="card${isFeat ? ' feat' : ''}" style="animation-delay:${delay}ms">
+        <div class="card-cover">
+          <img src="assets/covers/${slug}.webp" loading="lazy" alt="${game.name}"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="cover-ph" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="6" width="20" height="12" rx="3"/>
+              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01"/>
+            </svg>
+          </div>
+          <div class="cover-gradient"></div>
+          ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         </div>
-        <a class="wa-btn" href="${waLink(game.name, selEd, selPrice)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          اطلب
-        </a>
-      </div>
-    </div>
-  </div>`;
+        <div class="card-body">
+          <div class="game-title">${game.name}</div>
+          <div class="editions">${edBtns}</div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <span class="price-label">السعر</span>
+              <span class="price" id="p_${safeId}">${price} <small style="font-size:13px;font-weight:500">د</small></span>
+            </div>
+            <a class="wa-btn" id="wa_${safeId}" href="${waHref(game.name, selEd, price)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              اطلب
+            </a>
+          </div>
+        </div>
+      </div>`;
     }
 
     function render() {
-      const q = document.getElementById('search').value.toLowerCase();
+      const q = document.getElementById('search').value.toLowerCase().trim();
       const grid = document.getElementById('grid');
 
-      let filtered = CATALOG.filter(g => {
+      let list = CATALOG.filter(g => {
         const matchQ = !q || g.name.toLowerCase().includes(q);
-        const basePrice = g.prices[g.editions[0]];
+        const base = g.prices[g.editions[0]];
         const matchF =
-          currentFilter === 'all' ? true :
-            currentFilter === 'new' ? g.tier === 'high' :
-              currentFilter === '40' ? basePrice === 40 :
-                currentFilter === '60' ? basePrice === 60 : true;
+          filter === 'all' ? true :
+            filter === 'feat' ? g.tier === 'high' :
+              filter === '40' ? base === 40 :
+                filter === '60' ? base === 60 : true;
         return matchQ && matchF;
       });
 
-      filtered.sort((a, b) => {
+      list.sort((a, b) => {
         if (a.tier === 'high' && b.tier !== 'high') return -1;
         if (a.tier !== 'high' && b.tier === 'high') return 1;
         return a.name.localeCompare(b.name);
       });
 
-      document.getElementById('total-count').textContent = filtered.length;
+      document.getElementById('total-count').textContent = list.length;
 
-      if (!filtered.length) {
+      const lbl = document.getElementById('results-label');
+      lbl.innerHTML = q
+        ? `عرض <strong>${list.length}</strong> نتيجة لـ "<strong>${q}</strong>"`
+        : `<strong>${list.length}</strong> لعبة`;
+
+      if (!list.length) {
         grid.innerHTML = `<div class="empty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <div>لا توجد نتائج لـ "${q}"</div>
-    </div>`;
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <h3>لا توجد نتائج</h3>
+          <span>جرب كلمة أخرى أو غيّر الفلتر</span>
+        </div>`;
         return;
       }
 
-      grid.innerHTML = filtered.map((g, i) => buildCard(g, i)).join('');
+      grid.innerHTML = list.map((g, i) => buildCard(g, i)).join('');
     }
 
-    // Edition selection
+    // Edition click delegation
     document.getElementById('grid').addEventListener('click', e => {
-      const tag = e.target.closest('.edition-tag');
-      if (tag) {
-        e.preventDefault();
-        e.stopPropagation();
-        const gameName = tag.dataset.game;
-        const ed = tag.dataset.ed;
-        selectedEditions[gameName] = ed;
+      const tag = e.target.closest('.ed-tag');
+      if (!tag) return;
+      e.preventDefault(); e.stopPropagation();
+      const gname = tag.dataset.game;
+      const ed = tag.dataset.ed;
+      const game = CATALOG.find(g => g.name === gname);
+      const price = game.prices[ed];
+      const safeId = gname.replace(/[^a-z0-9]/gi, '_');
+      selEditions[gname] = ed;
 
-        // find game data
-        const game = CATALOG.find(g => g.name === gameName);
-        const price = game.prices[ed];
+      tag.closest('.editions').querySelectorAll('.ed-tag').forEach(t => t.classList.remove('sel'));
+      tag.classList.add('sel');
 
-        // update siblings
-        tag.closest('.editions').querySelectorAll('.edition-tag').forEach(t => t.classList.remove('selected'));
-        tag.classList.add('selected');
+      const priceEl = document.getElementById('p_' + safeId);
+      if (priceEl) priceEl.innerHTML = `${price} <small style="font-size:13px;font-weight:500">د</small>`;
 
-        // update price display
-        const card = tag.closest('.card');
-        const priceEl = card.querySelector('.price');
-        if (priceEl) priceEl.textContent = price + ' درهم';
-
-        // update wa link
-        const waBtn = card.querySelector('.wa-btn');
-        waBtn.href = waLink(gameName, ed, price);
-      }
+      const waEl = document.getElementById('wa_' + safeId);
+      if (waEl) waEl.href = waHref(gname, ed, price);
     });
 
-    // Filter buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    // Filters
+    document.querySelectorAll('.pill').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
+        filter = btn.dataset.f;
         render();
       });
     });
@@ -808,16 +829,40 @@
     // Search
     document.getElementById('search').addEventListener('input', render);
 
-    // Modal
-    document.getElementById('modal-close').addEventListener('click', () => {
-      document.getElementById('modal').classList.remove('open');
-    });
-    document.getElementById('modal').addEventListener('click', e => {
-      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
-    });
+    // Load CSV
+    fetch('games.csv')
+      .then(r => r.text())
+      .then(csv => {
+        const lines = csv.split(/\r?\n/).filter(l => l.trim() !== '');
+        CATALOG = [];
+        // Skip header line (i = 1)
+        for (let i = 1; i < lines.length; i++) {
+          const parts = lines[i].split(',');
+          if (parts.length >= 3) {
+            const name = parts[0].trim();
+            const price = parseInt(parts[1].trim(), 10) || 0;
+            const tag = parts[2].trim();
 
-    // Initial render
-    render();
+            CATALOG.push({
+              name: name,
+              editions: ['Standard'],
+              prices: { 'Standard': price },
+              tier: (tag.includes('NEW') || price === 60) ? 'high' : 'normal'
+            });
+          }
+        }
+        render();
+      })
+      .catch(err => {
+        console.error("Error loading CSV:", err);
+        document.getElementById('grid').innerHTML = `<div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+          </svg>
+          <h3>تعذّر تحميل الكتالوج</h3>
+          <span>تأكد من وجود ملف games.csv</span>
+        </div>`;
+      });
   </script>
 </body>
 

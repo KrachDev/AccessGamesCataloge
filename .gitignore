@@ -1,0 +1,12 @@
+# Admin panel — keep out of public repo
+admin.html
+
+# Raw/intermediate data files
+games-raw.json
+
+# OS & editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo

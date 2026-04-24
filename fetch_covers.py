@@ -8,8 +8,8 @@ from PIL import Image
 API_KEY = "72b088fdc51f94e536039eb065bb8ae7"
 HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
-HTML_PATH = r"c:\Users\Kracher\Downloads\catalog_1.html"
-OUT_DIR = r"c:\Users\Kracher\Downloads\assets\covers"
+HTML_PATH = r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\index.html"
+OUT_DIR = r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\assets\covers"
 
 os.makedirs(OUT_DIR, exist_ok=True)
 

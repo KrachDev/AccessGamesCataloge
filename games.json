@@ -1,0 +1,1264 @@
+[
+  {
+    "name": "Alan Wake 2",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Anno",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Gold"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Gold": 40
+    }
+  },
+  {
+    "name": "Armored Core VI: Fires of Rubicon",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Assassin’s Creed",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Assassin’s Creed Shadows",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Atlas Fallen",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Atomfall",
+    "tier": "high",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 60,
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Avatar: Frontiers of Pandora",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard",
+      "Gold"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40,
+      "Gold": 40
+    }
+  },
+  {
+    "name": "Avowed",
+    "tier": "standard",
+    "editions": [
+      "Premium",
+      "Standard"
+    ],
+    "prices": {
+      "Premium": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Baldur's Gate 3",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Battlefield",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "BeamNG.drive",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Black Myth: Wukong",
+    "tier": "high",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Borderlands 4",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Clair Obscur: Expedition 33",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Code Vein II",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Crimson Desert",
+    "tier": "high",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 60,
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Cronos: The New Dawn",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Cyberpunk 2077",
+    "tier": "high",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Dead Space",
+    "tier": "high",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 60,
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Death Stranding",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Doom",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe",
+      "Premium"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40,
+      "Premium": 40
+    }
+  },
+  {
+    "name": "Dragon Age: The Veilguard",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Dragon's Dogma 2",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Dying Light",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "EA SPORTS FC 24",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "EA SPORTS FC 25",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "EA SPORTS FC 26",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "EA app",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Elden Ring Nightreign",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Elden Ring",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Elder Scrolls",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Enshrouded",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Epic Games",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Europa Universalis V",
+    "tier": "standard",
+    "editions": [
+      "Premium",
+      "Standard"
+    ],
+    "prices": {
+      "Premium": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "F1 25",
+    "tier": "standard",
+    "editions": [
+      "Premium",
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Premium": 40,
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Far Cry",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Final Fantasy XVI",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Complete"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Complete": 40
+    }
+  },
+  {
+    "name": "Football Manager",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Forza Horizon",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Premium",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Premium": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Forza Motorsport (2023)",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Ghost of Tsushima",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "God of War",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Grounded",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Hollow Knight",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Horizon",
+    "tier": "standard",
+    "editions": [
+      "Complete"
+    ],
+    "prices": {
+      "Complete": 40
+    }
+  },
+  {
+    "name": "Indiana Jones and the Great Circle",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Premium"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Premium": 40
+    }
+  },
+  {
+    "name": "Jurassic World Evolution 3",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Killing Floor",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Kingdom Come: Deliverance",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Lies of P",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Life is Strange: Double Exposure",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Life is Strange: Reunion",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Little Nightmares",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Lords of the Fallen",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Lost Soul Aside",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Mafia",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Manor Lords",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Metal Gear",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Metaphor: ReFantazio",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "MiSide",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Monster Hunter Wilds",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Mortal Kombat 1",
+    "tier": "standard",
+    "editions": [
+      "Premium",
+      "Standard"
+    ],
+    "prices": {
+      "Premium": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Ninja Gaiden 4",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Nioh 3",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Only Up!",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Other Games",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Premium",
+      "Standard",
+      "Ultimate"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Premium": 40,
+      "Standard": 40,
+      "Ultimate": 40
+    }
+  },
+  {
+    "name": "Outlast",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Persona",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Gold"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Gold": 40
+    }
+  },
+  {
+    "name": "Pragmata",
+    "tier": "high",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 60,
+      "Standard": 60
+    }
+  },
+  {
+    "name": "R.E.P.O.",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Reanimal",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Remnant 2",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Resident Evil 4",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Resident Evil",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Resident Evil Requiem",
+    "tier": "high",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 60,
+      "Standard": 60
+    }
+  },
+  {
+    "name": "Resident Evil Village",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "RoboCop: Rogue City",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Sid Meier's Civilization 7",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Silent Hill 2",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Silent Hill f",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Sniper Elite",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Sonic Racing: CrossWorlds",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Sonic X Shadow Generations",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "South of Midnight",
+    "tier": "standard",
+    "editions": [
+      "Premium",
+      "Standard"
+    ],
+    "prices": {
+      "Premium": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Spider-Man",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Split Fiction",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Star Wars",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Gold"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Gold": 40
+    }
+  },
+  {
+    "name": "Starfield",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Premium"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Premium": 40
+    }
+  },
+  {
+    "name": "Stellar Blade",
+    "tier": "standard",
+    "editions": [
+      "Complete",
+      "Standard"
+    ],
+    "prices": {
+      "Complete": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Tainted Grail: The Fall of Avalon",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "The Alters",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "The First Berserker: Khazan",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "The Last of Us",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "The Outer Worlds",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Premium"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Premium": 40
+    }
+  },
+  {
+    "name": "The Witcher 3: Wild Hunt",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Titan Quest",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Tomb Raider",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Uncharted",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Undisputed",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Until Dawn",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Uplay",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Gold"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Gold": 40
+    }
+  },
+  {
+    "name": "Vampire: The Masquerade - Bloodlines 2",
+    "tier": "standard",
+    "editions": [
+      "Standard",
+      "Premium",
+      "Deluxe"
+    ],
+    "prices": {
+      "Standard": 40,
+      "Premium": 40,
+      "Deluxe": 40
+    }
+  },
+  {
+    "name": "Wallpaper Engine",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Warhammer 40,000: Space Marine 2",
+    "tier": "standard",
+    "editions": [
+      "Ultimate",
+      "Standard"
+    ],
+    "prices": {
+      "Ultimate": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Warhammer",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Watch Dogs",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Wuchang: Fallen Feathers",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  },
+  {
+    "name": "Yakuza",
+    "tier": "standard",
+    "editions": [
+      "Deluxe",
+      "Standard"
+    ],
+    "prices": {
+      "Deluxe": 40,
+      "Standard": 40
+    }
+  },
+  {
+    "name": "inZOI",
+    "tier": "standard",
+    "editions": [
+      "Standard"
+    ],
+    "prices": {
+      "Standard": 40
+    }
+  }
+]
