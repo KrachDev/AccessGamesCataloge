@@ -694,12 +694,7 @@
     let selectedEditions = {};
 
     function waLink(gameName, edition, price) {
-      const normName = gameName.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').trim();
-      
-      // Using raw GitHub URL so WhatsApp can generate a link preview even when viewing the HTML locally
-      const imgSrc = `https://raw.githubusercontent.com/KrachDev/AccessGamesCataloge/main/assets/covers/${normName}.webp`;
-
-      const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${gameName}\n📦 ${edition} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم\n🖼️ غلاف اللعبة: ${imgSrc}`;
+      const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${gameName}\n📦 ${edition} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم`;
       return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
     }
 
