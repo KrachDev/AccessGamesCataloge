@@ -322,6 +322,15 @@
       box-shadow: 0 12px 40px rgba(245, 158, 11, .08), 0 4px 12px rgba(0, 0, 0, .4);
     }
 
+    .card.combo-card {
+      border-color: rgba(220, 38, 38, .3);
+    }
+
+    .card.combo-card:hover {
+      border-color: rgba(220, 38, 38, .6);
+      box-shadow: 0 12px 40px rgba(220, 38, 38, .15), 0 4px 12px rgba(0, 0, 0, .4);
+    }
+
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -380,6 +389,33 @@
     .badge-feat {
       background: var(--feat);
       color: #000;
+    }
+
+    .badge-combo {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: #fff;
+      left: 10px;
+      right: auto;
+    }
+
+    .combo-games-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--muted2);
+      direction: ltr;
+      text-align: right;
+      padding-top: 4px;
+      border-top: 1px dashed var(--border2);
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    .combo-item {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     /* card body */
@@ -676,6 +712,8 @@
       <button class="pill feat-pill" data-f="feat">⭐ مميزة</button>
       <button class="pill" data-f="40">40 د</button>
       <button class="pill" data-f="60">60 د</button>
+      <button class="pill" data-f="combo">مجموعات</button>
+      <button class="pill" data-f="single">فردية</button>
     </div>
 
     <div class="results-row">
@@ -705,6 +743,69 @@
     function waHref(name, ed, price) {
       const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${name}\n📦 ${ed} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم`;
       return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function buildComboGameCard(game, idx) {
+      const isFeat = game.tier === 'high';
+      const selEd = selEditions[game.name] || game.editions[0];
+      const price = game.prices[selEd];
+      const delay = Math.min(idx * 25, 500);
+      const slug = slugify(game.name);
+      const safeId = game.name.replace(/[^a-z0-9]/gi, '_');
+
+      const edBtns = game.editions.map(ed =>
+        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د">${ed}</span>`
+      ).join('');
+
+      let gamesListHtml = '';
+      let coverHtml = '';
+      const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='1.5'%3E%3Crect x='2' y='6' width='20' height='12' rx='3'/%3E%3Cpath d='M8 12h2m1-1v2M17 12h.01M14 12h.01'/%3E%3C/svg%3E";
+
+      if (game.combo_list && game.combo_list.length > 0) {
+        gamesListHtml = `<div class="combo-games-list">
+          ${game.combo_list.map(g => `<div class="combo-item">• ${g}</div>`).join('')}
+        </div>`;
+        
+        const coverGames = game.combo_list.slice(0, 3);
+        const colWidth = 100 / coverGames.length;
+        
+        const imgs = coverGames.map((g, i) => {
+          const cSlug = slugify(g);
+          const borderStyle = i > 0 ? 'border-right: 1px solid rgba(255,255,255,0.15);' : '';
+          return `<img src="assets/covers/${cSlug}.webp" loading="lazy" alt="${g}" style="width: ${colWidth}%; height: 100%; object-fit: cover; ${borderStyle}" onerror="this.src='${placeholder}'; this.onerror=null; this.style.objectFit='contain'; this.style.padding='20px';">`;
+        }).join('');
+        
+        coverHtml = `<div style="display: flex; width: 100%; height: 100%; flex-direction: row-reverse;">${imgs}</div>`;
+      } else {
+        coverHtml = `<img src="assets/covers/${slug}.webp" loading="lazy" alt="${game.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${placeholder}'; this.onerror=null; this.style.objectFit='contain'; this.style.padding='40px';">`;
+      }
+
+      return `
+      <div class="card combo-card${isFeat ? ' feat' : ''}" style="animation-delay:${delay}ms">
+        <div class="card-cover">
+          ${coverHtml}
+          <div class="cover-gradient"></div>
+          ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
+          <span class="badge badge-combo">مجموعة ألعاب</span>
+        </div>
+        <div class="card-body">
+          <div class="game-title">${game.name}</div>
+          ${gamesListHtml}
+          <div class="editions">${edBtns}</div>
+          <div class="card-footer">
+            <div class="price-wrap">
+              <span class="price-label">السعر</span>
+              <span class="price" id="p_${safeId}">${price} <small style="font-size:13px;font-weight:500">د</small></span>
+            </div>
+            <a class="wa-btn" id="wa_${safeId}" href="${waHref(game.name, selEd, price)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              اطلب
+            </a>
+          </div>
+        </div>
+      </div>`;
     }
 
     function buildCard(game, idx) {
@@ -763,7 +864,9 @@
           filter === 'all' ? true :
             filter === 'feat' ? g.tier === 'high' :
               filter === '40' ? base === 40 :
-                filter === '60' ? base === 60 : true;
+                filter === '60' ? base === 60 : 
+                  filter === 'combo' ? g.is_combo :
+                    filter === 'single' ? !g.is_combo : true;
         return matchQ && matchF;
       });
 
@@ -791,7 +894,7 @@
         return;
       }
 
-      grid.innerHTML = list.map((g, i) => buildCard(g, i)).join('');
+      grid.innerHTML = list.map((g, i) => g.is_combo ? buildComboGameCard(g, i) : buildCard(g, i)).join('');
     }
 
     // Edition click delegation
@@ -842,12 +945,24 @@
             const name = parts[0].trim();
             const price = parseInt(parts[1].trim(), 10) || 0;
             const tag = parts[2].trim();
+            const has_deluxe = parts[3] ? parts[3].trim() === 'True' : false;
+            const is_combo = parts[4] ? parts[4].trim() === 'True' : false;
+            const combo_list = parts[5] ? parts[5].trim() : '';
+
+            const editions = ['Standard'];
+            const prices = { 'Standard': price };
+            if (has_deluxe) {
+              editions.push('Deluxe');
+              prices['Deluxe'] = price + 10;
+            }
 
             CATALOG.push({
               name: name,
-              editions: ['Standard'],
-              prices: { 'Standard': price },
-              tier: (tag.includes('NEW') || price === 60) ? 'high' : 'normal'
+              editions: editions,
+              prices: prices,
+              tier: (tag.includes('NEW') || price === 60) ? 'high' : 'normal',
+              is_combo: is_combo,
+              combo_list: combo_list.split('|').map(s => s.trim()).filter(s => s)
             });
           }
         }

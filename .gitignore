@@ -1,6 +1,10 @@
 # Admin panel — keep out of public repo
 admin.html
 
+# Proxy server (contains API key)
+sgdb_proxy.py
+
+GG.csv
 # Raw/intermediate data files
 games-raw.json
 

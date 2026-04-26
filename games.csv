@@ -1,111 +1,192 @@
-game,sell_mad,tag
-Alan Wake 2,40,OLD
-Anno,40,OLD
-Armored Core Vi: Fires Of Rubicon,40,OLD
-Assassins Creed,40,OLD
-Assassins Creed Shadows,60,NEW/DENUVO
-Atlas Fallen,40,OLD
-Atomfall,60,NEW/DENUVO
-Avatar: Frontiers Of Pandora,40,OLD
-Avowed,40,OLD
-Baldurs Gate 3,40,OLD
-Battlefield,40,OLD
-Beamngdrive,40,OLD
-Black Myth: Wukong,40,OLD
-Borderlands 4,60,NEW/DENUVO
-Clair Obscur: Expedition 33,40,OLD
-Code Vein Ii,60,NEW/DENUVO
-Crimson Desert,60,NEW/DENUVO
-Cronos: The New Dawn,40,OLD
-Cyberpunk 2077,60,NEW/DENUVO
-Dead Space,60,NEW/DENUVO
-Death Stranding,40,OLD
-Doom,40,OLD
-Dragon Age: The Veilguard,40,OLD
-Dragons Dogma 2,40,OLD
-Dying Light,40,OLD
-Ea Sports Fc 24,40,OLD
-Ea Sports Fc 25,40,OLD
-Ea Sports Fc 26,40,OLD
-Ea App,40,OLD
-Elden Ring Nightreign,40,OLD
-Elden Ring,40,OLD
-Elder Scrolls,40,OLD
-Enshrouded,40,OLD
-Epic Games,40,OLD
-Europa Universalis V,40,OLD
-F1 25,40,OLD
-Far Cry,40,OLD
-Final Fantasy Xvi,40,OLD
-Football Manager,40,OLD
-Forza Horizon,40,OLD
-Forza Motorsport,40,OLD
-Ghost Of Tsushima,40,OLD
-God Of War,40,OLD
-Grounded,40,OLD
-Hollow Knight,40,OLD
-Horizon,40,OLD
-Indiana Jones And The Great Circle,40,OLD
-Jurassic World Evolution 3,40,OLD
-Killing Floor,40,OLD
-Kingdom Come: Deliverance,40,OLD
-Lies Of P,40,OLD
-Life Is Strange: Double Exposure,40,OLD
-Life Is Strange: Reunion,40,OLD
-Little Nightmares,40,OLD
-Lords Of The Fallen,40,OLD
-Lost Soul Aside,40,OLD
-Mafia,40,OLD
-Manor Lords,40,OLD
-Metal Gear,40,OLD
-Metaphor: Refantazio,40,OLD
-Miside,40,OLD
-Monster Hunter Wilds,40,OLD
-Mortal Kombat 1,40,OLD
-Ninja Gaiden 4,40,OLD
-Nioh 3,40,OLD
-Only Up,40,OLD
-Other Games,40,OLD
-Outlast,40,OLD
-Persona,40,OLD
-Pragmata,60,NEW/DENUVO
-Repo,40,OLD
-Reanimal,40,OLD
-Remnant 2,40,OLD
-Resident Evil 4,40,OLD
-Resident Evil,40,OLD
-Resident Evil Requiem,60,NEW/DENUVO
-Resident Evil Village,40,OLD
-Robocop: Rogue City,40,OLD
-Sid Meiers Civilization 7,40,OLD
-Silent Hill 2,40,OLD
-Silent Hill F,40,OLD
-Sniper Elite,40,OLD
-Sonic Racing: Crossworlds,40,OLD
-Sonic X Shadow Generations,40,OLD
-South Of Midnight,40,OLD
-Spiderman,40,OLD
-Split Fiction,40,OLD
-Star Wars,40,OLD
-Starfield,40,OLD
-Stellar Blade,40,OLD
-Tainted Grail: The Fall Of Avalon,40,OLD
-The Alters,40,OLD
-The First Berserker: Khazan,40,OLD
-The Last Of Us,40,OLD
-The Outer Worlds,40,OLD
-The Witcher 3: Wild Hunt,40,OLD
-Titan Quest,40,OLD
-Tomb Raider,40,OLD
-Uncharted,40,OLD
-Undisputed,40,OLD
-Until Dawn,40,OLD
-Uplay,40,OLD
-Vampire: The Masquerade Bloodlines 2,40,OLD
-Wallpaper Engine,40,OLD
-Warhammer 40000: Space Marine 2,40,OLD
-Warhammer,40,OLD
-Watch Dogs,40,OLD
-Wuchang: Fallen Feathers,40,OLD
-Yakuza,40,OLD
-Inzoi,40,OLD
+game,sell_mad,tag,has_deluxe,is_combo,combo_list
+Anno 117: Pax Romana,40,OLD,True,False,
+Assassin’s Creed Collection,40,OLD,True,True,Assassin’s Creed Chronicles: Trilogy | Shadows
+Assassin’s Creed Shadows,40,OLD,True,False,
+Atomfall,60,NEW/DENUVO,True,False,
+Avatar: Frontiers of Pandora,40,OLD,True,False,
+Black Myth: Wukong Collection,60,NEW/DENUVO,True,True,Black Myth: Wukong | Nightreign | Hunter Wilds
+Borderlands 4 Collection,40,OLD,True,True,Borderlands 4
+Borderlands Collection,40,OLD,True,True,Borderlands 3 | 4 | 2 | 1 | The Pre-Sequel
+Clair Obscur: Expedition 33,40,OLD,True,False,
+Code Vein II Collection,40,OLD,True,True,Code Vein II | I
+Crimson Desert Collection,60,NEW/DENUVO,True,True,Crimson Desert | Kingdom Come: Deliverance 2 | 1
+Cronos: The New Dawn,40,OLD,True,False,
+Cyberpunk 2077 Collection,60,NEW/DENUVO,True,True,Cyberpunk 2077 | Stellar Blade | Dispatch
+Death Stranding Collection,40,OLD,True,True,Death Stranding 2: On the Beach | Death Stranding 1
+Devil May Cry Collection,40,OLD,True,True,Devil May Cry 5 | Stellar Blade
+DmC: Devil May Cry (2013),40,OLD,True,False,
+Devil May Cry 4,40,OLD,True,False,
+Doom Collection,40,OLD,True,True,Doom Eternal | The Dark Ages | 2016 | All Another
+Dragon Age: The Veilguard,40,OLD,True,False,
+Dying Light Collection,40,OLD,True,True,Dying Light: The Beast | 2 | 1
+EA SPORTS FC 25 Collection,40,OLD,True,True,FC 26 | FC 25
+EA SPORTS FC 26 Collection,40,OLD,True,True,FC 26 | FC 25
+EA app Collection,40,OLD,True,True,Need for Speed ​​Unbound
+Madden NFL 26,40,OLD,True,False,
+Star Wars Jedi: Survivor,40,OLD,True,False,
+Elden Ring Nightreign Collection,40,OLD,True,True,Elden Ring Nightreign | Black Myth Wukong
+F1 25 Collection,40,OLD,False,True,F1 (2025)
+Far Cry Collection,40,OLD,True,True,Far Cry 3: Blood Dragon | 4 | 5 | 6
+Final Fantasy XVI Collection,40,OLD,True,True,Final Fantasy XVI | Tactics | XV | IX | Rebirth | Remake VII
+Football Manager Collection,40,OLD,False,True,Football Manager 26 | In-Game Editor
+Football Manager 26,40,OLD,False,False,
+GTA 5 Online Collection,40,OLD,False,True,Grand Theft Auto V (GTA V / GTA 5) | RDR 2 | RDR 1
+Ghost of Tsushima Collection,40,OLD,True,True,Ghost of Tsushima | Black Myth Wukong
+God of War Collection,40,OLD,True,True,God of War (2018) | GoW Ragnarok
+Hollow Knight Collection,40,OLD,False,True,Hollow Knight: Silksong | Hollow Knight
+Horizon Collection,40,OLD,True,True,Horizon Forbidden West | Zero Dawn
+Indiana Jones and the Great Circle,40,OLD,True,False,
+Jurassic World Evolution 3 Collection,40,OLD,False,True,Jurassic World Evolution 3
+Jurassic World Evolution 3,40,OLD,True,False,
+Kingdom Come: Deliverance Collection,40,OLD,True,True,Kingdom Come: Deliverance 2 | 1
+Lies of P Collection,40,OLD,True,True,Lies of P | Black Myth Wukong | Stellar Blade
+Life is Strange: Double Exposure Collection,40,OLD,True,True,Life is Strange: Double Exposure
+Life is Strange: Reunion Collection,40,OLD,True,True,Life is Strange: Reunion
+Little Nightmares Collection,40,OLD,True,True,Little Nightmares 3 | 2 | 1 | Reanimal
+Mafia Collection,40,OLD,True,True,Mafia 2 (Classic) | 3 | 1 | Mafia: The Old Country
+Metal Gear Solid Δ: Snake Eater (2025),40,OLD,True,False,
+MindsEye Collection,40,OLD,True,True,MindsEye | Stellar Blade | Cyberpunk 2077
+Monster Hunter Wilds Collection,40,OLD,True,True,Monster Hunter Wilds | Monster Hunter Stories 3: Twisted Reflection
+Mortal Kombat 1 Collection,40,OLD,False,True,Mortal Kombat 1 | MK 11 | MK XL
+Mortal Kombat 11 Collection,40,OLD,True,True,Mortal Kombat 11 | Mortal Kombat 1 | MK XL
+Ninja Gaiden 4,40,OLD,True,False,
+Ninja Gaiden 4 Collection,40,OLD,True,True,Ninja Gaiden 4 | Mafia:The Old Country
+Nioh 3 Collection,40,OLD,True,True,Nioh 3 | Stellar Blade | Nier Automata
+Pragmata,40,OLD,True,False,
+Atomic Heart,40,OLD,True,False,
+Other Games Collection,40,OLD,True,True,Life is Strange: Reunion | Double Exposure | True Colors | Remastered Collection
+Sid Meier's Civilization 7,40,OLD,True,False,
+Black Myth: Wukong,40,OLD,True,False,
+The Outlast Trials,40,OLD,False,False,
+Painkiller Collection,40,OLD,True,True,Painkiller | DOOM: The Dark Ages
+Reanimal,40,OLD,True,False,
+Red Dead Redemption 2 Collection,40,OLD,False,True,Red Dead Redemption 2 (RDR 2 | RDR 1 | GTA V )
+Red Dead Redemption Collection,40,OLD,False,True,Red Dead Redemption 1 (RDR 1 | RDR 2 | GTA V )
+Resident Evil 4 Collection,40,OLD,True,True,Resident Evil 4 | Requiem | 2 | 3 | 7 | Village
+Resident Evil Collection,40,OLD,True,True,Resident Evil: Revelations 2 | Requiem | 2 | 3 | 4 | 7 | Village
+Resident Evil Requiem,60,NEW/DENUVO,False,False,
+Resident Evil Requiem Collection,60,NEW/DENUVO,True,True,Resident Evil Requiem | 4 | 3 | 2 | 7 | Village
+Resident Evil Village Collection,40,OLD,True,True,Resident Evil Village | Requiem | 2 | 3 | 4 | 7
+Rise of the Ronin Collection,40,OLD,False,True,Rise of the Ronin | Black Myth Wukong
+Silent Hill 2,40,OLD,True,False,
+Silent Hill f,40,OLD,True,False,
+South of Midnight,40,OLD,False,False,
+Spider-Man Collection,40,OLD,True,True,Spider-Man: Miles Morales
+Split Fiction Collection,40,OLD,False,True,Split Fiction | It Takes Two | A Way Out | Unravel Two
+Star Wars Jedi: Fallen Order,40,OLD,True,False,
+Star Wars Outlaws,40,OLD,True,False,
+Stellar Blade Collection,40,OLD,True,True,Stellar Blade | NieR: Automata | Replicant
+The Dark Pictures Anthology: Season One,40,OLD,False,False,
+The Dark Pictures Collection,40,OLD,False,True,ALL - The Dark Pictures: The Devil in Me | Little Nightmares | Reanimal
+The First Berserker: Khazan Collection,40,OLD,True,True,The First Berserker: Khazan | Black Myth Wukong
+The Last of Us Collection,40,OLD,True,True,The Last of Us Part 1 | Part 2
+The Outer Worlds Collection,40,OLD,True,True,The Outer Worlds 2 | Black Myth Wukong
+The Witcher 3: Wild Hunt Collection,40,OLD,True,True,The Witcher 3 | 2 | 1 | Cyberpunk 2077
+Tomb Raider Collection,40,OLD,True,True,Shadow of the Tomb Raider
+Uncharted Collection,40,OLD,False,True,Uncharted: Legacy of Thieves Collection | Wuchang | Death Stranding
+Until Dawn,40,OLD,False,False,
+Assassin’s Creed Mirage,40,OLD,True,False,
+Uplay Collection,40,OLD,True,True,Assassin’s Creed Shadows | DLC
+Vampire: The Masquerade - Bloodlines 2,40,OLD,True,False,
+Watch Dogs Collection,40,OLD,True,True,Watch Dogs: Legion | 2 | 1 | All Assassin’s Creed | Far Cry | Avatar
+Wuchang: Fallen Feathers Collection,40,OLD,True,True,Wuchang: Fallen Feathers | Black Myth Wukong
+Yakuza Collection,40,OLD,True,True,Yakuza Kiwami 3 | Dark Ties | Yakuza in Hawaii
+Like a Dragon: Pirate Yakuza in Hawaii,40,OLD,True,False,
+inZOI Collection,40,OLD,False,True,inZOI | Stellar Blade | Cyberpunk 2077
+Alan Wake 2,40,OLD,False,False,
+Armored Core Vi: Fires Of Rubicon,40,OLD,False,False,
+Atlas Fallen,40,OLD,False,False,
+Avowed,40,OLD,False,False,
+Baldurs Gate 3,40,OLD,False,False,
+Beamngdrive,40,OLD,False,False,
+Borderlands 4,60,NEW/DENUVO,True,True,Borderlands 4 | All Previous Parts/Others
+Code Vein Ii,60,NEW/DENUVO,True,True,Code Vein II | I
+Crimson Desert,60,NEW/DENUVO,True,True,Crimson Desert | All Resident Evil | All Previous Parts/Others
+Cyberpunk 2077,40,OLD,True,True,Cyberpunk 2077 | Stellar Blade | Dispatch
+Dead Space Remake,40,OLD,False,False,
+Death Stranding,40,OLD,True,True,Death Stranding 2: On the Beach | Death Stranding 1
+Dragons Dogma 2,40,OLD,False,False,
+Dying Light,40,OLD,True,True,Dying Light: The Beast | 2 | 1
+Ea Sports Fc 24,40,OLD,False,False,
+Ea Sports Fc 25,40,OLD,True,True,FC 26 | FC 25
+Ea Sports Fc 26,40,OLD,True,True,FC 26 | FC 25
+Elden Ring Nightreign,40,OLD,True,True,Elden Ring Nightreign | Black Myth Wukong
+Elden Ring,40,OLD,False,False,
+Enshrouded,40,OLD,False,False,
+Europa Universalis V,40,OLD,False,False,
+F1 25,40,OLD,False,True,F1 (2025) | All Previous Parts/Others
+Final Fantasy Xvi,40,OLD,True,True,Final Fantasy XVI | Tactics | XV | IX | Rebirth | Remake VII
+Football Manager,40,OLD,False,True,Football Manager 26 | In-Game Editor
+Forza Horizon,40,OLD,False,False,
+Ghost Of Tsushima,40,OLD,True,True,Ghost of Tsushima | Black Myth Wukong
+God Of War,40,OLD,True,True,God of War (2018) | GoW Ragnarok
+Grounded,40,OLD,False,False,
+Hollow Knight,40,OLD,False,True,Hollow Knight: Silksong | Hollow Knight
+Horizon,40,OLD,True,True,Horizon Forbidden West | Zero Dawn
+Killing Floor,40,OLD,False,False,
+Kingdom Come: Deliverance,40,OLD,True,True,Kingdom Come: Deliverance 2 | 1
+Lies Of P,40,OLD,True,True,Lies of P | All Resident Evil | All Previous Parts/Others
+Life Is Strange: Double Exposure,40,OLD,True,True,Life is Strange: Double Exposure | All Previous Parts/Others
+Life Is Strange: Reunion,40,OLD,True,True,Life is Strange: Reunion | All Previous Parts/Others
+Little Nightmares,40,OLD,True,True,Little Nightmares 3 | 2 | 1 | Reanimal
+Lords Of The Fallen,40,OLD,False,False,
+Lost Soul Aside,40,OLD,False,False,
+Mafia,40,OLD,True,True,Mafia 2 (Classic) | 3 | 1 | Mafia: The Old Country
+Manor Lords,40,OLD,False,False,
+Metal Gear,40,OLD,True,False,
+Metaphor: Refantazio,40,OLD,False,False,
+Miside,40,OLD,False,False,
+Monster Hunter Wilds,40,OLD,True,True,Monster Hunter Wilds | Monster Hunter Stories 3: Twisted Reflection
+Mortal Kombat 1,40,OLD,False,True,Mortal Kombat 1 | MK 11 | MK XL
+Nioh 3,40,OLD,True,True,Nioh 3 | Stellar Blade | Nier Automata
+Only Up,40,OLD,False,False,
+Outlast,40,OLD,False,False,
+Persona,40,OLD,False,False,
+Repo,40,OLD,False,False,
+Remnant 2,40,OLD,False,False,
+Resident Evil 4,40,OLD,True,True,Resident Evil 4 | Requiem | 2 | 3 | 7 | Village | All Previous Parts/Others
+Resident Evil,40,OLD,True,True,Resident Evil: Revelations 2 | Requiem | 2 | 3 | 4 | 7 | Village | All Previous Parts/Others
+Resident Evil Village,40,OLD,True,True,Resident Evil Village | Requiem | 2 | 3 | 4 | 7 | All Previous Parts/Others
+Robocop: Rogue City,40,OLD,False,False,
+Sniper Elite,40,OLD,False,False,
+Sonic Racing: Crossworlds,40,OLD,False,False,
+Sonic X Shadow Generations,40,OLD,False,False,
+Spiderman,40,OLD,True,False,
+Split Fiction,40,OLD,False,True,Split Fiction | It Takes Two | A Way Out | Unravel Two
+Star Wars,40,OLD,True,False,
+Starfield,40,OLD,False,False,
+Stellar Blade,40,OLD,True,True,Stellar Blade | NieR: Automata | Replicant
+Tainted Grail: The Fall Of Avalon,40,OLD,False,False,
+The Alters,40,OLD,False,False,
+The First Berserker: Khazan,40,OLD,True,True,The First Berserker: Khazan | Black Myth Wukong
+The Last Of Us,40,OLD,True,True,The Last of Us Part 1 | Part 2
+The Outer Worlds,40,OLD,True,True,The Outer Worlds 2 | Black Myth Wukong
+The Witcher 3: Wild Hunt,40,OLD,True,True,The Witcher 3 | 2 | 1 | Cyberpunk 2077
+Titan Quest,40,OLD,False,False,
+Tomb Raider,40,OLD,True,True,Shadow of the Tomb Raider | All Previous Parts/Others
+Uncharted,40,OLD,False,True,Uncharted: Legacy of Thieves Collection | Wuchang | Death Stranding
+Undisputed,40,OLD,False,False,
+Wallpaper Engine,40,OLD,False,False,
+Warhammer 40000: Space Marine 2,40,OLD,False,False,
+Watch Dogs,40,OLD,True,True,Watch Dogs: Legion | 2 | 1 | All Assassin’s Creed | Far Cry | Avatar | All Previous Parts/Others
+Wuchang: Fallen Feathers,40,OLD,True,True,Wuchang: Fallen Feathers | Black Myth Wukong
+Inzoi,40,OLD,False,True,inZOI | Stellar Blade | Cyberpunk 2077
+Anno,40,OLD,True,False,
+Assassin’s Creed,40,OLD,True,True,Assassin’s Creed Chronicles: Trilogy | Shadows | All Previous Parts/Others
+Battlefield,40,OLD,True,True,Battlefield: Bad Company 2 | All Previous Parts/Others
+Borderlands,40,OLD,True,True,Borderlands 3 | 4 | 2 | 1 | All Previous Parts/Others
+Devil May Cry,40,OLD,True,True,Devil May Cry 5 | All Previous Parts/Others
+Doom,40,OLD,True,True,Doom Eternal | The Dark Ages | 2016 | All Another | All Previous Parts/Others
+EA app,40,OLD,True,True,Need for Speed ​​Unbound | All Previous Parts/Others
+Far Cry,40,OLD,True,True,Far Cry 3: Blood Dragon | 4 | 5 | 6 | All Previous Parts/Others
+GTA 5 Online,40,OLD,False,True,Grand Theft Auto V (GTA V / GTA 5) | RDR 2 | RDR 1
+MindsEye,40,OLD,True,True,MindsEye | Stellar Blade | Cyberpunk 2077
+Mortal Kombat 11,40,OLD,True,True,Mortal Kombat 11 | Mortal Kombat 1 | MK XL
+Other Games,40,OLD,True,True,Life is Strange: Reunion | Double Exposure | True Colors | Remastered Collection
+Painkiller,40,OLD,True,True,Painkiller | All Previous Parts/Others
+Red Dead Redemption 2,40,OLD,False,True,Red Dead Redemption 2 (RDR 2 | RDR 1 | GTA V )
+Red Dead Redemption,40,OLD,False,True,Red Dead Redemption 1 (RDR 1 | RDR 2 | GTA V )
+Rise of the Ronin,40,OLD,False,True,Rise of the Ronin | Black Myth Wukong
+The Dark Pictures,40,OLD,False,True,ALL - The Dark Pictures: The Devil in Me | Little Nightmares | Reanimal
+Uplay,40,OLD,True,True,Assassin’s Creed Shadows | DLC
+Yakuza,40,OLD,True,True,Yakuza Kiwami 3 | Dark Ties | Yakuza in Hawaii
