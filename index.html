@@ -19,32 +19,32 @@
     }
 
     :root {
-      --bg: #07090f;
-      --bg2: #0d1018;
-      --bg3: #121620;
-      --surface: #161b26;
-      --border: #1e2535;
-      --border2: #263044;
-      --accent: #00d9ff;
-      --accent-d: #0099bb;
+      --bg: #030408;
+      --bg2: #080a10;
+      --bg3: #0c0f18;
+      --surface: #10141f;
+      --border: rgba(255, 255, 255, 0.1);
+      --border2: rgba(255, 255, 255, 0.15);
+      --accent: #ff0044;
+      --accent-d: #cc0036;
       --feat: #f59e0b;
       --feat-d: #c97d08;
-      --text: #e8edf5;
-      --muted: #5a6880;
-      --muted2: #8898aa;
-      --radius: 10px;
-      --radius-lg: 16px;
+      --text: #ffffff;
+      --muted: #a0a5b5;
+      --muted2: #d1d5db;
+      --radius: 12px;
+      --radius-lg: 18px;
     }
 
     body {
       font-family: 'Outfit', 'Tajawal', sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, #1a0810 0%, #030408 60%);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* subtle noise grain */
+    /* glowing embers and noise */
     body::after {
       content: '';
       position: fixed;
@@ -52,18 +52,16 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
-      opacity: .7;
+      opacity: .5;
     }
 
-    /* faint grid */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(0, 217, 255, .025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 217, 255, .025) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 60, 0, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(255, 0, 60, 0.04) 0%, transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -105,12 +103,12 @@
     .brand-icon {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, var(--accent), #0070ff);
+      background: linear-gradient(135deg, var(--accent), #ff4d79);
       border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(0, 217, 255, .3);
+      box-shadow: 0 0 18px rgba(255, 0, 68, .4);
       flex-shrink: 0;
     }
 
@@ -171,7 +169,7 @@
 
     #search:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0, 217, 255, .1);
+      box-shadow: 0 0 0 3px rgba(255, 0, 68, .15);
     }
 
     #search:focus~svg {
@@ -285,71 +283,154 @@
       font-weight: 600;
     }
 
-    /* ── GRID ── */
-    .grid {
+    /* ── GRID & SECTIONS ── */
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 16px;
       padding-bottom: 80px;
     }
 
+    .catalog-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'Rajdhani', 'Tajawal', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      direction: rtl;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 5px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    .scroller-wrap {
+      position: relative;
+    }
+
+    .scroller {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      direction: rtl;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+    }
+
+    .scroller::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroller .card {
+      min-width: 210px;
+      max-width: 210px;
+      scroll-snap-align: start;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: calc(50% - 6px);
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(10, 10, 15, 0.7);
+      border: 1px solid var(--border2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all .2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+
+    .scroll-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(255, 0, 68, 0.5);
+    }
+
+    .scroll-btn.next-btn {
+      left: -12px;
+    }
+
+    .scroll-btn.prev-btn {
+      right: -12px;
+    }
+
     /* ── CARD ── */
     .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
+      background: #000;
+      border: 1px solid var(--border2);
       border-radius: var(--radius-lg);
       overflow: hidden;
       cursor: default;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
       animation: fadeUp .4s both;
       display: flex;
       flex-direction: column;
       position: relative;
+      aspect-ratio: 2 / 3;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: rgba(0, 217, 255, .35);
-      box-shadow: 0 12px 40px rgba(0, 217, 255, .07), 0 4px 12px rgba(0, 0, 0, .4);
+      border-color: rgba(255, 0, 68, .4);
+      box-shadow: 0 12px 40px rgba(255, 0, 68, .15), 0 4px 12px rgba(0, 0, 0, .5);
     }
 
     .card.feat {
-      border-color: rgba(245, 158, 11, .2);
+      border-color: rgba(245, 158, 11, .3);
+      box-shadow: 0 0 15px rgba(245, 158, 11, .1);
     }
 
     .card.feat:hover {
-      border-color: rgba(245, 158, 11, .5);
-      box-shadow: 0 12px 40px rgba(245, 158, 11, .08), 0 4px 12px rgba(0, 0, 0, .4);
+      border-color: rgba(245, 158, 11, .6);
+      box-shadow: 0 12px 40px rgba(245, 158, 11, .2), 0 4px 12px rgba(0, 0, 0, .5);
     }
 
     .card.combo-card {
-      border-color: rgba(220, 38, 38, .3);
+      border-color: rgba(0, 217, 255, .4);
+      box-shadow: 0 0 15px rgba(0, 217, 255, .15), inset 0 0 20px rgba(122, 0, 255, .1);
     }
 
     .card.combo-card:hover {
-      border-color: rgba(220, 38, 38, .6);
-      box-shadow: 0 12px 40px rgba(220, 38, 38, .15), 0 4px 12px rgba(0, 0, 0, .4);
+      border-color: #00d9ff;
+      box-shadow: 0 12px 40px rgba(0, 217, 255, .3), 0 4px 12px rgba(0, 0, 0, .5);
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* cover */
     .card-cover {
-      position: relative;
-      aspect-ratio: 2 / 3;
-      overflow: hidden;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       background: var(--bg3);
-      flex-shrink: 0;
     }
 
     .card-cover img {
@@ -357,45 +438,53 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .35s;
+      transition: transform .4s ease;
     }
 
     .card:hover .card-cover img {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .cover-gradient {
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom,
-          transparent 40%,
-          rgba(7, 9, 15, .6) 70%,
-          rgba(7, 9, 15, .95) 100%);
+          transparent 30%,
+          rgba(0, 0, 0, .5) 65%,
+          rgba(0, 0, 0, .95) 100%);
+      pointer-events: none;
     }
 
     /* badge */
     .badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      left: 12px;
+      z-index: 4;
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: .6px;
-      padding: 3px 9px;
-      border-radius: 5px;
+      letter-spacing: .8px;
+      padding: 4px 10px;
+      border-radius: 6px;
       text-transform: uppercase;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
     }
 
     .badge-feat {
       background: var(--feat);
       color: #000;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+      right: 12px;
+      left: auto;
     }
 
     .badge-combo {
-      background: linear-gradient(135deg, #e11d48, #be123c);
-      color: #fff;
-      left: 10px;
-      right: auto;
+      background: rgba(15, 15, 20, 0.8);
+      backdrop-filter: blur(4px);
+      color: #00d9ff;
+      border: 1px solid #00d9ff;
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+      left: 12px;
     }
 
     .combo-games-list {
@@ -405,10 +494,10 @@
       font-size: 11px;
       color: var(--muted2);
       direction: ltr;
-      text-align: right;
+      text-align: left;
       padding-top: 4px;
-      border-top: 1px dashed var(--border2);
-      max-height: 80px;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      max-height: 70px;
       overflow-y: auto;
     }
 
@@ -418,23 +507,35 @@
       white-space: nowrap;
     }
 
-    /* card body */
+    /* card body - glassmorphism & neon borders */
     .card-body {
-      padding: 14px 14px 12px;
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 3;
+      padding: 14px 12px;
       display: flex;
       flex-direction: column;
-      flex: 1;
       gap: 10px;
+      background: rgba(10, 10, 15, 0.45);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      border-radius: 12px;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      box-shadow: 0 -4px 12px rgba(255, 0, 68, 0.25), 0 4px 12px rgba(255, 0, 68, 0.25);
     }
 
     .game-title {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 800;
       color: #fff;
-      line-height: 1.25;
+      line-height: 1.2;
       direction: ltr;
-      text-align: right;
+      text-align: left;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     /* editions */
@@ -447,37 +548,28 @@
     .ed-tag {
       font-family: 'Outfit', sans-serif;
       font-size: 11px;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 5px;
-      border: 1px solid var(--border2);
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
       color: var(--muted2);
+      background: rgba(0,0,0,0.3);
       cursor: pointer;
-      transition: all .15s;
+      transition: all .2s;
       direction: ltr;
     }
 
     .ed-tag:hover {
       border-color: var(--accent);
-      color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(255, 0, 68, 0.4);
     }
 
     .ed-tag.sel {
-      background: rgba(0, 217, 255, .12);
+      background: rgba(255, 0, 68, 0.15);
       border-color: var(--accent);
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .card.feat .ed-tag:hover {
-      border-color: var(--feat);
-      color: var(--feat);
-    }
-
-    .card.feat .ed-tag.sel {
-      background: rgba(245, 158, 11, .1);
-      border-color: var(--feat);
-      color: var(--feat);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 0, 68, 0.4);
     }
 
     /* footer */
@@ -485,55 +577,66 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--border);
-      padding-top: 10px;
       margin-top: auto;
+      padding-top: 2px;
     }
 
-    .price-wrap {}
+    .price-wrap {
+      display: flex;
+      flex-direction: column;
+    }
 
     .price-label {
       font-size: 10px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.7);
       display: block;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       font-family: 'Tajawal', sans-serif;
     }
 
     .price {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 800;
       line-height: 1;
-      color: var(--accent);
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
-
-    .card.feat .price {
-      color: var(--feat);
+    
+    .price small {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      margin-left: 2px;
+      text-shadow: 0 0 8px rgba(255, 0, 68, 0.5);
     }
 
     .wa-btn {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       background: #1db954;
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 8px 13px;
+      padding: 8px 14px;
       font-family: 'Tajawal', sans-serif;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
-      transition: background .15s, transform .1s, box-shadow .15s;
+      transition: transform .15s, box-shadow .15s, background .15s;
       white-space: nowrap;
+      box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
     }
 
     .wa-btn:hover {
       background: #1ed760;
-      transform: scale(1.04);
-      box-shadow: 0 4px 14px rgba(29, 185, 84, .35);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(29, 185, 84, 0.5);
     }
 
     .wa-btn svg {
@@ -544,8 +647,8 @@
 
     /* cover placeholder */
     .cover-ph {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -608,6 +711,77 @@
       }
     }
 
+    /* ── CONTACT BANNER ── */
+    .contact-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 40px;
+      margin-bottom: 80px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 0, 68, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .contact-text {
+      flex: 1;
+    }
+
+    .contact-text h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .contact-text p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .contact-btn {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .contact-btn:hover {
+      background: var(--accent-d);
+      box-shadow: 0 4px 15px rgba(255,0,68,0.4);
+    }
+
+    .contact-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar {
       width: 5px;
@@ -639,9 +813,28 @@
         order: 3;
       }
 
-      .grid {
+      .grid-container {
         grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
         gap: 11px;
+      }
+
+      .scroller-wrap {
+        margin: 0 -14px;
+      }
+
+      .scroller {
+        padding: 0 14px 12px;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+      }
+
+      .scroller .card {
+        min-width: 160px;
+        max-width: 160px;
+      }
+
+      .scroll-btn {
+        display: none;
       }
 
       .stat-item {
@@ -651,6 +844,18 @@
       .stat-item:not(:last-child) {
         margin-left: 14px;
         padding-left: 14px;
+      }
+
+      .contact-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 16px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
@@ -710,8 +915,8 @@
       <span class="filters-label">تصفية</span>
       <button class="pill active" data-f="all">الكل</button>
       <button class="pill feat-pill" data-f="feat">⭐ مميزة</button>
-      <button class="pill" data-f="40">40 د</button>
-      <button class="pill" data-f="60">60 د</button>
+      <button class="pill" data-f="40">40 د.م</button>
+      <button class="pill" data-f="60">60 د.م</button>
       <button class="pill" data-f="combo">مجموعات</button>
       <button class="pill" data-f="single">فردية</button>
     </div>
@@ -725,6 +930,26 @@
         <div class="spinner"></div>
         <span>جاري تحميل الكتالوج…</span>
       </div>
+    </div>
+
+    <div class="contact-banner">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <div class="contact-text">
+        <h4>لم تجد اللعبة التي تبحث عنها؟</h4>
+        <p>تواصل معنا وسنقوم بتوفيرها لك بأفضل سعر!</p>
+      </div>
+      <a class="contact-btn" href="https://wa.me/212659978011?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%84%D8%B9%D8%A8%D8%A9%20%D8%BA%D9%8A%D8%B1%20%D9%85%D9%88%D8%AC%D9%88%D8%AF%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D9%84%D9%88%D8%AC%3A" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        تواصل معنا
+      </a>
     </div>
   </div>
 
@@ -754,7 +979,7 @@
       const safeId = game.name.replace(/[^a-z0-9]/gi, '_');
 
       const edBtns = game.editions.map(ed =>
-        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د">${ed}</span>`
+        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د.م">${ed}</span>`
       ).join('');
 
       let gamesListHtml = '';
@@ -785,17 +1010,16 @@
         <div class="card-cover">
           ${coverHtml}
           <div class="cover-gradient"></div>
-          ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
-          <span class="badge badge-combo">مجموعة ألعاب</span>
         </div>
+        ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
+        <span class="badge badge-combo">مجموعة ألعاب</span>
         <div class="card-body">
           <div class="game-title">${game.name}</div>
           ${gamesListHtml}
-          <div class="editions">${edBtns}</div>
           <div class="card-footer">
             <div class="price-wrap">
               <span class="price-label">السعر</span>
-              <span class="price" id="p_${safeId}">${price} <small style="font-size:13px;font-weight:500">د</small></span>
+              <span class="price" id="p_${safeId}">${price}<small>د.م</small></span>
             </div>
             <a class="wa-btn" id="wa_${safeId}" href="${waHref(game.name, selEd, price)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -817,7 +1041,7 @@
       const safeId = game.name.replace(/[^a-z0-9]/gi, '_');
 
       const edBtns = game.editions.map(ed =>
-        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د">${ed}</span>`
+        `<span class="ed-tag${ed === selEd ? ' sel' : ''}" data-game="${game.name}" data-ed="${ed}" title="${ed} — ${game.prices[ed]}د.م">${ed}</span>`
       ).join('');
 
       return `
@@ -832,15 +1056,15 @@
             </svg>
           </div>
           <div class="cover-gradient"></div>
-          ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         </div>
+        ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         <div class="card-body">
           <div class="game-title">${game.name}</div>
           <div class="editions">${edBtns}</div>
           <div class="card-footer">
             <div class="price-wrap">
               <span class="price-label">السعر</span>
-              <span class="price" id="p_${safeId}">${price} <small style="font-size:13px;font-weight:500">د</small></span>
+              <span class="price" id="p_${safeId}">${price}<small>د.م</small></span>
             </div>
             <a class="wa-btn" id="wa_${safeId}" href="${waHref(game.name, selEd, price)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -851,6 +1075,45 @@
           </div>
         </div>
       </div>`;
+    }
+
+    function scrollRow(btn, dir) {
+      const scroller = btn.parentElement.querySelector('.scroller');
+      const amount = dir * 600;
+      scroller.scrollBy({ left: -amount, behavior: 'smooth' });
+    }
+
+    function buildSection(title, games, isScroller) {
+      if (!games.length) return '';
+      const cardsHtml = games.map((g, i) => g.is_combo ? buildComboGameCard(g, i) : buildCard(g, i)).join('');
+      
+      if (isScroller) {
+        return `
+          <div class="section">
+            <div class="section-title">${title}</div>
+            <div class="scroller-wrap">
+              <button class="scroll-btn prev-btn" onclick="scrollRow(this, -1)" aria-label="السابق">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+              <div class="scroller">
+                ${cardsHtml}
+              </div>
+              <button class="scroll-btn next-btn" onclick="scrollRow(this, 1)" aria-label="التالي">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="section">
+            <div class="section-title">${title}</div>
+            <div class="grid-container">
+              ${cardsHtml}
+            </div>
+          </div>
+        `;
+      }
     }
 
     function render() {
@@ -884,6 +1147,7 @@
         : `<strong>${list.length}</strong> لعبة`;
 
       if (!list.length) {
+        grid.className = 'grid-container';
         grid.innerHTML = `<div class="empty">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -894,7 +1158,28 @@
         return;
       }
 
-      grid.innerHTML = list.map((g, i) => g.is_combo ? buildComboGameCard(g, i) : buildCard(g, i)).join('');
+      if (filter === 'all' && q === '') {
+        let html = '';
+        const newGames = list.filter(g => g.tag && g.tag.includes('NEW'));
+        if (newGames.length) html += buildSection('🔥 أحدث الإصدارات', newGames, true);
+
+        const newNames = new Set(newGames.map(g => g.name));
+        const featGames = list.filter(g => g.tier === 'high' && !newNames.has(g.name));
+        if (featGames.length) html += buildSection('⭐ ألعاب مميزة', featGames, true);
+
+        const comboAll = list.filter(g => g.is_combo);
+        if (comboAll.length) html += buildSection('📦 مجموعات التوفير', comboAll, true);
+
+        const shownNames = new Set([...newGames, ...featGames, ...comboAll].map(g => g.name));
+        const restGames = list.filter(g => !shownNames.has(g.name));
+        if (restGames.length) html += buildSection('🎮 تصفح الكتالوج', restGames, false);
+
+        grid.className = 'catalog-sections';
+        grid.innerHTML = html;
+      } else {
+        grid.className = 'grid-container';
+        grid.innerHTML = list.map((g, i) => g.is_combo ? buildComboGameCard(g, i) : buildCard(g, i)).join('');
+      }
     }
 
     // Edition click delegation
@@ -913,7 +1198,7 @@
       tag.classList.add('sel');
 
       const priceEl = document.getElementById('p_' + safeId);
-      if (priceEl) priceEl.innerHTML = `${price} <small style="font-size:13px;font-weight:500">د</small>`;
+      if (priceEl) priceEl.innerHTML = `${price}<small>د.م</small>`;
 
       const waEl = document.getElementById('wa_' + safeId);
       if (waEl) waEl.href = waHref(gname, ed, price);
@@ -932,15 +1217,29 @@
     // Search
     document.getElementById('search').addEventListener('input', render);
 
+    function parseCSVLine(line) {
+      const result = [];
+      let cur = '';
+      let inQ = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') { inQ = !inQ; }
+        else if (ch === ',' && !inQ) { result.push(cur); cur = ''; }
+        else { cur += ch; }
+      }
+      result.push(cur);
+      return result;
+    }
+
     // Load CSV
-    fetch('games.csv')
+    fetch('games.csv?' + Date.now())
       .then(r => r.text())
       .then(csv => {
         const lines = csv.split(/\r?\n/).filter(l => l.trim() !== '');
         CATALOG = [];
         // Skip header line (i = 1)
         for (let i = 1; i < lines.length; i++) {
-          const parts = lines[i].split(',');
+          const parts = parseCSVLine(lines[i]);
           if (parts.length >= 3) {
             const name = parts[0].trim();
             const price = parseInt(parts[1].trim(), 10) || 0;
@@ -948,12 +1247,13 @@
             const has_deluxe = parts[3] ? parts[3].trim() === 'True' : false;
             const is_combo = parts[4] ? parts[4].trim() === 'True' : false;
             const combo_list = parts[5] ? parts[5].trim() : '';
+            const deluxe_price = parts[6] ? parseInt(parts[6].trim(), 10) : 0;
 
             const editions = ['Standard'];
             const prices = { 'Standard': price };
             if (has_deluxe) {
               editions.push('Deluxe');
-              prices['Deluxe'] = price + 10;
+              prices['Deluxe'] = deluxe_price || (price + 10);
             }
 
             CATALOG.push({
@@ -962,6 +1262,7 @@
               prices: prices,
               tier: (tag.includes('NEW') || price === 60) ? 'high' : 'normal',
               is_combo: is_combo,
+              tag: tag,
               combo_list: combo_list.split('|').map(s => s.trim()).filter(s => s)
             });
           }
