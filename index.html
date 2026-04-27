@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AccessGames — كتالوج الألعاب</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *,
     *::before,
@@ -19,51 +17,85 @@
     }
 
     :root {
-      --bg: #030408;
-      --bg2: #080a10;
-      --bg3: #0c0f18;
-      --surface: #10141f;
-      --border: rgba(255, 255, 255, 0.1);
-      --border2: rgba(255, 255, 255, 0.15);
-      --accent: #ff0044;
-      --accent-d: #cc0036;
+      --bg: #02040a;
+      --bg2: #050814;
+      --bg3: #0a0d1d;
+      --surface: #101426;
+      --border: rgba(0, 217, 255, 0.1);
+      --border2: rgba(0, 217, 255, 0.2);
+      --accent: #00d9ff;
+      --accent-d: #00a3c2;
+      --accent-glow: rgba(0, 217, 255, 0.4);
+      --promo: #ff0044;
       --feat: #f59e0b;
       --feat-d: #c97d08;
       --text: #ffffff;
-      --muted: #a0a5b5;
-      --muted2: #d1d5db;
+      --muted: #8096b5;
+      --muted2: #b0c4de;
       --radius: 12px;
       --radius-lg: 18px;
     }
 
     body {
       font-family: 'Outfit', 'Tajawal', sans-serif;
-      background: radial-gradient(circle at top, #1a0810 0%, #030408 60%);
+      background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* glowing embers and noise */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: .5;
-    }
-
+    /* ── BACKGROUND DEPTH ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: 
-        radial-gradient(circle at 15% 50%, rgba(255, 60, 0, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 85% 30%, rgba(255, 0, 60, 0.04) 0%, transparent 40%);
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 68, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% -10%, rgba(0, 217, 255, 0.12) 0%, transparent 50%);
+      z-index: -2;
       pointer-events: none;
-      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+      mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bg-glow-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: float 20s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translate(-10%, -10%); }
+      to { transform: translate(10%, 10%); }
     }
 
     .wrap {
@@ -101,15 +133,16 @@
     }
 
     .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--accent), #ff4d79);
-      border-radius: 9px;
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent), #0077ff);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(255, 0, 68, .4);
+      box-shadow: 0 0 20px rgba(0, 217, 255, .5);
       flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .brand-icon svg {
@@ -119,11 +152,13 @@
     }
 
     .brand-text {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
+      font-family: 'Black Ops One', 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
       color: #fff;
-      letter-spacing: .5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
     }
 
     .brand-text span {
@@ -175,6 +210,30 @@
     #search:focus~svg {
       color: var(--accent);
     }
+
+    
+    /* Platforms & Footer Features */
+    .features-strip {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0 20px;
+      flex-wrap: wrap;
+    }
+    .feature-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'Tajawal', sans-serif;
+      background: rgba(255,255,255,0.03);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .feature-chip svg { height: 16px; width: auto; color: var(--accent); }
+    .feature-chip.green svg { color: #76B900; }
 
     /* ── STATS STRIP ── */
     .stats-strip {
@@ -299,16 +358,30 @@
     }
 
     .section-title {
-      font-family: 'Rajdhani', 'Tajawal', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
       color: #fff;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 15px;
       direction: rtl;
+      position: relative;
     }
+    .section-title::after, .section-title::before {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent));
+      max-width: 150px;
+      opacity: 0.5;
+    }
+    .section-title::before {
+      background: linear-gradient(-90deg, transparent, var(--accent));
+    }
+    
 
     .section-title::before {
       content: '';
@@ -395,9 +468,9 @@
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255, 0, 68, .4);
-      box-shadow: 0 12px 40px rgba(255, 0, 68, .15), 0 4px 12px rgba(0, 0, 0, .5);
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 20px 50px rgba(0, 217, 255, .2), 0 5px 15px rgba(0, 0, 0, .8);
     }
 
     .card.feat {
@@ -473,7 +546,7 @@
     .badge-feat {
       background: var(--feat);
       color: #000;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
       right: 12px;
       left: auto;
     }
@@ -487,24 +560,111 @@
       left: 12px;
     }
 
+    .save-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 6;
+      background: var(--promo);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px rgba(255, 0, 68, 0.4);
+      font-family: 'Tajawal', sans-serif;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .save-tag {
+      background: rgba(255, 0, 68, 0.15);
+      color: var(--promo);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 0, 68, 0.3);
+      margin-right: 8px;
+    }
+
     .combo-games-list {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 0;
+      background: rgba(0, 217, 255, 0.03);
+      border-radius: 10px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      scrollbar-width: none;
+      margin: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+    }
+    .card:hover .combo-games-list {
+      max-height: 100px;
+      opacity: 1;
+      padding: 8px;
+      margin: 10px 0;
+      border-color: var(--border2);
+      box-shadow: inset 0 0 10px rgba(0, 217, 255, 0.05);
+    }
+    .combo-games-list::-webkit-scrollbar { display: none; }
+
+    .combo-hint {
       font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .card:hover .combo-hint { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+    .game-chip {
+      font-size: 10px;
+      font-weight: 700;
       color: var(--muted2);
-      direction: ltr;
-      text-align: left;
-      padding-top: 4px;
-      border-top: 1px dashed rgba(255,255,255,0.1);
-      max-height: 70px;
-      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 100px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .game-chip::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 5px var(--accent);
+    }
+
+    .combo-count {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 900;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+      z-index: 5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .combo-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      display: none; /* replaced by game-chip */
     }
 
     /* card body - glassmorphism & neon borders */
@@ -514,17 +674,22 @@
       left: 12px;
       right: 12px;
       z-index: 3;
-      padding: 14px 12px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      background: rgba(10, 10, 15, 0.45);
-      backdrop-filter: blur(12px) saturate(1.2);
-      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      background: rgba(5, 8, 20, 0.4);
+      backdrop-filter: blur(8px) saturate(1.4);
+      -webkit-backdrop-filter: blur(8px) saturate(1.4);
       border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-top: 2px solid var(--accent);
-      border-bottom: 2px solid var(--accent);
-      box-shadow: 0 -4px 12px rgba(255, 0, 68, 0.25), 0 4px 12px rgba(255, 0, 68, 0.25);
+      transition: all 0.4s ease;
+    }
+    .card:hover .card-body {
+      background: rgba(5, 8, 20, 0.85);
+      backdrop-filter: blur(16px) saturate(1.8);
+      border-color: var(--border2);
+      transform: translateY(-5px);
     }
 
     .game-title {
@@ -618,25 +783,26 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: #1db954;
+      background: rgba(0,0,0,0.8);
       color: #fff;
-      border: none;
+      border: 1px solid var(--accent);
       border-radius: 8px;
       padding: 8px 14px;
       font-family: 'Tajawal', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
-      transition: transform .15s, box-shadow .15s, background .15s;
+      transition: all .2s;
       white-space: nowrap;
-      box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
+      box-shadow: 0 0 10px rgba(255, 0, 68, 0.2), inset 0 0 5px rgba(255, 0, 68, 0.2);
     }
 
     .wa-btn:hover {
-      background: #1ed760;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(29, 185, 84, 0.5);
+      background: var(--accent);
+      color: #000;
+      transform: scale(1.02);
+      box-shadow: 0 4px 15px rgba(255, 0, 68, 0.5);
     }
 
     .wa-btn svg {
@@ -861,7 +1027,10 @@
   </style>
 </head>
 
-<body>
+  <div class="bg-glow">
+    <div class="bg-glow-orb" style="top: 10%; left: -10%;"></div>
+    <div class="bg-glow-orb" style="bottom: 10%; right: -10%; background: radial-gradient(circle, rgba(255, 0, 68, 0.03) 0%, transparent 70%);"></div>
+  </div>
 
   <header>
     <div class="wrap">
@@ -919,6 +1088,29 @@
       <button class="pill" data-f="60">60 د.م</button>
       <button class="pill" data-f="combo">مجموعات</button>
       <button class="pill" data-f="single">فردية</button>
+    </div>
+
+
+    <div class="features-strip">
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.353 0 0 5.385 0 12c0 3.018 1.11 5.765 2.946 7.893l3.328-4.786c-.052-.35-.084-.712-.084-1.085 0-3.313 2.686-6 6-6s6 2.687 6 6-2.687 6-6 6c-1.398 0-2.687-.492-3.712-1.314l-4.484 6.452C6.914 23.363 9.351 24 11.979 24c6.627 0 12-5.385 12-12s-5.373-12-12-12zm4.331 16.945c-1.07.643-2.33.957-3.665.957-3.238 0-5.876-2.585-5.993-5.811L3.064 16.14c1.642 2.766 4.673 4.614 8.192 4.614 5.105 0 9.245-4.14 9.245-9.245S16.361 2.264 11.256 2.264 2.011 6.404 2.011 11.509c0 .762.094 1.5.267 2.21l3.524-5.064c.541-1.996 2.378-3.486 4.542-3.486 2.602 0 4.71 2.108 4.71 4.71 0 1.25-.49 2.385-1.288 3.226l2.544 3.84zm-4.331-8.21c-1.397 0-2.529 1.132-2.529 2.529s1.132 2.529 2.529 2.529 2.529-1.132 2.529-2.529-1.132-2.529-2.529-2.529z"/></svg>
+        ستيم
+      </div>
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.05 6.78c-1.05-.72-2.19-1.32-3.42-1.77C15.42 4.21 13.06 4 11.75 4c-1.31 0-3.67.21-5.88 1.01-1.23.45-2.37 1.05-3.42 1.77-.32.22-.55.51-.71.86-.16.35-.24.73-.24 1.13 0 .4.08.78.24 1.13.16.35.39.64.71.86 1.05.72 2.19 1.32 3.42 1.77 2.21.8 4.57 1.01 5.88 1.01 1.31 0 3.67-.21 5.88-1.01 1.23-.45 2.37-1.05 3.42-1.77.32-.22.55-.51.71-.86.16-.35.24-.73.24-1.13 0-.4-.08-.78-.24-1.13-.16-.35-.39-.64-.71-.86zm-12.7 6.08c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38zm6.8 0c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38z"/></svg>
+        بلايستيشن
+      </div>
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0C5.355 0 0 5.355 0 11.96c0 6.606 5.355 11.96 11.96 11.96 6.606 0 11.96-5.354 11.96-11.96C23.92 5.355 18.566 0 11.96 0zm-5.01 6.551c1.558.053 3.619.674 5.01 1.547 1.391-.873 3.452-1.494 5.01-1.547 1.969-.066 3.864.882 5.01 2.353-2.148-1.042-4.996-.757-6.935.539-1.939 1.296-3.085 3.39-3.085 5.567 0 2.177 1.146 4.271 3.085 5.567 1.939 1.296 4.787 1.581 6.935.539-1.146 1.471-3.041 2.419-5.01 2.353-1.558-.053-3.619-.674-5.01-1.547-1.391.873-3.452 1.494-5.01 1.547-1.969.066-3.864-.882-5.01-2.353 2.148 1.042 4.996.757 6.935-.539 1.939-1.296 3.085-3.39 3.085-5.567 0-2.177-1.146-4.271-3.085-5.567-1.939-1.296-4.787-1.581-6.935-.539 1.146-1.471 3.041-2.419 5.01-2.353z"/></svg>
+        إكس بوكس
+      </div>
+      <div class="feature-chip">
+        <span style="font-weight:700">BOOSTER</span>
+      </div>
+      <div class="feature-chip green">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+        <span style="font-weight:700">GEFORCE</span>
+      </div>
     </div>
 
     <div class="results-row">
@@ -988,22 +1180,33 @@
 
       if (game.combo_list && game.combo_list.length > 0) {
         gamesListHtml = `<div class="combo-games-list">
-          ${game.combo_list.map(g => `<div class="combo-item">• ${g}</div>`).join('')}
+          ${game.combo_list.map(g => `<span class="game-chip">${g}</span>`).join('')}
         </div>`;
         
         const coverGames = game.combo_list.slice(0, 3);
-        const colWidth = 100 / coverGames.length;
+        const count = game.combo_list.length;
         
         const imgs = coverGames.map((g, i) => {
           const cSlug = slugify(g);
-          const borderStyle = i > 0 ? 'border-right: 1px solid rgba(255,255,255,0.15);' : '';
-          return `<img src="assets/covers/${cSlug}.webp" loading="lazy" alt="${g}" style="width: ${colWidth}%; height: 100%; object-fit: cover; ${borderStyle}" onerror="this.src='${placeholder}'; this.onerror=null; this.style.objectFit='contain'; this.style.padding='20px';">`;
+          // Perspective layering
+          const zIndex = 3 - i;
+          const offset = i * 25;
+          const filter = i === 0 ? '' : `brightness(${1 - i*0.2}) grayscale(${i*0.2})`;
+          return `<img src="assets/covers/${cSlug}.webp" loading="lazy" alt="${g}" class="collage-img" 
+                  style="position: absolute; right: ${offset}px; top: 0; width: calc(100% - 50px); height: 100%; object-fit: cover; z-index: ${zIndex}; filter: ${filter}; border-left: 2px solid rgba(0,0,0,0.5); box-shadow: -10px 0 20px rgba(0,0,0,0.5);">`;
         }).join('');
         
-        coverHtml = `<div style="display: flex; width: 100%; height: 100%; flex-direction: row-reverse;">${imgs}</div>`;
+        coverHtml = `<div style="position: relative; width: 100%; height: 100%; overflow: hidden;">
+          ${imgs}
+          <div class="combo-count">${count} ألعاب</div>
+        </div>`;
       } else {
         coverHtml = `<img src="assets/covers/${slug}.webp" loading="lazy" alt="${game.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${placeholder}'; this.onerror=null; this.style.objectFit='contain'; this.style.padding='40px';">`;
       }
+
+      const totalPartsPrice = game.total_parts_price || 0;
+      const savePercent = (totalPartsPrice > price) ? Math.round(((totalPartsPrice - price) / totalPartsPrice) * 100) : 0;
+      const saveHtml = savePercent > 0 ? `<div class="save-badge">وفر ${savePercent}%</div>` : '';
 
       return `
       <div class="card combo-card${isFeat ? ' feat' : ''}" style="animation-delay:${delay}ms">
@@ -1013,13 +1216,21 @@
         </div>
         ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         <span class="badge badge-combo">مجموعة ألعاب</span>
+        ${saveHtml}
         <div class="card-body">
           <div class="game-title">${game.name}</div>
+          <div class="combo-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            تتضمن ${game.combo_list.length} ألعاب
+          </div>
           ${gamesListHtml}
           <div class="card-footer">
             <div class="price-wrap">
               <span class="price-label">السعر</span>
-              <span class="price" id="p_${safeId}">${price}<small>د.م</small></span>
+              <div style="display:flex; align-items:center;">
+                <span class="price" id="p_${safeId}">${price}<small>د.م</small></span>
+                ${savePercent > 0 ? `<span class="save-tag">وفر ${savePercent}%</span>` : ''}
+              </div>
             </div>
             <a class="wa-btn" id="wa_${safeId}" href="${waHref(game.name, selEd, price)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1267,6 +1478,22 @@
             });
           }
         }
+
+        // Calculate combo savings
+        const singlesMap = {};
+        CATALOG.forEach(g => { if(!g.is_combo) singlesMap[g.name.toLowerCase()] = g.prices['Standard']; });
+        
+        CATALOG.forEach(g => {
+          if (g.is_combo && g.combo_list) {
+            let total = 0;
+            g.combo_list.forEach(item => {
+              const p = singlesMap[item.toLowerCase()];
+              total += (p !== undefined) ? p : 40; // Default to 40 if not found
+            });
+            g.total_parts_price = total;
+          }
+        });
+
         render();
       })
       .catch(err => {
