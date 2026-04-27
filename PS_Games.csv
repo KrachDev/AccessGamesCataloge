@@ -1,0 +1,33 @@
+game,p2_price,p3_price,tag,is_combo,combo_list
+Gran Turismo 7,40,80,OLD,False,
+Spider-Man: Miles Morales,40,70,OLD,False,
+Demon's Souls,40,70,OLD,False,
+Ratchet & Clank: Rift Apart,40,70,OLD,False,
+Returnal,40,70,OLD,False,
+Sackboy: A Big Adventure,30,60,OLD,False,
+Astro Bot,50,100,NEW,False,
+Bloodborne,30,60,OLD,False,
+God of War (2018),30,60,OLD,False,
+God of War: Ragnarok,50,90,OLD,False,
+Ghost of Tsushima,40,80,OLD,False,
+Horizon Forbidden West,40,80,OLD,False,
+Horizon Zero Dawn,25,50,OLD,False,
+The Last of Us Part I,40,80,OLD,False,
+The Last of Us Part II,40,80,OLD,False,
+Marvel's Spider-Man Remastered,40,80,OLD,False,
+Marvel's Spider-Man 2,50,100,OLD,False,
+Uncharted: Legacy of Thieves Collection,40,80,OLD,False,
+Death Stranding 2: On the Beach,60,120,NEW,False,
+Stellar Blade,50,100,OLD,False,
+Rise of the Ronin,50,100,OLD,False,
+Monster Hunter Wilds,60,120,NEW,False,
+Final Fantasy XVI,40,80,OLD,False,
+Final Fantasy VII Rebirth,50,100,OLD,False,
+Hellblade II: Senua's Saga,40,80,OLD,False,
+Nioh 3,50,100,NEW,False,
+Like a Dragon: Infinite Wealth,40,80,OLD,False,
+The Last of Us Collection,70,140,OLD,True,The Last of Us Part I | The Last of Us Part II
+God of War Collection,70,140,OLD,True,God of War (2018) | God of War: Ragnarok
+Spider-Man Collection,100,200,OLD,True,Marvel's Spider-Man Remastered | Spider-Man: Miles Morales | Marvel's Spider-Man 2
+Horizon Collection,70,140,OLD,True,Horizon Forbidden West | Horizon Zero Dawn
+Death Stranding Collection,70,140,OLD,True,Death Stranding 2: On the Beach | Death Stranding 1

@@ -962,69 +962,307 @@
       border-radius: 3px;
     }
 
-    /* ── RESPONSIVE ── */
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 12px;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE OVERHAUL ── */
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .platform-tabs { 
+        flex-direction: column;
+        gap: 12px;
+      }
+      .platform-tab { 
+        flex: 1; 
+      }
+      .benefits-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        margin: 0 -16px 24px;
+        padding: 0 16px 12px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+      .brand-text { font-size: 20px; }
+    }
+
     @media (max-width: 640px) {
-      .wrap {
-        padding: 0 14px;
-      }
-
-      .brand-text {
-        font-size: 18px;
-      }
-
+      .wrap { padding: 0 16px; }
+      
+      header { padding: 12px 0; }
+      .header-row { gap: 12px; }
+      
       .header-search {
-        max-width: 100%;
-        min-width: 0;
-        flex: 1 1 100%;
         order: 3;
+        flex: 1 0 100%;
+        margin-top: 8px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .stats-strip {
+        display: none; /* Hide stats on small phones to clean up header */
       }
 
       .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-        gap: 11px;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns is better for stores */
+        gap: 12px;
       }
 
-      .scroller-wrap {
-        margin: 0 -14px;
+      .card-body { padding: 12px; }
+      .game-title { font-size: 14px; }
+      .price { font-size: 18px; }
+      
+      .platform-tab {
+        flex: 1;
+        padding: 14px 16px;
+        gap: 12px;
       }
-
-      .scroller {
-        padding: 0 14px 12px;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+      .logo-wrap { width: 44px; height: 44px; }
+      .logo-wrap svg { width: 22px; height: 22px; }
+      .tab-name { font-size: 13px; }
+      
+      .benefits-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        margin: 0 -16px 24px;
+        padding: 0 16px 12px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
       }
-
-      .scroller .card {
-        min-width: 160px;
-        max-width: 160px;
+      .benefit-item { 
+        flex: 0 0 140px; 
+        padding: 10px; 
+        gap: 6px; 
+        border-radius: 10px; 
+        scroll-snap-align: start;
       }
-
-      .scroll-btn {
-        display: none;
-      }
-
-      .stat-item {
-        padding: 8px 14px 8px 0;
-      }
-
-      .stat-item:not(:last-child) {
-        margin-left: 14px;
-        padding-left: 14px;
-      }
-
-      .contact-banner {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-        gap: 16px;
-      }
-
-      .contact-btn {
-        width: 100%;
-        justify-content: center;
+      .benefit-icon { width: 24px; height: 24px; border-radius: 6px; }
+      .benefit-icon svg { width: 12px; height: 12px; }
+      .benefit-content h3 { font-size: 11px; margin-bottom: 2px; }
+      .benefit-content p { font-size: 9px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      
+      .section-header h2 { font-size: 20px; }
+      
+      .badge-online {
+        top: 8px;
+        left: 8px;
+        font-size: 8px;
+        padding: 2px 6px;
       }
     }
+
+    @media (max-width: 380px) {
+      .grid-container {
+        grid-template-columns: 1fr; /* Single column for very small phones */
+      }
+    }
+
+    /* ── HEADER NAV ── */
+    .header-nav {
+      display: flex;
+      gap: 24px;
+      margin-right: auto;
+      margin-left: 32px;
+    }
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent);
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── PLATFORM TABS ── */
+    .platform-tabs {
+      display: flex;
+      gap: 12px;
+      padding: 20px 0 8px;
+      justify-content: stretch;
+    }
+
+    .platform-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Outfit', 'Tajawal', sans-serif;
+      color: var(--muted2);
+      position: relative;
+      overflow: hidden;
+    }
+    .platform-tab::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .platform-tab:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .platform-tab.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px rgba(0, 217, 255, 0.15);
+      color: var(--text);
+    }
+    .platform-tab[data-csv="Xbox_Games.csv"].active {
+      border-color: #107c10;
+      box-shadow: 0 0 25px rgba(16, 124, 16, 0.2);
+    }
+    .platform-tab[data-csv="PS_Games.csv"].active {
+      border-color: #0070d1;
+      box-shadow: 0 0 25px rgba(0, 112, 209, 0.2);
+    }
+    .logo-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .logo-wrap svg {
+      width: 30px;
+      height: 30px;
+    }
+    .tab-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+      direction: ltr;
+    }
+    .tab-name {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .tab-count {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .platform-tab.active .tab-count { color: var(--accent); }
+    .platform-tab[data-csv="Xbox_Games.csv"].active .tab-count { color: #1a9e1a; }
+    .platform-tab[data-csv="PS_Games.csv"].active .tab-count { color: #0070d1; }
+
+    /* ── BENEFITS GRID ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .benefit-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s;
+      backdrop-filter: blur(20px);
+    }
+    .benefit-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+    }
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 217, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
+    }
+    .benefit-icon svg { width: 24px; height: 24px; }
+    .benefit-content h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .benefit-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── ONLINE BADGE ── */
+    .badge-online {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      background: rgba(0, 255, 100, 0.15);
+      color: #00ff64;
+      border: 1px solid rgba(0, 255, 100, 0.4);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
+      backdrop-filter: blur(8px);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 5px rgba(0, 255, 100, 0.2); }
+      50% { box-shadow: 0 0 15px rgba(0, 255, 100, 0.4); }
+      100% { box-shadow: 0 0 5px rgba(0, 255, 100, 0.2); }
+    }
   </style>
+  <!-- Vercel Analytics & Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
   <div class="bg-glow">
@@ -1045,6 +1283,13 @@
           </div>
           <div class="brand-text">Access<span>Games</span></div>
         </a>
+
+        <nav class="header-nav">
+          <a href="index.html" class="nav-link active">المتجر</a>
+          <a href="faq.html" class="nav-link">الأسئلة</a>
+          <a href="tutorials.html" class="nav-link">دليل الاستخدام</a>
+          <a href="terms.html" class="nav-link">شروط الخدمة</a>
+        </nav>
 
         <div class="header-search">
           <input type="text" id="search" placeholder="ابحث عن لعبة..." autocomplete="off">
@@ -1068,18 +1313,100 @@
           <span class="stat-num amber">60</span>
           <span>درهم — المميزة</span>
         </div>
-        <div class="stat-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            style="color:var(--accent)">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-          </svg>
-          <span>تفعيل أوفلاين فوري</span>
-        </div>
       </div>
     </div>
   </header>
 
   <div class="wrap">
+    <!-- Marketing Benefits -->
+    <div class="benefits-grid animate-in" style="animation-delay: 0.1s">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <div class="benefit-content">
+          <h3>لعب يوم الإصدار</h3>
+          <p>استمتع بأحدث الألعاب في أول يوم من صدورها، حتى ألعاب الحماية القوية متوفرة فوراً.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div class="benefit-content">
+          <h3>أمان وموثوقية</h3>
+          <p>ملفات رسمية من المتاجر مباشرة. تجربة آمنة 100% وخالية من أي برمجيات ضارة.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div class="benefit-content">
+          <h3>تحديثات تلقائية</h3>
+          <p>احصل على جميع التحديثات والإضافات (DLC) فور صدورها، تماماً مثل النسخة الأصلية.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="benefit-content">
+          <h3>دعم فني متخصص</h3>
+          <p>نحن معك خطوة بخطوة لضمان تشغيل اللعبة بأفضل أداء وبدون أي تعقيدات تقنية.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PLATFORM TABS ── -->
+    <div class="platform-tabs" id="platform-tabs">
+
+      <button class="platform-tab active" data-csv="PC_Games.csv" id="tab-pc" onclick="loadCSV('PC_Games.csv', this)">
+        <div class="logo-wrap" style="background: linear-gradient(135deg,#1b2838,#2a475e);">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M11.979 0C5.353 0 0 5.385 0 12c0 3.018 1.11 5.765 2.946 7.893l3.328-4.786c-.052-.35-.084-.712-.084-1.085 0-3.313 2.686-6 6-6s6 2.687 6 6-2.687 6-6 6c-1.398 0-2.687-.492-3.712-1.314l-4.484 6.452C6.914 23.363 9.351 24 11.979 24c6.627 0 12-5.385 12-12s-5.373-12-12-12z"/></svg>
+        </div>
+        <div class="tab-info">
+          <span class="tab-name">PC / Steam</span>
+          <span class="tab-count" id="count-pc">...</span>
+        </div>
+      </button>
+
+      <button class="platform-tab" data-csv="Xbox_Games.csv" id="tab-xbox" onclick="loadCSV('Xbox_Games.csv', this)">
+        <div class="logo-wrap" style="background: linear-gradient(135deg,#107c10,#1a9e1a);">
+          <!-- Xbox logo -->
+          <svg viewBox="0 0 24 24" fill="white"><path d="M11.969 0C5.353 0 .016 5.385.016 12c0 4.49 2.467 8.401 6.112 10.506-.12-.147-4.365-5.107.849-10.986 2.367-2.659 5.384-3.979 5.384-3.979s-3.52-4.499-5.384-5.375c-.046-.022-.087-.048-.127-.07A11.965 11.965 0 0 1 11.969 0zm.046 0a11.96 11.96 0 0 1 5.116 1.096c-.04.022-.08.048-.127.07C15.14 2.042 11.62 6.54 11.62 6.54s3.017 1.32 5.384 3.98c5.214 5.879.969 10.839.849 10.986C21.498 19.401 23.965 15.49 23.965 12c0-6.615-5.337-12-11.95-12zM6.521 2.655c2.065 1.593 4.453 4.63 4.453 4.63s-.81-.113-1.99.146c-1.177.259-2.352.952-3.177 1.862-2.9 3.182-.955 6.998-.955 6.998s-4.07-5.38-2.07-9.638a9.6 9.6 0 0 1 3.74-4zm10.946 0a9.594 9.594 0 0 1 3.741 4.001c2 4.257-2.072 9.637-2.072 9.637s1.946-3.816-.955-6.998c-.825-.91-2-1.603-3.177-1.862-1.18-.259-1.99-.146-1.99-.146s2.388-3.037 4.453-4.632zM12 8.875a5.125 5.125 0 1 1 0 10.25A5.125 5.125 0 0 1 12 8.875z"/></svg>
+        </div>
+        <div class="tab-info">
+          <span class="tab-name">Xbox</span>
+          <span class="tab-count" id="count-xbox">...</span>
+        </div>
+      </button>
+
+      <button class="platform-tab" data-csv="PS_Games.csv" id="tab-ps" onclick="loadCSV('PS_Games.csv', this)">
+        <div class="logo-wrap" style="background: linear-gradient(135deg,#003087,#0070d1);">
+          <!-- PlayStation logo -->
+          <svg viewBox="0 0 24 24" fill="white"><path d="M8.984 2.596v14.109l3.76 1.094V6.333c0-.498.218-.834.566-.724.46.141.55.59.55 1.088v5.086l3.758 1.092V6.702c0-2.182-1.348-3.23-3.32-3.828-1.19-.363-2.534-.777-5.314-2.278zm6.978 10.155v2.978c1.636.66 3.248.428 3.248-1.2 0-1.536-1.086-2.19-3.248-3.46v2.982c.001 0 .001-.3 0 0zm-3.76 5.084l-2.756-.844c-2.72-.836-4.506-2.498-4.506-4.894 0-2.542 1.93-3.352 4.506-2.57l2.756.844v-2.78L9.05 7.8C5.274 6.648 2.18 7.892 2.18 12.06c0 4.13 3.046 7.05 6.87 8.218l3.152.966v-3.41z"/></svg>
+        </div>
+        <div class="tab-info">
+          <span class="tab-name">PlayStation</span>
+          <span class="tab-count" id="count-ps">...</span>
+        </div>
+      </button>
+
+    </div>
+
     <div class="filters-bar">
       <span class="filters-label">تصفية</span>
       <button class="pill active" data-f="all">الكل</button>
@@ -1090,33 +1417,9 @@
       <button class="pill" data-f="single">فردية</button>
     </div>
 
-
-    <div class="features-strip">
-      <div class="feature-chip">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.353 0 0 5.385 0 12c0 3.018 1.11 5.765 2.946 7.893l3.328-4.786c-.052-.35-.084-.712-.084-1.085 0-3.313 2.686-6 6-6s6 2.687 6 6-2.687 6-6 6c-1.398 0-2.687-.492-3.712-1.314l-4.484 6.452C6.914 23.363 9.351 24 11.979 24c6.627 0 12-5.385 12-12s-5.373-12-12-12zm4.331 16.945c-1.07.643-2.33.957-3.665.957-3.238 0-5.876-2.585-5.993-5.811L3.064 16.14c1.642 2.766 4.673 4.614 8.192 4.614 5.105 0 9.245-4.14 9.245-9.245S16.361 2.264 11.256 2.264 2.011 6.404 2.011 11.509c0 .762.094 1.5.267 2.21l3.524-5.064c.541-1.996 2.378-3.486 4.542-3.486 2.602 0 4.71 2.108 4.71 4.71 0 1.25-.49 2.385-1.288 3.226l2.544 3.84zm-4.331-8.21c-1.397 0-2.529 1.132-2.529 2.529s1.132 2.529 2.529 2.529 2.529-1.132 2.529-2.529-1.132-2.529-2.529-2.529z"/></svg>
-        ستيم
-      </div>
-      <div class="feature-chip">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.05 6.78c-1.05-.72-2.19-1.32-3.42-1.77C15.42 4.21 13.06 4 11.75 4c-1.31 0-3.67.21-5.88 1.01-1.23.45-2.37 1.05-3.42 1.77-.32.22-.55.51-.71.86-.16.35-.24.73-.24 1.13 0 .4.08.78.24 1.13.16.35.39.64.71.86 1.05.72 2.19 1.32 3.42 1.77 2.21.8 4.57 1.01 5.88 1.01 1.31 0 3.67-.21 5.88-1.01 1.23-.45 2.37-1.05 3.42-1.77.32-.22.55-.51.71-.86.16-.35.24-.73.24-1.13 0-.4-.08-.78-.24-1.13-.16-.35-.39-.64-.71-.86zm-12.7 6.08c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38zm6.8 0c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38z"/></svg>
-        بلايستيشن
-      </div>
-      <div class="feature-chip">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0C5.355 0 0 5.355 0 11.96c0 6.606 5.355 11.96 11.96 11.96 6.606 0 11.96-5.354 11.96-11.96C23.92 5.355 18.566 0 11.96 0zm-5.01 6.551c1.558.053 3.619.674 5.01 1.547 1.391-.873 3.452-1.494 5.01-1.547 1.969-.066 3.864.882 5.01 2.353-2.148-1.042-4.996-.757-6.935.539-1.939 1.296-3.085 3.39-3.085 5.567 0 2.177 1.146 4.271 3.085 5.567 1.939 1.296 4.787 1.581 6.935.539-1.146 1.471-3.041 2.419-5.01 2.353-1.558-.053-3.619-.674-5.01-1.547-1.391.873-3.452 1.494-5.01 1.547-1.969.066-3.864-.882-5.01-2.353 2.148 1.042 4.996.757 6.935-.539 1.939-1.296 3.085-3.39 3.085-5.567 0-2.177-1.146-4.271-3.085-5.567-1.939-1.296-4.787-1.581-6.935-.539 1.146-1.471 3.041-2.419 5.01-2.353z"/></svg>
-        إكس بوكس
-      </div>
-      <div class="feature-chip">
-        <span style="font-weight:700">BOOSTER</span>
-      </div>
-      <div class="feature-chip green">
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-        <span style="font-weight:700">GEFORCE</span>
-      </div>
-    </div>
-
     <div class="results-row">
       <span id="results-label"></span>
     </div>
-
     <div class="grid" id="grid">
       <div class="loader">
         <div class="spinner"></div>
@@ -1214,6 +1517,7 @@
           ${coverHtml}
           <div class="cover-gradient"></div>
         </div>
+        ${game.is_online === 'True' ? '<div class="badge-online">ONLINE</div>' : ''}
         ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         <span class="badge badge-combo">مجموعة ألعاب</span>
         ${saveHtml}
@@ -1268,6 +1572,7 @@
           </div>
           <div class="cover-gradient"></div>
         </div>
+        ${game.is_online === 'True' ? '<div class="badge-online">ONLINE</div>' : ''}
         ${isFeat ? '<span class="badge badge-feat">مميز</span>' : ''}
         <div class="card-body">
           <div class="game-title">${game.name}</div>
@@ -1442,39 +1747,70 @@
       return result;
     }
 
-    // Load CSV
-    fetch('games.csv?' + Date.now())
+    // Load CSV  
+    window.loadCSV = function loadCSV(file, tabEl) {
+      // Update active tab
+      document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+      if (tabEl) tabEl.classList.add('active');
+
+      // Reset filter
+      filter = 'all';
+      document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+      document.querySelector('.pill[data-f="all"]').classList.add('active');
+
+      document.getElementById('grid').innerHTML = '<div class="loader"><div class="spinner"></div><span>جاري تحميل الكتالوج…</span></div>';
+
+      fetch(file + '?' + Date.now())
       .then(r => r.text())
       .then(csv => {
         const lines = csv.split(/\r?\n/).filter(l => l.trim() !== '');
         CATALOG = [];
+        if (lines.length === 0) return;
+
+        const header = parseCSVLine(lines[0]);
+        const isConsole = header.includes('p2_price');
+
         // Skip header line (i = 1)
         for (let i = 1; i < lines.length; i++) {
           const parts = parseCSVLine(lines[i]);
-          if (parts.length >= 3) {
+          if (parts.length >= 2) {
             const name = parts[0].trim();
-            const price = parseInt(parts[1].trim(), 10) || 0;
-            const tag = parts[2].trim();
-            const has_deluxe = parts[3] ? parts[3].trim() === 'True' : false;
-            const is_combo = parts[4] ? parts[4].trim() === 'True' : false;
-            const combo_list = parts[5] ? parts[5].trim() : '';
-            const deluxe_price = parts[6] ? parseInt(parts[6].trim(), 10) : 0;
+            const tag = isConsole ? parts[3].trim() : parts[2].trim();
+            const is_combo = isConsole ? (parts[4] === 'True') : (parts[4] === 'True');
+            const combo_list_str = isConsole ? parts[5] : parts[5];
 
-            const editions = ['Standard'];
-            const prices = { 'Standard': price };
-            if (has_deluxe) {
-              editions.push('Deluxe');
-              prices['Deluxe'] = deluxe_price || (price + 10);
+            let editions = [];
+            let prices = {};
+
+            if (isConsole) {
+              const p2 = parseInt(parts[1], 10) || 0;
+              const p3 = parseInt(parts[2], 10) || 0;
+              editions = ['P2 (Secondary)', 'P3 (Primary)'];
+              prices = { 'P2 (Secondary)': p2, 'P3 (Primary)': p3 };
+            } else {
+              const price = parseInt(parts[1], 10) || 0;
+              const has_deluxe = parts[3] === 'True';
+              const deluxe_price = parseInt(parts[6], 10) || 0;
+              editions = ['Standard'];
+              prices = { 'Standard': price };
+              if (has_deluxe) {
+                editions.push('Deluxe');
+                prices['Deluxe'] = deluxe_price || (price + 20);
+              }
             }
+
+            const oi = header.indexOf('is_online');
+            const is_online = (oi >= 0 && parts[oi]) ? parts[oi].trim() : 'False';
 
             CATALOG.push({
               name: name,
               editions: editions,
               prices: prices,
-              tier: (tag.includes('NEW') || price === 60) ? 'high' : 'normal',
+              tier: (tag.includes('NEW') || (isConsole ? prices[editions[0]] >= 60 : prices[editions[0]] >= 60)) ? 'high' : 'normal',
               is_combo: is_combo,
               tag: tag,
-              combo_list: combo_list.split('|').map(s => s.trim()).filter(s => s)
+              is_online: is_online,
+              combo_list: (combo_list_str || '').split('|').map(s => s.trim()).filter(s => s)
             });
           }
         }
@@ -1497,15 +1833,32 @@
         render();
       })
       .catch(err => {
-        console.error("Error loading CSV:", err);
+        console.error('Error loading CSV:', err);
         document.getElementById('grid').innerHTML = `<div class="empty">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
           </svg>
           <h3>تعذّر تحميل الكتالوج</h3>
-          <span>تأكد من وجود ملف games.csv</span>
+          <span>تأكد من وجود ملف ${file}</span>
         </div>`;
       });
+    };
+
+    // Preload counts for all platforms
+    function preloadCount(file, elId) {
+      fetch(file + '?' + Date.now()).then(r => r.text()).then(csv => {
+        const lines = csv.split(/\r?\n/).filter(l => l.trim() && !l.startsWith('game,'));
+        document.getElementById(elId).textContent = lines.length + ' لعبة';
+      }).catch(() => {
+        document.getElementById(elId).textContent = '—';
+      });
+    }
+    preloadCount('PC_Games.csv',   'count-pc');
+    preloadCount('Xbox_Games.csv', 'count-xbox');
+    preloadCount('PS_Games.csv',   'count-ps');
+
+    // Boot — load PC by default
+    loadCSV('PC_Games.csv', document.getElementById('tab-pc'));
   </script>
 </body>
 

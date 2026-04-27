@@ -1,0 +1,27 @@
+game,p2_price,p3_price,tag,is_combo,combo_list
+Halo: The Master Chief Collection,40,70,OLD,False,
+Halo Infinite,40,70,OLD,False,
+Gears 5,30,60,OLD,False,
+Gears of War 4,30,60,OLD,False,
+Forza Motorsport,50,90,OLD,False,
+Forza Horizon 4,40,80,OLD,False,
+Forza Horizon 5,50,90,OLD,False,
+Sea of Thieves,40,70,OLD,False,
+Ori and the Will of the Wisps,25,50,OLD,False,
+Ori and the Blind Forest,25,50,OLD,False,
+Psychonauts 2,30,60,OLD,False,
+Microsoft Flight Simulator 2024,60,110,NEW,False,
+Age of Empires IV,40,70,OLD,False,
+Minecraft Legends,30,60,OLD,False,
+Pentiment,25,50,OLD,False,
+Grounded,30,60,OLD,False,
+The Outer Worlds,30,60,OLD,False,
+Hi-Fi Rush,30,60,OLD,False,
+Minecraft Dungeons,25,50,OLD,False,
+State of Decay 2,30,60,OLD,False,
+Sunset Overdrive,20,40,OLD,False,
+Quantum Break,30,60,OLD,False,
+Halo Collection,70,130,OLD,True,Halo: The Master Chief Collection | Halo Infinite
+Gears Collection,50,100,OLD,True,Gears 5 | Gears of War 4
+Ori Collection,40,80,OLD,True,Ori and the Will of the Wisps | Ori and the Blind Forest
+Forza Collection,80,150,OLD,True,Forza Motorsport | Forza Horizon 4 | Forza Horizon 5
