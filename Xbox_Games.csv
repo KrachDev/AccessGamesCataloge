@@ -1,27 +1,316 @@
-game,p2_price,p3_price,tag,is_combo,combo_list
-Halo: The Master Chief Collection,40,70,OLD,False,
-Halo Infinite,40,70,OLD,False,
-Gears 5,30,60,OLD,False,
-Gears of War 4,30,60,OLD,False,
-Forza Motorsport,50,90,OLD,False,
-Forza Horizon 4,40,80,OLD,False,
-Forza Horizon 5,50,90,OLD,False,
-Sea of Thieves,40,70,OLD,False,
-Ori and the Will of the Wisps,25,50,OLD,False,
-Ori and the Blind Forest,25,50,OLD,False,
-Psychonauts 2,30,60,OLD,False,
-Microsoft Flight Simulator 2024,60,110,NEW,False,
-Age of Empires IV,40,70,OLD,False,
-Minecraft Legends,30,60,OLD,False,
-Pentiment,25,50,OLD,False,
-Grounded,30,60,OLD,False,
-The Outer Worlds,30,60,OLD,False,
-Hi-Fi Rush,30,60,OLD,False,
-Minecraft Dungeons,25,50,OLD,False,
-State of Decay 2,30,60,OLD,False,
-Sunset Overdrive,20,40,OLD,False,
-Quantum Break,30,60,OLD,False,
-Halo Collection,70,130,OLD,True,Halo: The Master Chief Collection | Halo Infinite
-Gears Collection,50,100,OLD,True,Gears 5 | Gears of War 4
-Ori Collection,40,80,OLD,True,Ori and the Will of the Wisps | Ori and the Blind Forest
-Forza Collection,80,150,OLD,True,Forza Motorsport | Forza Horizon 4 | Forza Horizon 5
+game,p2_price,p3_price,tag,is_combo,combo_list,is_online,is_featured,price_mode
+Borderlands 4 Xbox Series X|S,0,231,OLD,False,,False,False,p3
+Crimson Desert Xbox Series X|S,0,441,OLD,False,,False,False,p3
+Call of Duty: Black Ops 7 Xbox Series X|S Xbox One,0,411,OLD,False,,False,False,p3
+Football Manager 26 Console Xbox Series X|S,0,354,OLD,False,,False,False,p3
+ARC Raiders Xbox Series X|S,0,242,OLD,False,,False,False,p3
+The Outer Worlds 2 Xbox Series X|S,0,531,OLD,False,,False,False,p3
+NINJA GAIDEN 4 Xbox Series X|S,0,269,OLD,False,,False,False,p3
+Vampire: The Masquerade - Bloodlines 2 Xbox Series X|S,0,348,OLD,False,,False,False,p3
+Battlefield 6 Xbox Series X|S,0,223,OLD,False,,False,False,p3
+EA SPORTS FC 26 Xbox Series X|S Xbox One,0,257,OLD,False,,False,False,p3
+SILENT HILL f Xbox Series X|S,0,334,OLD,False,,False,False,p3
+Dying Light: The Beast Xbox Series X|S,0,374,OLD,False,,False,False,p3
+The Elder Scrolls IV: Oblivion Remastered Xbox Series X|S,0,161,OLD,False,,False,False,p3
+NBA 2K26 Xbox Series X|S,0,188,OLD,False,,False,False,p3
+WUCHANG: Fallen Feathers Xbox Series X|S,0,315,OLD,False,,False,False,p3
+Clair Obscur: Expedition 33 Xbox Series X|S,0,140,OLD,False,,False,False,p3
+MotoGP 25 Xbox Series X|S,0,180,OLD,False,,False,False,p3
+DOOM: The Dark Ages Xbox Series X|S,0,274,OLD,False,,False,False,p3
+ELDEN RING NIGHTREIGN Xbox Series X|S Xbox One,0,250,OLD,False,,False,False,p3
+F1 25 Xbox Series X|S,0,231,OLD,False,,False,False,p3
+Tony Hawk's Pro Skater 3 + 4 Xbox Series X|S Xbox One,0,294,OLD,False,,False,False,p3
+Cronos: The OLD Dawn Xbox Series X|S,0,418,OLD,False,,False,False,p3
+Killing Floor 3 Xbox Series X|S,0,221,OLD,False,,False,False,p3
+Mafia: The Old Country Xbox Series X|S,0,326,OLD,False,,False,False,p3
+Black Myth: Wukong Xbox Series X|S,0,464,OLD,False,,False,False,p3
+EA SPORTS Madden NFL 26 Xbox Series X|S,0,531,OLD,False,,False,False,p3
+METAL GEAR SOLID: SNAKE EATER Xbox Series X|S,0,360,OLD,False,,False,False,p3
+EA SPORTS Madden NFL 25 Xbox Series X|S Xbox One,0,197,OLD,False,,False,False,p3
+DRAGON BALL Sparking! ZERO Xbox Series X|S,0,360,OLD,False,,False,False,p3
+NHL 25 Xbox Series X|S,0,206,OLD,False,,False,False,p3
+Disney Epic Mickey: Rebrushed Xbox Series X|S Xbox One,0,156,OLD,False,,False,False,p3
+EA SPORTS FC 25 Xbox Series X|S Xbox One,0,214,OLD,False,,False,False,p3
+Test Drive Unlimited Solar Crown Xbox Series X|S,0,188,OLD,False,,False,False,p3
+"Warhammer 40,000: Space Marine 2 Xbox Series X|S",0,210,OLD,False,False,False,False,p3
+NBA 2K25 Standard Edition Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+Star Wars Outlaws Xbox Series X|S,0,197,OLD,False,,False,False,p3
+Visions of Mana Xbox Series X|S,0,434,OLD,False,,False,False,p3
+Call of Duty: Black Ops 6 - Cross-Gen Bundle Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+ELDEN RING Shadow of the Erdtree Edition Complete Xbox Series X|S Xbox One,0,608,OLD,False,,False,False,p3
+ELDEN RING Shadow of the Erdtree DLC Xbox Series X|S Xbox One,0,356,OLD,False,,False,False,p3
+F1 24 Standard Edition Xbox Series X|S Xbox One,0,277,OLD,False,,False,False,p3
+Senua’s Saga: Hellblade II Xbox Series X|S,0,145,OLD,False,,False,False,p3
+MotoGP24 Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+TopSpin 2K25 Cross-Gen Edition Xbox Series X|S Xbox One,0,198,OLD,False,,False,False,p3
+SAND LAND Xbox Series X|S,0,307,OLD,False,,False,False,p3
+Grounded Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+SOUTH PARK: SNOW DAY! Xbox Series X|S,0,139,OLD,False,,False,False,p3
+PGA TOUR 2K25 Xbox Series X|S,0,261,OLD,False,,False,False,p3
+Indiana Jones and the Great Circle Xbox Series X|S,0,300,OLD,False,,False,False,p3
+Monster Energy Supercross 25 Xbox Series X|S,0,434,OLD,False,,False,False,p3
+The First Berserker: Khazan Xbox Series X|S,0,380,OLD,False,,False,False,p3
+Atomfall Xbox Series X|S Xbox One,0,156,OLD,False,,False,False,p3
+Assassin’s Creed Shadows Xbox Series X|S,0,146,OLD,False,,False,False,p3
+MLB The Show 25 Xbox Series X|S,0,382,OLD,False,,False,False,p3
+WWE 2K25 Xbox Series X|S Xbox One,0,385,OLD,False,,False,False,p3
+Split Fiction Xbox Series X|S,0,326,OLD,False,,False,False,p3
+Avowed Standard Edition Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Dragon's Dogma 2 Xbox Series X|S,0,263,OLD,False,,False,False,p3
+Monster Hunter Wilds Xbox Series X|S,0,266,OLD,False,,False,False,p3
+Like a Dragon: Pirate Yakuza in Hawaii Xbox Series X|S Xbox One,0,207,OLD,False,,False,False,p3
+Kingdom Come: Deliverance II Xbox Series X|S,0,292,OLD,False,,False,False,p3
+DYNASTY WARRIORS: ORIGINS Xbox Series X|S,0,574,OLD,False,,False,False,p3
+Undisputed Xbox Series X|S,0,265,OLD,False,,False,False,p3
+S.T.A.L.K.E.R. 2: Heart of Chornobyl Xbox Series X|S,0,252,OLD,False,,False,False,p3
+Farming Simulator 25 Xbox Series X|S,0,213,OLD,False,,False,False,p3
+Dragon Age: The Veilguard Xbox Series X|S,0,248,OLD,False,,False,False,p3
+RIDE 5 Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Forza Motorsport Xbox Series X|S,0,146,OLD,False,,False,False,p3
+NHL 24 Xbox Series X|S,0,188,OLD,False,,False,False,p3
+Assassin's Creed Mirage Xbox Series X|S Xbox One,0,140,OLD,False,,False,False,p3
+EA SPORTS FC 24 Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+Mortal Kombat 1 Xbox Series X|S,0,158,OLD,False,,False,False,p3
+Lies of P Xbox Series X|S Xbox One,0,271,OLD,False,,False,False,p3
+The Crew Motorfest - Cross-Gen Bundle Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+NBA 2K24 Kobe Bryant Edition Xbox Series X|S,0,146,OLD,False,,False,False,p3
+NBA 2K24 Kobe Bryant Edition Xbox One,0,135,OLD,False,,False,False,p3
+Lords of the Fallen Xbox Series X|S,0,157,OLD,False,,False,False,p3
+Madden NFL 24 Xbox Series X|S Xbox One,0,154,OLD,False,,False,False,p3
+Stray Xbox Series X|S,0,84,OLD,False,,False,False,p3
+Atlas Fallen Xbox Series X|S,0,239,OLD,False,,False,False,p3
+Remnant II Xbox Series X|S,0,196,OLD,False,,False,False,p3
+Crash Team Rumble Xbox Series X|S Xbox One,0,142,OLD,False,,False,False,p3
+F1 23 Standard Edition Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+Diablo IV Xbox Series X|S Xbox One,0,214,OLD,False,,False,False,p3
+Street Fighter 6 Xbox Series X|S,0,187,OLD,False,,False,False,p3
+Baldur's Gate 3 Xbox Series X|S,0,269,OLD,False,,False,False,p3
+Alone in the Dark Xbox Series X|S,0,284,OLD,False,,False,False,p3
+The Outlast Trials Xbox Series X|S Xbox One,0,136,OLD,False,,False,False,p3
+WWE 2K24 Cross-Gen Edition Xbox Series X|S Xbox One,0,345,OLD,False,,False,False,p3
+Skull and Bones Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Jujutsu Kaisen Cursed Clash Xbox Series X|S Xbox One,0,201,OLD,False,,False,False,p3
+Suicide Squad: Kill the Justice League Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Like a Dragon: Infinite Wealth Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+TEKKEN 8 Xbox Series X|S,0,257,OLD,False,,False,False,p3
+Prince of Persia The Lost Crown Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+The Lord of the Rings: Gollum Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+AVATAR: FRONTIERS OF PANDORA Xbox Series X|S,0,188,OLD,False,,False,False,p3
+Call of Duty: Modern Warfare III Xbox Series X|S Xbox One,0,163,OLD,False,,False,False,p3
+UFC 5 Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Alan Wake 2 Xbox Series X|S,0,124,OLD,False,,False,False,p3
+Ghostrunner 2 Xbox Series X|S,0,91,OLD,False,,False,False,p3
+HOT WHEELS UNLEASHED 2 - Turbocharged Xbox Series X|S Xbox One,0,140,OLD,False,,False,False,p3
+SONIC SUPERSTARS Xbox Series X|S Xbox One,0,284,OLD,False,,False,False,p3
+Gears 5 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+STAR WARS Jedi: Fallen Order Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Need for Speed Heat Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+The Outer Worlds Xbox Series X|S Xbox One,0,194,OLD,False,,False,False,p3
+The Surge 2 Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Wreckfest Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Tom Clancy’s Ghost Recon Breakpoint Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Call of Duty: Modern Warfare Xbox Series X|S Xbox One,0,202,OLD,False,,False,False,p3
+Destiny 2: Shadowkeep Xbox Series X|S Xbox One,0,139,OLD,False,,False,False,p3
+GreedFall Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+The Dark Pictures Anthology: Man Of Medan Xbox Series X|S Xbox One,0,71,OLD,False,,False,False,p3
+Borderlands 3 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+DRAGON BALL Z: KAKAROT Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+FIFA 20 Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+Madden NFL 20 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Remnant: From the Ashes Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+The Sinking City Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Wolfenstein: Youngblood Xbox Series X|S Xbox One,0,97,OLD,False,,False,False,p3
+Team Sonic Racing Xbox Series X|S Xbox One,0,174,OLD,False,,False,False,p3
+The Witcher 3: Wild Hunt – Complete Edition Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Tom Clancy's Rainbow Six Siege Deluxe Edition Xbox Series X|S Xbox One,0,145,OLD,False,,False,False,p3
+Borderlands: The Handsome Collection Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+No Man's Sky Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Warhammer: Chaosbane Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+UFC 4 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Tennis World Tour 2 Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+WWE 2K Battlegrounds Xbox Series X|S Xbox One,0,91,OLD,False,,False,False,p3
+NBA 2K21 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Marvel's Avengers Xbox Series X|S Xbox One,0,284,OLD,False,,False,False,p3
+Tony Hawk's Pro Skater 1 + 2 Standard Edition Xbox Series X|S Xbox One,0,133,OLD,False,,False,False,p3
+Mortal Shell Xbox Series X|S Xbox One,0,97,OLD,False,,False,False,p3
+Project CARS 3 Xbox Series X|S Xbox One,0,172,OLD,False,,False,False,p3
+Madden NFL 21 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Wasteland 3 Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+PGA TOUR 2K21 Xbox Series X|S Xbox One,0,137,OLD,False,,False,False,p3
+Microsoft Flight Simulator Xbox Series X|S,0,142,OLD,False,,False,False,p3
+DayZ Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+F1 2020 Xbox Series X|S Xbox One,0,247,OLD,False,,False,False,p3
+Minecraft Dungeons Xbox Series X|S Xbox One,0,81,OLD,False,,False,False,p3
+Saints Row The Third Remastered Xbox Series X|S Xbox One,0,145,OLD,False,,False,False,p3
+Maneater Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Mafia: Trilogy Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+SnowRunner Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Shadow of the Tomb Raider Definitive Edition Xbox Series X|S Xbox One,0,130,OLD,False,,False,False,p3
+MotoGP20 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+RESIDENT EVIL 3 Xbox Series X|S Xbox One,0,137,OLD,False,,False,False,p3
+DOOM Eternal Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Darksiders Genesis Xbox Series X|S Xbox One,0,136,OLD,False,,False,False,p3
+Far Cry 5 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+DARK SOULS III Xbox Series X|S Xbox One,0,240,OLD,False,,False,False,p3
+Assassin's Creed Odyssey Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Call of Duty: Black Ops 4 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Shadow of the Tomb Raider Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Forza Horizon 4 Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+Battlefield V Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Red Dead Redemption 2 Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+NBA 2K19 Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+Crash Bandicoot N. Sane Trilogy Xbox Series X|S Xbox One,0,199,OLD,False,,False,False,p3
+The Crew 2 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Jurassic World Evolution Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Fallout 76 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Sea of Thieves Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Ghost Recon Wildlands Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+MONSTER HUNTER: WORLD Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Kingdom Come: Deliverance Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Destiny 2 Xbox Series X|S Xbox One,0,322,OLD,False,,False,False,p3
+Forza Motorsport 7 Xbox Series X|S Xbox One,0,232,OLD,False,,False,False,p3
+Assassin's Creed Origins Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Call of Duty: WWII Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Grand Theft Auto V Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+FIFA 18 Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+Sekiro: Shadows Die Twice Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+Overwatch Xbox Series X|S Xbox One,0,252,OLD,False,,False,False,p3
+A Plague Tale: Innocence Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Control Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Crash Team Racing Nitro-Fueled Xbox Series X|S Xbox One,0,145,OLD,False,,False,False,p3
+Mortal Kombat 11 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+World War Z Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Assassin's Creed III: Remastered Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Generation Zero Xbox Series X|S Xbox One,0,123,OLD,False,,False,False,p3
+Darksiders III Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Tom Clancy's The Division 2 Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Devil May Cry 5 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+DEAD OR ALIVE 6 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+DiRT Rally 2.0 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Far Cry OLD Dawn Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Metro Exodus Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+HITMAN 2 Xbox Series X|S Xbox One,0,322,OLD,False,,False,False,p3
+ACE COMBAT 7: SKIES UNKNOWN Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+RESIDENT EVIL 2 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+KINGDOM HEARTS Ⅲ Xbox Series X|S Xbox One,0,165,OLD,False,,False,False,p3
+Just Cause 4 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Monster Hunter Rise Xbox Series X|S Xbox One,0,166,OLD,False,,False,False,p3
+Gotham Knights Xbox Series X|S,0,141,OLD,False,,False,False,p3
+Call of Duty: Modern Warfare 2 - Cross-Gen Bundle Xbox Series X|S Xbox One,0,171,OLD,False,,False,False,p3
+Sonic Frontiers Xbox Series X|S Xbox One,0,188,OLD,False,,False,False,p3
+The Dark Pictures Anthology: The Devil in Me Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Evil West Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+The Callisto Protocol Xbox One,0,156,OLD,False,,False,False,p3
+The Callisto Protocol Xbox Series X|S,0,135,OLD,False,,False,False,p3
+Need for Speed Unbound Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Marvel's Midnight Suns Enhanced Edition Xbox Series X|S,0,182,OLD,False,,False,False,p3
+Hello Neighbor 2 Xbox Series X|S Xbox One,0,145,OLD,False,,False,False,p3
+CRISIS CORE –FINAL FANTASY VII– REUNION Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+High On Life Xbox Series X|S Xbox One,0,175,OLD,False,,False,False,p3
+ONE PIECE ODYSSEY Xbox Series X|S,0,202,OLD,False,,False,False,p3
+Ghostbusters: Spirits Unleashed Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Dead Space Xbox Series X|S,0,146,OLD,False,,False,False,p3
+SpongeBob SquarePants: The Cosmic Shake Xbox One,0,250,OLD,False,,False,False,p3
+Hogwarts Legacy Xbox Series X|S,0,158,OLD,False,,False,False,p3
+Atomic Heart Xbox Series X|S Xbox One,0,262,OLD,False,,False,False,p3
+Wo Long: Fallen Dynasty Xbox Series X|S Xbox One,0,337,OLD,False,,False,False,p3
+Anno 1800 Console Edition Xbox Series X|S,0,136,OLD,False,,False,False,p3
+WWE 2K23 Cross-Gen Digital Edition Xbox Series X|S Xbox One,0,223,OLD,False,,False,False,p3
+Resident Evil 4 Remake Xbox Series X|S,0,187,OLD,False,,False,False,p3
+MLB The Show 23 Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+Minecraft Legends Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Dead Island 2 Xbox Series X|S Xbox One,0,210,OLD,False,,False,False,p3
+STAR WARS Jedi: Survivor Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Redfall Xbox Series X|S,0,240,OLD,False,,False,False,p3
+F1 22 Xbox One,0,135,OLD,False,,False,False,p3
+DYNASTY WARRIORS 9 Empires Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+THE KING OF FIGHTERS XV Standard Edition Xbox Series X|S,0,130,OLD,False,,False,False,p3
+ELDEN RING Xbox Series X|S Xbox One,0,217,OLD,False,,False,False,p3
+WWE 2K22 Xbox Series X|S,0,141,OLD,False,,False,False,p3
+WWE 2K22 Xbox One,0,135,OLD,False,,False,False,p3
+STRANGER OF PARADISE FINAL FANTASY ORIGIN Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Tiny Tina's Wonderlands Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+LEGO Star Wars: The Skywalker Saga Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+MotoGP 22 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Evil Dead: The Game Xbox Series X|S Xbox One,0,132,OLD,False,,False,False,p3
+Vampire: The Masquerade - Swansong Xbox Series X|S Xbox One,0,162,OLD,False,,False,False,p3
+Sniper Elite 5 Xbox Series X|S Xbox One,0,156,OLD,False,,False,False,p3
+The Quarry Xbox One,0,135,OLD,False,,False,False,p3
+Dying Light 2 Stay Human Xbox Series X|S Xbox One,0,172,OLD,False,,False,False,p3
+F1 22 Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Madden NFL 23 Xbox One,0,150,OLD,False,,False,False,p3
+Saints Row Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Destroy All Humans! 2 - Reprobed Xbox Series X|S,0,123,OLD,False,,False,False,p3
+Steelrising - Standard Edition Xbox Series X|S,0,156,OLD,False,,False,False,p3
+NBA 2K23 Xbox One,0,135,OLD,False,,False,False,p3
+NBA 2K23 Xbox Series X|S,0,146,OLD,False,,False,False,p3
+EA SPORTS FIFA 23 Standard Edition Xbox One,0,135,OLD,False,,False,False,p3
+EA SPORTS FIFA 23 Standard Edition Xbox Series X|S,0,146,OLD,False,,False,False,p3
+NHL 23 Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+PGA TOUR 2K23 Cross-Gen Edition Xbox Series X|S Xbox One,0,158,OLD,False,,False,False,p3
+A Plague Tale: Requiem Xbox Series X|S,0,188,OLD,False,,False,False,p3
+Marvel's Guardians of the Galaxy Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Tales of Arise Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+NBA 2K22 Xbox Series X|S,0,263,OLD,False,,False,False,p3
+NBA 2K22 Xbox One,0,150,OLD,False,,False,False,p3
+Diablo II: Resurrected Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Insurgency: Sandstorm Xbox Series X|S Xbox One,0,183,OLD,False,,False,False,p3
+FIFA 22 Standard Edition Xbox One,0,142,OLD,False,,False,False,p3
+FIFA 22 Standard Edition Xbox Series X|S,0,146,OLD,False,,False,False,p3
+HOT WHEELS UNLEASHED Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Far Cry 6 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Back 4 Blood: Standard Edition Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+NHL 22 Xbox One,0,135,OLD,False,,False,False,p3
+The Dark Pictures Anthology House of Ashes Xbox Series X|S Xbox One,0,87,OLD,False,,False,False,p3
+Battlefield 2042 Cross-Gen Bundle Xbox Series X|S Xbox One,0,146,OLD,False,,False,False,p3
+Life is Strange: True Colors Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Riders Republic Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Call of Duty: Vanguard - Standard Edition Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Call of Duty: Vanguard - Cross-Gen Bundle Xbox Series X|S Xbox One,0,188,OLD,False,,False,False,p3
+Forza Horizon 5 Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+Jurassic World Evolution 2 Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Grand Theft Auto: The Trilogy – The Definitive Edition Xbox Series X|S Xbox One,0,143,OLD,False,,False,False,p3
+Sherlock Holmes Chapter One Xbox Series X|S,0,231,OLD,False,,False,False,p3
+Evil Genius 2: World Domination Xbox Series X|S Xbox One,0,178,OLD,False,,False,False,p3
+Chorus Xbox Series X|S Xbox One,0,161,OLD,False,,False,False,p3
+Halo Infinite (Campaign) Xbox Series X|S Xbox One,0,150,OLD,False,,False,False,p3
+The Elder Scrolls V: Skyrim Special Edition Xbox Series X|S Xbox One,0,161,OLD,False,,False,False,p3
+Tom Clancy’s Rainbow Six Extraction Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+Life is Strange Remastered Collection Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+Call of Duty: Black Ops Cold War - Cross-Gen Bundle Xbox Series X|S Xbox One,0,231,OLD,False,,False,False,p3
+Crash Bandicoot 4: It’s About Time Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+STAR WARS: Squadrons Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+DIRT 5 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+FIFA 21 Standard Edition Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+NHL 21 Standard Edition Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Watch Dogs: Legion Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+The Dark Pictures Anthology: Little Hope Xbox Series X|S Xbox One,0,75,OLD,False,,False,False,p3
+Assassin's Creed Valhalla: Standard Edition Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Destiny 2: Beyond Light Xbox Series X|S Xbox One,0,145,OLD,False,,False,False,p3
+Call of Duty: Black Ops Cold War - Standard Edition Xbox Series X|S Xbox One,0,172,OLD,False,,False,False,p3
+KINGDOM HEARTS Melody of Memory Xbox Series X|S Xbox One,0,220,OLD,False,,False,False,p3
+Cyberpunk 2077 Xbox Series X|S Xbox One,0,172,OLD,False,,False,False,p3
+NBA 2K21 Next Generation Xbox Series X|S,0,146,OLD,False,,False,False,p3
+Mafia: Definitive Edition Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3
+Immortals Fenyx Rising Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+HITMAN 3 Xbox Series X|S Xbox One,0,187,OLD,False,,False,False,p3
+It Takes Two Xbox Series X|S Xbox One,0,95,OLD,False,,False,False,p3
+Outriders Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+MotoGP 21 Xbox One,0,135,OLD,False,,False,False,p3
+NieR Replicant ver.1.22474487139...Xbox Series X|S Xbox One,0,194,OLD,False,,False,False,p3
+Resident Evil Village Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Mass Effect Legendary Edition Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Biomutant Xbox Series X|S Xbox One,0,124,OLD,False,,False,False,p3
+Dark Alliance Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+SCARLET NEXUS Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+F1 2021 Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3
+NBA 2K20 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+RAGE 2 Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+STAR WARS Battlefront II Xbox Series X|S Xbox One,0,135,OLD,False,,False,False,p3
+Need for Speed Payback Xbox Series X|S Xbox One,0,93,OLD,False,,False,False,p3
+PLAYERUNKNOWN'S BATTLEGROUNDS Xbox Series X|S Xbox One,0,76,OLD,False,,False,False,p3
+Persona 5 Tactica Xbox Series X|S Xbox One,0,476,OLD,False,,False,False,p3
+Hell is Us Xbox Series X|S,0,540,OLD,False,,False,False,p3
+Little Nightmares III Xbox Series X|S Xbox One,0,377,OLD,False,,False,False,p3
+RIDE 6 Xbox Series X|S,0,621,OLD,False,,False,False,p3
+PRAGMATA Xbox Series X|S,0,540,OLD,False,,False,False,p3

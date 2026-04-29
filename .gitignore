@@ -1,6 +1,6 @@
 # Admin panel — keep out of public repo
 admin.html
-
+receipt.html
 # Proxy server (contains API key)
 sgdb_proxy.py
 update_combo.py

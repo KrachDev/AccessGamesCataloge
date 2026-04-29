@@ -235,6 +235,30 @@
     .feature-chip svg { height: 16px; width: auto; color: var(--accent); }
     .feature-chip.green svg { color: #76B900; }
 
+    
+    /* Platforms & Footer Features */
+    .features-strip {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0 20px;
+      flex-wrap: wrap;
+    }
+    .feature-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'Tajawal', sans-serif;
+      background: rgba(255,255,255,0.03);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .feature-chip svg { height: 16px; width: auto; color: var(--accent); }
+    .feature-chip.green svg { color: #76B900; }
+
     /* ── STATS STRIP ── */
     .stats-strip {
       display: flex;
@@ -1417,6 +1441,29 @@
       <button class="pill" data-f="single">فردية</button>
     </div>
 
+
+    <div class="features-strip">
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.353 0 0 5.385 0 12c0 3.018 1.11 5.765 2.946 7.893l3.328-4.786c-.052-.35-.084-.712-.084-1.085 0-3.313 2.686-6 6-6s6 2.687 6 6-2.687 6-6 6c-1.398 0-2.687-.492-3.712-1.314l-4.484 6.452C6.914 23.363 9.351 24 11.979 24c6.627 0 12-5.385 12-12s-5.373-12-12-12zm4.331 16.945c-1.07.643-2.33.957-3.665.957-3.238 0-5.876-2.585-5.993-5.811L3.064 16.14c1.642 2.766 4.673 4.614 8.192 4.614 5.105 0 9.245-4.14 9.245-9.245S16.361 2.264 11.256 2.264 2.011 6.404 2.011 11.509c0 .762.094 1.5.267 2.21l3.524-5.064c.541-1.996 2.378-3.486 4.542-3.486 2.602 0 4.71 2.108 4.71 4.71 0 1.25-.49 2.385-1.288 3.226l2.544 3.84zm-4.331-8.21c-1.397 0-2.529 1.132-2.529 2.529s1.132 2.529 2.529 2.529 2.529-1.132 2.529-2.529-1.132-2.529-2.529-2.529z"/></svg>
+        ستيم
+      </div>
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.05 6.78c-1.05-.72-2.19-1.32-3.42-1.77C15.42 4.21 13.06 4 11.75 4c-1.31 0-3.67.21-5.88 1.01-1.23.45-2.37 1.05-3.42 1.77-.32.22-.55.51-.71.86-.16.35-.24.73-.24 1.13 0 .4.08.78.24 1.13.16.35.39.64.71.86 1.05.72 2.19 1.32 3.42 1.77 2.21.8 4.57 1.01 5.88 1.01 1.31 0 3.67-.21 5.88-1.01 1.23-.45 2.37-1.05 3.42-1.77.32-.22.55-.51.71-.86.16-.35.24-.73.24-1.13 0-.4-.08-.78-.24-1.13-.16-.35-.39-.64-.71-.86zm-12.7 6.08c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38zm6.8 0c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.62 1.38-1.38 1.38z"/></svg>
+        بلايستيشن
+      </div>
+      <div class="feature-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0C5.355 0 0 5.355 0 11.96c0 6.606 5.355 11.96 11.96 11.96 6.606 0 11.96-5.354 11.96-11.96C23.92 5.355 18.566 0 11.96 0zm-5.01 6.551c1.558.053 3.619.674 5.01 1.547 1.391-.873 3.452-1.494 5.01-1.547 1.969-.066 3.864.882 5.01 2.353-2.148-1.042-4.996-.757-6.935.539-1.939 1.296-3.085 3.39-3.085 5.567 0 2.177 1.146 4.271 3.085 5.567 1.939 1.296 4.787 1.581 6.935.539-1.146 1.471-3.041 2.419-5.01 2.353-1.558-.053-3.619-.674-5.01-1.547-1.391.873-3.452 1.494-5.01 1.547-1.969.066-3.864-.882-5.01-2.353 2.148 1.042 4.996.757 6.935-.539 1.939-1.296 3.085-3.39 3.085-5.567 0-2.177-1.146-4.271-3.085-5.567-1.939-1.296-4.787-1.581-6.935-.539 1.146-1.471 3.041-2.419 5.01-2.353z"/></svg>
+        إكس بوكس
+      </div>
+      <div class="feature-chip">
+        <span style="font-weight:700">BOOSTER</span>
+      </div>
+      <div class="feature-chip green">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+        <span style="font-weight:700">GEFORCE</span>
+      </div>
+    </div>
+
     <div class="results-row">
       <span id="results-label"></span>
     </div>
@@ -1457,7 +1504,11 @@
     let selEditions = {};
 
     function slugify(n) {
-      return n.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').trim();
+      let str = n.replace(/xbox series x\|s/gi, '')
+                 .replace(/xbox one/gi, '')
+                 .replace(/ps5/gi, '')
+                 .replace(/ps4/gi, '');
+      return str.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').trim();
     }
 
     function waHref(name, ed, price) {
@@ -1785,8 +1836,27 @@
             if (isConsole) {
               const p2 = parseInt(parts[1], 10) || 0;
               const p3 = parseInt(parts[2], 10) || 0;
-              editions = ['P2 (Secondary)', 'P3 (Primary)'];
-              prices = { 'P2 (Secondary)': p2, 'P3 (Primary)': p3 };
+              const isXbox = file.includes('Xbox');
+              const p2Label = isXbox ? 'Method' : 'P2 (Secondary)';
+              const p3Label = isXbox ? 'Direct' : 'P3 (Primary)';
+              // Check price_mode column
+              const pmIdx = header.indexOf('price_mode');
+              const priceMode = (pmIdx >= 0 && parts[pmIdx]) ? parts[pmIdx].trim() : 'p3';
+              editions = [];
+              prices = {};
+              if (priceMode === 'both' || priceMode === 'p2') {
+                editions.push(p2Label);
+                prices[p2Label] = p2;
+              }
+              if (priceMode === 'both' || priceMode === 'p3') {
+                editions.push(p3Label);
+                prices[p3Label] = p3;
+              }
+              // Fallback: if somehow empty, show p3
+              if (editions.length === 0) {
+                editions.push(p3Label);
+                prices[p3Label] = p3;
+              }
             } else {
               const price = parseInt(parts[1], 10) || 0;
               const has_deluxe = parts[3] === 'True';
@@ -1801,12 +1871,14 @@
 
             const oi = header.indexOf('is_online');
             const is_online = (oi >= 0 && parts[oi]) ? parts[oi].trim() : 'False';
+            const fi = header.indexOf('is_featured');
+            const is_featured = (fi >= 0 && parts[fi]) ? parts[fi].trim() : 'False';
 
             CATALOG.push({
               name: name,
               editions: editions,
               prices: prices,
-              tier: (tag.includes('NEW') || (isConsole ? prices[editions[0]] >= 60 : prices[editions[0]] >= 60)) ? 'high' : 'normal',
+              tier: is_featured === 'True' ? 'high' : 'normal',
               is_combo: is_combo,
               tag: tag,
               is_online: is_online,
