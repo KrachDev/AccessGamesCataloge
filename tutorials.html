@@ -6,129 +6,328 @@
   <title>دليل الاستخدام — AccessGames</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #03070c;
-      --card-bg: rgba(13, 20, 33, 0.7);
+      --surface: #0a1120;
+      --surface-2: #111d2e;
       --accent: #00d9ff;
-      --accent-d: #0099cc;
-      --text: #ffffff;
-      --muted: #8899a6;
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 16px;
+      --accent-dim: rgba(0,217,255,0.12);
+      --accent-glow: rgba(0,217,255,0.3);
+      --gold: #f5c842;
+      --text: #f0f4f8;
+      --muted: #6b8096;
+      --border: rgba(255,255,255,0.07);
+      --border-accent: rgba(0,217,255,0.25);
+      --radius: 14px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: 'Tajawal', sans-serif;
-      line-height: 1.6;
+      font-family: 'Cairo', sans-serif;
+      line-height: 1.7;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .bg-glow {
+    .bg-layer {
       position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(circle at 50% -20%, #002244 0%, #03070c 100%);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,60,120,0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0,40,80,0.3) 0%, transparent 60%),
+        #03070c;
+    }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -1; opacity: 0.025;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
 
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
+    /* ── Header ── */
     header {
-      padding: 24px 0; border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
-      background: rgba(3, 7, 12, 0.8);
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px) saturate(1.4);
+      background: rgba(3,7,12,0.82);
     }
     .header-row { display: flex; align-items: center; justify-content: space-between; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
     .brand-icon {
-      width: 40px; height: 40px; background: var(--accent);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent), #006fa6);
+      border-radius: 11px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px rgba(0,217,255,0.35);
     }
-    .brand-text { font-size: 20px; font-weight: 900; letter-spacing: 0.5px; font-family: 'Outfit', sans-serif; }
+    .brand-text { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; }
     .brand-text span { color: var(--accent); }
-    .header-nav { display: flex; gap: 24px; }
-    .nav-link { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 0; }
-    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .header-nav { display: flex; gap: 28px; }
+    .nav-link {
+      color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px;
+      transition: color 0.2s; position: relative; padding-bottom: 4px;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link.active { color: var(--accent); }
+    .nav-link.active::after {
+      content: ''; position: absolute; bottom: 0; right: 0; left: 0; height: 2px;
+      background: var(--accent); border-radius: 2px; box-shadow: 0 0 8px var(--accent);
+    }
 
-    .hero { text-align: center; padding: 80px 0 40px; }
-    .hero span { color: var(--accent); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
-    .hero h1 { font-size: 48px; font-weight: 900; margin: 10px 0; }
+    /* ── Hero ── */
+    .page-hero { text-align: center; padding: 64px 0 44px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-dim); border: 1px solid var(--border-accent);
+      padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 700;
+      color: var(--accent); margin-bottom: 20px; letter-spacing: 0.5px;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+    .page-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(30px, 5vw, 46px); font-weight: 900; letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p { color: var(--muted); font-size: 16px; max-width: 480px; margin: 0 auto; }
 
+    /* ── Platform Tabs ── */
+    .platform-tabs {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 48px;
+    }
+    .platform-tab {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); padding: 10px 20px; border-radius: 100px;
+      cursor: pointer; font-weight: 700; font-size: 14px; font-family: 'Cairo', sans-serif;
+      transition: all 0.25s;
+    }
+    .platform-tab:hover { border-color: rgba(255,255,255,0.18); color: #fff; background: var(--surface-2); }
+    .platform-tab.active {
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      border-color: var(--accent); color: #000;
+      box-shadow: 0 0 28px rgba(0,217,255,0.28), 0 4px 16px rgba(0,0,0,0.3);
+      font-weight: 900;
+    }
+    .platform-tab.gold-tab.active {
+      background: linear-gradient(135deg, var(--gold), #c9930a);
+      border-color: var(--gold); color: #000;
+      box-shadow: 0 0 28px rgba(245,200,66,0.28), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .platform-tab.green-tab.active {
+      background: linear-gradient(135deg, #00e5a0, #009966);
+      border-color: #00e5a0; color: #000;
+      box-shadow: 0 0 28px rgba(0,229,160,0.28), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    /* ── Tutorial Sections ── */
+    .tut-section { display: none; }
+    .tut-section.active { display: block; animation: slideIn 0.35s ease-out both; }
+    @keyframes slideIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Section intro banner ── */
+    .section-intro {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px; margin-bottom: 36px;
+      border-right: 3px solid var(--accent);
+    }
+    .section-intro.gold { border-right-color: var(--gold); }
+    .section-intro.green { border-right-color: #00e5a0; }
+    .section-intro-icon { font-size: 28px; flex-shrink: 0; }
+    .section-intro p { color: var(--muted); font-size: 15px; }
+    .section-intro strong { color: var(--text); }
+
+    /* ── Phase divider ── */
+    .phase-divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 52px 0 28px;
+    }
+    .phase-line { flex:1; height:1px; background: linear-gradient(to left, transparent, var(--border)); }
+    .phase-line.r { background: linear-gradient(to right, transparent, var(--border)); }
     .phase-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.2);
-      color: var(--accent); padding: 8px 20px; border-radius: 100px;
-      font-weight: 800; margin: 60px 0 30px;
+      background: var(--accent-dim); border: 1px solid var(--border-accent);
+      color: var(--accent); font-weight: 800; font-size: 13px; letter-spacing: 0.05em;
+      padding: 6px 18px; border-radius: 100px; white-space: nowrap;
     }
+    .phase-badge.gold { background: rgba(245,200,66,0.1); border-color: rgba(245,200,66,0.3); color: var(--gold); }
+    .phase-badge.green { background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.3); color: #00e5a0; }
 
-    .step-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 24px; padding: 32px; margin-bottom: 40px;
-      position: relative;
+    /* ── Step card ── */
+    .step-wrap { margin-bottom: 40px; }
+    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .step-num-badge {
+      background: var(--accent-dim); border: 1px solid var(--border-accent);
+      color: var(--accent); font-family: 'Outfit', sans-serif;
+      font-weight: 900; font-size: 12px; padding: 4px 12px; border-radius: 100px;
+      letter-spacing: 0.5px;
     }
-    .step-num {
-      position: absolute; top: -15px; right: 32px;
-      background: var(--accent); color: #000; font-weight: 900;
-      padding: 4px 16px; border-radius: 8px; font-size: 14px;
-    }
-    .step-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
-    .step-card p { color: var(--muted); font-size: 17px; margin-bottom: 24px; }
+    .step-num-badge.gold { background: rgba(245,200,66,0.1); border-color: rgba(245,200,66,0.3); color: var(--gold); }
+    .step-num-badge.green { background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.3); color: #00e5a0; }
+    .step-title { font-size: 20px; font-weight: 800; }
+    .step-desc { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 18px; }
+    .step-desc strong { color: var(--text); }
 
+    /* ── Image frame ── */
     .img-frame {
       position: relative; border-radius: 16px; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1); background: #000;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      border: 1px solid var(--border); background: #000;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
     }
-    .img-frame img { width: 100%; display: block; opacity: 0.9; }
+    .img-frame img { width: 100%; display: block; }
+    .img-overlay { position: absolute; inset: 0; pointer-events: none; }
 
-    /* Annotation Overlays */
-    .overlay { position: absolute; inset: 0; pointer-events: none; }
+    /* Annotation */
     .ann-box {
-      position: absolute; border: 3px solid #ff0044; border-radius: 6px;
-      box-shadow: 0 0 15px rgba(255,0,68,0.5);
-      animation: pulse 2s infinite;
+      position: absolute; border: 2px solid #ef4444; border-radius: 6px;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.2), 0 0 16px rgba(239,68,68,0.15);
+      animation: ann-pulse 2s ease-in-out infinite;
+    }
+    @keyframes ann-pulse {
+      0%,100%{ box-shadow: 0 0 0 3px rgba(239,68,68,0.2), 0 0 16px rgba(239,68,68,0.12); }
+      50%{ box-shadow: 0 0 0 5px rgba(239,68,68,0.3), 0 0 28px rgba(239,68,68,0.2); }
     }
     .ann-label {
-      position: absolute; background: #ff0044; color: #fff;
-      padding: 4px 12px; border-radius: 6px; font-weight: 800; font-size: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.02); } }
-
-    .tip {
-      display: flex; gap: 12px; background: rgba(0, 217, 255, 0.05);
-      border: 1px solid rgba(0, 217, 255, 0.1); padding: 16px; border-radius: 12px;
-      margin-top: 20px; font-size: 15px; color: var(--muted);
+      position: absolute; background: #ef4444; color: #fff;
+      font-weight: 800; font-size: 11px; padding: 3px 9px;
+      border-radius: 5px; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(239,68,68,0.4);
     }
 
-    footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 80px; }
-    .footer-links { display: flex; gap: 20px; margin-bottom: 12px; justify-content: center; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    /* ── Caption ── */
+    .caption {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 14px; padding: 13px 16px;
+      background: rgba(0,217,255,0.05); border: 1px solid rgba(0,217,255,0.12);
+      border-radius: 10px; font-size: 14px; color: var(--muted); line-height: 1.65;
+    }
+    .caption.warn {
+      background: rgba(239,68,68,0.05); border-color: rgba(239,68,68,0.15);
+    }
+    .caption.gold {
+      background: rgba(245,200,66,0.05); border-color: rgba(245,200,66,0.18);
+    }
+    .caption strong { color: var(--text); }
+    .cap-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Connector ── */
+    .connector {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      margin: -12px auto; position: relative; z-index: 1;
+    }
+    .connector-line { width: 2px; height: 36px; background: linear-gradient(to bottom, var(--border), var(--accent)); opacity: 0.4; }
+    .connector-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+    /* ── Manual steps (for Xbox/PS) ── */
+    .manual-steps { list-style: none; }
+    .manual-steps li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; color: var(--muted);
+    }
+    .manual-steps li:last-child { border-bottom: none; }
+    .manual-steps li strong { color: var(--text); }
+    .ms-num {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: var(--accent-dim); color: var(--accent);
+      font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border-accent);
+    }
+    .ms-num.gold { background: rgba(245,200,66,0.1); border-color: rgba(245,200,66,0.3); color: var(--gold); }
+    .ms-num.green { background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.3); color: #00e5a0; }
+
+    /* ── Info cards ── */
+    .info-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+    .info-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+    }
+    .info-card.highlight { border-color: rgba(0,217,255,0.3); background: rgba(0,217,255,0.05); }
+    .info-card-label {
+      display: inline-block; font-family: 'Outfit', sans-serif; font-weight: 900;
+      font-size: 11px; letter-spacing: 1px; padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 10px;
+      background: rgba(0,217,255,0.15); color: var(--accent); border: 1px solid rgba(0,217,255,0.3);
+    }
+    .info-card-label.gold { background: rgba(245,200,66,0.12); color: var(--gold); border-color: rgba(245,200,66,0.3); }
+    .info-card-title { font-weight: 800; font-size: 15px; margin-bottom: 8px; }
+    .info-card-desc { color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+    /* ── Notice box ── */
+    .notice {
+      display: flex; gap: 10px; padding: 14px 18px; border-radius: 10px;
+      font-size: 14px; margin: 20px 0;
+      background: rgba(245,200,66,0.07); border: 1px solid rgba(245,200,66,0.25); color: #c9a82e;
+    }
+    .notice.blue {
+      background: var(--accent-dim); border-color: var(--border-accent); color: var(--accent);
+    }
+
+    /* ── CTA ── */
+    .tut-cta {
+      text-align: center; padding: 56px 0 72px; border-top: 1px solid var(--border); margin-top: 60px;
+    }
+    .tut-cta h3 { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+    .tut-cta p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px; border-radius: 100px; font-family: 'Cairo', sans-serif;
+      font-weight: 800; font-size: 14px; cursor: pointer; border: none; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #0099cc); color: #000;
+      box-shadow: 0 4px 20px rgba(0,217,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,217,255,0.45); }
+    .btn-ghost {
+      background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    }
+    .btn-ghost:hover { border-color: var(--border-accent); color: var(--text); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px 0 36px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; transition: color 0.2s; }
     .footer-links a:hover { color: var(--accent); }
+    footer p { color: #3a4d5e; font-size: 13px; }
 
+    /* ── Responsive ── */
     @media (max-width: 640px) {
-      .hero h1 { font-size: 32px; }
-      .step-card { padding: 20px; }
+      .header-nav { display: none; }
+      .page-hero { padding: 44px 0 32px; }
+      .info-cards { grid-template-columns: 1fr; }
+      .step-title { font-size: 17px; }
     }
   </style>
-  <!-- Vercel Analytics & Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-  <div class="bg-glow"></div>
+  <div class="bg-layer"></div>
+  <div class="bg-grid"></div>
 
   <header>
     <div class="wrap">
       <div class="header-row">
         <a class="brand" href="index.html">
           <div class="brand-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="6" width="20" height="12" rx="3" />
-              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="3"/>
+              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01"/>
             </svg>
           </div>
           <div class="brand-text">Access<span>Games</span></div>
@@ -144,58 +343,429 @@
   </header>
 
   <div class="wrap">
-    <div class="hero">
-      <span>How to use</span>
-      <h1>كيفاش تلعب أوفلاين على Steam</h1>
+
+    <div class="page-hero">
+      <div class="hero-badge">دليل الاستخدام</div>
+      <h1>كيفاش تلعب — خطوة بخطوة</h1>
+      <p>اختار المنصة ديالك وتبع الدليل — واضح وسهل لكل طريقة</p>
     </div>
 
-    <center><div class="phase-badge"> المرحلة 1: تسجيل الدخول</div></center>
+    <!-- Platform Tabs -->
+    <div class="platform-tabs">
+      <button class="platform-tab active" onclick="switchPlatform('pc', this)">
+        💻 PC · Steam أوفلاين
+      </button>
+      <button class="platform-tab gold-tab" onclick="switchPlatform('xbox-direct', this)">
+        🟢 Xbox — Direct
+      </button>
+      <button class="platform-tab gold-tab" onclick="switchPlatform('xbox-method', this)">
+        🟡 Xbox — Method
+      </button>
+      <button class="platform-tab green-tab" onclick="switchPlatform('ps-p3', this)">
+        🔵 PS4/5 — P3
+      </button>
+      <button class="platform-tab green-tab" onclick="switchPlatform('ps-p2', this)">
+        🟣 PS4/5 — P2
+      </button>
+    </div>
 
-    <div class="step-card">
-      <div class="step-num">خطوة 1</div>
-      <h2>🔑 إدخال الحساب</h2>
-      <p>افتح Steam وادخل باسم المستخدم وكلمة السر اللي وصلاتك منا. اكتبهم بالضبط كما جاوك.</p>
-      <div class="img-frame">
-        <img src="assets/tut/t1.png" alt="Login" onerror="this.src='https://placehold.co/800x450/03070c/00d9ff?text=Steam+Login+Screen'">
-        <div class="overlay" id="ov1"></div>
+
+    <!-- ════════════════════════════════════════
+         PC · STEAM OFFLINE
+    ════════════════════════════════════════ -->
+    <div class="tut-section active" id="sec-pc">
+
+      <div class="section-intro">
+        <div class="section-intro-icon">💻</div>
+        <p>كنعطيوك <strong>حساب Steam</strong> فيه اللعبة. خاصك تدخل مرة واحدة أونلاين، تشغّل اللعبة، مبعد تمشي للوضع الأوفلاين — وتلعب بدون انترنت للأبد.</p>
       </div>
-      <div class="tip">💡 اكتب الحروف الكبيرة والصغيرة بالضبط كما هي.</div>
-    </div>
 
-    <div class="step-card">
-      <div class="step-num">خطوة 2</div>
-      <h2>📱 تأكيد Steam Guard</h2>
-      <p>غا يطلب منك Steam تأكيد من الموبايل. استنى شوية، غادي نوافقو من عندنا مباشرة وتدخل تلقائياً.</p>
-      <div class="img-frame">
-        <img src="assets/tut/t2.png" alt="Guard" onerror="this.src='https://placehold.co/800x450/03070c/00d9ff?text=Steam+Guard+Screen'">
+      <!-- PHASE 1 -->
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge">🔐 المرحلة 1 — تسجيل الدخول</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 1 من 6</div>
+          <div class="step-title">🔑 دخل بالاسم وكلمة السر</div>
+        </div>
+        <p class="step-desc">افتح Steam وادخل باسم المستخدم وكلمة السر اللي وصلاتك منا. اكتبهم بالضبط — <strong>الحروف الكبيرة والصغيرة مهمة</strong>.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t1_Login Phase.png" alt="تسجيل الدخول على Steam" id="pc-img1" onload="drawPC1()">
+          <div class="img-overlay" id="pc-ov1"></div>
+        </div>
+        <div class="caption">
+          <span class="cap-icon">💡</span>
+          <span>اكتب <strong>اسم المستخدم</strong> و<strong>كلمة السر</strong> بالضبط كما جاوك، مبعد نقر على <strong>Sign in</strong>.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div><div class="connector-line"></div></div>
+
+      <!-- STEP 2 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 2 من 6</div>
+          <div class="step-title">📱 Steam Guard — استنى</div>
+        </div>
+        <p class="step-desc">Steam غا يطلب تأكيد. <strong>ما دير والو</strong> — بقى على هاد الشاشة وراسلنا على الواتساب. غادي نرسلوك الكود في الحين أو نوافقو من الموبايل.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t2_Enter Code Phase.png" alt="Steam Guard">
+        </div>
+        <div class="caption warn">
+          <span class="cap-icon">⏳</span>
+          <span>ما تقفلش Steam وما تبدلش الشاشة — استنى شوية. غادي نرسلوك الكود مباشرة.</span>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge">🎮 المرحلة 2 — تشغيل اللعبة</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 3 من 6</div>
+          <div class="step-title">▶️ شغّل اللعبة أونلاين</div>
+        </div>
+        <p class="step-desc">مبعد ما دخلت، غا تلقى اللعبة في المكتبة. انقر على <strong>PLAY</strong> وانتظر حتى توصل للشاشة الرئيسية ديالها — هاد الخطوة ضرورية للتفعيل.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t4_play.png" alt="تشغيل اللعبة" id="pc-img3" onload="drawPC3()">
+          <div class="img-overlay" id="pc-ov3"></div>
+        </div>
+        <div class="caption">
+          <span class="cap-icon">💡</span>
+          <span>هاد الخطوة ضرورية — اللعبة خاصها تشوف أنها شغّلات مرة وانت متصل بالنت.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div><div class="connector-line"></div></div>
+
+      <!-- STEP 4 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 4 من 6</div>
+          <div class="step-title">❌ خرج من اللعبة</div>
+        </div>
+        <p class="step-desc">مجرد ما وصلت للشاشة الرئيسية — خرج من اللعبة. انقر <strong>Exit</strong> من القائمة أو <strong>X</strong> من فوق.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t5_quit.png" alt="خروج من اللعبة" id="pc-img4" onload="drawPC4()">
+          <div class="img-overlay" id="pc-ov4"></div>
+        </div>
+        <div class="caption">
+          <span class="cap-icon">💡</span>
+          <span>خرج من اللعبة بالكامل — إما <strong>Exit</strong> في القائمة أو الـ <strong>X</strong> فوق على اليمين.</span>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge">📶 المرحلة 3 — الوضع الأوفلاين</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 5 من 6</div>
+          <div class="step-title">🌐 روّح على الوضع الأوفلاين</div>
+        </div>
+        <p class="step-desc">من القائمة فوق، انقر على <strong>Steam</strong> مبعد <strong>Go Offline…</strong> مبعد <strong>Restart in Offline Mode</strong>.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t6_go_offline.png" alt="Go Offline" id="pc-img5" onload="drawPC5()">
+          <div class="img-overlay" id="pc-ov5"></div>
+        </div>
+        <div class="caption">
+          <span class="cap-icon">💡</span>
+          <span>انقر <strong>Steam</strong> فوق على اليسار ← <strong>Go Offline…</strong> ← <strong>Restart in Offline Mode</strong>.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-line"></div><div class="connector-dot"></div><div class="connector-line"></div></div>
+
+      <!-- STEP 6 -->
+      <div class="step-wrap">
+        <div class="step-header">
+          <div class="step-num-badge">الخطوة 6 من 6</div>
+          <div class="step-title">✅ راك في الوضع الأوفلاين!</div>
+        </div>
+        <p class="step-desc">Steam دابا شغّال بدون انترنت. تقدر تلعب اللعبة متى بغيتي — شوف <strong>OFFLINE MODE</strong> في الأسفل على اليمين.</p>
+        <div class="img-frame">
+          <img src="assets/tut/t7_offline_mode.png" alt="Offline Mode مفعّل" id="pc-img6" onload="drawPC6()">
+          <div class="img-overlay" id="pc-ov6"></div>
+        </div>
+        <div class="caption">
+          <span class="cap-icon">✅</span>
+          <span>تشوف <strong>"OFFLINE MODE"</strong> في الأسفل على اليمين = اللعبة جاهزة تلعب بدون انترنت في أي وقت!</span>
+        </div>
+      </div>
+
+    </div><!-- /sec-pc -->
+
+
+    <!-- ════════════════════════════════════════
+         XBOX — DIRECT
+    ════════════════════════════════════════ -->
+    <div class="tut-section" id="sec-xbox-direct">
+
+      <div class="section-intro gold">
+        <div class="section-intro-icon">🟢</div>
+        <p><strong>Xbox Direct</strong> — أسهل طريقة. كنضيفو حساب اللعبة مباشرة على Xbox ديالك وتلعب من حسابك الشخصي بدون أي قيود أو ضبط إضافي.</p>
+      </div>
+
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge gold">🎮 خطوات الإضافة المباشرة</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <ul class="manual-steps">
+        <li>
+          <div class="ms-num gold">1</div>
+          <div>اذهب إلى <strong>الإعدادات</strong> على Xbox ديالك ← <strong>الحساب</strong> ← <strong>إضافة حساب جديد</strong></div>
+        </li>
+        <li>
+          <div class="ms-num gold">2</div>
+          <div>أدخل <strong>الإيميل وكلمة السر</strong> ديال الحساب اللي عطيناك إياه</div>
+        </li>
+        <li>
+          <div class="ms-num gold">3</div>
+          <div>إذا طلب تأكيد — راسلنا على الواتساب وغادي نرسلوك <strong>الكود</strong> فوراً</div>
+        </li>
+        <li>
+          <div class="ms-num gold">4</div>
+          <div>بمجرد ما يدخل الحساب، غادي تلقى <strong>اللعبة متاحة في مكتبتك</strong> مباشرة</div>
+        </li>
+        <li>
+          <div class="ms-num gold">5</div>
+          <div><strong>ارجع لحسابك الشخصي</strong> وشغّل اللعبة — راها جاهزة تلعب بحسابك الخاص</div>
+        </li>
+      </ul>
+
+      <div class="notice">
+        <span>⚡</span>
+        <span>هاد الطريقة كتخليك تلعب <strong>أونلاين وأوفلاين</strong> بحسابك الشخصي بدون أي قيود.</span>
+      </div>
+
+      <div class="info-cards">
+        <div class="info-card highlight">
+          <div class="info-card-label">✓ مزايا Direct</div>
+          <div class="info-card-title">أبسط طريقة</div>
+          <div class="info-card-desc">إضافة مباشرة — ما كاينش ضبط معقد. اللعبة تبان في مكتبتك وتلعب بحسابك.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">ℹ️ ملاحظة</div>
+          <div class="info-card-title">حساب إضافي على الجهاز</div>
+          <div class="info-card-desc">غادي يكون كاين حساب إضافي على Xbox ديالك — هاد الشيء عادي وما كيأثرش على حسابك الرئيسي.</div>
+        </div>
+      </div>
+
+    </div><!-- /sec-xbox-direct -->
+
+
+    <!-- ════════════════════════════════════════
+         XBOX — METHOD
+    ════════════════════════════════════════ -->
+    <div class="tut-section" id="sec-xbox-method">
+
+      <div class="section-intro gold">
+        <div class="section-intro-icon">🟡</div>
+        <p><strong>Xbox Method</strong> — نفس النتيجة بطريقة مختلفة. تلعب اللعبة على جهازك بدون ما تضيف الحساب بشكل دائم. خاصك تطبق خطوات معينة في كل مرة.</p>
+      </div>
+
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge gold">🔧 طريقة التفعيل</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <ul class="manual-steps">
+        <li>
+          <div class="ms-num gold">1</div>
+          <div>قفّل حسابك الشخصي على Xbox (Sign out)</div>
+        </li>
+        <li>
+          <div class="ms-num gold">2</div>
+          <div>ادخل بحساب AccessGames اللي عطيناك — <strong>إيميل + كلمة السر</strong></div>
+        </li>
+        <li>
+          <div class="ms-num gold">3</div>
+          <div>إذا طلب كود تأكيد — راسلنا وغادي نرسلوك إياه <strong>فوراً</strong></div>
+        </li>
+        <li>
+          <div class="ms-num gold">4</div>
+          <div>شغّل اللعبة <strong>مرة وحدة</strong> من حساب AccessGames</div>
+        </li>
+        <li>
+          <div class="ms-num gold">5</div>
+          <div>قفّل حساب AccessGames (Sign out) وادخل <strong>بحسابك الشخصي</strong></div>
+        </li>
+        <li>
+          <div class="ms-num gold">6</div>
+          <div>شغّل اللعبة مرة أخرى — دابا راها تلعب <strong>بحسابك الخاص</strong></div>
+        </li>
+      </ul>
+
+      <div class="notice">
+        <span>⚠️</span>
+        <span>خاصك تبدا من الخطوة 1 في كل مرة تبغي تشغّل اللعبة من جهاز مختلف.</span>
+      </div>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-label">✓ مزايا Method</div>
+          <div class="info-card-title">بدون إضافة دائمة</div>
+          <div class="info-card-desc">ما كاينش حساب إضافي دائم على جهازك — كتمسح الحساب بعد ما تلعب إذا بغيتي.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">ℹ️ ملاحظة</div>
+          <div class="info-card-title">خطوات في كل مرة</div>
+          <div class="info-card-desc">خاصك تكرر الخطوات إذا غيرتي الجهاز. على نفس الجهاز — اللعبة كتبقى متاحة.</div>
+        </div>
+      </div>
+
+    </div><!-- /sec-xbox-method -->
+
+
+    <!-- ════════════════════════════════════════
+         PS4/5 — P3 (Primary)
+    ════════════════════════════════════════ -->
+    <div class="tut-section" id="sec-ps-p3">
+
+      <div class="section-intro green">
+        <div class="section-intro-icon">🔵</div>
+        <p><strong>PS4/5 — P3 (Primary)</strong> — أحسن تجربة على PS. اللعبة كتظهر في <strong>مكتبتك الشخصية</strong>، تجمع تروفيز بحسابك، وتلعب أونلاين وأوفلاين.</p>
+      </div>
+
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge green">🎮 خطوات تفعيل P3</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <ul class="manual-steps">
+        <li>
+          <div class="ms-num green">1</div>
+          <div>اذهب إلى <strong>الإعدادات</strong> على PS ديالك ← <strong>المستخدمون والحسابات</strong> ← <strong>إضافة مستخدم جديد</strong></div>
+        </li>
+        <li>
+          <div class="ms-num green">2</div>
+          <div>أدخل <strong>الإيميل وكلمة السر</strong> ديال حساب AccessGames</div>
+        </li>
+        <li>
+          <div class="ms-num green">3</div>
+          <div>إذا طلب تأكيد — راسلنا على الواتساب وغادي نرسلوك <strong>الكود</strong> في الحين</div>
+        </li>
+        <li>
+          <div class="ms-num green">4</div>
+          <div>من حساب AccessGames، روّح لـ <strong>PlayStation Store</strong> وتحقق باش اللعبة موجودة</div>
+        </li>
+        <li>
+          <div class="ms-num green">5</div>
+          <div>اذهب لـ <strong>الإعدادات ← مستخدمون وحسابات ← الحساب الأساسي</strong> واجعل هاد الـ PS <strong>الجهاز الأساسي</strong> للحساب</div>
+        </li>
+        <li>
+          <div class="ms-num green">6</div>
+          <div><strong>ارجع لحسابك الشخصي</strong> وشغّل اللعبة — راها في مكتبتك بحسابك الخاص</div>
+        </li>
+      </ul>
+
+      <div class="notice blue">
+        <span>⭐</span>
+        <span><strong>P3</strong> كيخليك تجمع تروفيز وتلعب أونلاين بحسابك الشخصي — أحسن تجربة ممكنة.</span>
+      </div>
+
+      <div class="info-cards">
+        <div class="info-card highlight">
+          <div class="info-card-label">✓ مزايا P3</div>
+          <div class="info-card-title">مكتبتك الشخصية</div>
+          <div class="info-card-desc">اللعبة في حسابك — تروفيز، إحصائيات، أصدقاء. تلعب أونلاين وأوفلاين بدون إنترنت دائم.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">ℹ️ ملاحظة</div>
+          <div class="info-card-title">حساب إضافي مثبّت</div>
+          <div class="info-card-desc">غادي يكون حساب AccessGames مثبّت على الجهاز كمستخدم إضافي — هادا عادي وضروري للطريقة تشتغل.</div>
+        </div>
+      </div>
+
+    </div><!-- /sec-ps-p3 -->
+
+
+    <!-- ════════════════════════════════════════
+         PS4/5 — P2 (Secondary)
+    ════════════════════════════════════════ -->
+    <div class="tut-section" id="sec-ps-p2">
+
+      <div class="section-intro green">
+        <div class="section-intro-icon">🟣</div>
+        <p><strong>PS4/5 — P2 (Secondary)</strong> — تلعب مباشرة من حساب AccessGames. أرخص خيار لكن <strong>محتاج إنترنت</strong> طول ما تلعب وما كتجمعش تروفيز في حسابك الشخصي.</p>
+      </div>
+
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge green">🎮 خطوات تفعيل P2</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <ul class="manual-steps">
+        <li>
+          <div class="ms-num green">1</div>
+          <div>اذهب لـ <strong>الإعدادات ← مستخدمون وحسابات ← إضافة مستخدم</strong></div>
+        </li>
+        <li>
+          <div class="ms-num green">2</div>
+          <div>أدخل <strong>الإيميل وكلمة السر</strong> ديال حساب AccessGames</div>
+        </li>
+        <li>
+          <div class="ms-num green">3</div>
+          <div>إذا طلب تأكيد — راسلنا وغادي نرسلوك <strong>الكود</strong> فوراً</div>
+        </li>
+        <li>
+          <div class="ms-num green">4</div>
+          <div>من <strong>حساب AccessGames</strong> مباشرة، شغّل اللعبة وتمتع بيها</div>
+        </li>
+      </ul>
+
+      <div class="notice">
+        <span>⚠️</span>
+        <span>P2 محتاج <strong>اتصال دائم بالإنترنت</strong> طول ما تلعب. إذا انقطع النت — اللعبة توقف.</span>
+      </div>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-label">✓ مزايا P2</div>
+          <div class="info-card-title">أبسط إعداد</div>
+          <div class="info-card-desc">ما كاينش إعداد معقد — فقط دخل بحساب AccessGames وشغّل مباشرة.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">⚠️ تنبيه</div>
+          <div class="info-card-title">إنترنت دائم مطلوب</div>
+          <div class="info-card-desc">التروفيز والإحصائيات ديال حساب AccessGames — مش حسابك الشخصي. محتاج نت طول ما تلعب.</div>
+        </div>
+      </div>
+
+    </div><!-- /sec-ps-p2 -->
+
+
+    <!-- CTA -->
+    <div class="tut-cta">
+      <h3>🎮 عندك سؤال؟</h3>
+      <p>إلا عندك أي مشكل أو محتاج مساعدة في أي خطوة — كنا هنا</p>
+      <div class="cta-btns">
+        <a href="index.html" class="btn btn-primary">تصفح المتجر ←</a>
+        <a href="faq.html" class="btn btn-ghost">الأسئلة الشائعة</a>
       </div>
     </div>
 
-    <center><div class="phase-badge"> المرحلة 2: تشغيل اللعبة</div></center>
-
-    <div class="step-card">
-      <div class="step-num">خطوة 3</div>
-      <h2>▶️ التشغيل الأول</h2>
-      <p>بعد ما تدخل، انقر على زر PLAY. هاد الخطوة ضرورية باش اللعبة تتفعل أونلاين لأول مرة.</p>
-      <div class="img-frame">
-        <img src="assets/tut/t3.png" alt="Play" onerror="this.src='https://placehold.co/800x450/03070c/00d9ff?text=Library+Play+Button'">
-        <div class="overlay" id="ov3"></div>
-      </div>
-    </div>
-
-    <center><div class="phase-badge"> المرحلة 3: وضع الأوفلاين</div></center>
-
-    <div class="step-card">
-      <div class="step-num">خطوة 4</div>
-      <h2>🌐 تفعيل Go Offline</h2>
-      <p>دابا اقطع النت على Steam. من القائمة فوق، اختار Steam ثم Go Offline.</p>
-      <div class="img-frame">
-        <img src="assets/tut/t4.png" alt="Offline" onerror="this.src='https://placehold.co/800x450/03070c/00d9ff?text=Steam+Menu+Go+Offline'">
-        <div class="overlay" id="ov4"></div>
-      </div>
-    </div>
-
-  </div>
+  </div><!-- /.wrap -->
 
   <footer>
     <div class="wrap">
@@ -210,44 +780,52 @@
   </footer>
 
   <script>
-    function addBox(id, x, y, w, h, label) {
-      const ov = document.getElementById(id);
-      if(!ov) return;
-      const box = document.createElement('div');
-      box.className = 'ann-box';
-      box.style.left = x + '%';
-      box.style.top = y + '%';
-      box.style.width = w + '%';
-      box.style.height = h + '%';
-      ov.appendChild(box);
-      
-      if(label) {
-        const lb = document.createElement('div');
-        lb.className = 'ann-label';
-        lb.textContent = label;
-        lb.style.left = x + '%';
-        lb.style.top = (y - 8) + '%';
-        ov.appendChild(lb);
-      }
+    // ── Tab switching ──
+    function switchPlatform(name, btn) {
+      document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tut-section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('sec-' + name).classList.add('active');
+      // redraw annotations for PC section
+      if (name === 'pc') setTimeout(redrawPC, 100);
     }
 
-    window.onload = () => {
-      // Step 1: Login fields
-      addBox('ov1', 7, 26, 56, 12, 'اسم المستخدم');
-      addBox('ov1', 7, 43, 56, 12, 'كلمة السر');
+    // ── Annotation helpers ──
+    function ann(ovId, boxes) {
+      const ov = document.getElementById(ovId);
+      if (!ov) return;
+      ov.innerHTML = '';
+      boxes.forEach(b => {
+        const box = document.createElement('div');
+        box.className = 'ann-box';
+        box.style.left = b[0] + '%'; box.style.top = b[1] + '%';
+        box.style.width = b[2] + '%'; box.style.height = b[3] + '%';
+        ov.appendChild(box);
+        if (b[4]) {
+          const lbl = document.createElement('div');
+          lbl.className = 'ann-label';
+          lbl.textContent = b[4];
+          lbl.style.left = b[0] + '%';
+          lbl.style.top = (b[1] - 7) + '%';
+          ov.appendChild(lbl);
+        }
+      });
+    }
 
-      // Step 3: Play button
-      addBox('ov3', 25, 43, 18, 10, 'PLAY');
+    function drawPC1() { ann('pc-ov1', [[6,26,56,11,'اسم المستخدم'],[6,42,56,11,'كلمة السر']]); }
+    function drawPC3() { ann('pc-ov3', [[26,43,18,9,'اضغط PLAY']]); }
+    function drawPC4() { ann('pc-ov4', [[25,61,11,5,'Exit'],[95,4,5,5,'X']]); }
+    function drawPC5() { ann('pc-ov5', [[0,0,8,4,'Steam'],[0,11,13,3,'Go Offline']]); }
+    function drawPC6() { ann('pc-ov6', [[61,92,27,7,'OFFLINE MODE ✅']]); }
 
-      // Step 4: Steam Menu
-      addBox('ov4', 0, 0, 8, 5, 'Steam');
-      addBox('ov4', 0, 11, 15, 4, 'Go Offline');
-    };
+    function redrawPC() { drawPC1(); drawPC3(); drawPC4(); drawPC5(); drawPC6(); }
+    window.addEventListener('resize', redrawPC);
+    window.addEventListener('DOMContentLoaded', () => setTimeout(redrawPC, 400));
   </script>
-<!-- Vercel Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
