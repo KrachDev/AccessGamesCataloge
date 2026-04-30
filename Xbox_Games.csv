@@ -1,16 +1,16 @@
 game,p2_price,p3_price,tag,is_combo,combo_list,is_online,is_featured,price_mode,real_price
-Borderlands 4 Xbox Series X|S,0,231,OLD,False,,False,False,p3,171
+Borderlands 4 Xbox Series X|S,95,231,OLD,False,,False,True,both,171
 WWE 2K26 Xbox Series X|S,0,531,OLD,False,,False,False,p3,471
 Crimson Desert Xbox Series X|S,0,441,OLD,False,,False,False,p3,381
 Call of Duty: Black Ops 7 Xbox Series X|S Xbox One,0,411,OLD,False,,False,False,p3,351
 Football Manager 26 Console Xbox Series X|S,0,354,OLD,False,,False,False,p3,294
-ARC Raiders Xbox Series X|S,0,242,OLD,False,,False,False,p3,182
+ARC Raiders Xbox Series X|S,100,242,OLD,False,,False,True,both,182
 The Outer Worlds 2 Xbox Series X|S,0,531,OLD,False,,False,False,p3,471
 NINJA GAIDEN 4 Xbox Series X|S,0,269,OLD,False,,False,False,p3,209
-Vampire: The Masquerade - Bloodlines 2 Xbox Series X|S,0,348,OLD,False,,False,False,p3,288
-Battlefield 6 Xbox Series X|S,0,223,OLD,False,,False,False,p3,163
-EA SPORTS FC 26 Xbox Series X|S Xbox One,0,257,OLD,False,,False,False,p3,197
-SILENT HILL f Xbox Series X|S,0,334,OLD,False,,False,False,p3,274
+Vampire: The Masquerade - Bloodlines 2 Xbox Series X|S,100,348,OLD,False,,False,True,both,288
+Battlefield 6 Xbox Series X|S,100,223,OLD,False,,False,True,both,163
+EA SPORTS FC 26 Xbox Series X|S Xbox One,100,257,OLD,False,,False,True,both,197
+SILENT HILL f Xbox Series X|S,90,334,OLD,False,,False,True,both,274
 Dying Light: The Beast Xbox Series X|S,0,374,OLD,False,,False,False,p3,314
 The Elder Scrolls IV: Oblivion Remastered Xbox Series X|S,0,161,OLD,False,,False,False,p3,101
 NBA 2K26 Xbox Series X|S,0,188,OLD,False,,False,False,p3,128
@@ -23,8 +23,8 @@ F1 25 Xbox Series X|S,0,231,OLD,False,,False,False,p3,171
 Tony Hawk's Pro Skater 3 + 4 Xbox Series X|S Xbox One,0,294,OLD,False,,False,False,p3,234
 Cronos: The OLD Dawn Xbox Series X|S,0,418,OLD,False,,False,False,p3,358
 Killing Floor 3 Xbox Series X|S,0,221,OLD,False,,False,False,p3,161
-Mafia: The Old Country Xbox Series X|S,0,326,OLD,False,,False,False,p3,266
-Black Myth: Wukong Xbox Series X|S,0,464,OLD,False,,False,False,p3,404
+Mafia: The Old Country Xbox Series X|S,90,326,OLD,False,,False,True,both,266
+Black Myth: Wukong Xbox Series X|S,100,464,OLD,False,,False,True,both,404
 EA SPORTS Madden NFL 26 Xbox Series X|S,0,531,OLD,False,,False,False,p3,471
 METAL GEAR SOLID: SNAKE EATER Xbox Series X|S,0,360,OLD,False,,False,False,p3,300
 EA SPORTS Madden NFL 25 Xbox Series X|S Xbox One,0,197,OLD,False,,False,False,p3,137
@@ -217,7 +217,7 @@ Atomic Heart Xbox Series X|S Xbox One,0,262,OLD,False,,False,False,p3,202
 Wo Long: Fallen Dynasty Xbox Series X|S Xbox One,0,337,OLD,False,,False,False,p3,277
 Anno 1800 Console Edition Xbox Series X|S,0,136,OLD,False,,False,False,p3,76
 WWE 2K23 Cross-Gen Digital Edition Xbox Series X|S Xbox One,0,223,OLD,False,,False,False,p3,163
-Resident Evil 4 Remake Xbox Series X|S,0,187,OLD,False,,False,False,p3,127
+Resident Evil 4 Xbox Series X|S,0,187,OLD,False,,False,False,p3,127
 MLB The Show 23 Xbox Series X|S Xbox One,0,157,OLD,False,,False,False,p3,97
 Minecraft Legends Xbox Series X|S Xbox One,0,82,OLD,False,,False,False,p3,42
 Dead Island 2 Xbox Series X|S Xbox One,0,210,OLD,False,,False,False,p3,150
@@ -315,3 +315,5 @@ Hell is Us Xbox Series X|S,0,540,OLD,False,,False,False,p3,480
 Little Nightmares III Xbox Series X|S Xbox One,0,377,OLD,False,,False,False,p3,317
 RIDE 6 Xbox Series X|S,0,621,OLD,False,,False,False,p3,561
 PRAGMATA Xbox Series X|S,0,540,OLD,False,,False,False,p3,480
+Resident Evil Collection,100,200,OLD,True,Resident Evil Requiem | Resident Evil 4 | Resident Evil Village | Resident Evil 7 | Resident Evil 3 | Resident Evil 2,False,False,p2,0
+Grand Theft Auto V + Red Dead Redemption 2,100,100,OLD,True,Grand Theft Auto V | Red Dead Redemption 2,False,False,p2,0
