@@ -1,144 +1,584 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الأسئلة الشائعة — AccessGames</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #03070c;
-      --card-bg: rgba(13, 20, 33, 0.7);
+      --surface: #0a1120;
+      --surface-2: #111d2e;
       --accent: #00d9ff;
-      --accent-d: #0099cc;
-      --text: #ffffff;
-      --muted: #8899a6;
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 12px;
+      --accent-dim: rgba(0, 217, 255, 0.12);
+      --accent-glow: rgba(0, 217, 255, 0.3);
+      --gold: #f5c842;
+      --text: #f0f4f8;
+      --muted: #6b8096;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-accent: rgba(0, 217, 255, 0.25);
+      --radius: 14px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: 'Tajawal', sans-serif;
-      line-height: 1.6;
+      font-family: 'Cairo', sans-serif;
+      line-height: 1.7;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* Background depth */
-    .bg-glow {
+    .bg-layer {
       position: fixed;
       inset: 0;
       z-index: -1;
-      background: radial-gradient(circle at 50% -20%, #002244 0%, #03070c 100%);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 60, 120, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0, 40, 80, 0.3) 0%, transparent 60%),
+        #03070c;
     }
 
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.025;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
     header {
-      padding: 24px 0;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(3, 7, 12, 0.8);
+      backdrop-filter: blur(18px) saturate(1.4);
+      background: rgba(3, 7, 12, 0.82);
     }
 
-    .header-row { display: flex; align-items: center; justify-content: space-between; }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
     .brand-icon {
-      width: 40px; height: 40px; background: var(--accent);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent), #006fa6);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.35), 0 0 60px rgba(0, 217, 255, 0.1);
     }
-    .brand-text { font-size: 20px; font-weight: 900; letter-spacing: 0.5px; font-family: 'Outfit', sans-serif; }
-    .brand-text span { color: var(--accent); }
 
-    .header-nav { display: flex; gap: 24px; }
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-text span {
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 28px;
+    }
+
     .nav-link {
-      color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px;
-      transition: all 0.2s; position: relative; padding: 8px 0;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 4px;
     }
-    .nav-link:hover, .nav-link.active { color: var(--accent); }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+    }
+
     .nav-link.active::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-      background: var(--accent); box-shadow: 0 0 10px var(--accent); border-radius: 2px;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--accent);
     }
 
-    .page-title { text-align: center; margin: 60px 0 40px; }
-    .page-title h1 { font-size: 42px; font-weight: 900; margin-bottom: 12px; }
-    .page-title p { color: var(--muted); font-size: 18px; }
+    .page-hero {
+      text-align: center;
+      padding: 72px 0 52px;
+      position: relative;
+    }
 
-    .faq-tabs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8)
+      }
+    }
+
+    .page-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(34px, 5vw, 50px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .faq-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
     .faq-tab {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      color: var(--muted); padding: 10px 24px; border-radius: 100px; cursor: pointer;
-      font-weight: 700; transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 10px 22px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: 'Cairo', sans-serif;
+      transition: all 0.25s;
     }
-    .faq-tab:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
-    .faq-tab.active { background: var(--accent); border-color: var(--accent); color: #000; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
 
-    .faq-section { display: none; }
-    .faq-section.active { display: block; animation: fadeIn 0.4s ease-out; }
+    .faq-tab:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      background: var(--surface-2);
+    }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .faq-tab.active {
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      border-color: var(--accent);
+      color: #000;
+      box-shadow: 0 0 28px rgba(0, 217, 255, 0.28), 0 4px 16px rgba(0, 0, 0, 0.3);
+      font-weight: 900;
+    }
+
+    .tab-icon {
+      font-size: 16px;
+    }
+
+    .faq-section {
+      display: none;
+    }
+
+    .faq-section.active {
+      display: block;
+      animation: slideIn 0.35s ease-out both;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border-right: 3px solid var(--accent);
+    }
+
+    .section-intro-icon {
+      font-size: 26px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .section-intro p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .section-intro strong {
+      color: var(--text);
+    }
 
     .accordion-item {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 16px; margin-bottom: 16px; overflow: hidden;
-      transition: all 0.3s;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .accordion-item:hover { border-color: rgba(0, 217, 255, 0.3); }
+
+    .accordion-item:hover {
+      border-color: rgba(0, 217, 255, 0.2);
+    }
+
+    .accordion-item.active {
+      border-color: var(--border-accent);
+      box-shadow: 0 0 36px rgba(0, 217, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
 
     .accordion-header {
-      width: 100%; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between;
-      background: none; border: none; color: #fff; font-size: 18px; font-weight: 800;
-      cursor: pointer; text-align: right;
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      text-align: right;
+      transition: background 0.2s;
     }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .acc-q {
+      flex: 1;
+      text-align: right;
+    }
+
     .accordion-arrow {
-      width: 24px; height: 24px; color: var(--muted); transition: transform 0.3s;
-      display: flex; align-items: center; justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: all 0.3s;
     }
-    .accordion-item.active .accordion-arrow { transform: rotate(180deg); color: var(--accent); }
-    .accordion-item.active { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 217, 255, 0.05); }
+
+    .accordion-item.active .accordion-arrow {
+      background: var(--accent-dim);
+      color: var(--accent);
+      transform: rotate(180deg);
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+    }
 
     .accordion-body {
-      max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
-      background: rgba(0, 0, 0, 0.2);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out;
     }
-    .accordion-item.active .accordion-body { max-height: 500px; }
-    .accordion-content { padding: 0 24px 24px; color: var(--muted); font-size: 16px; line-height: 1.8; }
 
-    footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 80px; }
-    .footer-links { display: flex; gap: 20px; margin-bottom: 12px; justify-content: center; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    footer p { color: var(--muted); font-size: 13px; }
+    .accordion-item.active .accordion-body {
+      max-height: 600px;
+    }
+
+    .accordion-content {
+      padding: 20px 24px 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .answer-text {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .answer-text strong {
+      color: var(--text);
+    }
+
+    .option-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .option-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .option-card.highlight {
+      border-color: rgba(0, 217, 255, 0.3);
+      background: rgba(0, 217, 255, 0.05);
+    }
+
+    .option-label {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+      background: rgba(0, 217, 255, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+    }
+
+    .option-label.gold {
+      background: rgba(245, 200, 66, 0.12);
+      color: var(--gold);
+      border-color: rgba(245, 200, 66, 0.3);
+    }
+
+    .option-title {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .option-desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .step-list {
+      list-style: none;
+      margin-top: 14px;
+    }
+
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .step-list li:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-accent);
+    }
+
+    .pay-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pay-pill {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .pay-pill-icon {
+      font-size: 18px;
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(245, 200, 66, 0.07);
+      border: 1px solid rgba(245, 200, 66, 0.25);
+      border-radius: 10px;
+      color: #c9a82e;
+      font-size: 14px;
+      display: flex;
+      gap: 10px;
+    }
+
+    footer {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 100px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    footer p {
+      color: #3a4d5e;
+      font-size: 13px;
+    }
 
     @media (max-width: 640px) {
-      .header-nav { display: none; }
-      .page-title h1 { font-size: 32px; }
-      .faq-tab { padding: 8px 16px; font-size: 14px; }
+      .header-nav {
+        display: none;
+      }
+
+      .page-hero {
+        padding: 48px 0 36px;
+      }
+
+      .option-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .accordion-header {
+        font-size: 15px;
+      }
     }
   </style>
-  <!-- Vercel Analytics & Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
+
 <body>
-  <div class="bg-glow"></div>
+  <div class="bg-layer"></div>
+  <div class="bg-grid"></div>
 
   <header>
     <div class="wrap">
       <div class="header-row">
         <a class="brand" href="index.html">
           <div class="brand-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="3" />
               <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
             </svg>
@@ -156,104 +596,335 @@
   </header>
 
   <div class="wrap">
-    <div class="page-title">
+    <div class="page-hero">
+      <div class="hero-badge">مركز المساعدة</div>
       <h1>الأسئلة الشائعة</h1>
-      <p>كل ما تحتاج لمعرفته حول خدمة AccessGames</p>
+      <p>كل ما تحتاج لمعرفته حول AccessGames — واضح ومفصل</p>
     </div>
 
     <div class="faq-tabs">
-      <button class="faq-tab active" onclick="switchTab('general', this)">🌐 عام</button>
-      <button class="faq-tab" onclick="switchTab('pc', this)">💻 ألعاب PC</button>
-      <button class="faq-tab" onclick="switchTab('console', this)">🎮 PS5 & Xbox</button>
-      <button class="faq-tab" onclick="switchTab('payment', this)">💳 الدفع</button>
+      <button class="faq-tab active" onclick="switchTab('general', this)">
+        <span class="tab-icon">🌐</span> عام
+      </button>
+      <button class="faq-tab" onclick="switchTab('pc', this)">
+        <span class="tab-icon">💻</span> ألعاب PC
+      </button>
+      <button class="faq-tab" onclick="switchTab('console', this)">
+        <span class="tab-icon">🎮</span> PS5 &amp; Xbox
+      </button>
+      <button class="faq-tab" onclick="switchTab('payment', this)">
+        <span class="tab-icon">💳</span> الدفع
+      </button>
     </div>
 
     <!-- GENERAL -->
     <div class="faq-section active" id="tab-general">
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>شنو هي AccessGames؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">شنو هي AccessGames؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">AccessGames هي خدمة مغربية تتيح لك توفير ألعاب PC أو PS5 أو Xbox بالدرهم المغربي — بدون الحاجة لبطاقة بنكية أجنبية وبدون PayPal. كنخدمو بنظام آمن وما تحتاجش تنشئ حساب.</div>
+          <div class="accordion-content">
+            <p class="answer-text">
+              AccessGames خدمة مغربية متخصصة في توفير ألعاب <strong>PC وPS5 وXbox</strong> بالدرهم المغربي — بدون بطاقة
+              بنكية أجنبية وبدون PayPal.
+              الألعاب رسمية ومشتراة من المتاجر الأصلية، وما محتاجش تنشئ حساب عندنا.
+            </p>
+          </div>
         </div>
       </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>كيفاش نطلب لعبة؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">كيفاش كنطلب لعبة؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">تصفح المتجر ← اختار اللعبة اللي بغيتي ← انقر على زر "اطلب" ← غادي يحولك للواتساب مع تفاصيل الطلب ← ارسل رسالة وأرفق صورة إثبات الدفع.</div>
+          <div class="accordion-content">
+            <p class="answer-text" style="margin-bottom:12px;">العملية بسيطة وكاملة عبر الواتساب:</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> تصفح المتجر واختار اللعبة اللي عجباتك</li>
+              <li><span class="step-num">2</span> انقر على زر "اطلب" — غادي يحولك للواتساب مع تفاصيل الطلب جاهزة</li>
+              <li><span class="step-num">3</span> دفع عبر إحدى طرق الدفع المتاحة</li>
+              <li><span class="step-num">4</span> ارسل صورة إثبات الدفع وانتظر التأكيد</li>
+              <li><span class="step-num">5</span> استلم اللعبة مباشرة على الواتساب</li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>قداش كيستغرق التسليم؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">قداش كيستغرق وقت التسليم؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">بمجرد التحقق من الدفع عبر الواتساب، التسليم كيكون فوري غالباً بين 15 دقيقة وساعة حسب وقت الطلب.</div>
+          <div class="accordion-content">
+            <p class="answer-text">
+              بمجرد التحقق من الدفع، التسليم كيكون فوري — غالباً <strong>بين 15 دقيقة وساعة واحدة</strong> حسب وقت
+              الطلب.
+              الطلبات اللي جاية فوق الليل ممكن تتأخر شوية، كنحاولو نردو في أقرب وقت.
+            </p>
+          </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span class="acc-q">واش الألعاب أصلية ورسمية؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p class="answer-text">
+              نعم بالكامل. جميع الألعاب مشتراة مباشرة من المتاجر الرسمية — <strong>PlayStation Store</strong>
+              و<strong>Xbox Store</strong> و<strong>Steam</strong>.
+              لا كراك، لا نسخ مقرصنة — خدمة نظيفة 100٪.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- PC -->
     <div class="faq-section" id="tab-pc">
+
+      <div class="section-intro">
+        <div class="section-intro-icon">💻</div>
+        <p>ألعاب PC عندنا كتشتغل عبر <strong>Steam في وضع Offline</strong> — بدون اشتراك شهري، بدون انترنت دائم، وبدون
+          أي تأثير على حسابك الشخصي.</p>
+      </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>شنو هو "وصول أوفلاين"؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">شنو هو "وصول أوفلاين" في Steam؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">كنعطيوك حساب Steam فيه اللعبة، كتدخل ليه وتفعل اللعبة مرة واحدة أونلاين، ومن بعد كتخلي Steam في وضع (Offline Mode) وكتلعب اللعبة براحتك بلا انقطاع وبدون ما تأثر على حسابك الشخصي.</div>
+          <div class="accordion-content">
+            <p class="answer-text" style="margin-bottom:14px;">كنعطيوك حساب Steam فيه اللعبة مثبتة. العملية:</p>
+            <ul class="step-list">
+              <li><span class="step-num">1</span> تدخل للحساب اللي عطيناك وتفتح اللعبة <strong>مرة واحدة فقط</strong>
+                وأنت متصل بالنت</li>
+              <li><span class="step-num">2</span> تبدل Steam لوضع <strong>Offline Mode</strong></li>
+              <li><span class="step-num">3</span> من هنا تلعب بلا انقطاع — حتى بدون انترنت</li>
+            </ul>
+            <p class="answer-text" style="margin-top:14px;">حسابك الشخصي ما كيتأثرش بأي شكل من الأشكال.</p>
+          </div>
         </div>
       </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>واش كود Steam Guard كيتعطل؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">واش محتاج كود Steam Guard للدخول؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">نهائياً. حنا متواجدين ديما لإرسال الكود في الحين. وبمجرد تفعيل وضع الأوفلاين، ما غتكررش تحتاج الكود إلا إذا مسحت اللعبة أو بدلت الجهاز.</div>
+          <div class="accordion-content">
+            <p class="answer-text">
+              مرة واحدة فقط — عند أول دخول للحساب. حنا متواجدين ونرسلوك الكود <strong>فوراً</strong> عبر الواتساب.
+            </p>
+            <p class="answer-text" style="margin-top:10px;">
+              بمجرد تفعيل وضع Offline، <strong>ما غتحتاجش الكود مرة أخرى</strong> إلا إذا مسحت اللعبة أو بدلت الجهاز.
+            </p>
+          </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span class="acc-q">واش نقدر نلعب أونلاين مع لأصحاب؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p class="answer-text">
+              لا — هاد النوع من الوصول مخصص للعب <strong>Solo فقط في وضع Offline</strong>.
+              اللعب الأونلاين المتعدد مش متاح بهاد الطريقة.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- CONSOLE -->
     <div class="faq-section" id="tab-console">
+
+      <div class="section-intro">
+        <div class="section-intro-icon">🎮</div>
+        <p>عندنا خيارين في PS5 وخيارين في Xbox — كل واحد كيناسب موقف مختلف. قرا مزيان باش تختار اللي يناسبك.</p>
+      </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>واش كاين فرق بين P2 و P3؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">شنو هو الفرق بين P3 وP2 في PS5؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">أيه، في PS5: P3 (أو Primary) كتخليك تلعب اللعبة بحسابك الشخصي وتجمع فيه التروفيز. أما P2 (أو Secondary) فكتلعب اللعبة فقط بالحساب اللي عطيناك ولازم تكون متصل بالنت. <br><br>في Xbox: "Direct" هو نفس الشيء ديال P3 (كتلعب بحسابك)، و "Method" هو نفس الشيء ديال P2.</div>
+          <div class="accordion-content">
+            <div class="option-cards">
+              <div class="option-card highlight">
+                <div class="option-label gold">P3 — Primary</div>
+                <div class="option-title">تلعب بحسابك الشخصي</div>
+                <div class="option-desc">اللعبة كتظهر في مكتبتك الخاصة. تجمع تروفيز، تشوف إحصائياتك، وتلعب أونلاين —
+                  كأنك اشريتي اللعبة بنفسك. بدون حاجة للانترنت للعب أوفلاين.</div>
+              </div>
+              <div class="option-card">
+                <div class="option-label">P2 — Secondary</div>
+                <div class="option-title">تلعب بحساب الخدمة</div>
+                <div class="option-desc">بتلعب من الحساب اللي عطيناك مباشرة — لازم تكون متصل بالانترنت طول ما كتلعب. ما
+                  كتجمعش تروفيز في حسابك الشخصي.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>واش الألعاب رسمية؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">شنو هو الفرق بين Direct وMethod في Xbox؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">نعم، جميع الألعاب يتم شراؤها من المتاجر الرسمية (PS Store / Xbox Store) وهي قانونية ومضمونة مئة بالمئة.</div>
+          <div class="accordion-content">
+            <div class="option-cards">
+              <div class="option-card highlight">
+                <div class="option-label gold">Direct</div>
+                <div class="option-title">إضافة الحساب مباشرة</div>
+                <div class="option-desc">كنضيفو حساب اللعبة مباشرة على Xbox ديالك — تلعب بحسابك الشخصي بدون قيود. أسهل
+                  طريقة وما كاينش أي ضبط إضافي.</div>
+              </div>
+              <div class="option-card">
+                <div class="option-label">Method</div>
+                <div class="option-title">طريقة الوصول عبر خطوات</div>
+                <div class="option-desc">نفس النتيجة تقريباً — تلعب على جهازك — لكن كتحتاج تطبق خطوات معينة لتفعيل
+                  الوصول. كنشرحوها مفصلة مع كل طلب.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span class="acc-q">أشمن خيار أحسن ليا؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p class="answer-text">
+              إذا بغيتي <strong>أحسن تجربة</strong> وتجمع تروفيز وتلعب بحسابك: اختار <strong>P3 (PS5)</strong> أو
+              <strong>Direct (Xbox)</strong>.
+            </p>
+            <p class="answer-text" style="margin-top:10px;">
+              إذا كان السعر هو الأهم وما كتهمكش التروفيز: <strong>P2</strong> أو <strong>Method</strong> هو الخيار
+              الأرخص.
+            </p>
+            <div class="notice">
+              <span>⚡</span>
+              <span>مش متأكد؟ راسلنا على الواتساب ونساعدوك تختار اللي يناسبك.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- PAYMENT -->
     <div class="faq-section" id="tab-payment">
+
       <div class="accordion-item">
         <button class="accordion-header" onclick="toggleAccordion(this)">
-          <span>شنو هي طرق الدفع المتوفرة؟</span>
-          <span class="accordion-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="acc-q">شنو هي طرق الدفع المقبولة؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
         </button>
         <div class="accordion-body">
-          <div class="accordion-content">كنقبلو الدفع عبر: CIH Bank، Barid Bank، Cash Plus، أو التعبئة (حسب الحالة).</div>
+          <div class="accordion-content">
+            <p class="answer-text" style="margin-bottom:14px;">كنقبلو الدفع بالدرهم المغربي عبر:</p>
+            <div class="pay-methods">
+              <div class="pay-pill"><span class="pay-pill-icon">🏦</span> CIH Bank</div>
+              <div class="pay-pill"><span class="pay-pill-icon">📮</span> Wafa Cash</div>
+              <div class="pay-pill"><span class="pay-pill-icon">💸</span> Cash Plus</div>
+            </div>
+            <p class="answer-text" style="margin-top:16px;">بعد الدفع ارسل لينا صورة إثبات الدفع على الواتساب ونبداو
+              بتجهيز طلبك فوراً.</p>
+          </div>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span class="acc-q">واش الدفع آمن؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p class="answer-text">
+              نعم. كل المعاملات كتتم مباشرة عبر الأنظمة البنكية المغربية الرسمية. ما عندنا ولا وصول لبياناتك البنكية —
+              كنتلقاو فقط صورة التأكيد.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          <span class="acc-q">كيفاش نثبت الدفع؟</span>
+          <span class="accordion-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="3">
+              <path d="M6 9l6 6 6-6" />
+            </svg></span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p class="answer-text">
+              خد <strong>screenshot</strong> أو <strong>صورة</strong> لتأكيد العملية من تطبيقك البنكي — اللي كيبين
+              المبلغ والتاريخ — وارسلها على الواتساب مع رسالة الطلب.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -272,29 +943,23 @@
 
   <script>
     function toggleAccordion(btn) {
-      const item = btn.parentElement;
+      const item = btn.closest('.accordion-item');
       const isActive = item.classList.contains('active');
-      
-      // Close all other items
-      document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-      
-      if (!isActive) {
-        item.classList.add('active');
-      }
+      item.closest('.faq-section').querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
     }
 
     function switchTab(name, btn) {
       document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.faq-section').forEach(s => s.classList.remove('active'));
-      
       btn.classList.add('active');
       document.getElementById('tab-' + name).classList.add('active');
     }
   </script>
-<!-- Vercel Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
+
 </html>
