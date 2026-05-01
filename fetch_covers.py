@@ -11,7 +11,12 @@ HEADERS  = {"Authorization": f"Bearer {API_KEY}"}
 CSV_PATHS = [
     r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PC_Games.csv",
     r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\Xbox_Games.csv",
-    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PS_Games.csv"
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PS_Games.csv",
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\Xbox_Keys_Games.csv",
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PC_Keys_Games.csv",
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\Xbox_Account_Games.csv",
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PC_Account_Games.csv",
+    r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\PS_Account_Games.csv"
 ]
 OUT_DIR  = r"c:\Users\Kracher\Documents\Project\AccessGamesCataloge\assets\covers"
 
@@ -28,10 +33,22 @@ def slugify(name):
     name = re.sub(r"-+", "-", name)
     return name.strip('-').strip()
 
+def clean_search_name(name):
+    name = re.sub(r'(?i)\(Xbox[^)]*\)?', '', name)
+    name = re.sub(r'(?i)\(PC[^)]*\)?', '', name)
+    name = re.sub(r'(?i)xbox series x\|s', '', name)
+    name = re.sub(r'(?i)xbox one', '', name)
+    name = re.sub(r'(?i)ps5', '', name)
+    name = re.sub(r'(?i)ps4', '', name)
+    # fallback if a parenthesis wasn't closed
+    name = re.sub(r'(?i)\(xbox.*', '', name)
+    return name.strip()
+
 def get_game_id(name):
     try:
+        search_term = clean_search_name(name)
         res = requests.get(
-            f"https://www.steamgriddb.com/api/v2/search/autocomplete/{requests.utils.quote(name)}",
+            f"https://www.steamgriddb.com/api/v2/search/autocomplete/{requests.utils.quote(search_term)}",
             headers=HEADERS, timeout=10)
         if res.status_code == 200:
             data = res.json()

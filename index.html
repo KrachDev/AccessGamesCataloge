@@ -1348,6 +1348,48 @@
       color: #0070d1;
     }
 
+    /* ── SUB TABS ── */
+    .sub-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .sub-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted2);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sub-tab:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sub-tab.active {
+      background: rgba(0, 217, 255, 0.1);
+      border-color: var(--accent);
+      color: var(--text);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.1);
+    }
+
+    .sub-tab[data-mode="keys"].active {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--feat);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+    }
+
     /* ── BENEFITS GRID ── */
     .benefits-grid {
       display: grid;
@@ -1437,6 +1479,88 @@
         box-shadow: 0 0 5px rgba(0, 255, 100, 0.2);
       }
     }
+  
+    /* ── ENHANCED FOOTER ── */
+    .site-footer {
+      margin-top: 60px;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .footer-platforms {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .plat-item:hover {
+      opacity: 1;
+    }
+
+    .plat-item svg, .plat-item img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform 0.2s;
+      direction: ltr;
+    }
+
+    .social-link:hover {
+      transform: translateX(5px);
+    }
+
+    .social-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .footer-platforms {
+        gap: 15px;
+      }
+      .plat-item span {
+        display: none;
+      }
+    }
+
   </style>
   <!-- Vercel Analytics & Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -1573,6 +1697,39 @@
 
   </div>
 
+  <div class="sub-tabs" id="sub-tabs">
+    <button class="sub-tab" data-mode="all" onclick="switchMode('all')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+        <polyline points="2 9 12 2 22 9"></polyline>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      الكل (All)
+    </button>
+    <button class="sub-tab" data-mode="offline" onclick="switchMode('offline')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+      <span id="offline-tab-text">تفعيل (Activations)</span>
+    </button>
+    <button class="sub-tab" data-mode="keys" onclick="switchMode('keys')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+      </svg>
+      مفاتيح (Keys)
+    </button>
+    <button class="sub-tab" data-mode="account" onclick="switchMode('account')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <polyline points="16 11 18 13 22 9"></polyline>
+      </svg>
+      حساب خاص (Account)
+    </button>
+  </div>
+
   <div class="filters-bar">
     <span class="filters-label">تصفية</span>
     <button class="pill active" data-f="all">الكل</button>
@@ -1595,88 +1752,126 @@
       <span>جاري تحميل الكتالوج…</span>
     </div>
   </div>
-  <!-- Marketing Benefits -->
-  <div class="benefits-grid animate-in" style="animation-delay: 0.1s">
-    <div class="benefit-item">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-        </svg>
-      </div>
-      <div class="benefit-content">
-        <h3>لعب يوم الإصدار</h3>
-        <p>استمتع بأحدث الألعاب في أول يوم من صدورها، حتى ألعاب الحماية القوية متوفرة فوراً.</p>
-      </div>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      </div>
-      <div class="benefit-content">
-        <h3>أمان وموثوقية</h3>
-        <p>ملفات رسمية من المتاجر مباشرة. تجربة آمنة 100% وخالية من أي برمجيات ضارة.</p>
-      </div>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path
-            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-          </path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-      </div>
-      <div class="benefit-content">
-        <h3>تحديثات تلقائية</h3>
-        <p>احصل على جميع التحديثات والإضافات (DLC) فور صدورها، تماماً مثل النسخة الأصلية.</p>
-      </div>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-      </div>
-      <div class="benefit-content">
-        <h3>دعم فني متخصص</h3>
-        <p>نحن معك خطوة بخطوة لضمان تشغيل اللعبة بأفضل أداء وبدون أي تعقيدات تقنية.</p>
-      </div>
-    </div>
-  </div>
+  <!-- Marketing Benefits Integrated in Footer -->
+  <footer class="site-footer" style="margin-top: 40px; padding-bottom: 40px; border-top: 1px solid var(--border); position: relative; z-index: 10; background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);">
+    <div class="footer-wrap" style="max-width: 1100px; margin: 0 auto; padding: 40px 20px 0; display: flex; flex-direction: column; gap: 50px;">
 
-  <div class="contact-banner">
-    <div class="contact-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-      </svg>
-    </div>
+      <div class="benefits-grid animate-in" style="animation-delay: 0.1s; margin: 0;">
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          </div>
+          <div class="benefit-content">
+            <h3>لعب يوم الإصدار</h3>
+            <p>استمتع بأحدث الألعاب في أول يوم من صدورها، حتى ألعاب الحماية القوية متوفرة فوراً.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="benefit-content">
+            <h3>أمان وموثوقية</h3>
+            <p>ملفات رسمية من المتاجر مباشرة. تجربة آمنة 100% وخالية من أي برمجيات ضارة.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <div class="benefit-content">
+            <h3>تحديثات تلقائية</h3>
+            <p>احصل على جميع التحديثات والإضافات (DLC) فور صدورها، تماماً مثل النسخة الأصلية.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="benefit-content">
+            <h3>دعم فني متخصص</h3>
+            <p>نحن معك خطوة بخطوة لضمان تشغيل اللعبة بأفضل أداء وبدون أي تعقيدات تقنية.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="contact-text">
-      <h4>لم تجد اللعبة التي تبحث عنها؟</h4>
-      <p>تواصل معنا وسنقوم بتوفيرها لك بأفضل سعر!</p>
+      <!-- Contact & Socials Hub (Merged) -->
+      <div class="footer-middle" style="display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 32px; background: rgba(10, 10, 15, 0.4); border-radius: 16px; border: 1px solid var(--border2); max-width: 800px; margin: 0 auto; width: 100%;">
+        <div class="contact-text" style="text-align: center;">
+          <h4 style="font-size: 22px; font-weight: 800; margin-bottom: 8px; color: #fff;">لم تجد اللعبة التي تبحث عنها؟</h4>
+          <p style="color: var(--muted2); font-size: 16px;">تواصل معنا وسنقوم بتوفيرها لك بأفضل سعر!</p>
+        </div>
+        
+        <div class="footer-socials" style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap; justify-content: center; border: none; padding: 0;">
+          <a class="contact-btn" href="https://wa.me/212659978011?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%84%D8%B9%D8%A8%D8%A9%20%D8%BA%D9%8A%D8%B1%20%D9%85%D9%88%D8%AC%D9%88%D8%AF%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D9%84%D9%88%D8%AC%3A" target="_blank" rel="noopener" style="font-size: 16px; padding: 12px 24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            اطلب لعبة مخصصة
+          </a>
+          <a href="https://t.me/AccessGames" target="_blank" class="social-link" style="padding: 12px 20px; background: rgba(0, 136, 204, 0.1); border-radius: 12px; transition: background 0.2s;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#0088cc"><path d="M12 0A12 12 0 1 0 24 12 12 12 0 0 0 12 0Zm5.4 8.7-2 9.5c-.2.8-.7 1-1.3.6l-3.5-2.6-1.7 1.6a1 1 0 0 1-.8.4l.2-3.6 6.5-5.9c.3-.3-.1-.4-.4-.2l-8 5-3.5-1c-.8-.2-.8-.8.2-1.2l13.6-5.2c.6-.2 1.1.2.9 1Z"/></svg>
+            Telegram
+          </a>
+          <a href="https://wa.me/212659978011" target="_blank" class="social-link" style="padding: 12px 20px; background: rgba(37, 211, 102, 0.1); border-radius: 12px; transition: background 0.2s;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#25D366"><path d="M12.01 2A10 10 0 0 0 2 12c0 1.76.46 3.44 1.3 4.96L2 22l5.17-1.36A10 10 0 1 0 12.01 2Zm5.78 14.33c-.24.7-1.42 1.34-1.95 1.4-.47.05-1.07.2-3.41-.76-2.82-1.16-4.66-4.08-4.8-4.26-.14-.19-1.15-1.53-1.15-2.92 0-1.39.73-2.07.99-2.36.26-.28.56-.35.75-.35s.37 0 .54.02c.17.02.4.06.63.6.26.61.87 2.12.95 2.29.08.16.14.35.03.55-.09.18-.14.3-.28.46l-.37.42c-.13.14-.28.29-.12.56.16.27.7 1.15 1.5 1.86.99.91 1.84 1.2 2.1 1.34.28.14.44.12.61-.08.16-.2.72-.84.92-1.13.19-.29.38-.24.63-.14.26.1 1.63.77 1.91.91.28.14.47.21.54.33.06.12.06.7-.18 1.4z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://instagram.com/AccessGamesMar" target="_blank" class="social-link" style="padding: 12px 20px; background: rgba(225, 48, 108, 0.1); border-radius: 12px; transition: background 0.2s;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="#E1306C"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.37.89.41.4.67.81.89 1.37.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.89 1.37-.41.4-.81.67-1.37.89-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.37-.89-.41-.4-.67-.81-.89-1.37-.16-.43-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.89-1.37.41-.4.81-.67 1.37-.89.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0-2.16C8.74 0 8.33.01 7.05.07 5.77.13 4.9.33 4.14.63c-.8.3-1.47.7-2.14 1.37S.93 3.34.63 4.14C.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.3.8.7 1.47 1.37 2.14s1.34 1.07 2.14 1.37c.76.3 1.63.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.8-.3 1.47-.7 2.14-1.37s1.07-1.34 1.37-2.14c.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91-.3-.8-.7-1.47-1.37-2.14s-1.34-1.07-2.14-1.37c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm3.84-10.42a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88Z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+
+      <!-- Platforms Row -->
+      <div class="footer-platforms" style="padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); border-bottom: none; gap: 40px;">
+        <div class="plat-item">
+          <svg fill="#fff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.102 12.129a2.831 2.831 0 1 1 2.831 2.831h-.002a2.83 2.83 0 0 1-2.83-2.83v-.001zm6.589.006a3.768 3.768 0 1 0-3.768 3.768 3.773 3.773 0 0 0 3.768-3.767zM10.427 23.76l-1.841-.762a3.19 3.19 0 0 0 2.868 1.808 3.18 3.18 0 0 0 2.93-1.943l.008-.021a3.18 3.18 0 0 0-4.083-4.194l.022-.007 1.903.787a2.35 2.35 0 0 1 1.439 2.164 2.347 2.347 0 0 1-3.26 2.163l.015.006zm5.547-22.756C8.117 1.005 1.673 7.05 1.036 14.742l-.004.054 8.038 3.322a4.2 4.2 0 0 1 2.387-.737h.002q.117.002.235.008l3.575-5.176v-.074a5.653 5.653 0 1 1 5.653 5.658h-.131l-5.094 3.638c0 .065.005.131.005.199v.003a4.241 4.241 0 0 1-8.394.861l-.005-.027-5.755-2.383c1.841 6.345 7.601 10.905 14.425 10.905 8.281 0 14.994-6.713 14.994-14.994S24.254 1.005 15.973 1.005h-.001z"/>
+          </svg>
+          <span>ستيم</span>
+        </div>
+        <div class="plat-item">
+          <svg fill="#fff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.262 24.248c-2.374-.681-2.767-2.084-1.69-2.899.776-.51 1.668-.954 2.612-1.288l.087-.027 7.017-2.516v2.89l-5.03 1.839c-.881.339-1.031.79-.299 1.032a5.1 5.1 0 0 0 2.963-.161l-.035.011 2.422-.882v2.592c-.15.037-.32.055-.487.091-.775.136-1.667.214-2.577.214-1.778 0-3.486-.298-5.078-.846l.11.033zm14.787.296 7.868-2.843c.893-.322 1.032-.781.307-1.022a5.3 5.3 0 0 0-2.982.165l.037-.011-5.255 1.874v-2.983l.3-.106c1.05-.349 2.284-.62 3.557-.761l.083-.008c.468-.05 1.01-.078 1.559-.078 1.877 0 3.677.331 5.343.939l-.108-.035c2.309.751 2.549 1.839 1.969 2.589a5.6 5.6 0 0 1-1.988 1.282l-.039.013-10.677 3.883v-2.869zM12.231 4.248v21.927l4.892 1.576V9.361c0-.862.38-1.438.992-1.238.795.225.95 1.017.95 1.881v7.342c3.05 1.491 5.451-.003 5.451-3.939 0-4.045-1.407-5.842-5.546-7.282-1.785-.648-4.04-1.294-6.347-1.805l-.389-.072z"/>
+          </svg>
+          <span>بلايستيشن</span>
+        </div>
+        <div class="plat-item">
+          <svg fill="#fff" viewBox="0 0 575.568 575.568">
+            <path d="M285.994,141.629c9.553-6.861,59.149-38.887,132.088-23.397c-36.084-27.772-81.25-44.327-130.307-44.327 c-48.562,0-93.324,16.212-129.224,43.482C228.925,104.211,276.648,134.921,285.994,141.629z"/>
+            <path d="M285.994,242.793C153.851,344.818,141.904,425.016,140.968,443.234c38.311,36.193,89.952,58.428,146.812,58.428 c55.129,0,105.379-20.869,143.305-55.129C431.258,438.994,429.832,353.852,285.994,242.793z"/>
+            <path d="M339.697,194.334c0,0,148.74,144.462,91.848,251.794c43.066-39.125,70.111-95.576,70.111-158.348 c0-63.011-27.264-119.652-70.619-158.79C429.574,134.597,345.51,162.394,339.697,194.334z"/>
+            <path d="M232.291,194.334c-5.361-29.492-77.412-55.447-89.578-63.66c-42.295,39.076-68.807,94.988-68.807,157.112 c0,59.504,24.321,113.313,63.532,152.083C89.303,333.266,232.291,194.334,232.291,194.334z"/>
+            <path d="M287.787,575.568c158.686,0,287.782-129.102,287.782-287.788C575.568,129.095,446.467,0,287.787,0 C129.095,0,0,129.102,0,287.787C0,446.473,129.095,575.568,287.787,575.568z M287.787,30.6 c141.813,0,257.18,115.374,257.18,257.187c0,141.813-115.373,257.18-257.18,257.18c-141.806,0-257.193-115.373-257.193-257.18 C30.594,145.98,145.974,30.6,287.787,30.6z"/>
+          </svg>
+          <span>إكس بوكس</span>
+        </div>
+        <div class="plat-item">
+          <svg fill="#fff" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          <span>ألعاب سحابية</span>
+        </div>
+        <div class="plat-item">
+          <svg fill="#76b900" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.6c-5.302 0-9.6-4.298-9.6-9.6S6.698 2.4 12 2.4s9.6 4.298 9.6 9.6-4.298 9.6-9.6 9.6z"/></svg>
+          <span>نفيديا</span>
+        </div>
+      </div>
     </div>
-    <a class="contact-btn"
-      href="https://wa.me/212659978011?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%84%D8%B9%D8%A8%D8%A9%20%D8%BA%D9%8A%D8%B1%20%D9%85%D9%88%D8%AC%D9%88%D8%AF%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D9%84%D9%88%D8%AC%3A"
-      target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-      </svg>
-      تواصل معنا
-    </a>
-  </div>
-</div>
+  </footer>
+
 
 <script>
   const WA = '212659978011';
-  const PLATFORM = 'PC (Offline)';
+  let CURRENT_PLATFORM = 'PC (Offline)';
 
   let CATALOG = [];
   let filter = 'all';
@@ -1691,7 +1886,7 @@
   }
 
   function waHref(name, ed, price) {
-    const msg = `مرحبا، أريد شراء لعبة:\n🎮 ${name}\n📦 ${ed} Edition\n💻 ${PLATFORM}\n💰 ${price} درهم`;
+    const msg = `مرحبا، أريد شراء لعبة:\n- اللعبة: ${name}\n- النوع: ${ed} Edition\n- المنصة: ${CURRENT_PLATFORM}`;
     return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
   }
 
@@ -1977,11 +2172,95 @@
     return result;
   }
 
+  let CURRENT_FILE = 'PC_Games.csv';
+  let CURRENT_MODE = 'offline';
+
+  window.switchMode = function(mode) {
+    if (CURRENT_MODE === mode) return;
+    document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.sub-tab[data-mode="${mode}"]`).classList.add('active');
+    
+    let baseFile = CURRENT_FILE;
+    if (baseFile.includes('_Keys_Games.csv')) baseFile = baseFile.replace('_Keys_Games.csv', '_Games.csv');
+    if (baseFile.includes('_Account_Games.csv')) baseFile = baseFile.replace('_Account_Games.csv', '_Games.csv');
+    
+    loadCSV(baseFile, document.querySelector(`.platform-tab[data-csv="${baseFile}"]`), mode);
+  };
+
   // Load CSV  
-  window.loadCSV = function loadCSV(file, tabEl) {
+  window.loadCSV = function loadCSV(file, tabEl, mode = null) {
+    if (!mode) mode = CURRENT_MODE;
+    
+    let targetFiles = [file];
+    if (mode === 'keys') {
+        if (file === 'Xbox_Games.csv') targetFiles = ['Xbox_Keys_Games.csv'];
+        if (file === 'PC_Games.csv') targetFiles = ['PC_Keys_Games.csv'];
+    } else if (mode === 'account') {
+        if (file === 'Xbox_Games.csv') targetFiles = ['Xbox_Account_Games.csv'];
+        if (file === 'PC_Games.csv') targetFiles = ['PC_Account_Games.csv'];
+        if (file === 'PS_Games.csv') targetFiles = ['PS_Account_Games.csv'];
+    } else if (mode === 'all') {
+        if (file === 'Xbox_Games.csv') targetFiles = ['Xbox_Games.csv', 'Xbox_Keys_Games.csv', 'Xbox_Account_Games.csv'];
+        if (file === 'PC_Games.csv') targetFiles = ['PC_Games.csv', 'PC_Keys_Games.csv', 'PC_Account_Games.csv'];
+        if (file === 'PS_Games.csv') targetFiles = ['PS_Games.csv', 'PS_Account_Games.csv'];
+    } else {
+        targetFiles = [file.replace('_Keys_Games.csv', '_Games.csv').replace('_Account_Games.csv', '_Games.csv')];
+    }
+
+    CURRENT_FILE = file.replace('_Keys_Games.csv', '_Games.csv').replace('_Account_Games.csv', '_Games.csv');
+    CURRENT_MODE = mode;
+    
     // Update active tab
     document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
     if (tabEl) tabEl.classList.add('active');
+    
+    // Manage sub-tabs visibility
+    const subTabs = document.getElementById('sub-tabs');
+    const keysTab = document.querySelector('.sub-tab[data-mode="keys"]');
+    
+    if (file.includes('PS')) {
+      if (keysTab) keysTab.style.display = 'none';
+      if (CURRENT_MODE === 'keys') {
+        CURRENT_MODE = 'offline';
+        mode = 'offline';
+        file = file.replace('_Keys_Games.csv', '_Games.csv');
+      }
+    } else {
+      if (keysTab) keysTab.style.display = 'flex';
+    }
+
+    const offlineText = document.getElementById('offline-tab-text');
+    if (offlineText) {
+      if (file.includes('Xbox')) {
+        offlineText.innerText = 'تفعيل (Activations)';
+      } else if (file.includes('PS')) {
+        offlineText.innerText = 'تفعيل (Activations)';
+      } else {
+        offlineText.innerText = 'تفعيل أوفلاين (Activations)';
+      }
+    }
+
+    // Ensure correct sub-tab is active
+    document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+    const activeSubTab = document.querySelector(`.sub-tab[data-mode="${mode}"]`);
+    if (activeSubTab) activeSubTab.classList.add('active');
+    
+    // Set WhatsApp platform name based on file and mode
+    if (file.includes('PC')) {
+      if (mode === 'keys') CURRENT_PLATFORM = 'PC (Key)';
+      else if (mode === 'account') CURRENT_PLATFORM = 'PC (Account)';
+      else if (mode === 'all') CURRENT_PLATFORM = 'PC';
+      else CURRENT_PLATFORM = 'PC (Activations)';
+    } else if (file.includes('Xbox')) {
+      if (mode === 'keys') CURRENT_PLATFORM = 'Xbox (Key)';
+      else if (mode === 'account') CURRENT_PLATFORM = 'Xbox (Account)';
+      else if (mode === 'all') CURRENT_PLATFORM = 'Xbox';
+      else CURRENT_PLATFORM = 'Xbox (Activations)';
+    } else {
+      if (mode === 'account') CURRENT_PLATFORM = 'PlayStation (Account)';
+      else if (mode === 'all') CURRENT_PLATFORM = 'PlayStation';
+      else CURRENT_PLATFORM = 'PlayStation (Activations)';
+    }
 
     // Reset filter
     filter = 'all';
@@ -1990,84 +2269,110 @@
 
     document.getElementById('grid').innerHTML = '<div class="loader"><div class="spinner"></div><span>جاري تحميل الكتالوج…</span></div>';
 
-    fetch(file + '?' + Date.now())
-      .then(r => r.text())
-      .then(csv => {
-        const lines = csv.split(/\r?\n/).filter(l => l.trim() !== '');
+    const fetchPromises = targetFiles.map(f => fetch(f + '?' + Date.now()).then(r => r.text()).then(text => ({ file: f, text })));
+    
+    Promise.all(fetchPromises)
+      .then(results => {
         CATALOG = [];
-        if (lines.length === 0) return;
+        const seenGames = new Set();
 
-        const header = parseCSVLine(lines[0]);
-        const isConsole = header.includes('p2_price');
+        results.forEach(res => {
+          const lines = res.text.split(/\r?\n/).filter(l => l.trim() !== '');
+          if (lines.length === 0) return;
 
-        // Skip header line (i = 1)
-        for (let i = 1; i < lines.length; i++) {
-          const parts = parseCSVLine(lines[i]);
-          if (parts.length >= 2) {
-            const name = parts[0].trim();
-            const tag = isConsole ? parts[3].trim() : parts[2].trim();
-            const is_combo = isConsole ? (parts[4] === 'True') : (parts[4] === 'True');
-            const combo_list_str = isConsole ? parts[5] : parts[5];
-
-            let editions = [];
-            let prices = {};
-
-            if (isConsole) {
-              const p2 = parseInt(parts[1], 10) || 0;
-              const p3 = parseInt(parts[2], 10) || 0;
-              const isXbox = file.includes('Xbox');
-              const p2Label = isXbox ? 'Method' : 'P2 (Secondary)';
-              const p3Label = isXbox ? 'Direct' : 'P3 (Primary)';
-              // Check price_mode column
-              const pmIdx = header.indexOf('price_mode');
-              const priceMode = (pmIdx >= 0 && parts[pmIdx]) ? parts[pmIdx].trim() : 'p3';
-              editions = [];
-              prices = {};
-              if (priceMode === 'both' || priceMode === 'p2') {
-                editions.push(p2Label);
-                prices[p2Label] = p2;
-              }
-              if (priceMode === 'both' || priceMode === 'p3') {
-                editions.push(p3Label);
-                prices[p3Label] = p3;
-              }
-              // Fallback: if somehow empty, show p3
-              if (editions.length === 0) {
-                editions.push(p3Label);
-                prices[p3Label] = p3;
-              }
-            } else {
-              const price = parseInt(parts[1], 10) || 0;
-              const has_deluxe = parts[3] === 'True';
-              const deluxe_price = parseInt(parts[6], 10) || 0;
-              editions = ['Standard'];
-              prices = { 'Standard': price };
-              if (has_deluxe) {
-                editions.push('Deluxe');
-                prices['Deluxe'] = deluxe_price || (price + 20);
-              }
-            }
-
-            const oi = header.indexOf('is_online');
-            const is_online = (oi >= 0 && parts[oi]) ? parts[oi].trim() : 'False';
-            const fi = header.indexOf('is_featured');
-            const is_featured = (fi >= 0 && parts[fi]) ? parts[fi].trim() : 'False';
-            const ri = header.indexOf('real_price');
-            const real_price = (ri >= 0 && parts[ri]) ? parseInt(parts[ri].trim()) || 0 : 0;
-
-            CATALOG.push({
-              name: name,
-              editions: editions,
-              prices: prices,
-              real_price: real_price,
-              tier: is_featured === 'True' ? 'high' : 'normal',
-              is_combo: is_combo,
-              tag: tag,
-              is_online: is_online,
-              combo_list: (combo_list_str || '').split('|').map(s => s.trim()).filter(s => s)
-            });
+          const header = parseCSVLine(lines[0]);
+          const isConsole = header.includes('p2_price');
+          const fileSource = res.file;
+          
+          // Determine mode from file name if in 'all' mode
+          let currentFileMode = mode;
+          if (mode === 'all') {
+            if (fileSource.includes('_Keys_')) currentFileMode = 'keys';
+            else if (fileSource.includes('_Account_')) currentFileMode = 'account';
+            else currentFileMode = 'offline';
           }
-        }
+
+          for (let i = 1; i < lines.length; i++) {
+            const parts = parseCSVLine(lines[i]);
+            if (parts.length >= 2) {
+              const name = parts[0].trim();
+              
+              // If merging, avoid duplicates (priority to standard catalog)
+              if (mode === 'all') {
+                const dupKey = `${name.toLowerCase()}_${currentFileMode}`;
+                if (seenGames.has(dupKey)) continue;
+                seenGames.add(dupKey);
+              }
+
+              const tag = isConsole ? (parts[3] ? parts[3].trim() : '') : (parts[2] ? parts[2].trim() : '');
+              const is_combo = isConsole ? (parts[4] === 'True') : (parts[4] === 'True');
+              const combo_list_str = isConsole ? parts[5] : parts[5];
+
+              let editions = [];
+              let prices = {};
+              
+              const hi = header.indexOf('has_key');
+              const has_key = (hi >= 0 && parts[hi]) ? parts[hi].trim() === 'True' : false;
+              const ki = header.indexOf('key_price');
+              const key_price = (ki >= 0 && parts[ki]) ? parseInt(parts[ki].trim(), 10) || 0 : 0;
+              const regIdx = header.indexOf('key_region');
+              const key_region = (regIdx >= 0 && parts[regIdx]) ? parts[regIdx].trim() : '';
+              
+              if (currentFileMode === 'keys' && !has_key) continue;
+
+              if (currentFileMode === 'keys') {
+                const label = key_region ? `Key (${key_region})` : 'Key';
+                editions = [label];
+                prices = { [label]: key_price };
+              } else if (currentFileMode === 'account') {
+                const price = isConsole ? (parseInt(parts[1], 10) || parseInt(parts[2], 10) || 0) : (parseInt(parts[1], 10) || 0);
+                const label = 'Account (حساب)';
+                editions = [label];
+                prices = { [label]: price };
+              } else if (isConsole) {
+                const p2 = parseInt(parts[1], 10) || 0;
+                const p3 = parseInt(parts[2], 10) || 0;
+                const isXbox = fileSource.includes('Xbox');
+                const p2Label = isXbox ? 'Method' : 'P2 (Secondary)';
+                const p3Label = isXbox ? 'Direct' : 'P3 (Primary)';
+                const pmIdx = header.indexOf('price_mode');
+                const priceMode = (pmIdx >= 0 && parts[pmIdx]) ? parts[pmIdx].trim() : 'p3';
+                editions = [];
+                prices = {};
+                if (priceMode === 'both' || priceMode === 'p2') { editions.push(p2Label); prices[p2Label] = p2; }
+                if (priceMode === 'both' || priceMode === 'p3') { editions.push(p3Label); prices[p3Label] = p3; }
+                if (editions.length === 0) { editions.push(p3Label); prices[p3Label] = p3; }
+              } else {
+                const price = parseInt(parts[1], 10) || 0;
+                const has_deluxe = parts[3] === 'True';
+                const deluxe_price = parseInt(parts[6], 10) || 0;
+                editions = ['Standard'];
+                prices = { 'Standard': price };
+                if (has_deluxe) { editions.push('Deluxe'); prices['Deluxe'] = deluxe_price || (price + 20); }
+              }
+
+              const oi = header.indexOf('is_online');
+              const is_online = (oi >= 0 && parts[oi]) ? parts[oi].trim() : 'False';
+              const fi = header.indexOf('is_featured');
+              const is_featured = (fi >= 0 && parts[fi]) ? parts[fi].trim() : 'False';
+              const ri = header.indexOf('real_price');
+              const real_price = (ri >= 0 && parts[ri]) ? parseInt(parts[ri].trim()) || 0 : 0;
+
+              CATALOG.push({
+                name: name,
+                editions: editions,
+                prices: prices,
+                real_price: real_price,
+                tier: is_featured === 'True' ? 'high' : 'normal',
+                is_combo: is_combo,
+                tag: tag,
+                is_online: is_online,
+                combo_list: (combo_list_str || '').split('|').map(s => s.trim()).filter(s => s),
+                mode: currentFileMode
+              });
+            }
+          }
+        });
 
         // Calculate combo savings
         const singlesMap = {};
@@ -2099,20 +2404,24 @@
   };
 
   // Preload counts for all platforms
-  function preloadCount(file, elId) {
-    fetch(file + '?' + Date.now()).then(r => r.text()).then(csv => {
-      const lines = csv.split(/\r?\n/).filter(l => l.trim() && !l.startsWith('game,'));
-      document.getElementById(elId).textContent = lines.length + ' لعبة';
+  function preloadCount(files, elId) {
+    const promises = files.map(f => fetch(f + '?' + Date.now()).then(r => r.text()));
+    Promise.all(promises).then(texts => {
+      let total = 0;
+      texts.forEach(csv => {
+        total += csv.split(/\r?\n/).filter(l => l.trim() && !l.startsWith('game,')).length;
+      });
+      document.getElementById(elId).textContent = total + ' لعبة';
     }).catch(() => {
       document.getElementById(elId).textContent = '—';
     });
   }
-  preloadCount('PC_Games.csv', 'count-pc');
-  preloadCount('Xbox_Games.csv', 'count-xbox');
-  preloadCount('PS_Games.csv', 'count-ps');
+  preloadCount(['PC_Games.csv', 'PC_Keys_Games.csv', 'PC_Account_Games.csv'], 'count-pc');
+  preloadCount(['Xbox_Games.csv', 'Xbox_Keys_Games.csv', 'Xbox_Account_Games.csv'], 'count-xbox');
+  preloadCount(['PS_Games.csv', 'PS_Account_Games.csv'], 'count-ps');
 
   // Boot — load PC by default
-  loadCSV('PC_Games.csv', document.getElementById('tab-pc'));
+  loadCSV('PC_Games.csv', document.getElementById('tab-pc'), 'all');
 </script>
 <!-- Vercel Analytics -->
 <script>
