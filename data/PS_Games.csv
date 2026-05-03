@@ -1,28 +1,28 @@
 game,p2_price,p3_price,tag,is_combo,combo_list,is_online,is_featured,price_mode,real_price,has_key,key_price
-Borderlands 4 PS5,0,360,OLD,False,,False,False,p3,300,False,0
-PRAGMATA PS5,0,476,OLD,False,,False,False,p3,416,False,0
-Crimson Desert PS5,0,501,OLD,False,,False,False,p3,441,False,0
-Resident Evil Requiem PS5,0,540,OLD,False,,False,False,p3,480,False,0
+Borderlands 4 PS5,187,300,OLD,False,,False,False,both,250,False,0
+PRAGMATA PS5,120,264,OLD,False,,False,False,both,214,False,0
+Crimson Desert PS5,162,338,OLD,False,,False,False,both,288,False,0
+Resident Evil Requiem PS5,105,175,OLD,False,,False,False,both,125,False,0
 RIDE 6 PS5,0,471,OLD,False,,False,False,p3,411,False,0
 Nioh 3 PS5,0,445,OLD,False,,False,False,p3,385,False,0
-Call of Duty: Black Ops 7 PS5,0,480,OLD,False,,False,False,p3,420,False,0
+Call of Duty: Black Ops 7 PS5,149,226,OLD,False,,False,False,both,176,False,0
 Football Manager 26 Console PS5,0,380,OLD,False,,False,False,p3,320,False,0
-ARC Raiders PS5,0,301,OLD,False,,False,False,p3,241,False,0
-The Outer Worlds 2 PS5,0,434,OLD,False,,False,False,p3,374,False,0
-Ninja Gaiden 4 PS5,0,299,OLD,False,,False,False,p3,239,False,0
-Vampire: The Masquerade - Bloodlines 2 PS5,0,412,OLD,False,,False,False,p3,352,False,0
-Battlefield 6 PS5,0,420,OLD,False,,False,False,p3,360,False,0
-Little Nightmares III PS4 PS5,0,250,OLD,False,,False,False,p3,190,False,0
-EA SPORTS FC 26 PS4,0,403,OLD,False,,False,False,p3,343,False,0
-Ghost of Yōtei PS5,0,480,OLD,False,,False,False,p3,420,False,0
-EA SPORTS FC 26 PS5,0,385,OLD,False,,False,False,p3,325,False,0
-SILENT HILL f PS5,0,360,OLD,False,,False,False,p3,300,False,0
-Dying Light: The Beast PS5,0,382,OLD,False,,False,False,p3,322,False,0
-NBA 2K26 for PS5,0,403,OLD,False,,False,False,p3,343,False,0
-Hogwarts Legacy PS5,0,141,OLD,False,,False,False,p3,81,False,0
+ARC Raiders PS5,100,288,OLD,False,,False,False,both,238,False,0
+The Outer Worlds 2 PS5,137,242,OLD,False,,False,False,both,192,False,0
+Ninja Gaiden 4 PS5,124,244,OLD,False,,False,False,both,194,False,0
+Vampire: The Masquerade - Bloodlines 2 PS5,149,237,OLD,False,,False,False,both,187,False,0
+Battlefield 6 PS5,86,162,OLD,False,,False,False,both,112,False,0
+Little Nightmares III PS4 PS5,94,137,OLD,False,,False,False,both,87,False,0
+EA SPORTS FC 26 PS4,74,86,OLD,False,,False,False,both,36,False,0
+Ghost of Yōtei PS5,104,212,OLD,False,,False,False,both,162,False,0
+EA SPORTS FC 26 PS5,89,137,OLD,False,,False,False,both,87,False,0
+SILENT HILL f PS5,149,263,OLD,False,,False,False,both,213,False,0
+Dying Light: The Beast PS5,112,163,OLD,False,,False,False,both,113,False,0
+NBA 2K26 for PS5,125,212,OLD,False,,False,False,both,162,False,0
+Hogwarts Legacy PS5,104,141,OLD,False,,False,False,both,81,False,0
 The Callisto Protocol PS4,0,201,OLD,False,,False,False,p3,141,False,0
 The Callisto Protocol PS5,0,135,OLD,False,,False,False,p3,75,False,0
-Need for Speed Unbound PS5,0,146,OLD,False,,False,False,p3,86,False,0
+Need for Speed Unbound PS5,112,132,OLD,False,,False,False,both,82,False,0
 Marvel's Midnight Suns Enhanced Edition PS5,0,206,OLD,False,,False,False,p3,146,False,0
 Hello Neighbor 2 PS4 PS5,0,161,OLD,False,,False,False,p3,101,False,0
 CRISIS CORE –FINAL FANTASY VII– REUNION PS4 PS5,0,158,OLD,False,,False,False,p3,98,False,0
@@ -31,20 +31,20 @@ Monster Hunter Rise PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
 Forspoken PS5,0,163,OLD,False,,False,False,p3,103,False,0
 Dead Space PS5,0,146,OLD,False,,False,False,p3,86,False,0
 SpongeBob SquarePants: The Cosmic Shake PS4,0,250,OLD,False,,False,False,p3,190,False,0
-Hogwarts Legacy PS4,0,157,OLD,False,,False,False,p3,97,False,0
+Hogwarts Legacy PS4,104,132,OLD,False,,False,False,both,82,False,0
 Evil West PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 Horizon Call of the Mountain PS5,0,187,OLD,False,,False,False,p3,127,False,0
-Atomic Heart PS4 PS5,0,232,OLD,False,,False,False,p3,172,False,0
+Atomic Heart PS4 PS5,86,107,OLD,False,,False,False,both,57,False,0
 Wo Long: Fallen Dynasty PS4 PS5,0,299,OLD,False,,False,False,p3,239,False,0
 Anno 1800 Console Edition PS5,0,187,OLD,False,,False,False,p3,127,False,0
 WWE 2K23 Cross-Gen Digital Edition PS4 PS5,0,223,OLD,False,,False,False,p3,163,False,0
-Resident Evil 4 Remake PS4 PS5,0,142,OLD,False,,False,False,p3,82,False,0
+Resident Evil 4 Remake PS4 PS5,107,142,OLD,False,,False,False,both,82,False,0
 MLB The Show 23 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Minecraft Legends PS4 PS5,0,95,OLD,False,,False,False,p3,55,False,0
 Dead Island 2 PS4 PS5,0,187,OLD,False,,False,False,p3,127,False,0
 STAR WARS Jedi: Survivor PS5,0,146,OLD,False,,False,False,p3,86,False,0
 The Lord of the Rings: Gollum PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
-Street Fighter 6 PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
+Street Fighter 6 PS4 PS5,124,212,OLD,False,,False,False,both,162,False,0
 Steelrising - Standard Edition PS5,0,124,OLD,False,,False,False,p3,64,False,0
 MotoGP 22 PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
 Evil Dead: The Game PS4 PS5,0,187,OLD,False,,False,False,p3,127,False,0
@@ -57,7 +57,7 @@ Stray PS4 PS5,0,123,OLD,False,,False,False,p3,63,False,0
 Madden NFL 23 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Saints Row PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Destroy All Humans! 2 - Reprobed PS5,0,157,OLD,False,,False,False,p3,97,False,0
-The Last of Us Part I PS5,0,257,OLD,False,,False,False,p3,197,False,0
+The Last of Us Part I PS5,237,338,OLD,False,,False,False,both,288,False,0
 LEGO Star Wars: The Skywalker Saga PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 NBA 2K23 PS4,0,135,OLD,False,,False,False,p3,75,False,0
 NBA 2K23 PS5,0,146,OLD,False,,False,False,p3,86,False,0
@@ -69,39 +69,39 @@ Ghostbusters: Spirits Unleashed PS4 PS5,0,157,OLD,False,,False,False,p3,97,False
 Gotham Knights PS5,0,141,OLD,False,,False,False,p3,81,False,0
 Call of Duty: Modern Warfare 2 - Cross-Gen Bundle PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 Sonic Frontiers PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
-God of War Ragnarök PS4 PS5,0,188,OLD,False,,False,False,p3,128,False,0
+God of War Ragnarök PS4 PS5,115,175,OLD,False,,False,False,both,125,False,0
 The Dark Pictures Anthology: The Devil in Me PS4 PS5,0,123,OLD,False,,False,False,p3,63,False,0
-Marvel’s Spider-Man 2 English Only PS5,0,317,OLD,False,,False,False,p3,257,False,0
+Marvel's Spider-Man 2 English Only PS5,121,175,OLD,False,,False,False,both,125,False,0
 TopSpin 2K25 Cross-Gen Digital Edition PS4 PS5,0,141,OLD,False,,False,False,p3,81,False,0
-Stellar Blade PS5,0,291,OLD,False,,False,False,p3,231,False,0
+Stellar Blade PS5,112,175,OLD,False,,False,False,both,125,False,0
 SAND LAND PS4 PS5,0,314,OLD,False,,False,False,p3,254,False,0
 Grounded PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 SOUTH PARK: SNOW DAY! PS5,0,161,OLD,False,,False,False,p3,101,False,0
 Rise of the Ronin PS5,0,274,OLD,False,,False,False,p3,214,False,0
 Dragon's Dogma 2 PS5,0,166,OLD,False,,False,False,p3,106,False,0
 Alone in the Dark PS5,0,271,OLD,False,,False,False,p3,211,False,0
-Sea of Thieves PS5,0,208,OLD,False,,False,False,p3,148,False,0
+Sea of Thieves PS5,150,225,OLD,False,,False,False,both,175,False,0
 The Outlast Trials PS4 PS5,0,200,OLD,False,,False,False,p3,140,False,0
 WWE 2K24 PS5,0,141,OLD,False,,False,False,p3,81,False,0
 WWE 2K24 PS4,0,157,OLD,False,,False,False,p3,97,False,0
 FINAL FANTASY VII REBIRTH PS5,0,368,OLD,False,,False,False,p3,308,False,0
 Skull and Bones PS5,0,343,OLD,False,,False,False,p3,283,False,0
-HELLDIVERS 2 PS5,0,250,OLD,False,,False,False,p3,190,False,0
+HELLDIVERS 2 PS5,151,212,OLD,False,,False,False,both,162,False,0
 Jujutsu Kaisen Cursed Clash PS4 PS5,0,220,OLD,False,,False,False,p3,160,False,0
-Star Wars Outlaws PS5,0,248,OLD,False,,False,False,p3,188,False,0
+Star Wars Outlaws PS5,149,225,OLD,False,,False,False,both,175,False,0
 Until Dawn PS5,0,269,OLD,False,,False,False,p3,209,False,0
 Disney Epic Mickey: Rebrushed PS4 PS5,0,425,OLD,False,,False,False,p3,365,False,0
 EA SPORTS FC 25 PS4,0,188,OLD,False,,False,False,p3,128,False,0
 EA SPORTS FC 25 PS5,0,188,OLD,False,,False,False,p3,128,False,0
-Test Drive Unlimited Solar Crown PS5,0,207,OLD,False,,False,False,p3,147,False,0
-"Warhammer 40,000: Space Marine 2 PS5",0,247,OLD,False,,False,False,p3,187,False,0
+Test Drive Unlimited Solar Crown PS5,149,225,OLD,False,,False,False,both,175,False,0
+"Warhammer 40,000: Space Marine 2 PS5",112,225,OLD,False,,False,False,both,175,False,0
 NBA 2K25 Standard Edition PS4 PS5,0,248,OLD,False,,False,False,p3,188,False,0
-ASTRO BOT PS5,0,382,OLD,False,,False,False,p3,322,False,0
-Suicide Squad: Kill the Justice League PS5,0,146,OLD,False,,False,False,p3,86,False,0
+ASTRO BOT PS5,130,198,OLD,False,,False,False,both,148,False,0
+Suicide Squad: Kill the Justice League PS5,112,212,OLD,False,,False,False,both,162,False,0
 Visions of Mana PS4 PS5,0,434,OLD,False,,False,False,p3,374,False,0
-Black Myth: Wukong PS5,0,352,OLD,False,,False,False,p3,292,False,0
+Black Myth: Wukong PS5,124,250,OLD,False,,False,False,both,200,False,0
 EA SPORTS Madden NFL 25 PS4 PS5,0,154,OLD,False,,False,False,p3,94,False,0
-ELDEN RING Shadow of the Erdtree Edition Complete PS4 PS5,0,531,OLD,False,,False,False,p3,471,False,0
+ELDEN RING Shadow of the Erdtree Edition Complete PS4 PS5,223,330,OLD,False,,False,False,both,280,False,0
 ELDEN RING Shadow of the Erdtree DLC PS4 PS5,0,284,OLD,False,,False,False,p3,224,False,0
 F1 24 Standard Edition PS4 PS5,0,312,OLD,False,,False,False,p3,252,False,0
 MotoGP24 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
@@ -109,14 +109,14 @@ RIDE 5 PS5,0,146,OLD,False,,False,False,p3,86,False,0
 NHL 24 PS5,0,146,OLD,False,,False,False,p3,86,False,0
 Assassin's Creed Mirage PS5,0,145,OLD,False,,False,False,p3,85,False,0
 EA SPORTS FC 24 PS5,0,146,OLD,False,,False,False,p3,86,False,0
-Mortal Kombat 1 PS5,0,206,OLD,False,,False,False,p3,146,False,0
-Lies of P PS4 PS5,0,252,OLD,False,,False,False,p3,192,False,0
+Mortal Kombat 1 PS5,112,162,OLD,False,,False,False,both,112,False,0
+Lies of P PS4 PS5,99,149,OLD,False,,False,False,both,99,False,0
 The Crew Motorfest - Cross-Gen Bundle PS4 PS5,0,206,OLD,False,,False,False,p3,146,False,0
 NBA 2K24 Kobe Bryant Edition PS5,0,188,OLD,False,,False,False,p3,128,False,0
 NBA 2K24 Kobe Bryant PS4,0,157,OLD,False,,False,False,p3,97,False,0
 Lords of the Fallen PS5,0,225,OLD,False,,False,False,p3,165,False,0
 Madden NFL 24 PS4 PS5,0,197,OLD,False,,False,False,p3,137,False,0
-Baldur's Gate 3 PS5,0,374,OLD,False,,False,False,p3,314,False,0
+Baldur's Gate 3 PS5,144,275,OLD,False,,False,False,both,225,False,0
 Atlas Fallen PS5,0,252,OLD,False,,False,False,p3,192,False,0
 Remnant II PS5,0,196,OLD,False,,False,False,p3,136,False,0
 FINAL FANTASY XVI PS5,0,188,OLD,False,,False,False,p3,128,False,0
@@ -124,26 +124,26 @@ Crash Team Rumble PS4 PS5,0,139,OLD,False,,False,False,p3,79,False,0
 F1 23 Standard Edition PS4 PS5,0,146,OLD,False,,False,False,p3,86,False,0
 Persona 5 Tactica PS4 PS5,0,252,OLD,False,,False,False,p3,192,False,0
 Like a Dragon: Infinite Wealth PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
-TEKKEN 8 PS5,0,248,OLD,False,,False,False,p3,188,False,0
-The Last of Us Part II Remastered PS5,0,219,OLD,False,,False,False,p3,159,False,0
+TEKKEN 8 PS5,99,162,OLD,False,,False,False,both,112,False,0
+The Last of Us Part II Remastered PS5,237,388,OLD,False,,False,False,both,338,False,0
 Prince of Persia The Lost Crown PS4 PS5,0,272,OLD,False,,False,False,p3,212,False,0
-Avatar: Frontiers of Pandora PS5,0,206,OLD,False,,False,False,p3,146,False,0
+Avatar: Frontiers of Pandora PS5,124,149,OLD,False,,False,False,both,99,False,0
 Assassin's Creed Mirage PS4,0,193,OLD,False,,False,False,p3,133,False,0
-Call of Duty: Modern Warfare III PS4,0,171,OLD,False,,False,False,p3,111,False,0
+Call of Duty: Modern Warfare 2 - Cross-Gen Bundle PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 EA SPORTS FC 24 PS4,0,154,OLD,False,,False,False,p3,94,False,0
-Diablo IV PS4 PS5,0,206,OLD,False,,False,False,p3,146,False,0
-Call of Duty: Modern Warfare III PS5,0,214,OLD,False,,False,False,p3,154,False,0
-UFC 5 PS5,0,188,OLD,False,,False,False,p3,128,False,0
-Alan Wake 2 PS5,0,156,OLD,False,,False,False,p3,96,False,0
+Diablo IV PS4 PS5,196,351,OLD,False,,False,False,both,301,False,0
+Call of Duty: Modern Warfare III PS5,137,214,OLD,False,,False,False,both,154,False,0
+UFC 5 PS5,86,137,OLD,False,,False,False,both,87,False,0
+Alan Wake 2 PS5,86,137,OLD,False,,False,False,both,87,False,0
 Ghostrunner 2 PS5,0,166,OLD,False,,False,False,p3,106,False,0
-Marvel’s Spider-Man 2 PS5,0,266,OLD,False,,False,False,p3,206,False,0
+Marvel's Spider-Man 2 PS5,121,175,OLD,False,,False,False,both,125,False,0
 HOT WHEELS UNLEASHED 2 - Turbocharged PS4 PS5,0,140,OLD,False,,False,False,p3,80,False,0
 SONIC SUPERSTARS PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
 The Dark Pictures Anthology: Little Hope PS4 PS5,0,139,OLD,False,,False,False,p3,79,False,0
 Ghost of Tsushima PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 Marvel's Iron Man VR PS4 PS5,0,250,OLD,False,,False,False,p3,190,False,0
 F1 2020 PS4 PS5,0,359,OLD,False,,False,False,p3,299,False,0
-UFC 4 PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
+UFC 4 PS4 PS5,74,99,OLD,False,,False,False,both,49,False,0
 PGA TOUR 2K21 PS4 PS5,0,245,OLD,False,,False,False,p3,185,False,0
 Wasteland 3 PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
 Project CARS 3 PS4 PS5,0,509,OLD,False,,False,False,p3,449,False,0
@@ -151,18 +151,18 @@ Mortal Shell PS4 PS5,0,233,OLD,False,,False,False,p3,173,False,0
 Tony Hawk's Pro Skater 1 + 2 Standard Edition PS4 PS5,0,89,OLD,False,,False,False,p3,49,False,0
 WWE 2K Battlegrounds PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 Tennis World Tour 2 PS4 PS5,0,93,OLD,False,,False,False,p3,53,False,0
-Crash Bandicoot 4: It’s About Time PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
+Crash Bandicoot 4: It's About Time PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
 STAR WARS: Squadrons PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
 DIRT 5 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 Watch Dogs: Legion - Standard Edition PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 The Last of Us Part II PS4 PS5,0,277,OLD,False,,False,False,p3,217,False,0
 Assassin's Creed Valhalla: Standard Edition PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Destiny 2: Beyond Light PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
-Marvel's Spider-Man: Miles Morales PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
+Marvel's Spider-Man: Miles Morales PS4 PS5,78,94,OLD,False,,False,False,both,44,False,0
 Sackboy: A Big Adventure PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
 Call of Duty: Black Ops Cold War - Standard Edition PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 KINGDOM HEARTS Melody of Memory PS4 PS5,0,265,OLD,False,,False,False,p3,205,False,0
-Cyberpunk 2077 PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
+Cyberpunk 2077 PS4 PS5,133,176,OLD,False,,False,False,both,126,False,0
 Demon's Souls PS5,0,171,OLD,False,,False,False,p3,111,False,0
 Call of Duty: Black Ops Cold War - Cross-Gen Bundle PS5,0,257,OLD,False,,False,False,p3,197,False,0
 Godfall PS5,0,188,OLD,False,,False,False,p3,128,False,0
@@ -170,20 +170,20 @@ Immortals Fenyx Rising PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 HITMAN World of Assassination PS4 PS5,0,307,OLD,False,,False,False,p3,247,False,0
 Puyo Puyo Tetris 2 PS4 PS5,0,166,OLD,False,,False,False,p3,106,False,0
 Persona 5 Strikers PS4 PS5,0,220,OLD,False,,False,False,p3,160,False,0
-It Takes Two PS4 PS5,0,174,OLD,False,,False,False,p3,114,False,0
+It Takes Two PS4 PS5,70,99,OLD,False,,False,False,both,49,False,0
 Darksiders Genesis PS4 PS5,0,166,OLD,False,,False,False,p3,106,False,0
 Madden NFL 20 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
-Borderlands 3 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Borderlands 3 PS4 PS5,100,135,OLD,False,,False,False,both,75,False,0
 The Dark Pictures Anthology: Man of Medan PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 GreedFall PS4 PS5,0,140,OLD,False,,False,False,p3,80,False,0
 Destiny 2: Shadowkeep PS4 PS5,0,230,OLD,False,,False,False,p3,170,False,0
 Call of Duty: Modern Warfare PS4 PS5,0,225,OLD,False,,False,False,p3,165,False,0
-Tom Clancy’s Ghost Recon Breakpoint PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Tom Clancy's Ghost Recon Breakpoint PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Wreckfest PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
 The Surge 2 PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
-DEATH STRANDING Digital Deluxe Edition PS4 PS5,0,240,OLD,False,,False,False,p3,180,False,0
+DEATH STRANDING Digital Deluxe Edition PS4 PS5,137,212,OLD,False,,False,False,both,162,False,0
 The Outer Worlds PS4 PS5,0,143,OLD,False,,False,False,p3,83,False,0
-Need for Speed Heat PS4 PS5,0,187,OLD,False,,False,False,p3,127,False,0
+Need for Speed Heat PS4 PS5,94,132,OLD,False,,False,False,both,82,False,0
 STAR WARS Jedi: Fallen Order PS4 PS5,0,150,OLD,False,,False,False,p3,90,False,0
 DRAGON BALL Z: KAKAROT PS4 PS5,0,195,OLD,False,,False,False,p3,135,False,0
 Dreams PS4 PS5,0,123,OLD,False,,False,False,p3,63,False,0
@@ -197,8 +197,8 @@ Trials of Mana PS4 PS5,0,283,OLD,False,,False,False,p3,223,False,0
 MotoGP 20 PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 Shadow of the Tomb Raider Definitive Edition PS4 PS5,0,348,OLD,False,,False,False,p3,288,False,0
 The Walking Dead: Saints and Sinners PS4 PS5,0,229,OLD,False,,False,False,p3,169,False,0
-SnowRunner PS4 PS5,0,219,OLD,False,,False,False,p3,159,False,0
-Mafia: Trilogy PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
+SnowRunner PS4 PS5,94,144,OLD,False,,False,False,both,94,False,0
+Mafia: Trilogy PS4 PS5,86,124,OLD,False,,False,False,both,64,False,0
 Maneater PS4 PS5,0,170,OLD,False,,False,False,p3,110,False,0
 Saints Row: The Third Remastered PS4 PS5,0,314,OLD,False,,False,False,p3,254,False,0
 Minecraft Dungeons PS4 PS5,0,87,OLD,False,,False,False,p3,47,False,0
@@ -212,17 +212,17 @@ Sherlock Holmes Chapter One PS5,0,206,OLD,False,,False,False,p3,146,False,0
 Evil Genius 2: World Domination PS4 PS5,0,170,OLD,False,,False,False,p3,110,False,0
 Chorus PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
 The Elder Scrolls V: Skyrim Special Edition PS4 PS5,0,179,OLD,False,,False,False,p3,119,False,0
-Tom Clancy’s Rainbow Six Extraction PS4 PS5,0,93,OLD,False,,False,False,p3,53,False,0
+Tom Clancy's Rainbow Six Extraction PS4 PS5,0,93,OLD,False,,False,False,p3,53,False,0
 UNCHARTED: Legacy of Thieves Collection PS5,0,219,OLD,False,,False,False,p3,159,False,0
 Life is Strange Remastered Collection PS4 PS5,0,132,OLD,False,,False,False,p3,72,False,0
 Dying Light 2 Stay Human PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Marvel's Guardians of the Galaxy PS4 PS5,0,142,OLD,False,,False,False,p3,82,False,0
 DYNASTY WARRIORS 9 Empires PS4 PS5,0,269,OLD,False,,False,False,p3,209,False,0
 THE KING OF FIGHTERS XV Standard Edition PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
-Horizon Forbidden West PS4 PS5,0,225,OLD,False,,False,False,p3,165,False,0
+Horizon Forbidden West PS4 PS5,157,237,OLD,False,,False,False,both,187,False,0
 ELDEN RING PS4 PS5,0,322,OLD,False,,False,False,p3,262,False,0
-Gran Turismo 7 PS4,0,269,OLD,False,,False,False,p3,209,False,0
-Gran Turismo 7 PS5,0,351,OLD,False,,False,False,p3,291,False,0
+Gran Turismo 7 PS4,137,200,OLD,False,,False,False,both,150,False,0
+Gran Turismo 7 PS5,137,200,OLD,False,,False,False,both,150,False,0
 WWE 2K22 PS5,0,141,OLD,False,,False,False,p3,81,False,0
 WWE 2K22 PS4,0,135,OLD,False,,False,False,p3,75,False,0
 STRANGER OF PARADISE FINAL FANTASY ORIGIN PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
@@ -235,34 +235,34 @@ Oddworld: Soulstorm PS4 PS5,0,267,OLD,False,,False,False,p3,207,False,0
 MotoGP 21 PS5,0,284,OLD,False,,False,False,p3,224,False,0
 NieR Replicant ver.1.22474487139.. PS4 PS5,0,245,OLD,False,,False,False,p3,185,False,0
 Returnal PS5,0,154,OLD,False,,False,False,p3,94,False,0
-Resident Evil Village PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
+Resident Evil Village PS4 PS5,94,137,OLD,False,,False,False,both,87,False,0
 Mass Effect Legendary Edition PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Biomutant PS4 PS5,0,245,OLD,False,,False,False,p3,185,False,0
-Ratchet & Clank: Rift Apart PS5,0,163,OLD,False,,False,False,p3,103,False,0
+Ratchet & Clank: Rift Apart PS5,124,175,OLD,False,,False,False,both,125,False,0
 Dark Alliance PS4 PS5,0,284,OLD,False,,False,False,p3,224,False,0
 SCARLET NEXUS PS4 PS5,0,150,OLD,False,,False,False,p3,90,False,0
-Ghost of Tsushima DIRECTOR’S CUT PS5 / PS4,0,257,OLD,False,,False,False,p3,197,False,0
+Ghost of Tsushima DIRECTOR'S CUT PS5 / PS4,124,149,OLD,False,,False,False,both,99,False,0
 F.I.S.T.: Forged In Shadow Torch PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 Life is Strange: True Colors PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 OUTRIDERS PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 NBA 2K22 PS4,0,210,OLD,False,,False,False,p3,150,False,0
 DEATHLOOP PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Kena: Bridge of Spirits PS4 PS5,0,187,OLD,False,,False,False,p3,127,False,0
-DEATH STRANDING DIRECTOR’S CUT PS5,0,193,OLD,False,,False,False,p3,133,False,0
-Diablo II: Resurrected PS4 PS5,0,161,OLD,False,,False,False,p3,101,False,0
+DEATH STRANDING DIRECTOR'S CUT PS5,137,212,OLD,False,,False,False,both,162,False,0
+Diablo II: Resurrected PS4 PS5,104,137,OLD,False,,False,False,both,87,False,0
 Insurgency: Sandstorm PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
 FIFA 22 Standard Edition PS4,0,135,OLD,False,,False,False,p3,75,False,0
 HOT WHEELS UNLEASHED PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
-Far Cry 6: Standard Edition PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
-Back 4 Blood: Standard Edition PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Far Cry 6: Standard Edition PS4 PS5,124,175,OLD,False,,False,False,both,125,False,0
+Back 4 Blood: Standard Edition PS4 PS5,89,135,OLD,False,,False,False,both,75,False,0
 The Dark Pictures Anthology: House of Ashes PS4 PS5,0,120,OLD,False,,False,False,p3,60,False,0
 Battlefield 2042 Cross-Gen Bundle PS4 PS5,0,146,OLD,False,,False,False,p3,86,False,0
-The Witcher 3: Wild Hunt PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
+The Witcher 3: Wild Hunt PS4 PS5,86,99,OLD,False,,False,False,both,49,False,0
 Batman: Arkham Knight PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Bloodborne PS4 PS5,0,155,OLD,False,,False,False,p3,95,False,0
-Diablo III: Reaper of Souls – Ultimate Evil PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Diablo III: Reaper of Souls – Ultimate Evil PS4 PS5,99,135,OLD,False,,False,False,both,75,False,0
 Dragon Ball Xenoverse PS4 PS5,0,93,OLD,False,,False,False,p3,53,False,0
-Grand Theft Auto V PS4 PS5,0,232,OLD,False,,False,False,p3,172,False,0
+Grand Theft Auto V PS4 PS5,86,137,OLD,False,,False,False,both,87,False,0
 Mortal Kombat X PS4 PS5,0,123,OLD,False,,False,False,p3,63,False,0
 TESO: Tamriel Unlimited PS4 PS5,0,170,OLD,False,,False,False,p3,110,False,0
 MGS V: The Phantom Pain PS4 PS5,0,87,OLD,False,,False,False,p3,47,False,0
@@ -276,7 +276,7 @@ Just Cause 3 XL Edition PS4 PS5,0,162,OLD,False,,False,False,p3,102,False,0
 Star Wars Battlefront DELUXE EDITION PS4 PS5,0,154,OLD,False,,False,False,p3,94,False,0
 Call of Duty: Black Ops III - Zombies Chronicles Edition PS4 PS5,0,232,OLD,False,,False,False,p3,172,False,0
 Sword Art Online: Lost Song PS4 PS5,0,169,OLD,False,,False,False,p3,109,False,0
-LEGO Marvel’s Avengers PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
+LEGO Marvel's Avengers PS4 PS5,0,137,OLD,False,,False,False,p3,77,False,0
 NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 PS4 PS5,0,161,OLD,False,,False,False,p3,101,False,0
 Dying Light: The Following - Enhanced Edition PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
 ARSLAN: THE WARRIORS OF LEGEND PS4 PS5,0,326,OLD,False,,False,False,p3,266,False,0
@@ -284,10 +284,10 @@ Far Cry: Primal - Digital Apex Edition PS4 PS5,0,82,OLD,False,,False,False,p3,42
 Earth Defense Force 4.1: The Shadow of OLD Despair PS4 PS5,0,151,OLD,False,,False,False,p3,91,False,0
 Street Fighter V PS4 PS5,0,125,OLD,False,,False,False,p3,65,False,0
 Plants vs. Zombies Garden Warfare 2 PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
-Tom Clancy’s The Division PS4 PS5,0,272,OLD,False,,False,False,p3,212,False,0
+Tom Clancy's The Division PS4 PS5,0,272,OLD,False,,False,False,p3,212,False,0
 DOOM PS4 PS5,0,140,OLD,False,,False,False,p3,80,False,0
 DARK SOULS III PS4 PS5,0,322,OLD,False,,False,False,p3,262,False,0
-Uncharted 4: A Thief’s End PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
+Uncharted 4: A Thief's End PS4 PS5,0,156,OLD,False,,False,False,p3,96,False,0
 Overwatch: Origins Edition PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Trackmania Turbo PS4 PS5,0,250,OLD,False,,False,False,p3,190,False,0
 One Piece: Burning Blood PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
@@ -300,13 +300,13 @@ FINAL FANTASY XV PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 STAR OCEAN : INTEGRITY AND FAITHLESSNESS PS4 PS5,0,220,OLD,False,,False,False,p3,160,False,0
 XCOM 2 PS4 PS5,0,130,OLD,False,,False,False,p3,70,False,0
 Dishonored Definitive Edition PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
-Minecraft: PlayStation4 Edition PS4 PS5,0,193,OLD,False,,False,False,p3,133,False,0
+Minecraft: PlayStation4 Edition PS4 PS5,96,142,OLD,False,,False,False,both,92,False,0
 Injustice: Gods Among Us Ultimate Edition PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 The Technomancer PS4 PS5,0,99,OLD,False,,False,False,p3,59,False,0
 Deadlight: Director's Cut PS4 PS5,0,92,OLD,False,,False,False,p3,52,False,0
 RESIDENT EVIL 5 PS4 PS5,0,153,OLD,False,,False,False,p3,93,False,0
 Resident Evil 6 PS4 PS5,0,194,OLD,False,,False,False,p3,134,False,0
-No Man's Sky PS4 PS5,0,188,OLD,False,,False,False,p3,128,False,0
+No Man's Sky PS4 PS5,130,188,OLD,False,,False,False,both,128,False,0
 Battleborn PS4 PS5,0,99,OLD,False,,False,False,p3,59,False,0
 Mafia III PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 Assetto Corsa PS4 PS5,0,98,OLD,False,,False,False,p3,58,False,0
@@ -332,8 +332,8 @@ Disney Infinity 3.0 Edition PS4 PS5,0,170,OLD,False,,False,False,p3,110,False,0
 For Honor PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 Nioh PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 Sniper Elite 4 PS4 PS5,0,150,OLD,False,,False,False,p3,90,False,0
-RESIDENT EVIL 7 biohazard PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
-Tom Clancy’s Ghost Recon Wildlands Standard Edition PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
+RESIDENT EVIL 7 biohazard PS4 PS5,107,149,OLD,False,,False,False,both,99,False,0
+Tom Clancy's Ghost Recon Wildlands Standard Edition PS4 PS5,0,124,OLD,False,,False,False,p3,64,False,0
 NieR: Automata PS4 PS5,0,202,OLD,False,,False,False,p3,142,False,0
 STEEP PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Mass Effect: Andromeda PS4 PS5,0,123,OLD,False,,False,False,p3,63,False,0
@@ -359,30 +359,30 @@ The Evil Within 2 PS4 PS5,0,142,OLD,False,,False,False,p3,82,False,0
 Gran Turismo Sport PS4 PS5,0,142,OLD,False,,False,False,p3,82,False,0
 South Park: The Fractured but Whole PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Battlefield 1 Revolution PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
-Assassin’s Creed Origins PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Assassin's Creed Origins PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Wolfenstein II: The OLD Colossus PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 DmC Devil May Cry: Definitive Edition PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 Call of Duty: WWII PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 SONIC FORCES Digital Bonus Edition PS4 PS5,0,161,OLD,False,,False,False,p3,101,False,0
-Need for Speed Payback PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Need for Speed Payback PS4 PS5,90,135,OLD,False,,False,False,both,75,False,0
 STAR WARS Battlefront II PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Horizon Zero Dawn: Complete Edition PS4 PS5,0,141,OLD,False,,False,False,p3,81,False,0
 DRAGON BALL FIGHTERZ PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 MONSTER HUNTER: WORLD PS4 PS5,0,150,OLD,False,,False,False,p3,90,False,0
 SHADOW OF THE COLOSSUS PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
 Kingdom Come: Deliverance PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
-FAR CRY 5 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
+FAR CRY 5 PS4 PS5,107,177,OLD,False,,False,False,both,127,False,0
 God of War PS4 PS5,0,143,OLD,False,,False,False,p3,83,False,0
 Detroit: Become Human PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 Jurassic World Evolution PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 The Crew 2 PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
 Spider-Man PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 NBA LIVE 19 PS4 PS5,0,314,OLD,False,,False,False,p3,254,False,0
-Red Dead Redemption 2 PS4 PS5,0,195,OLD,False,,False,False,p3,135,False,0
+Red Dead Redemption 2 PS4 PS5,69,100,OLD,False,,False,False,both,50,False,0
 Shadow of the Tomb Raider PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 DRAGON QUEST XI PS4 PS5,0,269,OLD,False,,False,False,p3,209,False,0
 NARUTO TO BORUTO: SHINOBI STRIKER PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
-Battlefield V PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Battlefield V PS4 PS5,113,152,OLD,False,,False,False,both,102,False,0
 Call of Duty: Black Ops 4 PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
 Assassin's Creed Odyssey PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Fallout 76 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
@@ -399,20 +399,20 @@ Far Cry OLD Dawn PS4 PS5,0,82,OLD,False,,False,False,p3,42,False,0
 DiRT Rally 2.0 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
 DEAD OR ALIVE 6 PS4 PS5,0,210,OLD,False,,False,False,p3,150,False,0
 Devil May Cry 5 PS4 PS5,0,157,OLD,False,,False,False,p3,97,False,0
-Tom Clancy’s The Division 2 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
+Tom Clancy's The Division 2 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 Sekiro: Shadows Die Twice PS4 PS5,0,247,OLD,False,,False,False,p3,187,False,0
 Generation Zero PS4 PS5,0,149,OLD,False,,False,False,p3,89,False,0
 Assassin's Creed III: Remastered PS4 PS5,0,153,OLD,False,,False,False,p3,93,False,0
 RAGE 2 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
 World War Z PS4 PS5,0,199,OLD,False,,False,False,p3,139,False,0
-Mortal Kombat 11 PS4 PS5,0,135,OLD,False,,False,False,p3,75,False,0
-Days Gone PS4 PS5,0,195,OLD,False,,False,False,p3,135,False,0
+Mortal Kombat 11 PS4 PS5,74,94,OLD,False,,False,False,both,44,False,0
+Days Gone PS4 PS5,124,195,OLD,False,,False,False,both,135,False,0
 Blood & Truth PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 Crash Team Racing Nitro-Fueled PS4 PS5,0,166,OLD,False,,False,False,p3,106,False,0
 Control PS4 PS5,0,150,OLD,False,,False,False,p3,90,False,0
 Firewall Zero Hour PS4 PS5,0,208,OLD,False,,False,False,p3,148,False,0
 Moss PS4 PS5,0,145,OLD,False,,False,False,p3,85,False,0
-DayZ PS4 PS5,0,235,OLD,False,,False,False,p3,175,False,0
+DayZ PS4 PS5,140,214,OLD,False,,False,False,both,164,False,0
 Warhammer Chaosbane PS4 PS5,0,172,OLD,False,,False,False,p3,112,False,0
 Team Sonic Racing PS4 PS5,0,187,OLD,False,,False,False,p3,127,False,0
 Judgment PS4,0,207,OLD,False,,False,False,p3,147,False,0
@@ -420,31 +420,31 @@ Five Nights at Freddy's VR: Help Wanted PS4 PS5,0,233,OLD,False,,False,False,p3,
 Wolfenstein: Youngblood PS4 PS5,0,139,OLD,False,,False,False,p3,79,False,0
 The Sinking City PS4,0,156,OLD,False,,False,False,p3,96,False,0
 ELDEN RING NIGHTREIGN PS4 PS5,0,259,OLD,False,,False,False,p3,199,False,0
-Atomfall PS4 PS5,0,361,OLD,False,,False,False,p3,301,False,0
+Atomfall PS4 PS5,130,184,OLD,False,,False,False,both,134,False,0
 The First Berserker: Khazan PS5,0,277,OLD,False,,False,False,p3,217,False,0
 Monster Energy Supercross 25 PS5,0,367,OLD,False,,False,False,p3,307,False,0
-Indiana Jones and the Great Circle PS5,0,368,OLD,False,,False,False,p3,308,False,0
+Indiana Jones and the Great Circle PS5,124,220,OLD,False,,False,False,both,170,False,0
 The Elder Scrolls IV: Oblivion Remastered PS5,0,227,OLD,False,,False,False,p3,167,False,0
-Days Gone Remastered PS5,0,331,OLD,False,,False,False,p3,271,False,0
-Clair Obscur: Expedition 33 PS5,0,257,OLD,False,,False,False,p3,197,False,0
-Forza Horizon 5 PS5,0,307,OLD,False,,False,False,p3,247,False,0
+Days Gone Remastered PS5,137,230,OLD,False,,False,False,both,180,False,0
+Clair Obscur: Expedition 33 PS5,112,162,OLD,False,,False,False,both,112,False,0
+Forza Horizon 5 PS5,99,176,OLD,False,,False,False,both,126,False,0
 MotoGP 25 PS5,0,359,OLD,False,,False,False,p3,299,False,0
-DOOM: The Dark Ages PS5,0,257,OLD,False,,False,False,p3,197,False,0
-SILENT HILL 2 PS5,0,262,OLD,False,,False,False,p3,202,False,0
-F1 25 PS5,0,300,OLD,False,,False,False,p3,240,False,0
-DEATH STRANDING 2: ON THE BEACH PS5,0,343,OLD,False,,False,False,p3,283,False,0
+DOOM: The Dark Ages PS5,175,212,OLD,False,,False,False,both,162,False,0
+SILENT HILL 2 PS5,124,237,OLD,False,,False,False,both,187,False,0
+F1 25 PS5,237,376,OLD,False,,False,False,both,326,False,0
+DEATH STRANDING 2: ON THE BEACH PS5,175,300,OLD,False,,False,False,both,250,False,0
 Tony Hawk's Pro Skater 3 + 4 PS4 PS5,0,347,OLD,False,,False,False,p3,287,False,0
-WUCHANG: Fallen Feathers PS5,0,299,OLD,False,,False,False,p3,239,False,0
-Mafia: The Old Country PS5,0,352,OLD,False,,False,False,p3,292,False,0
-Senua's Saga: Hellblade II PS5,0,389,OLD,False,,False,False,p3,329,False,0
+WUCHANG: Fallen Feathers PS5,187,288,OLD,False,,False,False,both,238,False,0
+Mafia: The Old Country PS5,110,162,OLD,False,,False,False,both,112,False,0
+Senua's Saga: Hellblade II PS5,149,225,OLD,False,,False,False,both,175,False,0
 Gears of War: Reloaded PS5,0,335,OLD,False,,False,False,p3,275,False,0
-METAL GEAR SOLID Δ: SNAKE EATER PS5,0,334,OLD,False,,False,False,p3,274,False,0
-Lost Soul Aside PS5,0,546,OLD,False,,False,False,p3,486,False,0
+METAL GEAR SOLID Δ: SNAKE EATER PS5,147,263,OLD,False,,False,False,both,213,False,0
+Lost Soul Aside PS5,137,250,OLD,False,,False,False,both,200,False,0
 MLB The Show 25 PS5,0,412,OLD,False,,False,False,p3,352,False,0
 NHL 25 Standard Edition PS5,0,146,OLD,False,,False,False,p3,86,False,0
 DRAGON BALL: Sparking! ZERO PS5,0,351,OLD,False,,False,False,p3,291,False,0
-Call of Duty: Black Ops 6 PS5,0,206,OLD,False,,False,False,p3,146,False,0
-Call of Duty: Black Ops 6 PS4,0,180,OLD,False,,False,False,p3,120,False,0
+Call of Duty: Black Ops 6 PS5,130,337,OLD,False,,False,False,both,287,False,0
+Call of Duty: Black Ops 6 PS4,135,208,OLD,False,,False,False,both,158,False,0
 Dragon Age: The Veilguard PS5,0,154,OLD,False,,False,False,p3,94,False,0
 Farming Simulator 25 PS5,0,341,OLD,False,,False,False,p3,281,False,0
 "Warhammer 40,000: Darktide PS5",0,153,OLD,False,,False,False,p3,93,False,0
@@ -452,17 +452,38 @@ Farming Simulator 25 PS5,0,341,OLD,False,,False,False,p3,281,False,0
 Undisputed PS5,0,316,OLD,False,,False,False,p3,256,False,0
 DYNASTY WARRIORS: ORIGINS PS5,0,351,OLD,False,,False,False,p3,291,False,0
 Alien: Rogue Incursion PS5,0,208,OLD,False,,False,False,p3,148,False,0
-Kingdom Come: Deliverance II PS5,0,269,OLD,False,,False,False,p3,209,False,0
+Kingdom Come: Deliverance II PS5,137,225,OLD,False,,False,False,both,175,False,0
 Like a Dragon: Pirate Yakuza in Hawaii PS4 PS5,0,258,OLD,False,,False,False,p3,198,False,0
 Monster Hunter Wilds PS5,0,360,OLD,False,,False,False,p3,300,False,0
 PGA TOUR 2K25 PS5,0,269,OLD,False,,False,False,p3,209,False,0
-Split Fiction PS5,0,368,OLD,False,,False,False,p3,308,False,0
+Split Fiction PS5,100,162,OLD,False,,False,False,both,112,False,0
 WWE 2K25 PS5,0,345,OLD,False,,False,False,p3,285,False,0
 WWE 2K25 PS4,0,320,OLD,False,,False,False,p3,260,False,0
-Assassin’s Creed Shadows PS5,0,308,OLD,False,,False,False,p3,248,False,0
+Assassin's Creed Shadows PS5,178,250,OLD,False,,False,False,both,200,False,0
 Killing Floor 3 PS5,0,377,OLD,False,,False,False,p3,317,False,0
 EA SPORTS Madden NFL 26 PS5,0,659,OLD,False,,False,False,p3,599,False,0
-Hell is Us PS5,0,540,OLD,False,,False,False,p3,480,False,0
-Cronos: The OLD Dawn PS5,0,540,OLD,False,,False,False,p3,480,False,0
-NBA 2K26 for PS4,0,617,OLD,False,,False,False,p3,557,False,0
+Hell is Us PS5,175,300,OLD,False,,False,False,both,250,False,0
+Cronos: The OLD Dawn PS5,137,200,OLD,False,,False,False,both,150,False,0
+NBA 2K26 for PS4,106,137,OLD,False,,False,False,both,87,False,0
 WWE 2K26 PS5,0,617,OLD,False,,False,False,p3,557,False,0
+AI Limit PS5,99,149,NEW,False,,False,False,both,99,False,0
+Age of Mythology: Retold PS5,99,149,NEW,False,,False,False,both,99,False,0
+Bleach: Rebirth of Souls PS4 PS5,175,300,NEW,False,,False,False,both,250,False,0
+Hades 2 PS5,125,206,NEW,False,,False,False,both,156,False,0
+Hollow Knight: Silksong PS5,90,144,NEW,False,,False,False,both,94,False,0
+Lies of P: Overture Bundle PS4 PS5,124,175,NEW,False,,False,False,both,125,False,0
+Microsoft Flight Simulator 2024 PS5,186,377,NEW,False,,False,False,both,327,False,0
+Mouse: P.I. for Hire PS5,95,173,NEW,False,,False,False,both,123,False,0
+NHL 26 PS5,187,300,NEW,False,,False,False,both,250,False,0
+Reanimal PS5,94,132,NEW,False,,False,False,both,82,False,0
+Rematch PS5,99,145,NEW,False,,False,False,both,95,False,0
+RoboCop: Rogue City PS5,149,200,NEW,False,,False,False,both,150,False,0
+Rust: Console Edition PS5,176,302,NEW,False,,False,False,both,252,False,0
+Still Wakes the Deep PS5,137,200,NEW,False,,False,False,both,150,False,0
+Tainted Grail: The Fall of Avalon PS5,137,225,NEW,False,,False,False,both,175,False,0
+Call of Duty: Black Ops 7 PS4,154,160,NEW,False,,False,False,both,110,False,0
+Mortal Kombat 1 Definitive Edition PS5,99,200,NEW,False,,False,False,both,150,False,0
+Assetto Corsa Competizione PS4 PS5,98,130,NEW,False,,False,False,both,80,False,0
+Metro Saga Bundle PS4 PS5,112,149,NEW,False,,False,False,both,99,False,0
+Beat Saber PS4 PS5,109,161,NEW,False,,False,False,both,111,False,0
+Sonic X Shadow Generations PS4 PS5,124,175,NEW,False,,False,False,both,125,False,0

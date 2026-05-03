@@ -2269,7 +2269,7 @@
 
     document.getElementById('grid').innerHTML = '<div class="loader"><div class="spinner"></div><span>جاري تحميل الكتالوج…</span></div>';
 
-    const fetchPromises = targetFiles.map(f => fetch(f + '?' + Date.now()).then(r => r.text()).then(text => ({ file: f, text })));
+    const fetchPromises = targetFiles.map(f => fetch('data/' + f + '?' + Date.now()).then(r => r.text()).then(text => ({ file: f, text })));
     
     Promise.all(fetchPromises)
       .then(results => {
@@ -2405,7 +2405,7 @@
 
   // Preload counts for all platforms
   function preloadCount(files, elId) {
-    const promises = files.map(f => fetch(f + '?' + Date.now()).then(r => r.text()));
+    const promises = files.map(f => fetch('data/' + f + '?' + Date.now()).then(r => r.text()));
     Promise.all(promises).then(texts => {
       let total = 0;
       texts.forEach(csv => {
