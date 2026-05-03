@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عروض المجموعات — AccessGames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Tajawal:wght@400;500;700;900&family=Rajdhani:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #02040a;
+      --bg2: #050814;
+      --bg3: #0a0d1d;
+      --surface: #101426;
+      --border: rgba(0, 217, 255, 0.1);
+      --border2: rgba(0, 217, 255, 0.2);
+      --accent: #00d9ff;
+      --accent-d: #00a3c2;
+      --accent-glow: rgba(0, 217, 255, 0.4);
+      --promo: #ff0044;
+      --feat: #f59e0b;
+      --text: #ffffff;
+      --muted: #8096b5;
+      --muted2: #b0c4de;
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    body {
+      font-family: 'Outfit', 'Tajawal', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── BACKGROUND DEPTH ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 68, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% -10%, rgba(0, 217, 255, 0.12) 0%, transparent 50%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bg-glow-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+      filter: blur(80px);
+      animation: float 20s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translate(-10%, -10%); }
+      to { transform: translate(10%, 10%); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(7, 9, 15, .88);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent), #0077ff);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0, 217, 255, .5);
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
+      color: #fff;
+    }
+
+    .brand-text {
+      font-family: 'Black Ops One', 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .brand-text span {
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 15px;
+      margin: 0 10px;
+    }
+
+    .nav-link {
+      color: var(--muted2);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .header-search {
+      flex: 1;
+      min-width: 200px;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .header-search svg {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      padding: 10px 42px 10px 14px;
+      outline: none;
+      transition: all .2s;
+    }
+
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 217, 255, .15);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      background: linear-gradient(to bottom, #fff 20%, #888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .hero p {
+      color: var(--muted2);
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 80px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #000;
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      animation: fadeUp 0.5s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--accent-glow);
+    }
+
+    .card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      overflow: hidden;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-img img {
+      transform: scale(1.1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .badge-pack { background: var(--accent); color: #000; }
+    .badge-feat { background: var(--feat); color: #000; box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
+
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .pack-content {
+      margin-bottom: 20px;
+    }
+
+    .pack-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .games-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .game-chip {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 100px;
+      color: var(--muted2);
+      transition: all 0.2s;
+    }
+
+    .card:hover .game-chip {
+      border-color: var(--border2);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-group .label { font-size: 12px; color: var(--muted); }
+    .price-value { font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; }
+    .price-value small { font-size: 14px; margin-right: 4px; color: var(--muted2); }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--accent), #0077ff);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 217, 255, 0.5);
+    }
+
+    .loader {
+      text-align: center;
+      padding: 100px 0;
+      grid-column: 1 / -1;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty {
+      text-align: center;
+      padding: 100px 0;
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-glow">
+    <div class="bg-glow-orb" style="top: 10%; left: -10%;"></div>
+    <div class="bg-glow-orb" style="bottom: 10%; right: -10%; background: radial-gradient(circle, rgba(255, 0, 68, 0.03) 0%, transparent 70%);"></div>
+  </div>
+
+  <header>
+    <div class="wrap">
+      <div class="header-row">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <div class="brand-text">ACCESS<span>GAMES</span></div>
+        </a>
+
+        <nav class="header-nav">
+          <a href="index.html" class="nav-link">المتجر</a>
+          <a href="steam-packs.html" class="nav-link active">عروض المجموعات</a>
+          <a href="faq.html" class="nav-link">الأسئلة</a>
+          <a href="tutorials.html" class="nav-link">دليل الاستخدام</a>
+        </nav>
+
+        <div class="header-search">
+          <input type="text" id="search" placeholder="ابحث عن عرض..." autocomplete="off">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>مجموعات ألعاب ستيم</h1>
+      <p>أفضل العروض الحصرية لمجموعات الألعاب بأفضل الأسعار. وفر أكثر عند شراء مجموعات كاملة.</p>
+    </div>
+
+    <div id="featured-section" style="display: none;">
+      <h2 class="section-title">⭐ عروض مميزة</h2>
+      <div class="grid" id="featured-grid"></div>
+    </div>
+
+    <h2 class="section-title">🎮 جميع العروض</h2>
+    <div class="grid" id="main-grid">
+      <div class="loader">
+        <div class="spinner"></div>
+        <p>جاري تحميل العروض الاستثنائية...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WA_NUMBER = '212659978011';
+    let CATALOG = [];
+
+    function slugify(text) {
+      return text.toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, '-')
+        .trim();
+    }
+
+    function parseCSV(text) {
+      const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+      if (lines.length === 0) return [];
+      
+      const headers = lines[0].split(',').map(h => h.trim());
+      return lines.slice(1).map(line => {
+        const values = [];
+        let cur = '';
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+          if (char === '"') inQuotes = !inQuotes;
+          else if (char === ',' && !inQuotes) {
+            values.push(cur);
+            cur = '';
+          } else {
+            cur += char;
+          }
+        }
+        values.push(cur);
+        
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = values[i] ? values[i].trim() : '');
+        return obj;
+      });
+    }
+
+    async function init() {
+      try {
+        const response = await fetch('data/PC_Games.csv?' + Date.now());
+        const text = await response.text();
+        const data = parseCSV(text);
+        
+        CATALOG = data.filter(item => item.is_combo === 'True');
+        render();
+        
+        document.getElementById('search').addEventListener('input', render);
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('main-grid').innerHTML = '<div class="empty">حدث خطأ في تحميل البيانات.</div>';
+      }
+    }
+
+    function buildCard(item, index) {
+      const slug = slugify(item.game);
+      const isFeatured = item.is_featured === 'True';
+      const games = item.combo_list ? item.combo_list.split('|').map(g => g.trim()) : [];
+      const waMsg = encodeURIComponent(`مرحبا، أريد طلب مجموعة: ${item.game}\nالسعر: ${item.sell_mad} د.م`);
+      
+      return `
+        <div class="card" style="animation-delay: ${index * 0.1}s">
+          <div class="card-img">
+            <span class="badge ${isFeatured ? 'badge-feat' : 'badge-pack'}">
+              ${isFeatured ? 'مميز' : 'PACK'}
+            </span>
+            <img src="assets/covers/${slug}.webp" loading="lazy" 
+                 onerror="this.src='https://placehold.co/600x337/101426/fff?text=${encodeURIComponent(item.game)}'">
+            <div class="card-overlay"></div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${item.game}</h3>
+            <div class="pack-content">
+              <span class="pack-label">محتويات العرض:</span>
+              <div class="games-list">
+                ${games.map(g => `<span class="game-chip">${g}</span>`).join('')}
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="price-group">
+                <span class="label">السعر النهائي</span>
+                <span class="price-value">${item.sell_mad}<small>د.م</small></span>
+              </div>
+              <a href="https://wa.me/${WA_NUMBER}?text=${waMsg}" class="action-btn" target="_blank">طلب العرض</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function render() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const filtered = CATALOG.filter(item => 
+        item.game.toLowerCase().includes(q) || 
+        (item.combo_list && item.combo_list.toLowerCase().includes(q))
+      );
+
+      const featGrid = document.getElementById('featured-grid');
+      const mainGrid = document.getElementById('main-grid');
+      const featSect = document.getElementById('featured-section');
+
+      if (filtered.length === 0) {
+        mainGrid.innerHTML = '<div class="empty">لا توجد عروض تطابق بحثك...</div>';
+        featSect.style.display = 'none';
+        return;
+      }
+
+      if (q) {
+        featSect.style.display = 'none';
+        mainGrid.innerHTML = filtered.map((item, i) => buildCard(item, i)).join('');
+      } else {
+        const featured = filtered.filter(item => item.is_featured === 'True');
+        const regular = filtered.filter(item => item.is_featured !== 'True');
+
+        if (featured.length > 0) {
+          featSect.style.display = 'block';
+          featGrid.innerHTML = featured.map((item, i) => buildCard(item, i)).join('');
+        } else {
+          featSect.style.display = 'none';
+        }
+
+        mainGrid.innerHTML = regular.map((item, i) => buildCard(item, i)).join('');
+      }
+    }
+
+    init();
+  </script>
+</body>
+
+</html>

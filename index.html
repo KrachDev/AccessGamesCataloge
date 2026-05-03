@@ -172,6 +172,39 @@
       color: var(--accent);
     }
 
+    .header-nav {
+      display: flex;
+      gap: 15px;
+      margin: 0 10px;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    .nav-link:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .nav-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
     .header-search {
       flex: 1;
       min-width: 200px;
@@ -1590,6 +1623,7 @@
 
       <nav class="header-nav">
         <a href="index.html" class="nav-link active">المتجر</a>
+        <a href="steam-packs.html" class="nav-link">عروض المجموعات</a>
         <a href="faq.html" class="nav-link">الأسئلة</a>
         <a href="tutorials.html" class="nav-link">دليل الاستخدام</a>
         <a href="terms.html" class="nav-link">شروط الخدمة</a>

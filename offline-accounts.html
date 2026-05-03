@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حسابات الأوفلاين — AccessGames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03070c;
+      --surface: #0a1120;
+      --surface-2: #111d2e;
+      --accent: #00d9ff;
+      --accent-dim: rgba(0, 217, 255, 0.12);
+      --accent-glow: rgba(0, 217, 255, 0.3);
+      --gold: #f5c842;
+      --text: #f0f4f8;
+      --muted: #6b8096;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-accent: rgba(0, 217, 255, 0.25);
+      --radius: 14px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; }
+
+    .bg-layer { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 60, 120, 0.55) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0, 40, 80, 0.3) 0%, transparent 60%), #03070c; }
+    .bg-grid { position: fixed; inset: 0; z-index: -1; opacity: 0.025; background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px); background-size: 60px 60px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(18px) saturate(1.4); background: rgba(3, 7, 12, 0.82); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+    .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), #006fa6); border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 24px rgba(0, 217, 255, 0.35); }
+    .brand-text { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; }
+    .brand-text span { color: var(--accent); }
+    .header-nav { display: flex; gap: 28px; }
+    .nav-link { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px; transition: color 0.2s; position: relative; padding-bottom: 4px; }
+    .nav-link:hover { color: #fff; }
+
+    .page-hero { text-align: center; padding: 60px 0 40px; }
+    .page-hero h1 { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 900; margin-bottom: 14px; background: linear-gradient(135deg, #ffffff 30%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-hero p { color: var(--muted); font-size: 17px; max-width: 600px; margin: 0 auto; }
+
+    .search-box { width: 100%; max-width: 500px; margin: 0 auto 40px; position: relative; }
+    .search-box input { width: 100%; padding: 16px 24px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); color: #fff; font-family: 'Outfit', 'Cairo', sans-serif; font-size: 16px; outline: none; transition: 0.3s; }
+    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+
+    .accounts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .account-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: 0.3s; position: relative; overflow: hidden; }
+    .account-card:hover { border-color: var(--border-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow); transform: translateY(-3px); }
+    .account-card::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), transparent); opacity: 0.2; border-bottom-left-radius: 40px; }
+    
+    .game-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: 'Outfit', 'Cairo', sans-serif; line-height: 1.4; }
+    .cred-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: var(--surface-2); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); }
+    .cred-label { font-size: 13px; color: var(--muted); font-weight: 600; }
+    .cred-val { font-family: monospace; color: var(--accent); font-size: 14px; user-select: all; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-align: left; direction: ltr; }
+    
+    .extra-info { margin-top: 10px; font-size: 12px; color: var(--gold); background: rgba(245, 200, 66, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(245, 200, 66, 0.2); line-height: 1.5; text-align: left; direction: ltr; }
+
+    .req-code-btn { display: block; width: 100%; text-align: center; background: rgba(0, 217, 255, 0.1); color: var(--accent); border: 1px solid var(--border-accent); padding: 10px; border-radius: 8px; margin-top: 12px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: 0.3s; }
+    .req-code-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
+
+    /* Password Overlay */
+    #pwd-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
+    .pwd-modal { background: var(--surface); padding: 40px; border-radius: 20px; border: 1px solid var(--border); text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow); }
+    .pwd-modal h2 { margin-bottom: 20px; color: #fff; font-family: 'Outfit', 'Cairo', sans-serif; }
+    .pwd-modal input { width: 100%; padding: 14px 20px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: #fff; font-size: 16px; outline: none; text-align: center; }
+    .pwd-modal input:focus { border-color: var(--accent); }
+    .pwd-modal button { background: linear-gradient(135deg, var(--accent), #006fa6); color: #000; border: none; padding: 14px 30px; border-radius: 10px; font-weight: 800; font-size: 16px; cursor: pointer; width: 100%; transition: 0.3s; }
+    .pwd-modal button:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+    .pwd-error { color: #ff4d4d; font-size: 14px; margin-bottom: 15px; display: none; }
+    
+    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--surface-2); color: #fff; padding: 12px 24px; border-radius: 100px; border: 1px solid var(--border-accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 14px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; z-index: 1000; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Password Protection Overlay -->
+  <div id="pwd-overlay">
+    <div class="pwd-modal">
+      <div class="brand-icon" style="margin: 0 auto 20px; width: 60px; height: 60px; border-radius: 16px;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2>منطقة محمية</h2>
+      <p style="color: var(--muted); margin-bottom: 20px; font-size: 14px;">المرجو إدخال كلمة المرور للوصول إلى الحسابات</p>
+      <div class="pwd-error" id="pwd-error">كلمة المرور غير صحيحة</div>
+      <input type="password" id="pwd-input" placeholder="كلمة المرور..." onkeydown="if(event.key === 'Enter') checkPwd()">
+      <button id="pwd-btn" onclick="checkPwd()">دخول</button>
+    </div>
+  </div>
+
+  <div class="bg-layer"></div>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="header-row">
+        <a class="brand" href="index.html">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="3" />
+              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
+            </svg>
+          </div>
+          <div class="brand-text">Access<span>Games</span></div>
+        </a>
+        <nav class="header-nav">
+          <a href="index.html" class="nav-link">المتجر</a>
+          <a href="offline-accounts.html" class="nav-link">حسابات الأوفلاين</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-bottom: 60px;">
+    <div class="page-hero">
+      <h1>حسابات الأوفلاين</h1>
+      <p>قائمة الحسابات المتاحة للوصول الفوري في وضع الأوفلاين. انسخ البيانات وسجل الدخول مباشرة.</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث عن لعبة..." onkeyup="filterGames()">
+    </div>
+
+    <div class="accounts-grid" id="accountsGrid">
+
+      <div class="account-card" data-name="steam 1">
+        <div class="game-title">Steam 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('departednotice8')" title="departednotice8">departednotice8</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('EKM9DAVguuRE')" title="EKM9DAVguuRE">EKM9DAVguuRE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="spider-man 2">
+        <div class="game-title">Spider-Man 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('d1pper2288')" title="d1pper2288">d1pper2288</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('lRl$LHXVP')" title="lRl$LHXVP">lRl$LHXVP</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="sid meier's civilization vii">
+        <div class="game-title">Sid Meier's Civilization VII</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('Jl6Jz6Xg2Fs8')" title="Jl6Jz6Xg2Fs8">Jl6Jz6Xg2Fs8</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Du3By9Yh5Ms8')" title="Du3By9Yh5Ms8">Du3By9Yh5Ms8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="avowed">
+        <div class="game-title">Avowed</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('nvvhl14115')" title="nvvhl14115">nvvhl14115</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('miwb16363A')" title="miwb16363A">miwb16363A</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ea sports fc 24">
+        <div class="game-title">EA SPORTS FC 24</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('frxtq92615')" title="frxtq92615">frxtq92615</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2AGCKZ7938Z4')" title="2AGCKZ7938Z4">2AGCKZ7938Z4</span>
+        </div>
+        <div class="extra-info">xbox Email - maryaboolshunova379@gmail.com Password - PoM?Z^j4-PJl]POD</div>
+      </div>
+
+      <div class="account-card" data-name="ark: survival evolved">
+        <div class="game-title">ARK: Survival Evolved</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('pedrosantiago2006')" title="pedrosantiago2006">pedrosantiago2006</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('5A54Z9EG5MMM')" title="5A54Z9EG5MMM">5A54Z9EG5MMM</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="farming simulator 19">
+        <div class="game-title">Farming Simulator 19</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('andreicalutu2004')" title="andreicalutu2004">andreicalutu2004</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SZC94GD5E3FT')" title="SZC94GD5E3FT">SZC94GD5E3FT</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="farming simulator 22">
+        <div class="game-title">Farming Simulator 22</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jobro1871')" title="jobro1871">jobro1871</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BB63E4MSTFA9')" title="BB63E4MSTFA9">BB63E4MSTFA9</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: black ops 1">
+        <div class="game-title">Call of Duty: Black Ops 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('isaac2313')" title="isaac2313">isaac2313</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GZYB5A7SAAMD')" title="GZYB5A7SAAMD">GZYB5A7SAAMD</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="fallout 4">
+        <div class="game-title">Fallout 4</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('klonix90')" title="klonix90">klonix90</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('YM44B8K9Z3TZ')" title="YM44B8K9Z3TZ">YM44B8K9Z3TZ</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the elder scrolls v: skyrim">
+        <div class="game-title">The Elder Scrolls V: Skyrim</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ktkaczyk13')" title="ktkaczyk13">ktkaczyk13</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('E5SFBBCKDZEG')" title="E5SFBBCKDZEG">E5SFBBCKDZEG</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="undertale">
+        <div class="game-title">Undertale</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ayberk733')" title="ayberk733">ayberk733</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('XBAC2GSXMM66')" title="XBAC2GSXMM66">XBAC2GSXMM66</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="batman: arkham knight">
+        <div class="game-title">Batman: Arkham Knight</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('382862487')" title="382862487">382862487</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('M92ATYM6KSYX')" title="M92ATYM6KSYX">M92ATYM6KSYX</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="batman: arkham origins">
+        <div class="game-title">Batman: Arkham Origins</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('hermanig2')" title="hermanig2">hermanig2</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('68KTMXB95ETY')" title="68KTMXB95ETY">68KTMXB95ETY</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="batman arkham city goty">
+        <div class="game-title">Batman Arkham City GOTY</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('e_ddy7')" title="e_ddy7">e_ddy7</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('5MBZXKB5MMAD')" title="5MBZXKB5MMAD">5MBZXKB5MMAD</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="arkham city asylum goty">
+        <div class="game-title">Arkham City Asylum GOTY</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('el_samurick')" title="el_samurick">el_samurick</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('6MS28MKM5YS8')" title="6MS28MKM5YS8">6MS28MKM5YS8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="horizon zero dawn™ complete edition">
+        <div class="game-title">Horizon Zero Dawn™ Complete Edition</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('chuky1100')" title="chuky1100">chuky1100</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('66AEBMYY96SM')" title="66AEBMYY96SM">66AEBMYY96SM</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ea sports fc 25">
+        <div class="game-title">EA SPORTS FC 25</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fczmt25455')" title="fczmt25455">fczmt25455</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('nqdp14538J')" title="nqdp14538J">nqdp14538J</span>
+        </div>
+        <div class="extra-info">xbox Email - egorboolshunov755@gmail.com Password - DE@Dm9[&ju&lB3SU</div>
+      </div>
+
+      <div class="account-card" data-name="dark souls: remastered">
+        <div class="game-title">DARK SOULS: REMASTERED</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('koperek1996')" title="koperek1996">koperek1996</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dark souls 2">
+        <div class="game-title">DARK SOULS 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('wilhan1997')" title="wilhan1997">wilhan1997</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('43X5ZEKZFA63')" title="43X5ZEKZFA63">43X5ZEKZFA63</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dark souls 3">
+        <div class="game-title">DARK SOULS 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ibezzubik')" title="ibezzubik">ibezzubik</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SM8XM5X9XC4B')" title="SM8XM5X9XC4B">SM8XM5X9XC4B</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="monster hunter: world">
+        <div class="game-title">Monster Hunter: World</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('michaeldanoite')" title="michaeldanoite">michaeldanoite</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('PXGK2PXGK2')" title="PXGK2PXGK2">PXGK2PXGK2</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="monster hunter wilds">
+        <div class="game-title">Monster Hunter Wilds</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gerald228345')" title="gerald228345">gerald228345</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('CZYE8S92_7STT1')" title="CZYE8S92_7STT1">CZYE8S92_7STT1</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="miside">
+        <div class="game-title">MiSide</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('53785244')" title="53785244">53785244</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('zljZoHFc4B')" title="zljZoHFc4B">zljZoHFc4B</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="only up!">
+        <div class="game-title">Only Up!</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('leanlovesjuice')" title="leanlovesjuice">leanlovesjuice</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dTGxJhzlre1!Aa')" title="dTGxJhzlre1!Aa">dTGxJhzlre1!Aa</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="avatar: frontiers of pandora">
+        <div class="game-title">Avatar: Frontiers of Pandora</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('brianperez2018')" title="brianperez2018">brianperez2018</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('qupupiwajo5112')" title="qupupiwajo5112">qupupiwajo5112</span>
+        </div>
+        <div class="extra-info">ubisoft Email - ndhdsd43@gmail.com Password - sh4Bd2gV7^zq94</div>
+      </div>
+
+      <div class="account-card" data-name="call of duty 2">
+        <div class="game-title">Call of Duty 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('miczlu')" title="miczlu">miczlu</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('7ZDGKT9K2694')" title="7ZDGKT9K2694">7ZDGKT9K2694</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty 1">
+        <div class="game-title">Call of Duty 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('peewee1789')" title="peewee1789">peewee1789</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('YCYZ2AZC3GT7')" title="YCYZ2AZC3GT7">YCYZ2AZC3GT7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty 4: modern warface (2007)">
+        <div class="game-title">Call of Duty 4: Modern Warface (2007)</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jayceephoto017')" title="jayceephoto017">jayceephoto017</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('XBAKYYGGCCA4')" title="XBAKYYGGCCA4">XBAKYYGGCCA4</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: modern warfare 2 (2009)">
+        <div class="game-title">Call of Duty: Modern Warfare 2 (2009)</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('stephane787')" title="stephane787">stephane787</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('CB5SMF6428DC')" title="CB5SMF6428DC">CB5SMF6428DC</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: modern warfare 3 (2011)">
+        <div class="game-title">Call of Duty: Modern Warfare 3 (2011)</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mathiasqvist2')" title="mathiasqvist2">mathiasqvist2</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('G85676ZM8E8B')" title="G85676ZM8E8B">G85676ZM8E8B</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="fallout 76">
+        <div class="game-title">Fallout 76</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('sohersuhanc')" title="sohersuhanc">sohersuhanc</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('5YYG6TAG8B7M')" title="5YYG6TAG8B7M">5YYG6TAG8B7M</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: united offensive">
+        <div class="game-title">Call of Duty: United Offensive</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('bootiechavis')" title="bootiechavis">bootiechavis</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('01.22.25r')" title="01.22.25r">01.22.25r</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ghost of tsushima">
+        <div class="game-title">Ghost of Tsushima</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('tknomsod12')" title="tknomsod12">tknomsod12</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ZACKK59M95EG')" title="ZACKK59M95EG">ZACKK59M95EG</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="age of mythology: retold">
+        <div class="game-title">Age of Mythology: Retold</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('sebasdeowo')" title="sebasdeowo">sebasdeowo</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('75X6G6SF7D4B')" title="75X6G6SF7D4B">75X6G6SF7D4B</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="phasmophobia">
+        <div class="game-title">Phasmophobia</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gnom_gaming12')" title="gnom_gaming12">gnom_gaming12</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('M54S9BG665XX')" title="M54S9BG665XX">M54S9BG665XX</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="killing floor 1">
+        <div class="game-title">Killing Floor 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('miltongameplays_hd')" title="miltongameplays_hd">miltongameplays_hd</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('9XYFFMDXX6TE')" title="9XYFFMDXX6TE">9XYFFMDXX6TE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="killing floor 2">
+        <div class="game-title">Killing Floor 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dikaya2mbo4ka')" title="dikaya2mbo4ka">dikaya2mbo4ka</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ZA94G77F8DX7')" title="ZA94G77F8DX7">ZA94G77F8DX7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: ghosts">
+        <div class="game-title">Call of Duty: Ghosts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cluewewg')" title="cluewewg">cluewewg</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('zK8-tzC-TUD-jgw')" title="zK8-tzC-TUD-jgw">zK8-tzC-TUD-jgw</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="god of war: ragnarok">
+        <div class="game-title">God of War: Ragnarok</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gojo_12134')" title="gojo_12134">gojo_12134</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: advanced warfare">
+        <div class="game-title">Call of Duty: Advanced Warfare</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ragomaskopase386')" title="ragomaskopase386">ragomaskopase386</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('6AGAKF9Y4977')" title="6AGAKF9Y4977">6AGAKF9Y4977</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: wwii">
+        <div class="game-title">Call of Duty: WWII</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dj_sonik3')" title="dj_sonik3">dj_sonik3</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GCY9E4Y3TFBF')" title="GCY9E4Y3TFBF">GCY9E4Y3TFBF</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: world at war">
+        <div class="game-title">Call of Duty: World at War</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('rychard31')" title="rychard31">rychard31</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('773ZA7B7XF5G')" title="773ZA7B7XF5G">773ZA7B7XF5G</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: black ops 2">
+        <div class="game-title">Call of Duty: Black Ops 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('matixkwidzyn1')" title="matixkwidzyn1">matixkwidzyn1</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('83A3B729D63T')" title="83A3B729D63T">83A3B729D63T</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the elder scrolls iv: oblivion">
+        <div class="game-title">The Elder Scrolls IV: Oblivion</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('thescotsman61')" title="thescotsman61">thescotsman61</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GEBA6DZB8SBC')" title="GEBA6DZB8SBC">GEBA6DZB8SBC</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the elder scrolls iii: morrowind">
+        <div class="game-title">The Elder Scrolls III: Morrowind</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('micrem3')" title="micrem3">micrem3</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('3&quot;4Fl8H!79')" title="3&quot;4Fl8H!79">3&quot;4Fl8H!79</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: infinite warfare">
+        <div class="game-title">Call of Duty: Infinite Warfare</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jancomajoros123')" title="jancomajoros123">jancomajoros123</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('EXBZZ866YM59')" title="EXBZZ866YM59">EXBZZ866YM59</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="call of duty: black ops 3">
+        <div class="game-title">Call of Duty: Black Ops 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('beleho')" title="beleho">beleho</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('99X5KXBX2KFG')" title="99X5KXBX2KFG">99X5KXBX2KFG</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="r.e.p.o.">
+        <div class="game-title">R.E.P.O.</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gieco62306')" title="gieco62306">gieco62306</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2!EDF2Uxuvodgf01_gh12')" title="2!EDF2Uxuvodgf01_gh12">2!EDF2Uxuvodgf01_gh12</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="project zomboid">
+        <div class="game-title">Project Zomboid</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('matmisxx')" title="matmisxx">matmisxx</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('DK4XX2A8XT9E')" title="DK4XX2A8XT9E">DK4XX2A8XT9E</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="for honor">
+        <div class="game-title">For Honor</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('lex10025')" title="lex10025">lex10025</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('67SKC8SETT3M')" title="67SKC8SETT3M">67SKC8SETT3M</span>
+        </div>
+        <div class="extra-info">ubisoft Email - beecham9393@mail.ru Password - tr*B55F0QvY8hw</div>
+      </div>
+
+      <div class="account-card" data-name="star wars all parts/ все части">
+        <div class="game-title">Star Wars all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru')" title="password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru">password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('tr*B55F0QvY8hw')" title="tr*B55F0QvY8hw">tr*B55F0QvY8hw</span>
+        </div>
+        <div class="extra-info">xbox Email - Password -</div>
+      </div>
+
+      <div class="account-card" data-name="mortal kombat komplete edition">
+        <div class="game-title">Mortal Kombat Komplete Edition</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('kluchaacm')" title="kluchaacm">kluchaacm</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('KZK3MZ5D7T7Y')" title="KZK3MZ5D7T7Y">KZK3MZ5D7T7Y</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="football manager all parts/ все части">
+        <div class="game-title">Football Manager all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('megane9278')" title="megane9278">megane9278</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('YC8YSBBK2S42')" title="YC8YSBBK2S42">YC8YSBBK2S42</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="resident evil village">
+        <div class="game-title">Resident Evil Village</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('bartek2631')" title="bartek2631">bartek2631</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Z4G5F47A7T5Z')" title="Z4G5F47A7T5Z">Z4G5F47A7T5Z</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="don't starve together">
+        <div class="game-title">Don't Starve Together</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('54766432')" title="54766432">54766432</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GST4MGY6C87S')" title="GST4MGY6C87S">GST4MGY6C87S</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="assassin’s creed все части/ full parts">
+        <div class="game-title">Assassin’s Creed все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('marksherrell1935')" title="marksherrell1935">marksherrell1935</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SosalHuy')" title="SosalHuy">SosalHuy</span>
+        </div>
+        <div class="extra-info">ubisoft Email - greenridgeperry@gmail.com Password - OKd5KCEi&L8W5M</div>
+      </div>
+
+      <div class="account-card" data-name="dead rising all parts/ все части">
+        <div class="game-title">Dead Rising all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fu3poa5')" title="fu3poa5">fu3poa5</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('VE7Ry96k958')" title="VE7Ry96k958">VE7Ry96k958</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="final fantasy xvi">
+        <div class="game-title">Final Fantasy XVI</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mzbketygS5069')" title="mzbketygS5069">mzbketygS5069</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('mzbketygS5069')" title="mzbketygS5069">mzbketygS5069</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="split fiction">
+        <div class="game-title">Split Fiction</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('attentivemasque')" title="attentivemasque">attentivemasque</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('k3e8vUPDP0uM')" title="k3e8vUPDP0uM">k3e8vUPDP0uM</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="silent hill 2 & silent hill f">
+        <div class="game-title">SILENT HILL 2 & SILENT HILL f</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('xjfqs03899')" title="xjfqs03899">xjfqs03899</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('foqjy10971')" title="foqjy10971">foqjy10971</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="arma reforger">
+        <div class="game-title">Arma Reforger</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('laeyt27147')" title="laeyt27147">laeyt27147</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('syef61385E')" title="syef61385E">syef61385E</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the amazing spider-man">
+        <div class="game-title">The Amazing Spider-Man</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ryanel1')" title="ryanel1">ryanel1</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ZET74SAB65GT')" title="ZET74SAB65GT">ZET74SAB65GT</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="red dead redemption 1">
+        <div class="game-title">Red Dead Redemption 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('atojb72124')" title="atojb72124">atojb72124</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('C5DACGXF556F')" title="C5DACGXF556F">C5DACGXF556F</span>
+        </div>
+        <div class="extra-info">Social club Email - callofduty2023wwa@gmail.com Password - C5DACGXF556Fd</div>
+      </div>
+
+      <div class="account-card" data-name="red dead redemption 2">
+        <div class="game-title">Red Dead Redemption 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('astffvarseniu')" title="astffvarseniu">astffvarseniu</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('JfZvCeBHf_123')" title="JfZvCeBHf_123">JfZvCeBHf_123</span>
+        </div>
+        <div class="extra-info">Social club Email - astffvarseniu@gmail.com Password - JfZvCeBHf_123_!</div>
+      </div>
+
+      <div class="account-card" data-name="ready or not+full dlc">
+        <div class="game-title">Ready or Not+Full dlc</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('agure4ek3')" title="agure4ek3">agure4ek3</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/k')" title="https://funpay.com/users/6324663/k">https://funpay.com/users/6324663/k</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="like a dragon: ishin!">
+        <div class="game-title">Like a Dragon: Ishin!</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gtncw172012')" title="gtncw172012">gtncw172012</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('YvWkW848490')" title="YvWkW848490">YvWkW848490</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="like a dragon: pirate yakuza in hawaii">
+        <div class="game-title">Like a Dragon: Pirate Yakuza in Hawaii</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('pdsbc918511')" title="pdsbc918511">pdsbc918511</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('FpGiE482331')" title="FpGiE482331">FpGiE482331</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="yakuza 6: the song of life">
+        <div class="game-title">Yakuza 6: The Song of Life</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('udtna400092')" title="udtna400092">udtna400092</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ZyIzG306103')" title="ZyIzG306103">ZyIzG306103</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="judgment">
+        <div class="game-title">Judgment</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yvrow878830')" title="yvrow878830">yvrow878830</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('WoVvJ648788')" title="WoVvJ648788">WoVvJ648788</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="yakuza 0">
+        <div class="game-title">Yakuza 0</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('donkakaktus')" title="donkakaktus">donkakaktus</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('D73TFYZGZ4MC')" title="D73TFYZGZ4MC">D73TFYZGZ4MC</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="yakuza kiwami">
+        <div class="game-title">Yakuza Kiwami</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('quhgl496637')" title="quhgl496637">quhgl496637</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('LnEeV698275')" title="LnEeV698275">LnEeV698275</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="lost judgment">
+        <div class="game-title">Lost Judgment</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ucfsl079260')" title="ucfsl079260">ucfsl079260</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SfRrX672516')" title="SfRrX672516">SfRrX672516</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="yakuza: like a dragon">
+        <div class="game-title">Yakuza: Like a Dragon</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cloudygayal5349')" title="cloudygayal5349">cloudygayal5349</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('4FDZK8S7E2A4')" title="4FDZK8S7E2A4">4FDZK8S7E2A4</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="like a dragon: infinite wealth">
+        <div class="game-title">Like a Dragon: Infinite Wealth</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jxjjo48793')" title="jxjjo48793">jxjjo48793</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('twlf44308L')" title="twlf44308L">twlf44308L</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="spider-man: miles morales">
+        <div class="game-title">Spider-Man: Miles Morales</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ibrahimmuhammad1114')" title="ibrahimmuhammad1114">ibrahimmuhammad1114</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('37EB2834GD6M')" title="37EB2834GD6M">37EB2834GD6M</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dragon ball: sparking zero">
+        <div class="game-title">Dragon Ball: Sparking Zero</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('toby_enjoyer')" title="toby_enjoyer">toby_enjoyer</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('KKGZXTK2C9G4')" title="KKGZXTK2C9G4">KKGZXTK2C9G4</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dragon age: the veilguard">
+        <div class="game-title">Dragon Age: The Veilguard</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('oqwia48499')" title="oqwia48499">oqwia48499</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('cxtp68075Z')" title="cxtp68075Z">cxtp68075Z</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="atomfall">
+        <div class="game-title">Atomfall</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ggfsgfefgd')" title="ggfsgfefgd">ggfsgfefgd</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Wke8Mjhyjgq5y6L')" title="Wke8Mjhyjgq5y6L">Wke8Mjhyjgq5y6L</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the first berserker: khazan">
+        <div class="game-title">The First Berserker: Khazan</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gvnodkna9170')" title="gvnodkna9170">gvnodkna9170</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dgxza22856_fdwa1')" title="dgxza22856_fdwa1">dgxza22856_fdwa1</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="inzoi">
+        <div class="game-title">inZOI</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('benjamindiez34')" title="benjamindiez34">benjamindiez34</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="life is strange: double exposure">
+        <div class="game-title">Life is Strange: Double Exposure</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('_agure4ek_')" title="_agure4ek_">_agure4ek_</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('agure4ek')" title="agure4ek">agure4ek</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="life is strange: reunion">
+        <div class="game-title">Life is Strange: Reunion</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ltwbixaz53bnoj')" title="ltwbixaz53bnoj">ltwbixaz53bnoj</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('WudGCSTV4oJphE')" title="WudGCSTV4oJphE">WudGCSTV4oJphE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="bleach rebirth of souls">
+        <div class="game-title">Bleach Rebirth of Souls</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('venom22_venom8')" title="venom22_venom8">venom22_venom8</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('S6G4YZSBDDS8')" title="S6G4YZSBDDS8">S6G4YZSBDDS8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="uncharted: legacy of thieves collection">
+        <div class="game-title">Uncharted: Legacy of Thieves Collection</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('tomicic03')" title="tomicic03">tomicic03</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BAAA4XE6KDMF')" title="BAAA4XE6KDMF">BAAA4XE6KDMF</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="7 days to die">
+        <div class="game-title">7 Days to die</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('6978377533')" title="6978377533">6978377533</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('97335141')" title="97335141">97335141</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="left 4 dead 1">
+        <div class="game-title">Left 4 Dead 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('itamika18')" title="itamika18">itamika18</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GXYBG4599D85')" title="GXYBG4599D85">GXYBG4599D85</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="world war z">
+        <div class="game-title">World War Z</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mzulfa')" title="mzulfa">mzulfa</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('T5DM7ZD5Y4DK')" title="T5DM7ZD5Y4DK">T5DM7ZD5Y4DK</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ai limit">
+        <div class="game-title">AI Limit</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('lnarloxygg')" title="lnarloxygg">lnarloxygg</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('$Ji2A6ALM9m*')" title="$Ji2A6ALM9m*">$Ji2A6ALM9m*</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="titanfall 2 - поменять пароль в стиме">
+        <div class="game-title">Titanfall 2 - поменять пароль в стиме</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jaeat76773')" title="jaeat76773">jaeat76773</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('YFDTGDAM99Y4')" title="YFDTGDAM99Y4">YFDTGDAM99Y4</span>
+        </div>
+        <div class="extra-info">xbox Email - maksimboolshunov397@gmail.com Password - YFDTGDAM99Y4</div>
+      </div>
+
+      <div class="account-card" data-name="dead space (2008)">
+        <div class="game-title">Dead Space (2008)</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yxnuh537334')" title="yxnuh537334">yxnuh537334</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('FqYkJ528659')" title="FqYkJ528659">FqYkJ528659</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dead space 2">
+        <div class="game-title">Dead Space 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('hzfag631398')" title="hzfag631398">hzfag631398</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GkInK725798')" title="GkInK725798">GkInK725798</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dead space 3">
+        <div class="game-title">Dead Space 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)')" title="cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)">cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('amkke46795')" title="amkke46795">amkke46795</span>
+        </div>
+        <div class="extra-info">xbox Email - durfee77@list.ru Password - amkke46795</div>
+      </div>
+
+      <div class="account-card" data-name="dead space 2023">
+        <div class="game-title">Dead Space 2023</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('DzFgY727806')" title="DzFgY727806">DzFgY727806</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('QnSnG258564')" title="QnSnG258564">QnSnG258564</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dragon age 2">
+        <div class="game-title">Dragon Age 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('caiofelipex')" title="caiofelipex">caiofelipex</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ETZGZT74TBF8')" title="ETZGZT74TBF8">ETZGZT74TBF8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dragon age: origins">
+        <div class="game-title">Dragon Age: Origins</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('unodos12')" title="unodos12">unodos12</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('EYA478SZDT86')" title="EYA478SZDT86">EYA478SZDT86</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dragon age: inquisition">
+        <div class="game-title">Dragon Age: Inquisition</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('wanderalexis019')" title="wanderalexis019">wanderalexis019</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('S5F3X8XYYEFA')" title="S5F3X8XYYEFA">S5F3X8XYYEFA</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="farming simulator 17">
+        <div class="game-title">Farming Simulator 17</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('li2365124962')" title="li2365124962">li2365124962</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('AmYijlcIlP')" title="AmYijlcIlP">AmYijlcIlP</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="farming simulator 15">
+        <div class="game-title">Farming Simulator 15</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('opizziluca')" title="opizziluca">opizziluca</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Zodali98')" title="Zodali98">Zodali98</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="metro 2033">
+        <div class="game-title">Metro 2033</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mdxqp74149')" title="mdxqp74149">mdxqp74149</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('bwrwx25829')" title="bwrwx25829">bwrwx25829</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="left 4 dead 2">
+        <div class="game-title">Left 4 Dead 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('kdnox01')" title="kdnox01">kdnox01</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GG35EXFDTDBG')" title="GG35EXFDTDBG">GG35EXFDTDBG</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the elder scrolls iv: oblivion remastered">
+        <div class="game-title">The Elder Scrolls IV: Oblivion Remastered</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('utnt33397')" title="utnt33397">utnt33397</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Dj2Sr4Nf3Gw9')" title="Dj2Sr4Nf3Gw9">Dj2Sr4Nf3Gw9</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="v rising">
+        <div class="game-title">V Rising</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('woogg84064')" title="woogg84064">woogg84064</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('shlt63998G')" title="shlt63998G">shlt63998G</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="wallpaper engine">
+        <div class="game-title">Wallpaper Engine</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('12534559')" title="12534559">12534559</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ivAxuzp3YJ')" title="ivAxuzp3YJ">ivAxuzp3YJ</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="grounded">
+        <div class="game-title">Grounded</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('agure4ek12')" title="agure4ek12">agure4ek12</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dwqdwqd3223de2wqew')" title="dwqdwqd3223de2wqew">dwqdwqd3223de2wqew</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="drive beyond horizons">
+        <div class="game-title">Drive Beyond Horizons</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('agure4eek')" title="agure4eek">agure4eek</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('funpay123@')" title="funpay123@">funpay123@</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="cities: skylines ii">
+        <div class="game-title">Cities: Skylines II</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('13810755071')" title="13810755071">13810755071</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('AB9B4K7T7CG7')" title="AB9B4K7T7CG7">AB9B4K7T7CG7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="manor lords">
+        <div class="game-title">Manor Lords</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('messing85')" title="messing85">messing85</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('DT673AZ4A655')" title="DT673AZ4A655">DT673AZ4A655</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="doom: the dark ages">
+        <div class="game-title">DOOM: The Dark Ages</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fdsfdsfds9824')" title="fdsfdsfds9824">fdsfdsfds9824</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('x2jrrd7mef3123')" title="x2jrrd7mef3123">x2jrrd7mef3123</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="starfield">
+        <div class="game-title">Starfield</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('josephkaiser1958')" title="josephkaiser1958">josephkaiser1958</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('GTTCCBY33KFC')" title="GTTCCBY33KFC">GTTCCBY33KFC</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="metaphor: refantazio">
+        <div class="game-title">Metaphor: ReFantazio</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jfps2c')" title="jfps2c">jfps2c</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('8X8X3FXDXC3G')" title="8X8X3FXDXC3G">8X8X3FXDXC3G</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="elden ring nightreign">
+        <div class="game-title">Elden Ring Nightreign</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('Jd6Zq7Eb0Cm2')" title="Jd6Zq7Eb0Cm2">Jd6Zq7Eb0Cm2</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Ji7Mi6Wj7Eg7')" title="Ji7Mi6Wj7Eg7">Ji7Mi6Wj7Eg7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="deltarune">
+        <div class="game-title">DELTARUNE</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('bivensduane')" title="bivensduane">bivensduane</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('eT0seNA5EByD')" title="eT0seNA5EByD">eT0seNA5EByD</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="stellar blade">
+        <div class="game-title">Stellar Blade</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('Lk4By5Sn8Sj4')" title="Lk4By5Sn8Sj4">Lk4By5Sn8Sj4</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Vk3Zr6Mf0Ma8')" title="Vk3Zr6Mf0Ma8">Vk3Zr6Mf0Ma8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="robocop: rogue city">
+        <div class="game-title">RoboCop: Rogue City</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fjnad73131')" title="fjnad73131">fjnad73131</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('yqtug55107')" title="yqtug55107">yqtug55107</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="enshrouded">
+        <div class="game-title">Enshrouded</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('LeonHolm6')" title="LeonHolm6">LeonHolm6</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('C38cv75dPD')" title="C38cv75dPD">C38cv75dPD</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="factorio">
+        <div class="game-title">Factorio</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mertiragynatechke')" title="mertiragynatechke">mertiragynatechke</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('B88WB7NP7HFV')" title="B88WB7NP7HFV">B88WB7NP7HFV</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="street fighter 6">
+        <div class="game-title">Street Fighter 6</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('wolf_of_dawn600')" title="wolf_of_dawn600">wolf_of_dawn600</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('TZGXY5AKZSFA')" title="TZGXY5AKZSFA">TZGXY5AKZSFA</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="stardew valley">
+        <div class="game-title">Stardew Valley</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('steven10073')" title="steven10073">steven10073</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('C9MM83T8FDBX')" title="C9MM83T8FDBX">C9MM83T8FDBX</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="flintlock: the siege of dawn">
+        <div class="game-title">Flintlock: The Siege of Dawn</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('vmiaf714717')" title="vmiaf714717">vmiaf714717</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BrTbM764024')" title="BrTbM764024">BrTbM764024</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="devil may cry hd collection">
+        <div class="game-title">Devil May Cry HD Collection</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('07magalhaes')" title="07magalhaes">07magalhaes</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('AT2S5EA83444')" title="AT2S5EA83444">AT2S5EA83444</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="devil may cry 4">
+        <div class="game-title">Devil May Cry 4</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('waterwateryu')" title="waterwateryu">waterwateryu</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('9G7DDG4BXXXF')" title="9G7DDG4BXXXF">9G7DDG4BXXXF</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dmc: devil may cry">
+        <div class="game-title">DmC: Devil May Cry</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('danielng0209')" title="danielng0209">danielng0209</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Bonnie0209$$221')" title="Bonnie0209$$221">Bonnie0209$$221</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the alters">
+        <div class="game-title">The Alters</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('helenscott9')" title="helenscott9">helenscott9</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('tunybequmuwyze34')" title="tunybequmuwyze34">tunybequmuwyze34</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="armored core vi: fires of rubicon">
+        <div class="game-title">Armored Core VI: Fires of Rubicon</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dragonspineabyss')" title="dragonspineabyss">dragonspineabyss</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BS4T3X37CCGE')" title="BS4T3X37CCGE">BS4T3X37CCGE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="worms collection +все части/ all parts">
+        <div class="game-title">Worms Collection +все части/ all parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('edwardcarter1925')" title="edwardcarter1925">edwardcarter1925</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('muhebodydacy66')" title="muhebodydacy66">muhebodydacy66</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="liar's bar">
+        <div class="game-title">Liar's Bar</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('2469403840')" title="2469403840">2469403840</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2B48GA54E88E')" title="2B48GA54E88E">2B48GA54E88E</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="deep rock galactic">
+        <div class="game-title">Deep Rock Galactic</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dorime0072')" title="dorime0072">dorime0072</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('3ZSEA6GF3AS2')" title="3ZSEA6GF3AS2">3ZSEA6GF3AS2</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="cult of the lamb">
+        <div class="game-title">Cult of the Lamb</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yiren2088rb5')" title="yiren2088rb5">yiren2088rb5</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Uch1Tk4WKqpV71')" title="Uch1Tk4WKqpV71">Uch1Tk4WKqpV71</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="no rest for the wicked">
+        <div class="game-title">No Rest for the Wicked</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('northkagimus1980')" title="northkagimus1980">northkagimus1980</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('y3oTz42FYW')" title="y3oTz42FYW">y3oTz42FYW</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="age of wonders 4">
+        <div class="game-title">Age of Wonders 4</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ruoshuixu0515')" title="ruoshuixu0515">ruoshuixu0515</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('8YCXDZBZYXZS')" title="8YCXDZBZYXZS">8YCXDZBZYXZS</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="aliens: dark descent">
+        <div class="game-title">Aliens: Dark Descent</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('7677447690789')" title="7677447690789">7677447690789</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('FGkfgtrt524525')" title="FGkfgtrt524525">FGkfgtrt524525</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="amerzone: the explorer's legacy">
+        <div class="game-title">Amerzone: The Explorer's Legacy</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('donaldsmith303')" title="donaldsmith303">donaldsmith303</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('cugoxihinyqen58')" title="cugoxihinyqen58">cugoxihinyqen58</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="peak">
+        <div class="game-title">Peak</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('silviahorova47')" title="silviahorova47">silviahorova47</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('menufuvinefi49')" title="menufuvinefi49">menufuvinefi49</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="broken arrow">
+        <div class="game-title">Broken Arrow</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('lxqax63095')" title="lxqax63095">lxqax63095</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('appue45766')" title="appue45766">appue45766</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ark: survival ascended">
+        <div class="game-title">ARK: Survival Ascended</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('chclt96745')" title="chclt96745">chclt96745</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('mevkn34510')" title="mevkn34510">mevkn34510</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="system shock 2: remaster">
+        <div class="game-title">System Shock 2: Remaster</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('panda2214312')" title="panda2214312">panda2214312</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('zaacP3hYvAhJ45t')" title="zaacP3hYvAhJ45t">zaacP3hYvAhJ45t</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="frostpunk 2">
+        <div class="game-title">Frostpunk 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('whiskeytangofoxtrot171')" title="whiskeytangofoxtrot171">whiskeytangofoxtrot171</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('9M763CDEBTE8')" title="9M763CDEBTE8">9M763CDEBTE8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="lords of the fallen">
+        <div class="game-title">Lords of the Fallen</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ange9112')" title="ange9112">ange9112</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('7B3YAZ24EYG5')" title="7B3YAZ24EYG5">7B3YAZ24EYG5</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="arma 3">
+        <div class="game-title">Arma 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('rxra1')" title="rxra1">rxra1</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ZG6GBYYMAGMT')" title="ZG6GBYYMAGMT">ZG6GBYYMAGMT</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="among us">
+        <div class="game-title">Among Us</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yourhoneymoon')" title="yourhoneymoon">yourhoneymoon</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('37C8F34A5TF7')" title="37C8F34A5TF7">37C8F34A5TF7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="mindseye">
+        <div class="game-title">MindsEye</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('Mv3Ac5Ue2Sg0')" title="Mv3Ac5Ue2Sg0">Mv3Ac5Ue2Sg0</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Bb5Ri1Jn8Dr7')" title="Bb5Ri1Jn8Dr7">Bb5Ri1Jn8Dr7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="unknown 9: awakening">
+        <div class="game-title">Unknown 9: Awakening</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('gfsgfdgfdfg')" title="gfsgfdgfdfg">gfsgfdgfdfg</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('TQ7RG5MFv9nKKKj')" title="TQ7RG5MFv9nKKKj">TQ7RG5MFv9nKKKj</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="atlas fallen: reign of sand">
+        <div class="game-title">Atlas Fallen: Reign Of Sand</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('npodk83530')" title="npodk83530">npodk83530</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('mnocx32028')" title="mnocx32028">mnocx32028</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="death stranding 1">
+        <div class="game-title">Death Stranding 1</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('2896rr')" title="2896rr">2896rr</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SEAM8D7XTM4S')" title="SEAM8D7XTM4S">SEAM8D7XTM4S</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="death stranding 2: on the beach">
+        <div class="game-title">DEATH STRANDING 2: ON THE BEACH</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('umyya68157')" title="umyya68157">umyya68157</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('nhfne13052')" title="nhfne13052">nhfne13052</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="little nightmares">
+        <div class="game-title">Little Nightmares</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('anas_uchiha59')" title="anas_uchiha59">anas_uchiha59</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Y757T2AZ4B7D')" title="Y757T2AZ4B7D">Y757T2AZ4B7D</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="little nightmares ii">
+        <div class="game-title">Little Nightmares II</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('67325571')" title="67325571">67325571</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('KBYXA4GC98GF')" title="KBYXA4GC98GF">KBYXA4GC98GF</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="subnautica">
+        <div class="game-title">Subnautica</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jamiecrawford01')" title="jamiecrawford01">jamiecrawford01</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('7268Z8BZC8DE')" title="7268Z8BZC8DE">7268Z8BZC8DE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="subnautica: below zero">
+        <div class="game-title">Subnautica: Below Zero</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jaimocho3377')" title="jaimocho3377">jaimocho3377</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('A3Y39XYK6669')" title="A3Y39XYK6669">A3Y39XYK6669</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="until dawn - тут нет игры">
+        <div class="game-title">Until Dawn - ТУТ НЕТ ИГРЫ</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jamiecrawford01')" title="jamiecrawford01">jamiecrawford01</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('7268Z8BZC8DE')" title="7268Z8BZC8DE">7268Z8BZC8DE</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="battlefield все части/ full parts (нету игр)">
+        <div class="game-title">Battlefield все части/ full parts (нету игр)</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('draghacker')" title="draghacker">draghacker</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('SYATZE8YYMKX')" title="SYATZE8YYMKX">SYATZE8YYMKX</span>
+        </div>
+        <div class="extra-info">xbox (я не стал менять потому что самих игр нету поменяю когда будут игры) Email - otoole78@list.ru Password - SYATZE8YYMKXq</div>
+      </div>
+
+      <div class="account-card" data-name="watch dogs все части/ full parts">
+        <div class="game-title">Watch Dogs все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('bibikavka')" title="bibikavka">bibikavka</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Z8E8MZFT7FZB')" title="Z8E8MZFT7FZB">Z8E8MZFT7FZB</span>
+        </div>
+        <div class="extra-info">ubisoft Email - greenridgeperry@gmail.com Password - OKd5KCEi&L8W5M</div>
+      </div>
+
+      <div class="account-card" data-name="need for speed все части/ full parts">
+        <div class="game-title">Need for Speed все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('znkpv96292')" title="znkpv96292">znkpv96292</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('qqawf88009')" title="qqawf88009">qqawf88009</span>
+        </div>
+        <div class="extra-info">xbox Email - olegbolshuunov950@gmail.com Password - pm5G^k7ArX&fRB</div>
+      </div>
+
+      <div class="account-card" data-name="far cry все части/ full parts">
+        <div class="game-title">Far Cry все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('sharonmetoyer1920')" title="sharonmetoyer1920">sharonmetoyer1920</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('gatykecosiril120')" title="gatykecosiril120">gatykecosiril120</span>
+        </div>
+        <div class="extra-info">ubisoft Email - jeffreygreenman827@gmail.com Password - Sj1EGBvN$mUWkI</div>
+      </div>
+
+      <div class="account-card" data-name="anno все части/ full parts">
+        <div class="game-title">Anno все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('animebold')" title="animebold">animebold</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2Y7ZK8957FE5')" title="2Y7ZK8957FE5">2Y7ZK8957FE5</span>
+        </div>
+        <div class="extra-info">ubisoft Email - jeffreygreenman827@gmail.com Password - Sj1EGBvN$mUWkI</div>
+      </div>
+
+      <div class="account-card" data-name="sonic x shadow generations">
+        <div class="game-title">Sonic X Shadow Generations</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('marmoth33')" title="marmoth33">marmoth33</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('FKX99K99KKDC')" title="FKX99K99KKDC">FKX99K99KKDC</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="geometry dash">
+        <div class="game-title">Geometry Dash</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mrdagnizzz')" title="mrdagnizzz">mrdagnizzz</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('CFM37TCX66TT')" title="CFM37TCX66TT">CFM37TCX66TT</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="killing floor 3">
+        <div class="game-title">Killing Floor 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('weohc00237')" title="weohc00237">weohc00237</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dfzfh66387')" title="dfzfh66387">dfzfh66387</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="wuchang: fallen feathers">
+        <div class="game-title">Wuchang: Fallen Feathers</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('kurhm61156')" title="kurhm61156">kurhm61156</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('jujmn97683')" title="jujmn97683">jujmn97683</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="mafia: the old country">
+        <div class="game-title">Mafia: The Old Country</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('wezmx25075')" title="wezmx25075">wezmx25075</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ypryn295691')" title="ypryn295691">ypryn295691</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="grounded 2 - тут нет игры">
+        <div class="game-title">Grounded 2 - тут нет игры</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mzthg68157')" title="mzthg68157">mzthg68157</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ywrom78352')" title="ywrom78352">ywrom78352</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="titan quest все части/ full parts">
+        <div class="game-title">Titan Quest все части/ full parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ufffj00098')" title="ufffj00098">ufffj00098</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ynkoq85328')" title="ynkoq85328">ynkoq85328</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="borderlands 4">
+        <div class="game-title">Borderlands 4</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('oprck72200')" title="oprck72200">oprck72200</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('jmaum68868')" title="jmaum68868">jmaum68868</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="dying light: the beast">
+        <div class="game-title">Dying Light: The Beast</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('michellenelson6q')" title="michellenelson6q">michellenelson6q</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('nVcr3Gv9091981')" title="nVcr3Gv9091981">nVcr3Gv9091981</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ea sports fc 26">
+        <div class="game-title">EA SPORTS FC 26</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cbrxu14249')" title="cbrxu14249">cbrxu14249</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dcayy39171')" title="dcayy39171">dcayy39171</span>
+        </div>
+        <div class="extra-info">xbox Email - mihailbolshuunov399@gmail.com Password - o5FZi&Nfk1A@7k</div>
+      </div>
+
+      <div class="account-card" data-name="mimesis">
+        <div class="game-title">Mimesis</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('rqxdz35002')" title="rqxdz35002">rqxdz35002</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('thssv69297')" title="thssv69297">thssv69297</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="rv there yet">
+        <div class="game-title">RV There Yet</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('larkerr')" title="larkerr">larkerr</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('DBXDBDFDFEE7')" title="DBXDBDFDFEE7">DBXDBDFDFEE7</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="grand theft auto v">
+        <div class="game-title">Grand Theft Auto V</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('Xs1Wk2Sh1Ee3')" title="Xs1Wk2Sh1Ee3">Xs1Wk2Sh1Ee3</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('h9jinZXC.')" title="h9jinZXC.">h9jinZXC.</span>
+        </div>
+        <div class="extra-info">Social club Email - ogurchekpidor1488@gmail.com Password - JfZvCeBHfsXr77c</div>
+      </div>
+
+      <div class="account-card" data-name="stronghold все части/ all parts">
+        <div class="game-title">Stronghold все части/ all parts</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ywmxa52089')" title="ywmxa52089">ywmxa52089</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('dwbsx51530')" title="dwbsx51530">dwbsx51530</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="remnant 2">
+        <div class="game-title">Remnant 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('pqeun18507')" title="pqeun18507">pqeun18507</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('xeesg63032')" title="xeesg63032">xeesg63032</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="commandos: origins">
+        <div class="game-title">Commandos: Origins</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('shadow42841')" title="shadow42841">shadow42841</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('C9SFC39K4DAY')" title="C9SFC39K4DAY">C9SFC39K4DAY</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="resident evil requiem">
+        <div class="game-title">Resident Evil Requiem</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('jonathanwilletts0w')" title="jonathanwilletts0w">jonathanwilletts0w</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('fNVYCWBrmckFMQl3')" title="fNVYCWBrmckFMQl3">fNVYCWBrmckFMQl3</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="deus ex all parts/ все части">
+        <div class="game-title">Deus Ex all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dfaamkbxmf')" title="dfaamkbxmf">dfaamkbxmf</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('lrha1ziqfgwlia3N')" title="lrha1ziqfgwlia3N">lrha1ziqfgwlia3N</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="thief all parts/ все части">
+        <div class="game-title">Thief all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fozpr18595')" title="fozpr18595">fozpr18595</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('obbpy39380')" title="obbpy39380">obbpy39380</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the long dark">
+        <div class="game-title">The Long Dark</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('martymekflay')" title="martymekflay">martymekflay</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('MBA2ABA44BY9')" title="MBA2ABA44BY9">MBA2ABA44BY9</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="rise of the ronin">
+        <div class="game-title">Rise of the Ronin</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yzxoj11658')" title="yzxoj11658">yzxoj11658</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('sretg68079')" title="sretg68079">sretg68079</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="foundation">
+        <div class="game-title">Foundation</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('soaresxrs1')" title="soaresxrs1">soaresxrs1</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BFB45ESACFF5')" title="BFB45ESACFF5">BFB45ESACFF5</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="lies of p">
+        <div class="game-title">Lies Of P</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cmccg33319')" title="cmccg33319">cmccg33319</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('wpawq16370')" title="wpawq16370">wpawq16370</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="jurassic world evolution 3">
+        <div class="game-title">Jurassic World Evolution 3</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('awxrvks12')" title="awxrvks12">awxrvks12</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('4AATG4X2TZC8')" title="4AATG4X2TZC8">4AATG4X2TZC8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="the dark pictures all parts/ все части">
+        <div class="game-title">The Dark Pictures all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('smgde16652')" title="smgde16652">smgde16652</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ucaex36107')" title="ucaex36107">ucaex36107</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="reanimal">
+        <div class="game-title">Reanimal</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('kazimirpanin1982')" title="kazimirpanin1982">kazimirpanin1982</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('Zomsik12345')" title="Zomsik12345">Zomsik12345</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="mewgenics">
+        <div class="game-title">Mewgenics</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('huapc71955')" title="huapc71955">huapc71955</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('wjfsq13876')" title="wjfsq13876">wjfsq13876</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="senua’s saga: hellblade 2">
+        <div class="game-title">Senua’s Saga: Hellblade 2</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('zorz323')" title="zorz323">zorz323</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('6MYDK2SDY782')" title="6MYDK2SDY782">6MYDK2SDY782</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="roadcraft">
+        <div class="game-title">RoadCraft</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ogqntbhz69')" title="ogqntbhz69">ogqntbhz69</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('a9pZpoMcLq2MmDR')" title="a9pZpoMcLq2MmDR">a9pZpoMcLq2MmDR</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="towa and the guardians of the sacred tree">
+        <div class="game-title">Towa and the Guardians of the Sacred Tree</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('samokkmagel8k0')" title="samokkmagel8k0">samokkmagel8k0</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2R11XEMAebh')" title="2R11XEMAebh">2R11XEMAebh</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="shin megami tensei v: vengeance">
+        <div class="game-title">Shin Megami Tensei V: Vengeance</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('uyztc21998')" title="uyztc21998">uyztc21998</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('pghtm76755')" title="pghtm76755">pghtm76755</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="heroes of might and magic all parts/ все части">
+        <div class="game-title">Heroes of Might and Magic all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('tkzww37017')" title="tkzww37017">tkzww37017</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('xeask28769')" title="xeask28769">xeask28769</span>
+        </div>
+        <div class="extra-info">ubisoft Email - ndhdsd43@gmail.com Password - sh4Bd2gV7^zq94</div>
+      </div>
+
+      <div class="account-card" data-name="sonic racing: crossworlds">
+        <div class="game-title">Sonic Racing: CrossWorlds</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ituqupkbj6w0')" title="ituqupkbj6w0">ituqupkbj6w0</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('2YC5D573YYYM')" title="2YC5D573YYYM">2YC5D573YYYM</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="forever skies">
+        <div class="game-title">Forever Skies</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('yugto32789')" title="yugto32789">yugto32789</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('jumnr89522')" title="jumnr89522">jumnr89522</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="solasta all parts/ все части">
+        <div class="game-title">Solasta all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('crushedPie44178')" title="crushedPie44178">crushedPie44178</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('EBHSoqmwQG8r')" title="EBHSoqmwQG8r">EBHSoqmwQG8r</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="tainted grail: the fall of avalon">
+        <div class="game-title">Tainted Grail: The Fall of Avalon</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('eunfo73356')" title="eunfo73356">eunfo73356</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('nnbav75678')" title="nnbav75678">nnbav75678</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="europa universalis v">
+        <div class="game-title">Europa Universalis V</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('cehennet96')" title="cehennet96">cehennet96</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('BSFTTZBE86DD')" title="BSFTTZBE86DD">BSFTTZBE86DD</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="ninja gaiden 4">
+        <div class="game-title">Ninja Gaiden 4</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('xtbpv85381')" title="xtbpv85381">xtbpv85381</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('brmbg71919')" title="brmbg71919">brmbg71919</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="hell is us">
+        <div class="game-title">Hell is Us</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('fjhhj00201')" title="fjhhj00201">fjhhj00201</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('qzdys32192')" title="qzdys32192">qzdys32192</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="everwind">
+        <div class="game-title">Everwind</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('amhcb38075')" title="amhcb38075">amhcb38075</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ydwsm97013')" title="ydwsm97013">ydwsm97013</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="slay the spire all parts/ все части">
+        <div class="game-title">Slay the Spire all parts/ все части</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('dmojj83135')" title="dmojj83135">dmojj83135</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('rronb37573')" title="rronb37573">rronb37573</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="crimson desert">
+        <div class="game-title">Crimson Desert</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('trpjz22958')" title="trpjz22958">trpjz22958</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('lTPZpSuyzH1D')" title="lTPZpSuyzH1D">lTPZpSuyzH1D</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="sword art online fractured daydream">
+        <div class="game-title">SWORD ART ONLINE Fractured Daydream</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('mqbpp58731')" title="mqbpp58731">mqbpp58731</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('hewcf73873')" title="hewcf73873">hewcf73873</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="lost records: bloom & rage">
+        <div class="game-title">Lost Records: Bloom & Rage</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('lehpfxvg97mn')" title="lehpfxvg97mn">lehpfxvg97mn</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('WX8SW2Sq2lbQLb8')" title="WX8SW2Sq2lbQLb8">WX8SW2Sq2lbQLb8</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="pragmata">
+        <div class="game-title">Pragmata</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('onrwo71301')" title="onrwo71301">onrwo71301</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="mouse: p.i. for hire">
+        <div class="game-title">MOUSE: P.I. For Hire</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ncdnm65676')" title="ncdnm65676">ncdnm65676</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('oauxq12521')" title="oauxq12521">oauxq12521</span>
+        </div>
+        
+      </div>
+
+      <div class="account-card" data-name="painkiller">
+        <div class="game-title">Painkiller</div>
+        <div class="cred-row">
+          <span class="cred-label">Login</span>
+          <span class="cred-val" onclick="copyText('ugbwk18220')" title="ugbwk18220">ugbwk18220</span>
+        </div>
+        <div class="cred-row">
+          <span class="cred-label">Password</span>
+          <span class="cred-val" onclick="copyText('ctseu98766')" title="ctseu98766">ctseu98766</span>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast">تم النسخ بنجاح!</div>
+
+  <script>
+    // Password protection & rate limit logic
+    const MAX_ATTEMPTS = 3;
+    let attempts = parseInt(localStorage.getItem('pwd_attempts') || '0');
+
+    async function hash(string) {
+      const utf8 = new TextEncoder().encode(string);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(bytes => bytes.toString(16).padStart(2, '0')).join('');
+    }
+
+    function checkLockout() {
+      if (attempts >= MAX_ATTEMPTS) {
+        document.getElementById('pwd-input').disabled = true;
+        document.getElementById('pwd-btn').disabled = true;
+        document.getElementById('pwd-error').innerText = 'تم تجاوز الحد المسموح به. المحاولة مقفلة.';
+        document.getElementById('pwd-error').style.display = 'block';
+        return true;
+      }
+      return false;
+    }
+
+    async function checkPwd() {
+      if (checkLockout()) return;
+
+      const pwd = document.getElementById('pwd-input').value;
+      const pwdHash = await hash(pwd);
+      const targetHash = 'bb9998c6d2bd6cbbfba2e522c2da2fe4ca6c6f9967ccf602e6e7b6affeaad848';
+      
+      if(pwdHash === targetHash) {
+        document.getElementById('pwd-overlay').style.display = 'none';
+        sessionStorage.setItem('accessAuth', 'true');
+        localStorage.setItem('pwd_attempts', '0');
+      } else {
+        attempts++;
+        localStorage.setItem('pwd_attempts', attempts.toString());
+        if (!checkLockout()) {
+          document.getElementById('pwd-error').innerText = `كلمة المرور غير صحيحة. تبقى ${MAX_ATTEMPTS - attempts} محاولات`;
+          document.getElementById('pwd-error').style.display = 'block';
+        }
+      }
+    }
+
+    if(sessionStorage.getItem('accessAuth') === 'true') {
+      document.getElementById('pwd-overlay').style.display = 'none';
+    } else {
+      checkLockout();
+    }
+
+    // Dynamically inject Action buttons into all cards
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.account-card').forEach(card => {
+        const gameTitle = card.querySelector('.game-title').innerText;
+        
+        // Extract credentials for copy
+        let copyStr = `اللعبة: ${gameTitle}\n`;
+        card.querySelectorAll('.cred-row').forEach(row => {
+          const label = row.querySelector('.cred-label').innerText;
+          const val = row.querySelector('.cred-val').innerText;
+          copyStr += `${label}: ${val}\n`;
+        });
+        const extra = card.querySelector('.extra-info');
+        if (extra) {
+          copyStr += `تفاصيل إضافية: ${extra.innerText}\n`;
+        }
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.style.display = 'flex';
+        actionsDiv.style.gap = '10px';
+        actionsDiv.style.marginTop = '12px';
+
+        const copyBtn = document.createElement('div');
+        copyBtn.className = 'req-code-btn';
+        copyBtn.style.marginTop = '0';
+        copyBtn.innerText = 'نسخ الحساب';
+        copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
+
+        const reqBtn = document.createElement('div');
+        reqBtn.className = 'req-code-btn';
+        reqBtn.style.marginTop = '0';
+        reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
+        reqBtn.style.color = 'var(--gold)';
+        reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
+        reqBtn.innerText = 'طلب الكود';
+        reqBtn.onclick = () => copyText('!code ' + gameTitle, 'تم نسخ كود الطلب بنجاح. أرسله للبائع');
+
+        actionsDiv.appendChild(copyBtn);
+        actionsDiv.appendChild(reqBtn);
+        card.appendChild(actionsDiv);
+      });
+    });
+
+    // Search filter
+    function filterGames() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.account-card');
+      
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name');
+        if(name.includes(input)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Copy to clipboard
+    let toastTimeout;
+    function copyText(text, message = 'تم النسخ بنجاح!') {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
