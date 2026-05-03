@@ -2853,14 +2853,20 @@
         copyBtn.innerText = 'نسخ الحساب';
         copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
 
-        const reqBtn = document.createElement('div');
+        const reqBtn = document.createElement('a');
         reqBtn.className = 'req-code-btn';
         reqBtn.style.marginTop = '0';
         reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
         reqBtn.style.color = 'var(--gold)';
         reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
+        reqBtn.style.textDecoration = 'none';
         reqBtn.innerText = 'طلب الكود';
-        reqBtn.onclick = () => copyText('!code ' + gameTitle, 'تم نسخ كود الطلب بنجاح. أرسله للبائع');
+        reqBtn.target = '_blank';
+        
+        const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
+        const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
+        const waText = `مرحبا، أحتاج إلى كود الدخول لوضع الأوفلاين.\n🎮 اللعبة: ${gameTitle}\n👤 الحساب: ${loginVal}\n!code`;
+        reqBtn.href = `https://wa.me/212659978011?text=${encodeURIComponent(waText)}`;
 
         actionsDiv.appendChild(copyBtn);
         actionsDiv.appendChild(reqBtn);
