@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SteamPack — AccessGames</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #03070c;
@@ -23,83 +26,419 @@
       --radius: 14px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; line-height: 1.7; min-height: 100vh; overflow-x: hidden; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .bg-layer { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 60, 120, 0.55) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0, 40, 80, 0.3) 0%, transparent 60%), #03070c; }
-    .bg-grid { position: fixed; inset: 0; z-index: -1; opacity: 0.025; background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px); background-size: 60px 60px; }
-    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-    
-    header { padding: 20px 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(18px) saturate(1.4); background: rgba(3, 7, 12, 0.82); }
-    .header-row { display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
-    .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--accent), #006fa6); border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 24px rgba(0, 217, 255, 0.35); }
-    .brand-text { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; }
-    .brand-text span { color: var(--accent); }
-    .header-nav { display: flex; gap: 28px; }
-    .nav-link { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px; transition: color 0.2s; position: relative; padding-bottom: 4px; }
-    .nav-link:hover { color: #fff; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    .page-hero { text-align: center; padding: 60px 0 40px; }
-    .page-hero h1 { font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 900; margin-bottom: 14px; background: linear-gradient(135deg, #ffffff 30%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .page-hero p { color: var(--muted); font-size: 17px; max-width: 600px; margin: 0 auto; }
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 60, 120, 0.55) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0, 40, 80, 0.3) 0%, transparent 60%), #03070c;
+    }
 
-    .search-box { width: 100%; max-width: 500px; margin: 0 auto 40px; position: relative; }
-    .search-box input { width: 100%; padding: 16px 24px; border-radius: 100px; background: var(--surface); border: 1px solid var(--border); color: #fff; font-family: 'Outfit', 'Cairo', sans-serif; font-size: 16px; outline: none; transition: 0.3s; }
-    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.025;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
 
-    .accounts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-    .account-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: 0.3s; position: relative; overflow: hidden; }
-    .account-card:hover { border-color: var(--border-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow); transform: translateY(-3px); }
-    .account-card::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), transparent); opacity: 0.2; border-bottom-left-radius: 40px; }
-    
-    .game-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; font-family: 'Outfit', 'Cairo', sans-serif; line-height: 1.4; }
-    .cred-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: var(--surface-2); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); }
-    .cred-label { font-size: 13px; color: var(--muted); font-weight: 600; }
-    .cred-val { font-family: monospace; color: var(--accent); font-size: 14px; user-select: all; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; text-align: left; direction: ltr; }
-    
-    .extra-info { margin-top: 10px; font-size: 12px; color: var(--gold); background: rgba(245, 200, 66, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(245, 200, 66, 0.2); line-height: 1.5; text-align: left; direction: ltr; }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-    .req-code-btn { display: block; width: 100%; text-align: center; background: rgba(0, 217, 255, 0.1); color: var(--accent); border: 1px solid var(--border-accent); padding: 10px; border-radius: 8px; margin-top: 12px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: 0.3s; }
-    .req-code-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px) saturate(1.4);
+      background: rgba(3, 7, 12, 0.82);
+    }
 
-    .accounts-grid.list-view { display: flex; flex-direction: column; gap: 15px; }
-    .accounts-grid.list-view .account-card { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; padding: 15px 24px; }
-    .accounts-grid.list-view .game-title { margin-bottom: 0; width: 200px; flex-shrink: 0; }
-    .accounts-grid.list-view .cred-row { margin-bottom: 0; flex: 1; min-width: 150px; background: transparent; border: none; padding: 0; }
-    .accounts-grid.list-view .extra-info { width: 100%; margin-top: 10px; }
-    .accounts-grid.list-view .account-card > div[style*="display: flex"] { margin-top: 0 !important; margin-right: auto; flex-wrap: nowrap; }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent), #006fa6);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.35);
+    }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .brand-text span {
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .page-hero {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: 'Outfit', 'Cairo', sans-serif;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .account-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .account-card:hover {
+      border-color: var(--border-accent);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+      transform: translateY(-3px);
+    }
+
+    .account-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent), transparent);
+      opacity: 0.2;
+      border-bottom-left-radius: 40px;
+    }
+
+    .game-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      font-family: 'Outfit', 'Cairo', sans-serif;
+      line-height: 1.4;
+    }
+
+    .cred-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      background: var(--surface-2);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .cred-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .cred-val {
+      font-family: monospace;
+      color: var(--accent);
+      font-size: 14px;
+      user-select: all;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      text-align: left;
+      direction: ltr;
+    }
+
+    .extra-info {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--gold);
+      background: rgba(245, 200, 66, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(245, 200, 66, 0.2);
+      line-height: 1.5;
+      text-align: left;
+      direction: ltr;
+    }
+
+    .req-code-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .req-code-btn:hover {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .accounts-grid.list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .accounts-grid.list-view .account-card {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 15px 24px;
+    }
+
+    .accounts-grid.list-view .game-title {
+      margin-bottom: 0;
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .accounts-grid.list-view .cred-row {
+      margin-bottom: 0;
+      flex: 1;
+      min-width: 150px;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .accounts-grid.list-view .extra-info {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .accounts-grid.list-view .account-card>div[style*="display: flex"] {
+      margin-top: 0 !important;
+      margin-right: auto;
+      flex-wrap: nowrap;
+    }
 
     /* Password Overlay */
-    #pwd-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
-    .pwd-modal { background: var(--surface); padding: 40px; border-radius: 20px; border: 1px solid var(--border); text-align: center; max-width: 400px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow); }
-    .pwd-modal h2 { margin-bottom: 20px; color: #fff; font-family: 'Outfit', 'Cairo', sans-serif; }
-    .pwd-modal input { width: 100%; padding: 14px 20px; margin-bottom: 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: #fff; font-size: 16px; outline: none; text-align: center; }
-    .pwd-modal input:focus { border-color: var(--accent); }
-    .pwd-modal button { background: linear-gradient(135deg, var(--accent), #006fa6); color: #000; border: none; padding: 14px 30px; border-radius: 10px; font-weight: 800; font-size: 16px; cursor: pointer; width: 100%; transition: 0.3s; }
-    .pwd-modal button:hover { box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
-    .pwd-error { color: #ff4d4d; font-size: 14px; margin-bottom: 15px; display: none; }
-    
-    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--surface-2); color: #fff; padding: 12px 24px; border-radius: 100px; border: 1px solid var(--border-accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 14px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; z-index: 1000; }
-    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    #pwd-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+    }
+
+    .pwd-modal {
+      background: var(--surface);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+    }
+
+    .pwd-modal h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-family: 'Outfit', 'Cairo', sans-serif;
+    }
+
+    .pwd-modal input {
+      width: 100%;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      text-align: center;
+    }
+
+    .pwd-modal input:focus {
+      border-color: var(--accent);
+    }
+
+    .pwd-modal button {
+      background: linear-gradient(135deg, var(--accent), #006fa6);
+      color: #000;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    .pwd-modal button:hover {
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .pwd-error {
+      color: #ff4d4d;
+      font-size: 14px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--surface-2);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid var(--border-accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      font-size: 14px;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
-  <!-- Password Protection Overlay -->
+  <!-- Login Overlay -->
   <div id="pwd-overlay">
     <div class="pwd-modal">
       <div class="brand-icon" style="margin: 0 auto 20px; width: 60px; height: 60px; border-radius: 16px;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </div>
-      <h2>منطقة محمية</h2>
-      <p style="color: var(--muted); margin-bottom: 20px; font-size: 14px;">المرجو إدخال كلمة المرور للوصول إلى الحسابات</p>
-      <div class="pwd-error" id="pwd-error">كلمة المرور غير صحيحة</div>
-      <input type="password" id="pwd-input" placeholder="كلمة المرور..." onkeydown="if(event.key === 'Enter') checkPwd()">
-      <button id="pwd-btn" onclick="checkPwd()">دخول</button>
+      <h2>تسجيل الدخول</h2>
+      <p style="color: var(--muted); margin-bottom: 20px; font-size: 14px;">أدخل بيانات حسابك للوصول إلى SteamPack</p>
+      <div class="pwd-error" id="login-error"></div>
+      <input type="email" id="email-input" placeholder="البريد الإلكتروني..."
+        onkeydown="if(event.key === 'Enter') checkLogin()">
+      <input type="password" id="pwd-input" placeholder="كلمة المرور..."
+        onkeydown="if(event.key === 'Enter') checkLogin()">
+      <button id="login-btn" onclick="checkLogin()">دخول</button>
     </div>
   </div>
 
@@ -111,7 +450,8 @@
       <div class="header-row">
         <a class="brand" href="index.html">
           <div class="brand-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="3" />
               <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
             </svg>
@@ -134,8 +474,15 @@
 
     <div class="search-box" style="display: flex; gap: 10px; max-width: 500px; margin: 0 auto 40px;">
       <input type="text" id="searchInput" placeholder="ابحث عن لعبة..." onkeyup="filterGames()" style="flex: 1;">
-      <button id="viewToggle" onclick="toggleView()" style="background: var(--surface); border: 1px solid var(--border); border-radius: 100px; width: 56px; color: #fff; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center;">
-        <svg id="viewIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <button id="viewToggle" onclick="toggleView()"
+        style="background: var(--surface); border: 1px solid var(--border); border-radius: 100px; width: 56px; color: #fff; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center;">
+        <svg id="viewIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
       </button>
     </div>
 
@@ -151,7 +498,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('EKM9DAVguuRE')" title="EKM9DAVguuRE">EKM9DAVguuRE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="spider-man 2">
@@ -164,7 +511,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('lRl$LHXVP')" title="lRl$LHXVP">lRl$LHXVP</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="sid meier's civilization vii">
@@ -177,7 +524,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Du3By9Yh5Ms8')" title="Du3By9Yh5Ms8">Du3By9Yh5Ms8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="avowed">
@@ -190,7 +537,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('miwb16363A')" title="miwb16363A">miwb16363A</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ea sports fc 24">
@@ -210,13 +557,14 @@
         <div class="game-title">ARK: Survival Evolved</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('pedrosantiago2006')" title="pedrosantiago2006">pedrosantiago2006</span>
+          <span class="cred-val" onclick="copyText('pedrosantiago2006')"
+            title="pedrosantiago2006">pedrosantiago2006</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('5A54Z9EG5MMM')" title="5A54Z9EG5MMM">5A54Z9EG5MMM</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="farming simulator 19">
@@ -229,7 +577,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('SZC94GD5E3FT')" title="SZC94GD5E3FT">SZC94GD5E3FT</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="farming simulator 22">
@@ -242,7 +590,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BB63E4MSTFA9')" title="BB63E4MSTFA9">BB63E4MSTFA9</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: black ops 1">
@@ -255,7 +603,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GZYB5A7SAAMD')" title="GZYB5A7SAAMD">GZYB5A7SAAMD</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="fallout 4">
@@ -268,7 +616,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('YM44B8K9Z3TZ')" title="YM44B8K9Z3TZ">YM44B8K9Z3TZ</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the elder scrolls v: skyrim">
@@ -281,7 +629,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('E5SFBBCKDZEG')" title="E5SFBBCKDZEG">E5SFBBCKDZEG</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="undertale">
@@ -294,7 +642,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('XBAC2GSXMM66')" title="XBAC2GSXMM66">XBAC2GSXMM66</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="batman: arkham knight">
@@ -307,7 +655,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('M92ATYM6KSYX')" title="M92ATYM6KSYX">M92ATYM6KSYX</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="batman: arkham origins">
@@ -320,7 +668,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('68KTMXB95ETY')" title="68KTMXB95ETY">68KTMXB95ETY</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="batman arkham city goty">
@@ -333,7 +681,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('5MBZXKB5MMAD')" title="5MBZXKB5MMAD">5MBZXKB5MMAD</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="arkham city asylum goty">
@@ -346,7 +694,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('6MS28MKM5YS8')" title="6MS28MKM5YS8">6MS28MKM5YS8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="horizon zero dawn™ complete edition">
@@ -359,7 +707,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('66AEBMYY96SM')" title="66AEBMYY96SM">66AEBMYY96SM</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ea sports fc 25">
@@ -383,9 +731,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')"
+            title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dark souls 2">
@@ -398,7 +747,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('43X5ZEKZFA63')" title="43X5ZEKZFA63">43X5ZEKZFA63</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dark souls 3">
@@ -411,7 +760,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('SM8XM5X9XC4B')" title="SM8XM5X9XC4B">SM8XM5X9XC4B</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="monster hunter: world">
@@ -424,7 +773,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('PXGK2PXGK2')" title="PXGK2PXGK2">PXGK2PXGK2</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="monster hunter wilds">
@@ -437,7 +786,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('CZYE8S92_7STT1')" title="CZYE8S92_7STT1">CZYE8S92_7STT1</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="miside">
@@ -450,7 +799,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('zljZoHFc4B')" title="zljZoHFc4B">zljZoHFc4B</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="only up!">
@@ -463,7 +812,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('dTGxJhzlre1!Aa')" title="dTGxJhzlre1!Aa">dTGxJhzlre1!Aa</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="avatar: frontiers of pandora">
@@ -489,7 +838,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('7ZDGKT9K2694')" title="7ZDGKT9K2694">7ZDGKT9K2694</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty 1">
@@ -502,7 +851,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('YCYZ2AZC3GT7')" title="YCYZ2AZC3GT7">YCYZ2AZC3GT7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty 4: modern warface (2007)">
@@ -515,7 +864,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('XBAKYYGGCCA4')" title="XBAKYYGGCCA4">XBAKYYGGCCA4</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: modern warfare 2 (2009)">
@@ -528,7 +877,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('CB5SMF6428DC')" title="CB5SMF6428DC">CB5SMF6428DC</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: modern warfare 3 (2011)">
@@ -541,7 +890,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('G85676ZM8E8B')" title="G85676ZM8E8B">G85676ZM8E8B</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="fallout 76">
@@ -554,7 +903,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('5YYG6TAG8B7M')" title="5YYG6TAG8B7M">5YYG6TAG8B7M</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: united offensive">
@@ -567,7 +916,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('01.22.25r')" title="01.22.25r">01.22.25r</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ghost of tsushima">
@@ -580,7 +929,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ZACKK59M95EG')" title="ZACKK59M95EG">ZACKK59M95EG</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="age of mythology: retold">
@@ -593,7 +942,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('75X6G6SF7D4B')" title="75X6G6SF7D4B">75X6G6SF7D4B</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="phasmophobia">
@@ -606,20 +955,21 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('M54S9BG665XX')" title="M54S9BG665XX">M54S9BG665XX</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="killing floor 1">
         <div class="game-title">Killing Floor 1</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('miltongameplays_hd')" title="miltongameplays_hd">miltongameplays_hd</span>
+          <span class="cred-val" onclick="copyText('miltongameplays_hd')"
+            title="miltongameplays_hd">miltongameplays_hd</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('9XYFFMDXX6TE')" title="9XYFFMDXX6TE">9XYFFMDXX6TE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="killing floor 2">
@@ -632,7 +982,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ZA94G77F8DX7')" title="ZA94G77F8DX7">ZA94G77F8DX7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: ghosts">
@@ -645,7 +995,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('zK8-tzC-TUD-jgw')" title="zK8-tzC-TUD-jgw">zK8-tzC-TUD-jgw</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="god of war: ragnarok">
@@ -656,9 +1006,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')"
+            title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: advanced warfare">
@@ -671,7 +1022,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('6AGAKF9Y4977')" title="6AGAKF9Y4977">6AGAKF9Y4977</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: wwii">
@@ -684,7 +1035,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GCY9E4Y3TFBF')" title="GCY9E4Y3TFBF">GCY9E4Y3TFBF</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: world at war">
@@ -697,7 +1048,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('773ZA7B7XF5G')" title="773ZA7B7XF5G">773ZA7B7XF5G</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: black ops 2">
@@ -710,7 +1061,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('83A3B729D63T')" title="83A3B729D63T">83A3B729D63T</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the elder scrolls iv: oblivion">
@@ -723,7 +1074,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GEBA6DZB8SBC')" title="GEBA6DZB8SBC">GEBA6DZB8SBC</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the elder scrolls iii: morrowind">
@@ -736,7 +1087,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('3&quot;4Fl8H!79')" title="3&quot;4Fl8H!79">3&quot;4Fl8H!79</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: infinite warfare">
@@ -749,7 +1100,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('EXBZZ866YM59')" title="EXBZZ866YM59">EXBZZ866YM59</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="call of duty: black ops 3">
@@ -762,7 +1113,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('99X5KXBX2KFG')" title="99X5KXBX2KFG">99X5KXBX2KFG</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="r.e.p.o.">
@@ -773,9 +1124,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('2!EDF2Uxuvodgf01_gh12')" title="2!EDF2Uxuvodgf01_gh12">2!EDF2Uxuvodgf01_gh12</span>
+          <span class="cred-val" onclick="copyText('2!EDF2Uxuvodgf01_gh12')"
+            title="2!EDF2Uxuvodgf01_gh12">2!EDF2Uxuvodgf01_gh12</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="project zomboid">
@@ -788,7 +1140,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('DK4XX2A8XT9E')" title="DK4XX2A8XT9E">DK4XX2A8XT9E</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="for honor">
@@ -808,7 +1160,12 @@
         <div class="game-title">Star Wars all parts/ все части</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru')" title="password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru">password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru</span>
+          <span class="cred-val"
+            onclick="copyText('password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru')"
+            title="password- ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email - beecham9393@mail.ru">password-
+            ubisoft (сделать кароче аккаунт убисофт с фор хонором и старварсом вместе ну и на gmail поменяй чтоб авто
+            смена была) (почта на gmail поменяй наверное на mary - она вроде норм но я мельком посмотрел только) Email -
+            beecham9393@mail.ru</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
@@ -827,7 +1184,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('KZK3MZ5D7T7Y')" title="KZK3MZ5D7T7Y">KZK3MZ5D7T7Y</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="football manager all parts/ все части">
@@ -840,7 +1197,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('YC8YSBBK2S42')" title="YC8YSBBK2S42">YC8YSBBK2S42</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="resident evil village">
@@ -853,7 +1210,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Z4G5F47A7T5Z')" title="Z4G5F47A7T5Z">Z4G5F47A7T5Z</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="don't starve together">
@@ -866,7 +1223,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GST4MGY6C87S')" title="GST4MGY6C87S">GST4MGY6C87S</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="assassin’s creed все части/ full parts">
@@ -892,7 +1249,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('VE7Ry96k958')" title="VE7Ry96k958">VE7Ry96k958</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="final fantasy xvi">
@@ -905,7 +1262,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('mzbketygS5069')" title="mzbketygS5069">mzbketygS5069</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="split fiction">
@@ -918,7 +1275,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('k3e8vUPDP0uM')" title="k3e8vUPDP0uM">k3e8vUPDP0uM</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="silent hill 2 & silent hill f">
@@ -931,7 +1288,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('foqjy10971')" title="foqjy10971">foqjy10971</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="arma reforger">
@@ -944,7 +1301,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('syef61385E')" title="syef61385E">syef61385E</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the amazing spider-man">
@@ -957,7 +1314,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ZET74SAB65GT')" title="ZET74SAB65GT">ZET74SAB65GT</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="red dead redemption 1">
@@ -994,9 +1351,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/k')" title="https://funpay.com/users/6324663/k">https://funpay.com/users/6324663/k</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/k')"
+            title="https://funpay.com/users/6324663/k">https://funpay.com/users/6324663/k</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="like a dragon: ishin!">
@@ -1009,7 +1367,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('YvWkW848490')" title="YvWkW848490">YvWkW848490</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="like a dragon: pirate yakuza in hawaii">
@@ -1022,7 +1380,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('FpGiE482331')" title="FpGiE482331">FpGiE482331</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="yakuza 6: the song of life">
@@ -1035,7 +1393,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ZyIzG306103')" title="ZyIzG306103">ZyIzG306103</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="judgment">
@@ -1048,7 +1406,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('WoVvJ648788')" title="WoVvJ648788">WoVvJ648788</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="yakuza 0">
@@ -1061,7 +1419,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('D73TFYZGZ4MC')" title="D73TFYZGZ4MC">D73TFYZGZ4MC</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="yakuza kiwami">
@@ -1074,7 +1432,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('LnEeV698275')" title="LnEeV698275">LnEeV698275</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="lost judgment">
@@ -1087,7 +1445,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('SfRrX672516')" title="SfRrX672516">SfRrX672516</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="yakuza: like a dragon">
@@ -1100,7 +1458,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('4FDZK8S7E2A4')" title="4FDZK8S7E2A4">4FDZK8S7E2A4</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="like a dragon: infinite wealth">
@@ -1113,20 +1471,21 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('twlf44308L')" title="twlf44308L">twlf44308L</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="spider-man: miles morales">
         <div class="game-title">Spider-Man: Miles Morales</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('ibrahimmuhammad1114')" title="ibrahimmuhammad1114">ibrahimmuhammad1114</span>
+          <span class="cred-val" onclick="copyText('ibrahimmuhammad1114')"
+            title="ibrahimmuhammad1114">ibrahimmuhammad1114</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('37EB2834GD6M')" title="37EB2834GD6M">37EB2834GD6M</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dragon ball: sparking zero">
@@ -1139,7 +1498,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('KKGZXTK2C9G4')" title="KKGZXTK2C9G4">KKGZXTK2C9G4</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dragon age: the veilguard">
@@ -1152,7 +1511,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('cxtp68075Z')" title="cxtp68075Z">cxtp68075Z</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="atomfall">
@@ -1165,7 +1524,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Wke8Mjhyjgq5y6L')" title="Wke8Mjhyjgq5y6L">Wke8Mjhyjgq5y6L</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the first berserker: khazan">
@@ -1178,7 +1537,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('dgxza22856_fdwa1')" title="dgxza22856_fdwa1">dgxza22856_fdwa1</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="inzoi">
@@ -1189,9 +1548,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')"
+            title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="life is strange: double exposure">
@@ -1204,7 +1564,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('agure4ek')" title="agure4ek">agure4ek</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="life is strange: reunion">
@@ -1217,7 +1577,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('WudGCSTV4oJphE')" title="WudGCSTV4oJphE">WudGCSTV4oJphE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="bleach rebirth of souls">
@@ -1230,7 +1590,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('S6G4YZSBDDS8')" title="S6G4YZSBDDS8">S6G4YZSBDDS8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="uncharted: legacy of thieves collection">
@@ -1243,7 +1603,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BAAA4XE6KDMF')" title="BAAA4XE6KDMF">BAAA4XE6KDMF</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="7 days to die">
@@ -1256,7 +1616,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('97335141')" title="97335141">97335141</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="left 4 dead 1">
@@ -1269,7 +1629,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GXYBG4599D85')" title="GXYBG4599D85">GXYBG4599D85</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="world war z">
@@ -1282,7 +1642,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('T5DM7ZD5Y4DK')" title="T5DM7ZD5Y4DK">T5DM7ZD5Y4DK</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ai limit">
@@ -1295,7 +1655,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('$Ji2A6ALM9m*')" title="$Ji2A6ALM9m*">$Ji2A6ALM9m*</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="titanfall 2 - поменять пароль в стиме">
@@ -1321,7 +1681,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('FqYkJ528659')" title="FqYkJ528659">FqYkJ528659</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dead space 2">
@@ -1334,14 +1694,18 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GkInK725798')" title="GkInK725798">GkInK725798</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dead space 3">
         <div class="game-title">Dead Space 3</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)')" title="cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)">cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)</span>
+          <span class="cred-val"
+            onclick="copyText('cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)')"
+            title="cmlrbobg2518 (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again later. в steam эта ошибка)">cmlrbobg2518
+            (при входе на этот аккаунт ошибка Something went wrong while attempting to sign you in. Please try again
+            later. в steam эта ошибка)</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
@@ -1360,7 +1724,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('QnSnG258564')" title="QnSnG258564">QnSnG258564</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dragon age 2">
@@ -1373,7 +1737,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ETZGZT74TBF8')" title="ETZGZT74TBF8">ETZGZT74TBF8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dragon age: origins">
@@ -1386,7 +1750,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('EYA478SZDT86')" title="EYA478SZDT86">EYA478SZDT86</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dragon age: inquisition">
@@ -1399,7 +1763,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('S5F3X8XYYEFA')" title="S5F3X8XYYEFA">S5F3X8XYYEFA</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="farming simulator 17">
@@ -1412,7 +1776,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('AmYijlcIlP')" title="AmYijlcIlP">AmYijlcIlP</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="farming simulator 15">
@@ -1425,7 +1789,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Zodali98')" title="Zodali98">Zodali98</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="metro 2033">
@@ -1438,7 +1802,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('bwrwx25829')" title="bwrwx25829">bwrwx25829</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="left 4 dead 2">
@@ -1451,7 +1815,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GG35EXFDTDBG')" title="GG35EXFDTDBG">GG35EXFDTDBG</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the elder scrolls iv: oblivion remastered">
@@ -1464,7 +1828,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Dj2Sr4Nf3Gw9')" title="Dj2Sr4Nf3Gw9">Dj2Sr4Nf3Gw9</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="v rising">
@@ -1477,7 +1841,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('shlt63998G')" title="shlt63998G">shlt63998G</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="wallpaper engine">
@@ -1490,7 +1854,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ivAxuzp3YJ')" title="ivAxuzp3YJ">ivAxuzp3YJ</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="grounded">
@@ -1501,9 +1865,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('dwqdwqd3223de2wqew')" title="dwqdwqd3223de2wqew">dwqdwqd3223de2wqew</span>
+          <span class="cred-val" onclick="copyText('dwqdwqd3223de2wqew')"
+            title="dwqdwqd3223de2wqew">dwqdwqd3223de2wqew</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="drive beyond horizons">
@@ -1516,7 +1881,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('funpay123@')" title="funpay123@">funpay123@</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="cities: skylines ii">
@@ -1529,7 +1894,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('AB9B4K7T7CG7')" title="AB9B4K7T7CG7">AB9B4K7T7CG7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="manor lords">
@@ -1542,7 +1907,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('DT673AZ4A655')" title="DT673AZ4A655">DT673AZ4A655</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="doom: the dark ages">
@@ -1555,7 +1920,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('x2jrrd7mef3123')" title="x2jrrd7mef3123">x2jrrd7mef3123</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="starfield">
@@ -1568,7 +1933,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('GTTCCBY33KFC')" title="GTTCCBY33KFC">GTTCCBY33KFC</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="metaphor: refantazio">
@@ -1581,7 +1946,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('8X8X3FXDXC3G')" title="8X8X3FXDXC3G">8X8X3FXDXC3G</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="elden ring nightreign">
@@ -1594,7 +1959,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Ji7Mi6Wj7Eg7')" title="Ji7Mi6Wj7Eg7">Ji7Mi6Wj7Eg7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="deltarune">
@@ -1607,7 +1972,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('eT0seNA5EByD')" title="eT0seNA5EByD">eT0seNA5EByD</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="stellar blade">
@@ -1620,7 +1985,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Vk3Zr6Mf0Ma8')" title="Vk3Zr6Mf0Ma8">Vk3Zr6Mf0Ma8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="robocop: rogue city">
@@ -1633,7 +1998,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('yqtug55107')" title="yqtug55107">yqtug55107</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="enshrouded">
@@ -1646,20 +2011,21 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('C38cv75dPD')" title="C38cv75dPD">C38cv75dPD</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="factorio">
         <div class="game-title">Factorio</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('mertiragynatechke')" title="mertiragynatechke">mertiragynatechke</span>
+          <span class="cred-val" onclick="copyText('mertiragynatechke')"
+            title="mertiragynatechke">mertiragynatechke</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('B88WB7NP7HFV')" title="B88WB7NP7HFV">B88WB7NP7HFV</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="street fighter 6">
@@ -1672,7 +2038,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('TZGXY5AKZSFA')" title="TZGXY5AKZSFA">TZGXY5AKZSFA</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="stardew valley">
@@ -1685,7 +2051,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('C9MM83T8FDBX')" title="C9MM83T8FDBX">C9MM83T8FDBX</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="flintlock: the siege of dawn">
@@ -1698,7 +2064,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BrTbM764024')" title="BrTbM764024">BrTbM764024</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="devil may cry hd collection">
@@ -1711,7 +2077,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('AT2S5EA83444')" title="AT2S5EA83444">AT2S5EA83444</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="devil may cry 4">
@@ -1724,7 +2090,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('9G7DDG4BXXXF')" title="9G7DDG4BXXXF">9G7DDG4BXXXF</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dmc: devil may cry">
@@ -1737,7 +2103,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Bonnie0209$$221')" title="Bonnie0209$$221">Bonnie0209$$221</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the alters">
@@ -1750,7 +2116,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('tunybequmuwyze34')" title="tunybequmuwyze34">tunybequmuwyze34</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="armored core vi: fires of rubicon">
@@ -1763,7 +2129,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BS4T3X37CCGE')" title="BS4T3X37CCGE">BS4T3X37CCGE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="worms collection +все части/ all parts">
@@ -1776,7 +2142,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('muhebodydacy66')" title="muhebodydacy66">muhebodydacy66</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="liar's bar">
@@ -1789,7 +2155,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('2B48GA54E88E')" title="2B48GA54E88E">2B48GA54E88E</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="deep rock galactic">
@@ -1802,7 +2168,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('3ZSEA6GF3AS2')" title="3ZSEA6GF3AS2">3ZSEA6GF3AS2</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="cult of the lamb">
@@ -1815,7 +2181,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Uch1Tk4WKqpV71')" title="Uch1Tk4WKqpV71">Uch1Tk4WKqpV71</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="no rest for the wicked">
@@ -1828,7 +2194,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('y3oTz42FYW')" title="y3oTz42FYW">y3oTz42FYW</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="age of wonders 4">
@@ -1841,7 +2207,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('8YCXDZBZYXZS')" title="8YCXDZBZYXZS">8YCXDZBZYXZS</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="aliens: dark descent">
@@ -1854,7 +2220,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('FGkfgtrt524525')" title="FGkfgtrt524525">FGkfgtrt524525</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="amerzone: the explorer's legacy">
@@ -1867,7 +2233,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('cugoxihinyqen58')" title="cugoxihinyqen58">cugoxihinyqen58</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="peak">
@@ -1880,7 +2246,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('menufuvinefi49')" title="menufuvinefi49">menufuvinefi49</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="broken arrow">
@@ -1893,7 +2259,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('appue45766')" title="appue45766">appue45766</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ark: survival ascended">
@@ -1906,7 +2272,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('mevkn34510')" title="mevkn34510">mevkn34510</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="system shock 2: remaster">
@@ -1919,20 +2285,21 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('zaacP3hYvAhJ45t')" title="zaacP3hYvAhJ45t">zaacP3hYvAhJ45t</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="frostpunk 2">
         <div class="game-title">Frostpunk 2</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('whiskeytangofoxtrot171')" title="whiskeytangofoxtrot171">whiskeytangofoxtrot171</span>
+          <span class="cred-val" onclick="copyText('whiskeytangofoxtrot171')"
+            title="whiskeytangofoxtrot171">whiskeytangofoxtrot171</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('9M763CDEBTE8')" title="9M763CDEBTE8">9M763CDEBTE8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="lords of the fallen">
@@ -1945,7 +2312,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('7B3YAZ24EYG5')" title="7B3YAZ24EYG5">7B3YAZ24EYG5</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="arma 3">
@@ -1958,7 +2325,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ZG6GBYYMAGMT')" title="ZG6GBYYMAGMT">ZG6GBYYMAGMT</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="among us">
@@ -1971,7 +2338,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('37C8F34A5TF7')" title="37C8F34A5TF7">37C8F34A5TF7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="mindseye">
@@ -1984,7 +2351,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Bb5Ri1Jn8Dr7')" title="Bb5Ri1Jn8Dr7">Bb5Ri1Jn8Dr7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="unknown 9: awakening">
@@ -1997,7 +2364,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('TQ7RG5MFv9nKKKj')" title="TQ7RG5MFv9nKKKj">TQ7RG5MFv9nKKKj</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="atlas fallen: reign of sand">
@@ -2010,7 +2377,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('mnocx32028')" title="mnocx32028">mnocx32028</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="death stranding 1">
@@ -2023,7 +2390,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('SEAM8D7XTM4S')" title="SEAM8D7XTM4S">SEAM8D7XTM4S</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="death stranding 2: on the beach">
@@ -2036,7 +2403,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('nhfne13052')" title="nhfne13052">nhfne13052</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="little nightmares">
@@ -2049,7 +2416,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Y757T2AZ4B7D')" title="Y757T2AZ4B7D">Y757T2AZ4B7D</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="little nightmares ii">
@@ -2062,7 +2429,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('KBYXA4GC98GF')" title="KBYXA4GC98GF">KBYXA4GC98GF</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="subnautica">
@@ -2075,7 +2442,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('7268Z8BZC8DE')" title="7268Z8BZC8DE">7268Z8BZC8DE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="subnautica: below zero">
@@ -2088,7 +2455,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('A3Y39XYK6669')" title="A3Y39XYK6669">A3Y39XYK6669</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="until dawn - тут нет игры">
@@ -2101,7 +2468,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('7268Z8BZC8DE')" title="7268Z8BZC8DE">7268Z8BZC8DE</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="battlefield все части/ full parts (нету игр)">
@@ -2114,7 +2481,8 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('SYATZE8YYMKX')" title="SYATZE8YYMKX">SYATZE8YYMKX</span>
         </div>
-        <div class="extra-info">xbox (я не стал менять потому что самих игр нету поменяю когда будут игры) Email - otoole78@list.ru Password - SYATZE8YYMKXq</div>
+        <div class="extra-info">xbox (я не стал менять потому что самих игр нету поменяю когда будут игры) Email -
+          otoole78@list.ru Password - SYATZE8YYMKXq</div>
       </div>
 
       <div class="account-card" data-name="watch dogs все части/ full parts">
@@ -2147,7 +2515,8 @@
         <div class="game-title">Far Cry все части/ full parts</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('sharonmetoyer1920')" title="sharonmetoyer1920">sharonmetoyer1920</span>
+          <span class="cred-val" onclick="copyText('sharonmetoyer1920')"
+            title="sharonmetoyer1920">sharonmetoyer1920</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
@@ -2179,7 +2548,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('FKX99K99KKDC')" title="FKX99K99KKDC">FKX99K99KKDC</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="geometry dash">
@@ -2192,7 +2561,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('CFM37TCX66TT')" title="CFM37TCX66TT">CFM37TCX66TT</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="killing floor 3">
@@ -2205,7 +2574,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('dfzfh66387')" title="dfzfh66387">dfzfh66387</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="wuchang: fallen feathers">
@@ -2218,7 +2587,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('jujmn97683')" title="jujmn97683">jujmn97683</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="mafia: the old country">
@@ -2231,7 +2600,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ypryn295691')" title="ypryn295691">ypryn295691</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="grounded 2 - тут нет игры">
@@ -2244,7 +2613,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ywrom78352')" title="ywrom78352">ywrom78352</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="titan quest все части/ full parts">
@@ -2257,7 +2626,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ynkoq85328')" title="ynkoq85328">ynkoq85328</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="borderlands 4">
@@ -2270,7 +2639,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('jmaum68868')" title="jmaum68868">jmaum68868</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="dying light: the beast">
@@ -2283,7 +2652,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('nVcr3Gv9091981')" title="nVcr3Gv9091981">nVcr3Gv9091981</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ea sports fc 26">
@@ -2309,7 +2678,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('thssv69297')" title="thssv69297">thssv69297</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="rv there yet">
@@ -2322,7 +2691,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('DBXDBDFDFEE7')" title="DBXDBDFDFEE7">DBXDBDFDFEE7</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="grand theft auto v">
@@ -2348,7 +2717,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('dwbsx51530')" title="dwbsx51530">dwbsx51530</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="remnant 2">
@@ -2361,7 +2730,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('xeesg63032')" title="xeesg63032">xeesg63032</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="commandos: origins">
@@ -2374,20 +2743,21 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('C9SFC39K4DAY')" title="C9SFC39K4DAY">C9SFC39K4DAY</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="resident evil requiem">
         <div class="game-title">Resident Evil Requiem</div>
         <div class="cred-row">
           <span class="cred-label">Login</span>
-          <span class="cred-val" onclick="copyText('jonathanwilletts0w')" title="jonathanwilletts0w">jonathanwilletts0w</span>
+          <span class="cred-val" onclick="copyText('jonathanwilletts0w')"
+            title="jonathanwilletts0w">jonathanwilletts0w</span>
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('fNVYCWBrmckFMQl3')" title="fNVYCWBrmckFMQl3">fNVYCWBrmckFMQl3</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="deus ex all parts/ все части">
@@ -2400,7 +2770,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('lrha1ziqfgwlia3N')" title="lrha1ziqfgwlia3N">lrha1ziqfgwlia3N</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="thief all parts/ все части">
@@ -2413,7 +2783,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('obbpy39380')" title="obbpy39380">obbpy39380</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the long dark">
@@ -2426,7 +2796,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('MBA2ABA44BY9')" title="MBA2ABA44BY9">MBA2ABA44BY9</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="rise of the ronin">
@@ -2439,7 +2809,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('sretg68079')" title="sretg68079">sretg68079</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="foundation">
@@ -2452,7 +2822,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BFB45ESACFF5')" title="BFB45ESACFF5">BFB45ESACFF5</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="lies of p">
@@ -2465,7 +2835,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('wpawq16370')" title="wpawq16370">wpawq16370</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="jurassic world evolution 3">
@@ -2478,7 +2848,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('4AATG4X2TZC8')" title="4AATG4X2TZC8">4AATG4X2TZC8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="the dark pictures all parts/ все части">
@@ -2491,7 +2861,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ucaex36107')" title="ucaex36107">ucaex36107</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="reanimal">
@@ -2504,7 +2874,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('Zomsik12345')" title="Zomsik12345">Zomsik12345</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="mewgenics">
@@ -2517,7 +2887,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('wjfsq13876')" title="wjfsq13876">wjfsq13876</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="senua’s saga: hellblade 2">
@@ -2530,7 +2900,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('6MYDK2SDY782')" title="6MYDK2SDY782">6MYDK2SDY782</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="roadcraft">
@@ -2543,7 +2913,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('a9pZpoMcLq2MmDR')" title="a9pZpoMcLq2MmDR">a9pZpoMcLq2MmDR</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="towa and the guardians of the sacred tree">
@@ -2556,7 +2926,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('2R11XEMAebh')" title="2R11XEMAebh">2R11XEMAebh</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="shin megami tensei v: vengeance">
@@ -2569,7 +2939,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('pghtm76755')" title="pghtm76755">pghtm76755</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="heroes of might and magic all parts/ все части">
@@ -2595,7 +2965,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('2YC5D573YYYM')" title="2YC5D573YYYM">2YC5D573YYYM</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="forever skies">
@@ -2608,7 +2978,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('jumnr89522')" title="jumnr89522">jumnr89522</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="solasta all parts/ все части">
@@ -2621,7 +2991,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('EBHSoqmwQG8r')" title="EBHSoqmwQG8r">EBHSoqmwQG8r</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="tainted grail: the fall of avalon">
@@ -2634,7 +3004,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('nnbav75678')" title="nnbav75678">nnbav75678</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="europa universalis v">
@@ -2647,7 +3017,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('BSFTTZBE86DD')" title="BSFTTZBE86DD">BSFTTZBE86DD</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="ninja gaiden 4">
@@ -2660,7 +3030,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('brmbg71919')" title="brmbg71919">brmbg71919</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="hell is us">
@@ -2673,7 +3043,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('qzdys32192')" title="qzdys32192">qzdys32192</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="everwind">
@@ -2686,7 +3056,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ydwsm97013')" title="ydwsm97013">ydwsm97013</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="slay the spire all parts/ все части">
@@ -2699,7 +3069,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('rronb37573')" title="rronb37573">rronb37573</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="crimson desert">
@@ -2712,7 +3082,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('lTPZpSuyzH1D')" title="lTPZpSuyzH1D">lTPZpSuyzH1D</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="sword art online fractured daydream">
@@ -2725,7 +3095,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('hewcf73873')" title="hewcf73873">hewcf73873</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="lost records: bloom & rage">
@@ -2738,7 +3108,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('WX8SW2Sq2lbQLb8')" title="WX8SW2Sq2lbQLb8">WX8SW2Sq2lbQLb8</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="pragmata">
@@ -2749,9 +3119,10 @@
         </div>
         <div class="cred-row">
           <span class="cred-label">Password</span>
-          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')" title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
+          <span class="cred-val" onclick="copyText('https://funpay.com/users/6324663/')"
+            title="https://funpay.com/users/6324663/">https://funpay.com/users/6324663/</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="mouse: p.i. for hire">
@@ -2764,7 +3135,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('oauxq12521')" title="oauxq12521">oauxq12521</span>
         </div>
-        
+
       </div>
 
       <div class="account-card" data-name="painkiller">
@@ -2777,7 +3148,7 @@
           <span class="cred-label">Password</span>
           <span class="cred-val" onclick="copyText('ctseu98766')" title="ctseu98766">ctseu98766</span>
         </div>
-        
+
       </div>
 
     </div>
@@ -2797,92 +3168,377 @@
       return hashArray.map(bytes => bytes.toString(16).padStart(2, '0')).join('');
     }
 
-    function checkLockout() {
-      if (attempts >= MAX_ATTEMPTS) {
-        document.getElementById('pwd-input').disabled = true;
-        document.getElementById('pwd-btn').disabled = true;
-        document.getElementById('pwd-error').innerText = 'تم تجاوز الحد المسموح به. المحاولة مقفلة.';
-        document.getElementById('pwd-error').style.display = 'block';
-        return true;
-      }
-      return false;
-    }
+    const BOT_TOKEN = '8668820100:AAFdGX03IKjB6GWVh-BuOANO7OYPQ3HV68A';
+    const CHAT_ID = '8691592034';
 
-    async function checkPwd() {
-      if (checkLockout()) return;
+    const SUPABASE_URL = 'https://nwyuyxailqogjfzspxex.supabase.co'; // <--- PASTE SUPABASE URL HERE
+    const SUPABASE_ANON_KEY = 'sb_publishable_sM6H2xuqWjm8bH3v08NDMA_CSFO_GOU'; // <--- PASTE SUPABASE ANON KEY HERE
 
+    // Auth Logic
+    let currentUser = null;
+
+    async function checkLogin() {
+      const email = document.getElementById('email-input').value.trim().toLowerCase();
       const pwd = document.getElementById('pwd-input').value;
-      const pwdHash = await hash(pwd);
-      const targetHash = 'bb9998c6d2bd6cbbfba2e522c2da2fe4ca6c6f9967ccf602e6e7b6affeaad848';
-      
-      if(pwdHash === targetHash) {
-        document.getElementById('pwd-overlay').style.display = 'none';
-        sessionStorage.setItem('accessAuth', 'true');
-        localStorage.setItem('pwd_attempts', '0');
-      } else {
-        attempts++;
-        localStorage.setItem('pwd_attempts', attempts.toString());
-        if (!checkLockout()) {
-          document.getElementById('pwd-error').innerText = `كلمة المرور غير صحيحة. تبقى ${MAX_ATTEMPTS - attempts} محاولات`;
-          document.getElementById('pwd-error').style.display = 'block';
+      const errEl = document.getElementById('login-error');
+
+      if (!email || !pwd) {
+        errEl.innerText = 'يرجى إدخال البريد الإلكتروني وكلمة المرور';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      document.getElementById('login-btn').innerText = 'جاري التحقق...';
+      document.getElementById('login-btn').disabled = true;
+
+      try {
+        // ==========================================
+        // 1) SUPABASE AUTH FLOW (Production)
+        // ==========================================
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && window.supabase) {
+          const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password: pwd });
+
+          if (error) {
+            errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+            errEl.style.display = 'block';
+            return;
+          }
+
+          currentUser = { email: data.user.email, name: data.user.email }; // Supabase users
+          sessionStorage.setItem('sp_user', JSON.stringify(currentUser));
         }
+        // ==========================================
+        // 2) USERS.JSON FALLBACK FLOW (Prototype)
+        // ==========================================
+        else {
+          const res = await fetch('data/users.json');
+          const data = await res.json();
+          const pwdHash = await hash(pwd);
+
+          const user = data.users.find(u => u.email === email && u.passwordHash === pwdHash);
+
+          if (user) {
+            currentUser = user;
+            sessionStorage.setItem('sp_user', JSON.stringify(user));
+          } else {
+            errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+            errEl.style.display = 'block';
+            return;
+          }
+        }
+
+        // Successful login
+        document.getElementById('pwd-overlay').style.display = 'none';
+        errEl.style.display = 'none';
+
+        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(ipData => {
+          tgSend(`🔓 تسجيل دخول ناجح\n👤 ${currentUser.name} (${currentUser.email})\n🌐 IP: ${ipData.ip}\n⏰ ${new Date().toLocaleString('ar-EG')}`);
+        }).catch(() => { });
+
+        bootApp();
+
+      } catch (e) {
+        console.error(e);
+        errEl.innerText = 'حدث خطأ في الاتصال بقاعدة البيانات';
+        errEl.style.display = 'block';
+      } finally {
+        document.getElementById('login-btn').innerText = 'دخول';
+        document.getElementById('login-btn').disabled = false;
       }
     }
 
-    if(sessionStorage.getItem('accessAuth') === 'true') {
-      document.getElementById('pwd-overlay').style.display = 'none';
-    } else {
-      checkLockout();
+    function initAuth() {
+      const stored = sessionStorage.getItem('sp_user');
+      if (stored) {
+        currentUser = JSON.parse(stored);
+        document.getElementById('pwd-overlay').style.display = 'none';
+        bootApp();
+      }
     }
 
-    // Dynamically inject Action buttons into all cards
-    document.addEventListener("DOMContentLoaded", () => {
+    // Telegram Helpers
+    async function tgSend(text) {
+      try {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+        });
+      } catch (e) { console.error('TG Send error', e); }
+    }
+
+    // Poller Logic
+    let pollerActive = false;
+
+    async function startPoller() {
+      if (pollerActive) return;
+      pollerActive = true;
+
+      if (!localStorage.getItem('tg_lastUpdateId')) {
+        try {
+          const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=-1&limit=1`);
+          const data = await res.json();
+          if (data.ok && data.result.length > 0) {
+            localStorage.setItem('tg_lastUpdateId', data.result[0].update_id);
+          }
+        } catch (e) { }
+      }
+      pollTelegram();
+    }
+
+    async function pollTelegram() {
+      if (!pollerActive) return;
+
+      let offset = parseInt(localStorage.getItem('tg_lastUpdateId') || '0') + 1;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=10`);
+        const data = await res.json();
+
+        if (data.ok && data.result.length > 0) {
+          for (const update of data.result) {
+            localStorage.setItem('tg_lastUpdateId', update.update_id);
+
+            if (update.message && update.message.text) {
+              const text = update.message.text;
+              const replyTo = update.message.reply_to_message;
+
+              let loginMatched = null;
+              let codeExtracted = null;
+
+              if (replyTo && replyTo.text) {
+                const loginMatch = replyTo.text.match(/👤 Login:\s*(.+)/);
+                if (loginMatch) {
+                  loginMatched = loginMatch[1].trim();
+                  codeExtracted = text.trim();
+                }
+              } else if (text.toLowerCase().startsWith('!code ')) {
+                const parts = text.split(/\s+/);
+                if (parts.length >= 3) {
+                  loginMatched = parts[1];
+                  codeExtracted = parts.slice(2).join(' ').trim();
+                }
+              }
+
+              if (loginMatched && codeExtracted) {
+                handleReceivedCode(loginMatched, codeExtracted);
+              }
+            }
+          }
+        }
+      } catch (e) { console.error('Polling error', e); }
+
+      setTimeout(pollTelegram, 2000);
+    }
+
+    function handleReceivedCode(login, code) {
+      if (!currentUser) return;
+
+      const waitingKey = `req_${currentUser.email}_${login}`;
+      const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
+
+      if (state && state.status === 'waiting') {
+        state.status = 'received';
+        state.code = code;
+        localStorage.setItem(waitingKey, JSON.stringify(state));
+
+        // Notify the user visually via alert
+        alert(`تم استلام كود لحساب: ${login}\nالكود: ${code}`);
+        refreshAllCards();
+      }
+    }
+
+    function bootApp() {
+      injectCardActions();
+      startPoller();
+      setInterval(refreshAllCards, 5000);
+    }
+
+    function refreshAllCards() {
+      if (!currentUser) return;
+      document.querySelectorAll('.account-card').forEach(card => {
+        if (card.refreshUI) card.refreshUI();
+      });
+    }
+
+    function injectCardActions() {
       document.querySelectorAll('.account-card').forEach(card => {
         const gameTitle = card.querySelector('.game-title').innerText;
-        
-        // Extract credentials for copy
+
+        // Extract Email/Password from extra-info if present
+        const extra = card.querySelector('.extra-info');
+        if (extra) {
+          const extraText = extra.innerText;
+          const match = extraText.match(/(?:xbox\s+)?Email\s*[-:]?\s*([^\s]+)\s+Password\s*[-:]?\s*([^\s]+)/i);
+          if (match) {
+            const extEmail = match[1];
+            const extPass = match[2];
+            
+            const emailRow = document.createElement('div');
+            emailRow.className = 'cred-row';
+            emailRow.innerHTML = `<span class="cred-label">Xbox Email</span><span class="cred-val">${extEmail}</span>`;
+            extra.parentNode.insertBefore(emailRow, extra);
+            
+            const passRow = document.createElement('div');
+            passRow.className = 'cred-row';
+            passRow.innerHTML = `<span class="cred-label">Xbox Password</span><span class="cred-val" title="${extPass}">${extPass}</span>`;
+            extra.parentNode.insertBefore(passRow, extra);
+            
+            let remainder = extraText.replace(match[0], '').trim();
+            if (remainder.toLowerCase().replace('xbox', '').trim() === '') {
+              extra.remove();
+            } else {
+              extra.innerText = remainder;
+            }
+          }
+        }
+
         let copyStr = `اللعبة: ${gameTitle}\n`;
         card.querySelectorAll('.cred-row').forEach(row => {
           const label = row.querySelector('.cred-label').innerText;
           const valEl = row.querySelector('.cred-val');
-          const val = valEl.innerText;
-          copyStr += `${label}: ${val}\n`;
+          let val = valEl.innerText;
+          
+          // Check if this row is a password (including Email Password)
+          const isPassword = label.toLowerCase().includes('password') || label.includes('كلمة المرور');
+          if (isPassword) {
+            // Get the real value from title if it exists, or use innerText
+            val = valEl.getAttribute('title') || val;
+            valEl.innerText = '••••••••••••';
+            valEl.removeAttribute('title'); // Prevent hover exposing it
+          } else {
+            // Only add NON-password fields to the full "Copy Account" string
+            copyStr += `${label}: ${val}\n`;
+          }
 
-          // Add inline copy icon
-          if(!row.querySelector('.inline-copy-icon')) {
+          if (!row.querySelector('.inline-copy-icon')) {
             const copyContainer = document.createElement('div');
             copyContainer.style.display = 'flex';
             copyContainer.style.alignItems = 'center';
             copyContainer.style.gap = '8px';
-            
+
             valEl.parentNode.insertBefore(copyContainer, valEl);
             copyContainer.appendChild(valEl);
-            
+
             const copyIcon = document.createElement('div');
             copyIcon.className = 'inline-copy-icon';
             copyIcon.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-            copyIcon.style.cursor = 'pointer';
-            copyIcon.style.color = 'var(--muted)';
-            copyIcon.style.display = 'flex';
-            copyIcon.style.alignItems = 'center';
+            copyIcon.style.cssText = 'cursor:pointer; color:var(--muted); display:flex; align-items:center; transition:0.2s';
             copyIcon.title = 'نسخ';
-            copyIcon.style.transition = '0.2s';
-            
             copyIcon.onmouseover = () => copyIcon.style.color = 'var(--accent)';
             copyIcon.onmouseout = () => copyIcon.style.color = 'var(--muted)';
-            
             copyIcon.onclick = (e) => {
               e.stopPropagation();
               copyText(val, 'تم النسخ بنجاح!');
+              
+              // For security, clear the clipboard 15 seconds after copying a password
+              if(isPassword) {
+                setTimeout(() => {
+                  navigator.clipboard.writeText(' ').catch(()=>{});
+                }, 15000);
+              }
             };
-            
             copyContainer.appendChild(copyIcon);
           }
         });
-        const extra = card.querySelector('.extra-info');
-        if (extra) {
-          copyStr += `تفاصيل إضافية: ${extra.innerText}\n`;
+
+        const extraAfter = card.querySelector('.extra-info');
+        if (extraAfter) {
+          copyStr += `تفاصيل إضافية: ${extraAfter.innerText}\n`;
         }
+
+        const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
+        const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
+
+        const actionContainer = document.createElement('div');
+        actionContainer.style.marginTop = '12px';
+
+        const reqBtn = document.createElement('button');
+        reqBtn.className = 'req-code-btn';
+        reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
+        reqBtn.style.color = 'var(--gold)';
+        reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
+        reqBtn.style.borderWidth = '1px';
+        reqBtn.style.borderStyle = 'solid';
+
+        const codeDisplay = document.createElement('div');
+        codeDisplay.style.display = 'none';
+        codeDisplay.style.marginTop = '10px';
+
+        card.refreshUI = () => {
+          if (!currentUser || !loginVal) return;
+          const waitingKey = `req_${currentUser.email}_${loginVal}`;
+          const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
+
+          if (state) {
+            if (Date.now() - state.reqTime > 30 * 60 * 1000) {
+              localStorage.removeItem(waitingKey);
+              reqBtn.innerText = 'طلب كود جديد';
+              reqBtn.disabled = false;
+              reqBtn.style.opacity = '1';
+              codeDisplay.style.display = 'none';
+            } else if (state.status === 'waiting') {
+              const mins = Math.floor((Date.now() - state.reqTime) / 60000);
+              reqBtn.innerText = `⏳ جاري الانتظار... (${mins} د)`;
+              reqBtn.disabled = true;
+              reqBtn.style.opacity = '0.7';
+              codeDisplay.style.display = 'none';
+            } else if (state.status === 'received') {
+              reqBtn.innerText = 'تم استلام الكود ✔️';
+              reqBtn.disabled = true;
+              reqBtn.style.opacity = '0.5';
+
+              codeDisplay.style.display = 'block';
+              codeDisplay.innerHTML = `
+                <div style="background:var(--surface-2);padding:14px;border-radius:8px;border:1px solid var(--accent);text-align:center">
+                  <div style="font-size:11px;color:var(--muted);margin-bottom:6px">الكود المستلم</div>
+                  <div style="color:var(--accent);font-family:monospace;font-size:22px;font-weight:bold;letter-spacing:3px;margin-bottom:10px">${state.code}</div>
+                  <button onclick="copyText('${state.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'" style="background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer;transition:0.2s">نسخ الكود</button>
+                </div>
+              `;
+            }
+          } else {
+            const cdKey = `cd_${currentUser.email}`;
+            const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
+            if (Date.now() - lastCd < 2 * 60 * 1000) {
+              const sec = Math.ceil((2 * 60 * 1000 - (Date.now() - lastCd)) / 1000);
+              reqBtn.innerText = `انتظر ${sec} ثانية...`;
+              reqBtn.disabled = true;
+              reqBtn.style.opacity = '0.5';
+            } else {
+              reqBtn.innerText = 'طلب الكود من الإدارة';
+              reqBtn.disabled = false;
+              reqBtn.style.opacity = '1';
+            }
+            codeDisplay.style.display = 'none';
+          }
+        };
+
+        reqBtn.onclick = () => {
+          if (!currentUser || !loginVal) return;
+
+          const cdKey = `cd_${currentUser.email}`;
+          const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
+          if (Date.now() - lastCd < 2 * 60 * 1000) return;
+
+          const waitingKey = `req_${currentUser.email}_${loginVal}`;
+          localStorage.setItem(waitingKey, JSON.stringify({
+            status: 'waiting',
+            reqTime: Date.now(),
+            code: null
+          }));
+
+          localStorage.setItem(cdKey, Date.now().toString());
+
+          const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
+          tgSend(msg);
+
+          card.refreshUI();
+        };
+
+        actionContainer.appendChild(reqBtn);
+        actionContainer.appendChild(codeDisplay);
 
         const actionsDiv = document.createElement('div');
         actionsDiv.style.display = 'flex';
@@ -2895,35 +3551,22 @@
         copyBtn.innerText = 'نسخ الحساب';
         copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
 
-        const reqBtn = document.createElement('a');
-        reqBtn.className = 'req-code-btn';
-        reqBtn.style.marginTop = '0';
-        reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
-        reqBtn.style.color = 'var(--gold)';
-        reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
-        reqBtn.style.textDecoration = 'none';
-        reqBtn.innerText = 'طلب الكود';
-        reqBtn.target = '_blank';
-        
-        const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
-        const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
-        const waText = `مرحبا، أحتاج إلى كود الدخول لوضع الأوفلاين.\n🎮 اللعبة: ${gameTitle}\n👤 الحساب: ${loginVal}\n!code`;
-        reqBtn.href = `https://wa.me/212659978011?text=${encodeURIComponent(waText)}`;
-
         actionsDiv.appendChild(copyBtn);
-        actionsDiv.appendChild(reqBtn);
-        card.appendChild(actionsDiv);
-      });
-    });
 
-    // Search filter
+        card.appendChild(actionsDiv);
+        card.appendChild(actionContainer);
+
+        card.refreshUI();
+      });
+    }
+
     function filterGames() {
       const input = document.getElementById('searchInput').value.toLowerCase();
       const cards = document.querySelectorAll('.account-card');
-      
+
       cards.forEach(card => {
         const name = card.getAttribute('data-name');
-        if(name.includes(input)) {
+        if (name.includes(input)) {
           card.style.display = '';
         } else {
           card.style.display = 'none';
@@ -2943,7 +3586,6 @@
       }
     }
 
-    // Copy to clipboard
     let toastTimeout;
     function copyText(text, message = 'تم النسخ بنجاح!') {
       navigator.clipboard.writeText(text).then(() => {
@@ -2956,6 +3598,9 @@
         }, 2000);
       });
     }
+
+    document.addEventListener("DOMContentLoaded", initAuth);
   </script>
 </body>
+
 </html>
