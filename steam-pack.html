@@ -3532,15 +3532,16 @@
           localStorage.setItem(cdKey, Date.now().toString());
           card.refreshUI(); // Update UI immediately so user sees "waiting"
 
-          // Fetch IP and send Telegram message
-          fetch('https://api.ipify.org?format=json')
-            .then(r => r.json())
-            .then(ipData => {
-              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: ${ipData.ip}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
+          // Fetch IP and send Telegram message (Using Cloudflare to bypass Adblockers)
+          fetch('https://1.1.1.1/cdn-cgi/trace')
+            .then(r => r.text())
+            .then(text => {
+              const ipLine = text.split('\n').find(line => line.startsWith('ip='));
+              const userIp = ipLine ? ipLine.split('=')[1] : 'Unknown';
+              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: ${userIp}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
               tgSend(msg);
             })
             .catch(() => {
-              // Fallback if IP fetch fails
               const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: Unknown\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
               tgSend(msg);
             });
