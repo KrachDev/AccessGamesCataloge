@@ -3530,11 +3530,20 @@
           }));
 
           localStorage.setItem(cdKey, Date.now().toString());
+          card.refreshUI(); // Update UI immediately so user sees "waiting"
 
-          const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
-          tgSend(msg);
-
-          card.refreshUI();
+          // Fetch IP and send Telegram message
+          fetch('https://api.ipify.org?format=json')
+            .then(r => r.json())
+            .then(ipData => {
+              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: ${ipData.ip}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
+              tgSend(msg);
+            })
+            .catch(() => {
+              // Fallback if IP fetch fails
+              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: Unknown\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
+              tgSend(msg);
+            });
         };
 
         actionContainer.appendChild(reqBtn);
