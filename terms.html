@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>شروط الخدمة — AccessGames</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Cairo:wght@400;600;700;900&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #03070c;
       --surface: #0a1120;
       --surface-2: #111d2e;
       --accent: #00d9ff;
-      --accent-dim: rgba(0,217,255,0.12);
+      --accent-dim: rgba(0, 217, 255, 0.12);
       --gold: #f5c842;
       --red: #ef4444;
-      --red-dim: rgba(239,68,68,0.08);
+      --red-dim: rgba(239, 68, 68, 0.08);
       --text: #f0f4f8;
       --muted: #6b8096;
-      --border: rgba(255,255,255,0.07);
-      --border-accent: rgba(0,217,255,0.25);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-accent: rgba(0, 217, 255, 0.25);
       --radius: 14px;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -35,194 +43,567 @@
     }
 
     .bg-layer {
-      position: fixed; inset: 0; z-index: -1;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,60,120,0.55) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0,40,80,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 60, 120, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(0, 40, 80, 0.3) 0%, transparent 60%),
         #03070c;
     }
+
     .bg-grid {
-      position: fixed; inset: 0; z-index: -1; opacity: 0.025;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.025;
       background-image: linear-gradient(var(--accent) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
       background-size: 60px 60px;
     }
 
-    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
     /* ── Header ── */
     header {
-      padding: 20px 0; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
       backdrop-filter: blur(18px) saturate(1.4);
-      background: rgba(3,7,12,0.82);
+      background: rgba(3, 7, 12, 0.82);
     }
-    .header-row { display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
     .brand-icon {
-      width: 42px; height: 42px;
+      width: 42px;
+      height: 42px;
       background: linear-gradient(135deg, var(--accent), #006fa6);
-      border-radius: 11px; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 24px rgba(0,217,255,0.35);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.35);
     }
-    .brand-text { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; }
-    .brand-text span { color: var(--accent); }
-    .header-nav { display: flex; gap: 28px; }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .brand-text span {
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 28px;
+    }
+
     .nav-link {
-      color: var(--muted); text-decoration: none; font-weight: 700; font-size: 14px;
-      transition: color 0.2s; position: relative; padding-bottom: 4px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 4px;
     }
-    .nav-link:hover { color: #fff; }
-    .nav-link.active { color: var(--accent); }
+
+    .nav-link:hover {
+      color: #fff;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+    }
+
     .nav-link.active::after {
-      content: ''; position: absolute; bottom: 0; right: 0; left: 0; height: 2px;
-      background: var(--accent); border-radius: 2px;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
     }
 
     /* ── Hero ── */
-    .page-hero { text-align: center; padding: 64px 0 48px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent-dim); border: 1px solid var(--border-accent);
-      padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 700;
-      color: var(--accent); margin-bottom: 20px;
+    .page-hero {
+      text-align: center;
+      padding: 64px 0 48px;
     }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
     .page-hero h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(28px, 5vw, 42px); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 14px;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
       background: linear-gradient(135deg, #ffffff 30%, var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .page-hero p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    .page-hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
 
     /* ── Last updated ── */
     .last-updated {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      color: var(--muted); font-size: 13px; margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 48px;
     }
-    .last-updated span { color: var(--accent); font-weight: 700; }
+
+    .last-updated span {
+      color: var(--accent);
+      font-weight: 700;
+    }
 
     /* ── Section card ── */
     .terms-section {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); margin-bottom: 16px; overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      overflow: hidden;
     }
+
     .terms-section-header {
-      display: flex; align-items: center; gap: 14px;
-      padding: 22px 28px; border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
       border-right: 3px solid var(--accent);
     }
-    .terms-section-header.red { border-right-color: var(--red); }
-    .terms-section-header.gold { border-right-color: var(--gold); }
-    .terms-section-header.green { border-right-color: #00e5a0; }
-    .section-icon { font-size: 22px; flex-shrink: 0; }
-    .section-title { font-size: 18px; font-weight: 900; }
-    .terms-section-body { padding: 24px 28px; }
+
+    .terms-section-header.red {
+      border-right-color: var(--red);
+    }
+
+    .terms-section-header.gold {
+      border-right-color: var(--gold);
+    }
+
+    .terms-section-header.green {
+      border-right-color: #00e5a0;
+    }
+
+    .section-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .terms-section-body {
+      padding: 24px 28px;
+    }
 
     /* ── Body text ── */
-    .body-text { color: var(--muted); font-size: 15px; line-height: 1.85; margin-bottom: 16px; }
-    .body-text:last-child { margin-bottom: 0; }
-    .body-text strong { color: var(--text); }
+    .body-text {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .body-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .body-text strong {
+      color: var(--text);
+    }
 
     /* ── Rule list ── */
-    .rule-list { list-style: none; }
+    .rule-list {
+      list-style: none;
+    }
+
     .rule-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 11px 0; border-bottom: 1px solid var(--border);
-      color: var(--muted); font-size: 15px; line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
     }
-    .rule-list li:last-child { border-bottom: none; padding-bottom: 0; }
-    .rule-list li strong { color: var(--text); }
+
+    .rule-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .rule-list li strong {
+      color: var(--text);
+    }
+
     .rule-dot {
-      width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 2px;
-      background: var(--accent-dim); border: 1px solid var(--border-accent);
-      display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--accent);
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--accent);
     }
-    .rule-dot.red { background: var(--red-dim); border-color: rgba(239,68,68,0.3); color: var(--red); }
-    .rule-dot.gold { background: rgba(245,200,66,0.1); border-color: rgba(245,200,66,0.3); color: var(--gold); }
-    .rule-dot.green { background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.3); color: #00e5a0; }
+
+    .rule-dot.red {
+      background: var(--red-dim);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--red);
+    }
+
+    .rule-dot.gold {
+      background: rgba(245, 200, 66, 0.1);
+      border-color: rgba(245, 200, 66, 0.3);
+      color: var(--gold);
+    }
+
+    .rule-dot.green {
+      background: rgba(0, 229, 160, 0.1);
+      border-color: rgba(0, 229, 160, 0.3);
+      color: #00e5a0;
+    }
 
     /* ── Alert / notice boxes ── */
     .alert {
-      display: flex; gap: 12px; padding: 16px 18px; border-radius: 10px;
-      font-size: 14px; margin-top: 18px; line-height: 1.7;
+      display: flex;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-top: 18px;
+      line-height: 1.7;
     }
-    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-    .alert.red { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.2); color: #f87171; }
-    .alert.red strong { color: var(--red); }
-    .alert.gold { background: rgba(245,200,66,0.07); border: 1px solid rgba(245,200,66,0.25); color: #c9a82e; }
-    .alert.gold strong { color: var(--gold); }
-    .alert.blue { background: var(--accent-dim); border: 1px solid var(--border-accent); color: var(--accent); }
-    .alert.blue strong { color: #fff; }
+
+    .alert-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .alert.red {
+      background: var(--red-dim);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .alert.red strong {
+      color: var(--red);
+    }
+
+    .alert.gold {
+      background: rgba(245, 200, 66, 0.07);
+      border: 1px solid rgba(245, 200, 66, 0.25);
+      color: #c9a82e;
+    }
+
+    .alert.gold strong {
+      color: var(--gold);
+    }
+
+    .alert.blue {
+      background: var(--accent-dim);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+    }
+
+    .alert.blue strong {
+      color: #fff;
+    }
 
     /* ── Platform tags ── */
-    .platform-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .platform-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
     .ptag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--surface-2); border: 1px solid var(--border);
-      padding: 5px 13px; border-radius: 100px; font-size: 13px; font-weight: 700; color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
     }
 
     /* ── Summary table ── */
-    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
     .summary-card {
-      background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 16px 18px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
     }
-    .summary-card.yes { border-color: rgba(0,229,160,0.3); background: rgba(0,229,160,0.05); }
-    .summary-card.no { border-color: rgba(239,68,68,0.25); background: var(--red-dim); }
+
+    .summary-card.yes {
+      border-color: rgba(0, 229, 160, 0.3);
+      background: rgba(0, 229, 160, 0.05);
+    }
+
+    .summary-card.no {
+      border-color: rgba(239, 68, 68, 0.25);
+      background: var(--red-dim);
+    }
+
     .summary-card-label {
-      font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 11px;
-      letter-spacing: 1px; margin-bottom: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
-    .summary-card.yes .summary-card-label { color: #00e5a0; }
-    .summary-card.no .summary-card-label { color: var(--red); }
-    .summary-card-title { font-weight: 800; font-size: 14px; margin-bottom: 6px; }
-    .summary-card-desc { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    .summary-card.yes .summary-card-label {
+      color: #00e5a0;
+    }
+
+    .summary-card.no .summary-card-label {
+      color: var(--red);
+    }
+
+    .summary-card-title {
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .summary-card-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
 
     /* ── Contact CTA ── */
     .contact-cta {
-      text-align: center; padding: 52px 0 72px;
-      border-top: 1px solid var(--border); margin-top: 48px;
+      text-align: center;
+      padding: 52px 0 72px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
     }
-    .contact-cta h3 { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 10px; }
-    .contact-cta p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+
+    .contact-cta h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .contact-cta p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
     .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 26px; border-radius: 100px;
-      font-family: 'Cairo', sans-serif; font-weight: 800; font-size: 14px;
-      cursor: pointer; border: none; text-decoration: none; transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      border-radius: 100px;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.2s;
     }
+
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #0099cc); color: #000;
-      box-shadow: 0 4px 20px rgba(0,217,255,0.3);
+      background: linear-gradient(135deg, var(--accent), #0099cc);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,217,255,0.45); }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(0, 217, 255, 0.45);
+    }
 
     /* ── Footer ── */
     footer {
-      padding: 48px 0 36px; text-align: center; border-top: 1px solid var(--border);
+      padding: 48px 0 36px;
+      text-align: center;
+      border-top: 1px solid var(--border);
     }
-    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 600; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    footer p { color: #3a4d5e; font-size: 13px; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    footer p {
+      color: #3a4d5e;
+      font-size: 13px;
+    }
 
     /* ── Divider ── */
-    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
 
     @media (max-width: 640px) {
-      .header-nav { display: none; }
-      .page-hero { padding: 44px 0 32px; }
-      .terms-section-header { padding: 18px 20px; }
-      .terms-section-body { padding: 20px; }
-      .summary-grid { grid-template-columns: 1fr; }
+      .header-nav {
+        display: none;
+      }
+
+      .page-hero {
+        padding: 44px 0 32px;
+      }
+
+      .terms-section-header {
+        padding: 18px 20px;
+      }
+
+      .terms-section-body {
+        padding: 20px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── CONSTRUCTION DISCLAIMER ── */
+    .construction-badge {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.1);
+      backdrop-filter: blur(10px) saturate(1.8);
+      -webkit-backdrop-filter: blur(10px) saturate(1.8);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f59e0b;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 158, 11, 0.1);
+      pointer-events: none;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .construction-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #f59e0b;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
+
 <body>
+  <div class="construction-badge">
+    الموقع قيد التطوير
+  </div>
   <div class="bg-layer"></div>
   <div class="bg-grid"></div>
 
@@ -231,9 +612,10 @@
       <div class="header-row">
         <a class="brand" href="index.html">
           <div class="brand-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="6" width="20" height="12" rx="3"/>
-              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01"/>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="3" />
+              <path d="M8 12h2m1-1v2M17 12h.01M14 12h.01" />
             </svg>
           </div>
           <div class="brand-text">Access<span>Games</span></div>
@@ -258,7 +640,16 @@
     </div>
 
     <div class="last-updated">
-      📅 آخر تحديث: <span>يناير 2026</span>
+      📅 آخر تحديث: <span>ماي 2026</span>
+    </div>
+
+    <!-- ── Acceptance notice ── -->
+    <div class="alert blue" style="margin-bottom: 32px; font-size: 15px; border-radius: 12px; padding: 18px 22px;">
+      <span class="alert-icon" style="font-size: 22px;">✅</span>
+      <div>
+        <strong>قبول الشروط:</strong> بإتمام عملية الدفع وإرسال إثبات التحويل — تكون قد قرأت وفهمت وقبلت
+        <strong>جميع شروط الخدمة</strong> المذكورة في هاذ الصفحة بشكل كامل وغير مشروط. لا يلزم توقيع إضافي.
+      </div>
     </div>
 
 
@@ -270,14 +661,17 @@
       </div>
       <div class="terms-section-body">
         <p class="body-text">
-          AccessGames خدمة مغربية متخصصة في توفير الألعاب الرقمية لـ <strong>PC (Steam)</strong> و<strong>PS4/5</strong> و<strong>Xbox</strong> بالدرهم المغربي — بدون بطاقة بنكية أجنبية.
+          AccessGames خدمة مغربية متخصصة في توفير الألعاب الرقمية لـ <strong>PC (Steam)</strong> و<strong>PS4/5</strong>
+          و<strong>Xbox</strong> بالدرهم المغربي — بدون بطاقة بنكية أجنبية.
         </p>
         <p class="body-text">
-          جميع الطلبات كتمر على مراجعة يدوية للتحقق من الدفع قبل التسليم. كنحتفظو بالحق في رفض أي طلب إذا كان إثبات الدفع غير واضح أو مشكوك فيه.
+          جميع الطلبات كتمر على مراجعة يدوية للتحقق من الدفع قبل التسليم. كنحتفظو بالحق في رفض أي طلب إذا كان إثبات
+          الدفع غير واضح أو مشكوك فيه.
         </p>
         <div class="alert blue">
           <span class="alert-icon">ℹ️</span>
-          <div><strong>الألعاب رسمية 100٪</strong> — مشتراة مباشرة من PlayStation Store وXbox Store وSteam. لا كراك، لا نسخ مقرصنة.</div>
+          <div><strong>الألعاب رسمية 100٪</strong> — مشتراة مباشرة من PlayStation Store وXbox Store وSteam. لا كراك، لا
+            نسخ مقرصنة.</div>
         </div>
       </div>
     </div>
@@ -290,7 +684,8 @@
         <div class="section-title">شروط ألعاب PC — Steam أوفلاين</div>
       </div>
       <div class="terms-section-body">
-        <p class="body-text">بتشتري وصول لحساب Steam مشترك مضافة فيه اللعبة. هاد الحساب ملكية AccessGames — كنمنحك حق الوصول للعب على جهازك فقط.</p>
+        <p class="body-text">بتشتري وصول لحساب Steam مشترك مضافة فيه اللعبة. هاد الحساب ملكية AccessGames — كنمنحك حق
+          الوصول للعب على جهازك فقط.</p>
         <ul class="rule-list">
           <li>
             <div class="rule-dot">✓</div>
@@ -306,7 +701,8 @@
           </li>
           <li>
             <div class="rule-dot red">✗</div>
-            <div><strong>ممنوع:</strong> اللعب في وضع الأونلاين المتعدد (Multiplayer Online) — هاد الوصول مخصص للعب Solo أوفلاين فقط</div>
+            <div><strong>ممنوع:</strong> اللعب في وضع الأونلاين المتعدد (Multiplayer Online) — هاد الوصول مخصص للعب Solo
+              أوفلاين فقط</div>
           </li>
           <li>
             <div class="rule-dot gold">!</div>
@@ -315,7 +711,8 @@
         </ul>
         <div class="alert gold">
           <span class="alert-icon">⚠️</span>
-          <div><strong>ملاحظة Denuvo:</strong> AccessGames ما تتحملش مسؤولية قفل اللعبة إذا غيرتي قطع الجهاز بشكل جذري (تغيير المعالج أو اللوحة الأم) بعد التفعيل — هاد الشيء مرتبط بنظام حماية الشركة المطورة.</div>
+          <div><strong>ملاحظة Denuvo:</strong> AccessGames ما تتحملش مسؤولية قفل اللعبة إذا غيرتي قطع الجهاز بشكل جذري
+            (تغيير المعالج أو اللوحة الأم) بعد التفعيل — هاد الشيء مرتبط بنظام حماية الشركة المطورة.</div>
         </div>
       </div>
     </div>
@@ -335,11 +732,17 @@
         <ul class="rule-list">
           <li>
             <div class="rule-dot green">✓</div>
-            <div><strong>P3:</strong> تلعب بحسابك الشخصي — تجمع تروفيز وتلعب أونلاين وأوفلاين. حساب AccessGames يكون موجود على جهازك كمستخدم إضافي.</div>
+            <div><strong>P3:</strong> تلعب بحسابك الشخصي — تجمع تروفيز وتلعب أونلاين وأوفلاين. حساب AccessGames يكون
+              موجود على جهازك كمستخدم إضافي.</div>
           </li>
           <li>
             <div class="rule-dot green">✓</div>
             <div><strong>P2:</strong> تلعب مباشرة من حساب AccessGames — محتاج اتصال دائم بالإنترنت طول ما تلعب.</div>
+          </li>
+          <li>
+            <div class="rule-dot">ℹ</div>
+            <div><strong>انقطاع خوادم PlayStation (P2):</strong> في حال انقطاع خوادم Sony أو توقف خدمة PSN من طرفهم —
+              هاد الشيء خارج عن سيطرتنا وما يعتبرش عطلاً من جهتنا ولا يستوجب استرجاعاً.</div>
           </li>
           <li>
             <div class="rule-dot red">✗</div>
@@ -391,41 +794,153 @@
     </div>
 
 
-    <!-- ═══ 5. الاسترجاع ═══ -->
+    <!-- ═══ 5. التفعيلات الأونلاين ═══ -->
+    <div class="terms-section">
+      <div class="terms-section-header red">
+        <div class="section-icon">🌐</div>
+        <div class="section-title">شروط التفعيلات الأونلاين — Online Activations</div>
+      </div>
+      <div class="terms-section-body">
+        <p class="body-text">التفعيلات الأونلاين هي نوع تفعيل خاص يتطلب اتصالاً بالإنترنت وربط اللعبة بالحساب مباشرةً.
+          هاد النوع من التفعيل خاضع لشروط إضافية:
+        </p>
+        <ul class="rule-list">
+          <li>
+            <div class="rule-dot red">✗</div>
+            <div><strong>الحظر بسبب تصرف المستخدم:</strong> أي حظر (Ban) يصدر من المنصة (Steam / PlayStation / Xbox)
+              نتيجة مخالفة قواعد اللعب — كالغش أو التحايل أو استخدام برامج خارجية — يُعتبر <strong>مسؤولية المستخدم
+                الكاملة</strong> ولا يستوجب أي استرجاع للمبلغ.</div>
+          </li>
+          <li>
+            <div class="rule-dot red">✗</div>
+            <div><strong>قطع الوصول:</strong> في حالة الحظر أو المخالفة الصادرة من المنصة بسبب تصرف المستخدم، تحتفظ
+              AccessGames بالحق في <strong>إيقاف الوصول فوراً</strong> دون إشعار مسبق ودون أي تعويض.</div>
+          </li>
+          <li>
+            <div class="rule-dot red">✗</div>
+            <div><strong>لا استرجاع:</strong> أي عملية شراء مرتبطة بتفعيل أونلاين تم فيه حظر الحساب أو إيقافه بسبب تصرف
+              المستخدم — <strong>غير قابلة للاسترجاع</strong> بأي حال.</div>
+          </li>
+          <li>
+            <div class="rule-dot gold">!</div>
+            <div>AccessGames ما تتحملش مسؤولية القرارات الصادرة عن شركات الألعاب (Valve / Sony / Microsoft) ضد حساب
+              المستخدم — نلتزم فقط بضمان التفعيل الأولي السليم.</div>
+          </li>
+        </ul>
+        <div class="alert red">
+          <span class="alert-icon">🚫</span>
+          <div><strong>تحذير:</strong> استخدام أي برنامج غش أو cheat أو أداة تعديل خارجية على تفعيل أونلاين يُبطل الضمان
+            فوراً ويعرض الوصول للإيقاف الدائم بدون تعويض.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ 6. سياسة التفعيل والضمان ═══ -->
+    <div class="terms-section">
+      <div class="terms-section-header gold">
+        <div class="section-icon">🔑</div>
+        <div class="section-title">سياسة التفعيل والضمان</div>
+      </div>
+      <div class="terms-section-body">
+        <p class="body-text">تنطبق السياسة التالية على <strong>جميع أنواع التفعيلات</strong> المقدمة من AccessGames —
+          سواء Steam أو PlayStation أو Xbox:</p>
+        <ul class="rule-list">
+          <li>
+            <div class="rule-dot">①</div>
+            <div><strong>التفعيل مرة واحدة — جهاز واحد:</strong> كل عملية شراء تخول المستخدم تفعيل اللعبة <strong>مرة
+                واحدة فقط</strong> على <strong>جهاز واحد محدد</strong>. لا يمكن نقل التفعيل أو تكراره تلقائياً.</div>
+          </li>
+          <li>
+            <div class="rule-dot gold">!</div>
+            <div><strong>إعادة التفعيل (Reactivation):</strong> في حال احتجت لإعادة التفعيل على نفس الجهاز أو جهاز آخر —
+              قد يتطلب ذلك <strong>رسوم إعادة تفعيل</strong> تختلف حسب اللعبة والمنصة. بعض الألعاب تتيح إعادة تفعيل
+              <strong>مجانية</strong> — تواصل معنا للاستفسار.
+            </div>
+          </li>
+          <li>
+            <div class="rule-dot green">✓</div>
+            <div><strong>فترة الضمان — 30 يوم:</strong> جميع الطلبات تستفيد من <strong>ضمان 30 يوماً</strong> اعتباراً
+              من تاريخ التسليم. خلال هاد الفترة، أي مشكل في التفعيل من جهتنا كنحلوه مجاناً أو كنقدمو بديلاً.</div>
+          </li>
+          <li>
+            <div class="rule-dot red">✗</div>
+            <div><strong>بعد فترة الضمان:</strong> بعد انتهاء الـ 30 يوم، أي إعادة تفعيل أو دعم تقني إضافي قد يكون
+              خاضعاً لرسوم — حسب حالة كل طلب.</div>
+          </li>
+        </ul>
+        <div class="summary-grid" style="margin-top: 20px;">
+          <div class="summary-card yes">
+            <div class="summary-card-label">✓ ضمن فترة الضمان</div>
+            <div class="summary-card-title">30 يوم من التسليم</div>
+            <div class="summary-card-desc">إصلاح مجاني لأي مشكل تقني في التفعيل من جهتنا — أو بديل مناسب.</div>
+          </div>
+          <div class="summary-card no">
+            <div class="summary-card-label">✗ خارج فترة الضمان</div>
+            <div class="summary-card-title">بعد 30 يوم</div>
+            <div class="summary-card-desc">إعادة التفعيل أو الدعم قد يتطلب رسوماً إضافية حسب اللعبة والحالة.</div>
+          </div>
+          <div class="summary-card yes">
+            <div class="summary-card-label">✓ مجاني</div>
+            <div class="summary-card-title">ألعاب بإعادة تفعيل مجانية</div>
+            <div class="summary-card-desc">بعض الألعاب تتيح إعادة تفعيل مجانية — تواصل معنا للتأكد قبل الطلب.</div>
+          </div>
+          <div class="summary-card no">
+            <div class="summary-card-label">💰 برسوم</div>
+            <div class="summary-card-title">إعادة التفعيل المدفوعة</div>
+            <div class="summary-card-desc">تفعيل على جهاز جديد أو بعد انتهاء الضمان — رسوم حسب اللعبة والمنصة.</div>
+          </div>
+        </div>
+        <div class="alert blue" style="margin-top: 20px;">
+          <span class="alert-icon">ℹ️</span>
+          <div><strong>ملاحظة:</strong> راسلنا على الواتساب قبل أي إعادة تفعيل لنعطيك التفاصيل الكاملة والسعر إن وجد —
+            بعض الحالات مجانية 100٪.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ 7. الاسترجاع ═══ -->
     <div class="terms-section">
       <div class="terms-section-header red">
         <div class="section-icon">💸</div>
         <div class="section-title">سياسة الاسترجاع</div>
       </div>
       <div class="terms-section-body">
-        <p class="body-text">بسبب طبيعة المنتجات الرقمية — <strong>لا يوجد استرجاع</strong> بعد تسليم الوصول أو الحساب. الاستثناءات الوحيدة:</p>
+        <p class="body-text">بسبب طبيعة المنتجات الرقمية — <strong>لا يوجد استرجاع</strong> بعد تسليم الوصول أو الحساب.
+          الاستثناءات الوحيدة:</p>
 
         <div class="summary-grid">
           <div class="summary-card yes">
             <div class="summary-card-label">✓ يستحق الاسترجاع</div>
             <div class="summary-card-title">المتجر ما قدرش يسلم</div>
-            <div class="summary-card-desc">إذا ما تمكناش من توفير اللعبة المطلوبة — كنرجعو المبلغ كاملاً بدون تأخير.</div>
+            <div class="summary-card-desc">إذا ما تمكناش من توفير اللعبة المطلوبة — كنرجعو المبلغ كاملاً بدون تأخير.
+            </div>
           </div>
           <div class="summary-card yes">
             <div class="summary-card-label">✓ يستحق الاسترجاع</div>
             <div class="summary-card-title">مشكل تقني من عندنا</div>
-            <div class="summary-card-desc">إذا كان الحساب أو الوصول معطوب من البداية وما قدرتيش تلعب — تواصل معنا في 24 ساعة مع فيديو يوضح المشكل.</div>
+            <div class="summary-card-desc">إذا كان الحساب أو الوصول معطوب من البداية وما قدرتيش تلعب — تواصل معنا في 24
+              ساعة مع شرح يوضح المشكل.</div>
           </div>
           <div class="summary-card no">
             <div class="summary-card-label">✗ لا استرجاع</div>
             <div class="summary-card-title">مواصفات الجهاز ضعيفة</div>
-            <div class="summary-card-desc">تأكد من متطلبات التشغيل قبل الشراء — اللعبة ما تشتغلش على جهازك مش مسؤوليتنا.</div>
+            <div class="summary-card-desc">تأكد من متطلبات التشغيل قبل الشراء — اللعبة ما تشتغلش على جهازك مش مسؤوليتنا.
+            </div>
           </div>
           <div class="summary-card no">
             <div class="summary-card-label">✗ لا استرجاع</div>
             <div class="summary-card-title">مخالفة الشروط</div>
-            <div class="summary-card-desc">إذا سحبنا الوصول بسبب مخالفة شروط الاستخدام — ما كاين لا تعويض ولا استرجاع.</div>
+            <div class="summary-card-desc">إذا سحبنا الوصول بسبب مخالفة شروط الاستخدام — ما كاين لا تعويض ولا استرجاع.
+            </div>
           </div>
         </div>
 
         <div class="alert gold" style="margin-top: 20px;">
           <span class="alert-icon">⏱️</span>
-          <div>أي مشكل تقني — تواصل معنا على الواتساب <strong>خلال 24 ساعة من الاستلام</strong> مع فيديو واضح يبين المشكل. بعد هاد الوقت ما نقدروش نضمن الحل.</div>
+          <div>أي مشكل تقني — تواصل معنا على الواتساب <strong>خلال 24 ساعة من الاستلام</strong> مع شرح واضح يبين
+            المشكل. بعد هاد الوقت ما نقدروش نضمن الحل.</div>
         </div>
       </div>
     </div>
@@ -441,7 +956,7 @@
         <ul class="rule-list">
           <li>
             <div class="rule-dot">✓</div>
-            <div>الدفع عبر: <strong>CIH Bank</strong> أو <strong>Barid Bank</strong> أو <strong>Cash Plus</strong> أو التعبئة (حسب الحالة)</div>
+            <div>الدفع عبر: <strong>CIH Bank</strong> أو <strong>Cash Plus</strong></div>
           </li>
           <li>
             <div class="rule-dot">✓</div>
@@ -470,11 +985,13 @@
         <ul class="rule-list">
           <li>
             <div class="rule-dot">ℹ</div>
-            <div>AccessGames خدمة مستقلة وما هيش تابعة رسمياً لـ PlayStation وXbox وSteam — نشتري لك الوصول من المتاجر الرسمية.</div>
+            <div>AccessGames خدمة مستقلة وما هيش تابعة رسمياً لـ PlayStation وXbox وSteam — نشتري لك الوصول من المتاجر
+              الرسمية.</div>
           </li>
           <li>
             <div class="rule-dot">ℹ</div>
-            <div>ما تتحملش مسؤولية أي تغيير في سياسات شركات الألعاب (Sony وMicrosoft وValve) اللي ممكن تأثر على الخدمة مستقبلاً.</div>
+            <div>ما تتحملش مسؤولية أي تغيير في سياسات شركات الألعاب (Sony وMicrosoft وValve) اللي ممكن تأثر على الخدمة
+              مستقبلاً.</div>
           </li>
           <li>
             <div class="rule-dot gold">!</div>
@@ -511,4 +1028,5 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
+
 </html>

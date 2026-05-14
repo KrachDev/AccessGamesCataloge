@@ -312,11 +312,59 @@
       .info-cards { grid-template-columns: 1fr; }
       .step-title { font-size: 17px; }
     }
+
+    /* ── CONSTRUCTION DISCLAIMER ── */
+    .construction-badge {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+      padding: 6px 14px;
+      background: rgba(245, 158, 11, 0.1);
+      backdrop-filter: blur(10px) saturate(1.8);
+      -webkit-backdrop-filter: blur(10px) saturate(1.8);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f59e0b;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 158, 11, 0.1);
+      pointer-events: none;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .construction-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #f59e0b;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
+  <div class="construction-badge">
+    الموقع قيد التطوير
+  </div>
   <div class="bg-layer"></div>
   <div class="bg-grid"></div>
 
@@ -828,5 +876,6 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="scripts/analytics.js"></script>
 </body>
 </html>
