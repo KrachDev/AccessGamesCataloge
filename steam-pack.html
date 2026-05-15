@@ -461,6 +461,35 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .price-badge {
+      position: fixed;
+      top: 55px;
+      left: 15px;
+      z-index: 1100;
+      padding: 6px 14px;
+      background: rgba(0, 217, 255, 0.1);
+      backdrop-filter: blur(10px) saturate(1.8);
+      -webkit-backdrop-filter: blur(10px) saturate(1.8);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00d9ff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 217, 255, 0.1);
+      pointer-events: none;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .price-badge svg {
+      width: 12px;
+      height: 12px;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -468,6 +497,11 @@
 <body>
   <div class="construction-badge">
     الموقع قيد التطوير
+  </div>
+
+  <div class="price-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span>الأسعار قد تختلف — تواصل معنا للتأكد</span>
   </div>
 
   <!-- Login Overlay -->

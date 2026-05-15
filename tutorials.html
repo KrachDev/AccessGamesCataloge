@@ -313,6 +313,63 @@
       .step-title { font-size: 17px; }
     }
 
+    /* ── Video Guides ── */
+    .video-guides {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(245,200,66,0.1);
+    }
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .video-card:hover .video-thumb img { opacity: 1; }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+    .video-card:hover .play-overlay {
+      transform: scale(1.1);
+      background: rgba(245,200,66,0.1);
+      color: var(--gold);
+    }
+    .video-info { padding: 16px; }
+    .video-title { font-weight: 800; font-size: 15px; margin-bottom: 4px; color: #fff; }
+    .video-desc { color: var(--muted); font-size: 13px; line-height: 1.5; }
+
     /* ── CONSTRUCTION DISCLAIMER ── */
     .construction-badge {
       position: fixed;
@@ -357,6 +414,35 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .price-badge {
+      position: fixed;
+      top: 55px;
+      left: 15px;
+      z-index: 1000;
+      padding: 6px 14px;
+      background: rgba(0, 217, 255, 0.1);
+      backdrop-filter: blur(10px) saturate(1.8);
+      -webkit-backdrop-filter: blur(10px) saturate(1.8);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00d9ff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 217, 255, 0.1);
+      pointer-events: none;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .price-badge svg {
+      width: 12px;
+      height: 12px;
+    }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -364,6 +450,11 @@
 <body>
   <div class="construction-badge">
     الموقع قيد التطوير
+  </div>
+
+  <div class="price-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span>الأسعار قد تختلف — تواصل معنا للتأكد</span>
   </div>
   <div class="bg-layer"></div>
   <div class="bg-grid"></div>
@@ -679,6 +770,35 @@
           <div class="info-card-title">خطوات في كل مرة</div>
           <div class="info-card-desc">خاصك تكرر الخطوات إذا غيرتي الجهاز. على نفس الجهاز — اللعبة كتبقى متاحة.</div>
         </div>
+      </div>
+
+      <div class="phase-divider">
+        <div class="phase-line"></div>
+        <div class="phase-badge gold">🎥 شروحات فيديو</div>
+        <div class="phase-line r"></div>
+      </div>
+
+      <div class="video-guides">
+        <a href="https://www.youtube.com/watch?v=N3LDHaa9kTM" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/N3LDHaa9kTM/mqdefault.jpg" alt="Method 1">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">الطريقة الأولى (Method 1)</div>
+            <div class="video-desc">شرح فيديو مفصل للطريقة الأولى على Xbox</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=2EUMVMWqhUA" target="_blank" class="video-card">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/2EUMVMWqhUA/mqdefault.jpg" alt="Method 2">
+            <div class="play-overlay">▶</div>
+          </div>
+          <div class="video-info">
+            <div class="video-title">الطريقة الثانية (Method 2)</div>
+            <div class="video-desc">شرح فيديو مفصل للطريقة الثانية على Xbox</div>
+          </div>
+        </a>
       </div>
 
     </div><!-- /sec-xbox-method -->
