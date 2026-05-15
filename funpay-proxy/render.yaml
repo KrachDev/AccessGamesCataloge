@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: funpay-proxy
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1 --threads 4
+    envVars:
+      - key: FUNPAY_GOLDEN_KEY
+        sync: false
+      - key: FUNPAY_PHPSESSID
+        sync: false
+      - key: FUNPAY_SUPPLIER_NODE
+        value: users-6324663-18588245
+      - key: FUNPAY_MY_ID
+        value: "18588245"
+      - key: FUNPAY_NUMERIC_NODE
+        value: "258374411"
+      - key: PROXY_API_KEY
+        sync: false
+    plan: free
+    region: frankfurt

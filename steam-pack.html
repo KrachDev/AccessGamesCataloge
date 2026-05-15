@@ -283,6 +283,86 @@
       box-shadow: 0 0 15px var(--accent-glow);
     }
 
+    .req-code-btn.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent !important;
+    }
+
+    .req-code-btn.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid var(--gold);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .code-result {
+      background: var(--surface-2);
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      text-align: center;
+      margin-top: 10px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .code-result .code-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .code-result .code-value {
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+
+    .code-result .code-copy-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .code-result .code-copy-btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .code-error {
+      background: rgba(255, 71, 87, 0.1);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      color: #ff4757;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     .accounts-grid.list-view {
       display: flex;
       flex-direction: column;
@@ -739,85 +819,19 @@
       } catch (e) { console.error('TG Send error', e); }
     }
 
-    // Poller Logic
-    let pollerActive = false;
+    // ── FunPay Proxy Config ──
+    // After deploying to Render, replace with your actual URL like:
+    // https://funpay-proxy-XXXX.onrender.com
+    const FUNPAY_PROXY = 'https://funpay-proxy.onrender.com';
+    const FUNPAY_API_KEY = 'CHANGE_ME_TO_YOUR_SECRET_KEY';
 
-    async function startPoller() {
-      if (pollerActive) return;
-      pollerActive = true;
-
-      if (!localStorage.getItem('tg_lastUpdateId')) {
-        try {
-          const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=-1&limit=1`);
-          const data = await res.json();
-          if (data.ok && data.result.length > 0) {
-            localStorage.setItem('tg_lastUpdateId', data.result[0].update_id);
-          }
-        } catch (e) { }
-      }
-      pollTelegram();
-    }
-
-    async function pollTelegram() {
-      if (!pollerActive) return;
-
-      let offset = parseInt(localStorage.getItem('tg_lastUpdateId') || '0') + 1;
-
-      try {
-        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=10`);
-        const data = await res.json();
-
-        if (data.ok && data.result.length > 0) {
-          for (const update of data.result) {
-            localStorage.setItem('tg_lastUpdateId', update.update_id);
-
-            if (update.message && update.message.text) {
-              const text = update.message.text;
-              const replyTo = update.message.reply_to_message;
-
-              let loginMatched = null;
-              let codeExtracted = null;
-
-              if (replyTo && replyTo.text) {
-                const loginMatch = replyTo.text.match(/👤 Login:\s*(.+)/);
-                if (loginMatch) {
-                  loginMatched = loginMatch[1].trim();
-                  codeExtracted = text.trim();
-                }
-              } else if (text.toLowerCase().startsWith('!code ')) {
-                const parts = text.split(/\s+/);
-                if (parts.length >= 3) {
-                  loginMatched = parts[1];
-                  codeExtracted = parts.slice(2).join(' ').trim();
-                }
-              }
-
-              if (loginMatched && codeExtracted) {
-                handleReceivedCode(loginMatched, codeExtracted);
-              }
-            }
-          }
-        }
-      } catch (e) { console.error('Polling error', e); }
-
-      setTimeout(pollTelegram, 2000);
-    }
-
-    function handleReceivedCode(login, code) {
-      if (!currentUser) return;
-
-      const waitingKey = `req_${currentUser.email}_${login}`;
-      const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
-
-      if (state && state.status === 'waiting') {
-        state.status = 'received';
-        state.code = code;
-        localStorage.setItem(waitingKey, JSON.stringify(state));
-
-        // Notify the user visually via alert
-        alert(`تم استلام كود لحساب: ${login}\nالكود: ${code}`);
-        refreshAllCards();
-      }
+    async function requestCodeFromProxy(login, type = 'steam') {
+      const res = await fetch(`${FUNPAY_PROXY}/get-code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login, type, key: FUNPAY_API_KEY })
+      });
+      return await res.json();
     }
 
     let isBooted = false;
@@ -825,8 +839,6 @@
       if (isBooted) return;
       isBooted = true;
       injectCardActions();
-      startPoller();
-      setInterval(refreshAllCards, 5000);
     }
 
     function refreshAllCards() {
@@ -989,36 +1001,99 @@
           }
         };
 
-        reqBtn.onclick = () => {
+        reqBtn.onclick = async () => {
           if (!currentUser || !loginVal) return;
 
           const cdKey = `cd_${currentUser.email}`;
           const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
           if (Date.now() - lastCd < 2 * 60 * 1000) return;
 
-          const waitingKey = `req_${currentUser.email}_${loginVal}`;
-          localStorage.setItem(waitingKey, JSON.stringify({
-            status: 'waiting',
-            reqTime: Date.now(),
-            code: null
-          }));
+          // Determine if this account needs a social code (check for Social club info)
+          const extraEl = card.querySelector('.extra-info');
+          const extraText = extraEl ? extraEl.innerText : '';
+          const hasSocial = /social\s*club/i.test(extraText);
 
+          // For social accounts, extract the email from extra info
+          let codeLogin = loginVal;
+          let codeType = 'steam';
+          if (hasSocial) {
+            const emailMatch = extraText.match(/Social\s*club\s*Email\s*[-:]?\s*([^\s]+)/i);
+            if (emailMatch) {
+              codeLogin = emailMatch[1].trim();
+              codeType = 'social';
+            }
+          }
+
+          // Set cooldown
           localStorage.setItem(cdKey, Date.now().toString());
-          card.refreshUI(); // Update UI immediately so user sees "waiting"
 
-          // Fetch IP and send Telegram message (Using Cloudflare to bypass Adblockers)
-          fetch('https://1.1.1.1/cdn-cgi/trace')
-            .then(r => r.text())
-            .then(text => {
-              const ipLine = text.split('\n').find(line => line.startsWith('ip='));
-              const userIp = ipLine ? ipLine.split('=')[1] : 'Unknown';
-              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: ${userIp}\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
-              tgSend(msg);
-            })
-            .catch(() => {
-              const msg = `🎮 طلب كود Steam Guard\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n🌐 IP: Unknown\n📋 Game: ${gameTitle}\n👤 Login: ${loginVal}\n⏰ Time: ${new Date().toLocaleString('en-US')}\n\n✅ Reply to this message with the code`;
-              tgSend(msg);
-            });
+          // Show loading state
+          reqBtn.classList.add('loading');
+          reqBtn.innerText = 'جارٍ جلب الكود...';
+          reqBtn.disabled = true;
+          codeDisplay.style.display = 'none';
+
+          // Send notification to Telegram (fire-and-forget)
+          tgSend(`🤖 طلب كود تلقائي\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${codeLogin}\n🔑 Type: ${codeType}\n⏰ Time: ${new Date().toLocaleString('en-US')}`);
+
+          try {
+            const result = await requestCodeFromProxy(codeLogin, codeType);
+
+            if (result.ok) {
+              // Save the code
+              const waitingKey = `req_${currentUser.email}_${loginVal}`;
+              localStorage.setItem(waitingKey, JSON.stringify({
+                status: 'received',
+                reqTime: Date.now(),
+                code: result.code
+              }));
+
+              // Show the code
+              reqBtn.classList.remove('loading');
+              reqBtn.innerText = 'تم استلام الكود ✔️';
+              reqBtn.disabled = true;
+              reqBtn.style.opacity = '0.5';
+
+              codeDisplay.style.display = 'block';
+              codeDisplay.innerHTML = `
+                <div class="code-result">
+                  <div class="code-label">الكود المستلم — ${result.identifier || codeLogin}</div>
+                  <div class="code-value">${result.code}</div>
+                  <button class="code-copy-btn" onclick="copyText('${result.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'">نسخ الكود</button>
+                </div>
+              `;
+
+              // Notify via Telegram that code was received
+              tgSend(`✅ كود تلقائي تم استلامه\n📋 ${gameTitle}\n👤 ${codeLogin}\n🔑 ${result.code}`);
+            } else {
+              // Show error
+              reqBtn.classList.remove('loading');
+              reqBtn.innerText = 'طلب الكود من الإدارة';
+              reqBtn.disabled = false;
+              reqBtn.style.opacity = '1';
+
+              codeDisplay.style.display = 'block';
+              codeDisplay.innerHTML = `
+                <div class="code-error">
+                  ❌ فشل جلب الكود: ${result.error || 'خطأ غير معروف'}
+                </div>
+              `;
+              setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
+            }
+          } catch (err) {
+            reqBtn.classList.remove('loading');
+            reqBtn.innerText = 'طلب الكود من الإدارة';
+            reqBtn.disabled = false;
+            reqBtn.style.opacity = '1';
+
+            codeDisplay.style.display = 'block';
+            codeDisplay.innerHTML = `
+              <div class="code-error">
+                ❌ خطأ في الاتصال بالسيرفر — تأكد أن البروكسي شغال
+              </div>
+            `;
+            setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
+          }
         };
 
         actionContainer.appendChild(reqBtn);
@@ -1085,6 +1160,7 @@
 
     // document.addEventListener("DOMContentLoaded", initAuth);
   </script>
+  <div id="toast" class="toast"></div>
   <script defer src="scripts/analytics.js"></script>
 </body>
 
