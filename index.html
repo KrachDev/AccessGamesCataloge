@@ -2358,20 +2358,28 @@
       let CURRENT_FILE = 'PC_Games.csv';
       let CURRENT_MODE = 'offline';
 
-      window.switchMode = function (mode) {
+      const platformMap = {
+        'pc': { file: 'PC_Games.csv', el: 'tab-pc' },
+        'xbox': { file: 'Xbox_Games.csv', el: 'tab-xbox' },
+        'ps': { file: 'PS_Games.csv', el: 'tab-ps' },
+        'playstation': { file: 'PS_Games.csv', el: 'tab-ps' }
+      };
+
+      window.switchMode = function (mode, skipHashUpdate = false) {
         if (CURRENT_MODE === mode) return;
         document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
-        document.querySelector(`.sub-tab[data-mode="${mode}"]`).classList.add('active');
+        const targetSubTab = document.querySelector(`.sub-tab[data-mode="${mode}"]`);
+        if (targetSubTab) targetSubTab.classList.add('active');
 
         let baseFile = CURRENT_FILE;
         if (baseFile.includes('_Keys_Games.csv')) baseFile = baseFile.replace('_Keys_Games.csv', '_Games.csv');
         if (baseFile.includes('_Account_Games.csv')) baseFile = baseFile.replace('_Account_Games.csv', '_Games.csv');
 
-        loadCSV(baseFile, document.querySelector(`.platform-tab[data-csv="${baseFile}"]`), mode);
+        loadCSV(baseFile, document.querySelector(`.platform-tab[data-csv="${baseFile}"]`), mode, skipHashUpdate);
       };
 
       // Load CSV  
-      window.loadCSV = function loadCSV(file, tabEl, mode = null) {
+      window.loadCSV = function loadCSV(file, tabEl, mode = null, skipHashUpdate = false) {
         if (!mode) mode = CURRENT_MODE;
 
         let targetFiles = [file];
@@ -2429,20 +2437,28 @@
         if (activeSubTab) activeSubTab.classList.add('active');
 
         // Set WhatsApp platform name based on file and mode
+        let platName = 'PC';
         if (file.includes('PC')) {
+          platName = 'PC';
           if (mode === 'keys') CURRENT_PLATFORM = 'PC (Key)';
           else if (mode === 'account') CURRENT_PLATFORM = 'PC (Account)';
           else if (mode === 'all') CURRENT_PLATFORM = 'PC';
           else CURRENT_PLATFORM = 'PC (Activations)';
         } else if (file.includes('Xbox')) {
+          platName = 'Xbox';
           if (mode === 'keys') CURRENT_PLATFORM = 'Xbox (Key)';
           else if (mode === 'account') CURRENT_PLATFORM = 'Xbox (Account)';
           else if (mode === 'all') CURRENT_PLATFORM = 'Xbox';
           else CURRENT_PLATFORM = 'Xbox (Activations)';
         } else {
+          platName = 'PS';
           if (mode === 'account') CURRENT_PLATFORM = 'PlayStation (Account)';
           else if (mode === 'all') CURRENT_PLATFORM = 'PlayStation';
           else CURRENT_PLATFORM = 'PlayStation (Activations)';
+        }
+
+        if (!skipHashUpdate) {
+          window.location.hash = `${platName}-${mode}`;
         }
 
         // Reset filter
@@ -2603,8 +2619,25 @@
       preloadCount(['Xbox_Games.csv', 'Xbox_Keys_Games.csv', 'Xbox_Account_Games.csv'], 'count-xbox');
       preloadCount(['PS_Games.csv', 'PS_Account_Games.csv'], 'count-ps');
 
-      // Boot — load PC by default
-      loadCSV('PC_Games.csv', document.getElementById('tab-pc'), 'all');
+      function loadFromHash() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+          const parts = hash.split('-');
+          const platKey = parts[0].toLowerCase();
+          const mode = parts[1] || 'all';
+
+          const plat = platformMap[platKey];
+          if (plat) {
+            loadCSV(plat.file, document.getElementById(plat.el), mode, true);
+          }
+        } else {
+          // Default
+          loadCSV('PC_Games.csv', document.getElementById('tab-pc'), 'all', true);
+        }
+      }
+
+      window.addEventListener('hashchange', loadFromHash);
+      window.addEventListener('DOMContentLoaded', loadFromHash);
     </script>
     <!-- Vercel Analytics -->
     <script>
