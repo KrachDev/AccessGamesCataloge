@@ -698,36 +698,62 @@
               const card = document.createElement('div');
               card.className = 'account-card';
               card.setAttribute('data-name', acc.Title.toLowerCase());
+              card.style.padding = '0';
+              card.style.overflow = 'hidden';
+              card.style.display = 'flex';
+              card.style.flexDirection = 'column';
 
-              let htmlStr = `<div class="game-title">${acc.Title}</div>`;
+              const safeId = acc.Title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+              const coverUrl = `assets/covers/${safeId}.webp`;
 
-              if (acc.Login) {
-                htmlStr += `<div class="cred-row">
-                  <span class="cred-label">Login</span>
-                  <span class="cred-val" onclick="copyText('${acc.Login}')" title="${acc.Login}">${acc.Login}</span>
-                </div>`;
-              }
+              let htmlStr = `
+                <div class="card-cover" style="height: 200px; position: relative; border-bottom: 1px solid var(--border);">
+                   <img src="${coverUrl}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(acc.Title)}&background=random'" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: filter 0.3s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'" />
+                   <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 30px 15px 15px;">
+                      <h3 class="game-title" style="font-size: 18px; margin:0; text-align: left; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">${acc.Title}</h3>
+                   </div>
+                </div>
+                <div class="card-body-content" style="padding: 16px; flex: 1; display: flex; flex-direction: column;">
+                   <div class="hidden-data" style="display: none;">
+                      <span class="raw-login">${acc.Login || ''}</span>
+                      <span class="raw-pass">${acc.Password || ''}</span>
+                      <div class="extra-info">${acc.ExtraInfo || ''}</div>
+                   </div>
 
-              if (acc.Password) {
-                // In the original, passwords were raw or masked based on script execution, 
-                // but the original HTML had them as clear text in the value.
-                // We will populate them as clear text here, and let the existing script mask them if it does.
-                htmlStr += `<div class="cred-row">
-                  <span class="cred-label">Password</span>
-                  <span class="cred-val" onclick="copyText('${acc.Password}')" title="${acc.Password}">${acc.Password}</span>
-                </div>`;
-              }
-
-              if (acc.ExtraInfo) {
-                htmlStr += `<div class="extra-info">${acc.ExtraInfo}</div>`;
-              }
+                   <button class="toggle-data-btn req-code-btn" style="width: 100%; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                      إظهار بيانات اللعبة
+                   </button>
+                   
+                   <div class="data-panel" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border);">
+                      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                         <button onclick="copyText('${(acc.Login || '').replace(/'/g, "\'")}', 'تم نسخ اسم المستخدم!')" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ المستخدم</button>
+                         <button onclick="copyText('${(acc.Password || '').replace(/'/g, "\'")}', 'تم نسخ كلمة المرور!')" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ الباسورد</button>
+                      </div>
+                      <div class="actions-container"></div>
+                   </div>
+                </div>
+              `;
 
               card.innerHTML = htmlStr;
+
+              const toggleBtn = card.querySelector('.toggle-data-btn');
+              const dataPanel = card.querySelector('.data-panel');
+              toggleBtn.onclick = () => {
+                 if(dataPanel.style.display === 'none') {
+                    dataPanel.style.display = 'block';
+                    toggleBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg> إخفاء البيانات`;
+                    toggleBtn.style.background = 'rgba(255,255,255,0.1)';
+                 } else {
+                    dataPanel.style.display = 'none';
+                    toggleBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> إظهار بيانات اللعبة`;
+                    toggleBtn.style.background = '';
+                 }
+              };
+
               grid.appendChild(card);
             });
-            // Re-run initAuth to apply the password masking and request buttons
             if (typeof initAuth === 'function') {
-              // Wait a bit to ensure DOM is updated
               setTimeout(initAuth, 100);
             }
           }
@@ -878,270 +904,258 @@
 
       function injectCardActions() {
         document.querySelectorAll('.account-card').forEach(card => {
+          if (card.dataset.injected) return;
+          card.dataset.injected = 'true';
+
           const gameTitle = card.querySelector('.game-title').innerText;
+          const loginVal = card.querySelector('.raw-login').innerText;
+          const passVal = card.querySelector('.raw-pass').innerText;
+          const extraText = card.querySelector('.extra-info').innerText;
+          
+          let socialEmail = '';
+          const emailMatch = extraText.match(/(?:xbox\s+)?Email\s*[-:]?\s*([^\s]+)/i) || extraText.match(/Social\s*club\s*Email\s*[-:]?\s*([^\s]+)/i);
+          if (emailMatch) socialEmail = emailMatch[1].trim();
+          
+          let socialTypeLabel = 'كود إضافي';
+          if (/rockstar|gta|red dead/i.test(gameTitle) || /social\s*club/i.test(extraText)) socialTypeLabel = 'كود Rockstar';
+          if (/ubisoft|far cry|assassin|watch dogs|crew/i.test(gameTitle)) socialTypeLabel = 'كود Ubisoft';
+          if (/ea |battlefield|fifa|fc 2|madden/i.test(gameTitle)) socialTypeLabel = 'كود EA';
+          
+          const hasSocial = socialEmail !== '';
 
-          // Extract Email/Password from extra-info if present
-          const extra = card.querySelector('.extra-info');
-          if (extra) {
-            const extraText = extra.innerText;
-            const match = extraText.match(/(?:xbox\s+)?Email\s*[-:]?\s*([^\s]+)\s+Password\s*[-:]?\s*([^\s]+)/i);
-            if (match) {
-              const extEmail = match[1];
-              const extPass = match[2];
+          const actionContainer = card.querySelector('.actions-container');
+          actionContainer.style.display = 'flex';
+          actionContainer.style.flexDirection = 'column';
+          actionContainer.style.gap = '10px';
 
-              const emailRow = document.createElement('div');
-              emailRow.className = 'cred-row';
-              emailRow.innerHTML = `<span class="cred-label">Xbox Email</span><span class="cred-val">${extEmail}</span>`;
-              extra.parentNode.insertBefore(emailRow, extra);
+          function showConfirmDialog(title, message, onConfirm) {
+            const overlay = document.createElement('div');
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(0,0,0,0.85)';
+            overlay.style.zIndex = '999999';
+            overlay.style.display = 'flex';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.backdropFilter = 'blur(8px)';
 
-              const passRow = document.createElement('div');
-              passRow.className = 'cred-row';
-              passRow.innerHTML = `<span class="cred-label">Xbox Password</span><span class="cred-val" title="${extPass}">${extPass}</span>`;
-              extra.parentNode.insertBefore(passRow, extra);
+            const box = document.createElement('div');
+            box.style.background = 'var(--surface-2)';
+            box.style.border = '1px solid var(--accent)';
+            box.style.padding = '30px';
+            box.style.borderRadius = '16px';
+            box.style.maxWidth = '400px';
+            box.style.width = '90%';
+            box.style.textAlign = 'center';
+            box.style.boxShadow = '0 10px 40px rgba(0,0,0,0.5)';
 
-              let remainder = extraText.replace(match[0], '').trim();
-              if (remainder.toLowerCase().replace('xbox', '').trim() === '') {
-                extra.remove();
-              } else {
-                extra.innerText = remainder;
+            const h2 = document.createElement('h3');
+            h2.innerText = title;
+            h2.style.margin = '0 0 15px';
+            h2.style.color = 'var(--accent)';
+            h2.style.fontSize = '22px';
+
+            const p = document.createElement('p');
+            p.innerText = message;
+            p.style.margin = '0 0 25px';
+            p.style.color = '#fff';
+            p.style.lineHeight = '1.6';
+            p.style.fontSize = '15px';
+
+            const btnRow = document.createElement('div');
+            btnRow.style.display = 'flex';
+            btnRow.style.gap = '10px';
+            btnRow.style.justifyContent = 'center';
+
+            const confirmBtn = document.createElement('button');
+            confirmBtn.innerText = 'نعم، الشاشة مفتوحة';
+            confirmBtn.style.background = 'var(--accent)';
+            confirmBtn.style.color = '#000';
+            confirmBtn.style.border = 'none';
+            confirmBtn.style.padding = '12px 20px';
+            confirmBtn.style.borderRadius = '8px';
+            confirmBtn.style.cursor = 'pointer';
+            confirmBtn.style.fontWeight = 'bold';
+            confirmBtn.style.flex = '1';
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.innerText = 'إلغاء';
+            cancelBtn.style.background = 'rgba(255,255,255,0.1)';
+            cancelBtn.style.color = '#fff';
+            cancelBtn.style.border = '1px solid rgba(255,255,255,0.2)';
+            cancelBtn.style.padding = '12px 20px';
+            cancelBtn.style.borderRadius = '8px';
+            cancelBtn.style.cursor = 'pointer';
+            cancelBtn.style.flex = '1';
+
+            confirmBtn.onclick = () => { document.body.removeChild(overlay); onConfirm(); };
+            cancelBtn.onclick = () => { document.body.removeChild(overlay); };
+
+            btnRow.appendChild(cancelBtn);
+            btnRow.appendChild(confirmBtn);
+            box.appendChild(h2);
+            box.appendChild(p);
+            box.appendChild(btnRow);
+            overlay.appendChild(box);
+            document.body.appendChild(overlay);
+          }
+
+          function createCodeRequestUI(type, loginToUse, label) {
+            const container = document.createElement('div');
+            container.style.width = '100%';
+
+            const btn = document.createElement('button');
+            btn.className = 'req-code-btn';
+            btn.style.background = 'rgba(245, 200, 66, 0.08)';
+            btn.style.color = 'var(--gold)';
+            btn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
+            btn.style.borderWidth = '1px';
+            btn.style.borderStyle = 'solid';
+            btn.style.marginTop = '0';
+
+            const display = document.createElement('div');
+            display.style.display = 'none';
+            display.style.marginTop = '10px';
+
+            container.appendChild(btn);
+            container.appendChild(display);
+
+            const refresh = () => {
+              if (!currentUser || !loginToUse) {
+                btn.style.display = 'none';
+                return false;
               }
-            }
-          }
+              const waitingKey = `req_${type}_${currentUser.email}_${loginToUse}`;
+              const cdKey = `cd_${type}_${currentUser.email}`;
+              const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
 
-          let copyStr = `اللعبة: ${gameTitle}\n`;
-          card.querySelectorAll('.cred-row').forEach(row => {
-            const label = row.querySelector('.cred-label').innerText;
-            const valEl = row.querySelector('.cred-val');
-            let val = valEl.innerText;
+              let isReceived = false;
 
-            // Check if this row is a password (including Email Password)
-            const isPassword = label.toLowerCase().includes('password') || label.includes('كلمة المرور');
-            if (isPassword) {
-              // Get the real value from title if it exists, or use innerText
-              val = valEl.getAttribute('title') || val;
-              valEl.innerText = '••••••••••••';
-              valEl.removeAttribute('title'); // Prevent hover exposing it
-            } else {
-              // Only add NON-password fields to the full "Copy Account" string
-              copyStr += `${label}: ${val}\n`;
-            }
-
-            if (!row.querySelector('.inline-copy-icon')) {
-              const copyContainer = document.createElement('div');
-              copyContainer.style.display = 'flex';
-              copyContainer.style.alignItems = 'center';
-              copyContainer.style.gap = '8px';
-
-              valEl.parentNode.insertBefore(copyContainer, valEl);
-              copyContainer.appendChild(valEl);
-
-              const copyIcon = document.createElement('div');
-              copyIcon.className = 'inline-copy-icon';
-              copyIcon.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-              copyIcon.style.cssText = 'cursor:pointer; color:var(--muted); display:flex; align-items:center; transition:0.2s';
-              copyIcon.title = 'نسخ';
-              copyIcon.onmouseover = () => copyIcon.style.color = 'var(--accent)';
-              copyIcon.onmouseout = () => copyIcon.style.color = 'var(--muted)';
-              copyIcon.onclick = (e) => {
-                e.stopPropagation();
-                copyText(val, 'تم النسخ بنجاح!');
-
-                // For security, clear the clipboard 15 seconds after copying a password
-                if (isPassword) {
-                  setTimeout(() => {
-                    navigator.clipboard.writeText(' ').catch(() => { });
-                  }, 15000);
+              if (state) {
+                if (Date.now() - state.reqTime > 30 * 60 * 1000) {
+                  localStorage.removeItem(waitingKey);
+                  btn.innerText = `طلب ${label}`;
+                  btn.disabled = false;
+                  btn.style.opacity = '1';
+                  display.style.display = 'none';
+                } else if (state.status === 'waiting') {
+                  const mins = Math.floor((Date.now() - state.reqTime) / 60000);
+                  btn.innerText = `⏳ جاري الانتظار... (${mins} د)`;
+                  btn.disabled = true;
+                  btn.style.opacity = '0.7';
+                  display.style.display = 'none';
+                } else if (state.status === 'received') {
+                  isReceived = true;
+                  btn.innerText = `تم استلام ${label} ✔️`;
+                  btn.disabled = true;
+                  btn.style.opacity = '0.5';
+                  display.style.display = 'block';
+                  display.innerHTML = `
+                    <div class="code-result">
+                      <div class="code-label">الكود المستلم — ${state.identifier || loginToUse}</div>
+                      <div class="code-value">${state.code}</div>
+                      <button class="code-copy-btn" onclick="copyText('${state.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'">نسخ الكود</button>
+                    </div>
+                  `;
                 }
-              };
-              copyContainer.appendChild(copyIcon);
-            }
-          });
+              } else {
+                const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
+                if (Date.now() - lastCd < 2 * 60 * 1000) {
+                  const sec = Math.ceil((2 * 60 * 1000 - (Date.now() - lastCd)) / 1000);
+                  btn.innerText = `انتظر ${sec} ثانية...`;
+                  btn.disabled = true;
+                  btn.style.opacity = '0.5';
+                } else {
+                  btn.innerText = `طلب ${label}`;
+                  btn.disabled = false;
+                  btn.style.opacity = '1';
+                }
+                display.style.display = 'none';
+              }
+              return isReceived;
+            };
 
-          const extraAfter = card.querySelector('.extra-info');
-          if (extraAfter) {
-            copyStr += `تفاصيل إضافية: ${extraAfter.innerText}\n`;
+            btn.onclick = async () => {
+              if (!currentUser || !loginToUse) return;
+              const waitingKey = `req_${type}_${currentUser.email}_${loginToUse}`;
+              const cdKey = `cd_${type}_${currentUser.email}`;
+              
+              const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
+              if (Date.now() - lastCd < 2 * 60 * 1000) return;
+
+              showConfirmDialog(
+                'تنبيه هام جداً ⚠️',
+                'يجب عليك طلب الكود فقط إذا كانت شاشة إدخال الكود ظاهرة أمامك بالفعل في اللعبة أو المنصة.\n\nهل شاشة الكود مفتوحة أمامك الآن؟',
+                async () => {
+                  localStorage.setItem(cdKey, Date.now().toString());
+
+                  btn.classList.add('loading');
+                  btn.innerText = 'جارٍ جلب الكود...';
+                  btn.disabled = true;
+                  display.style.display = 'none';
+
+                  tgSend(`🤖 طلب كود تلقائي\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${loginToUse}\n🔑 Type: ${type}\n⏰ Time: ${new Date().toLocaleString('en-US')}`);
+
+                  try {
+                    const result = await requestCodeFromProxy(loginToUse, type);
+                    if (result.ok) {
+                      localStorage.setItem(waitingKey, JSON.stringify({
+                        status: 'received',
+                        reqTime: Date.now(),
+                        code: result.code,
+                        identifier: result.identifier
+                      }));
+                      card.refreshUI();
+                      tgSend(`✅ كود تلقائي تم استلامه\n📋 ${gameTitle}\n👤 ${loginToUse}\n🔑 ${result.code}`);
+                    } else {
+                      btn.classList.remove('loading');
+                      btn.innerText = `طلب ${label}`;
+                      btn.disabled = false;
+                      btn.style.opacity = '1';
+                      display.style.display = 'block';
+                      display.innerHTML = `<div class="code-error">❌ فشل جلب الكود: ${result.error || 'خطأ غير معروف'}</div>`;
+                      setTimeout(() => { display.style.display = 'none'; }, 8000);
+                    }
+                  } catch (err) {
+                    btn.classList.remove('loading');
+                    btn.innerText = `طلب ${label}`;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    display.style.display = 'block';
+                    display.innerHTML = `<div class="code-error">❌ خطأ في الاتصال بالسيرفر</div>`;
+                    setTimeout(() => { display.style.display = 'none'; }, 8000);
+                  }
+                }
+              );
+            };
+
+            return { container, refresh };
           }
 
-          const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
-          const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
+          const steamUI = createCodeRequestUI('steam', loginVal, 'كود Steam');
+          actionContainer.appendChild(steamUI.container);
 
-          const actionContainer = document.createElement('div');
-          actionContainer.style.marginTop = '12px';
-
-          const reqBtn = document.createElement('button');
-          reqBtn.className = 'req-code-btn';
-          reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
-          reqBtn.style.color = 'var(--gold)';
-          reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
-          reqBtn.style.borderWidth = '1px';
-          reqBtn.style.borderStyle = 'solid';
-
-          const codeDisplay = document.createElement('div');
-          codeDisplay.style.display = 'none';
-          codeDisplay.style.marginTop = '10px';
+          let socialUI = null;
+          if (hasSocial && socialEmail) {
+            socialUI = createCodeRequestUI('social', socialEmail, socialTypeLabel);
+            actionContainer.appendChild(socialUI.container);
+          }
 
           card.refreshUI = () => {
-            if (!currentUser || !loginVal) return;
-            const waitingKey = `req_${currentUser.email}_${loginVal}`;
-            const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
-
-            if (state) {
-              if (Date.now() - state.reqTime > 30 * 60 * 1000) {
-                localStorage.removeItem(waitingKey);
-                reqBtn.innerText = 'طلب كود جديد';
-                reqBtn.disabled = false;
-                reqBtn.style.opacity = '1';
-                codeDisplay.style.display = 'none';
-              } else if (state.status === 'waiting') {
-                const mins = Math.floor((Date.now() - state.reqTime) / 60000);
-                reqBtn.innerText = `⏳ جاري الانتظار... (${mins} د)`;
-                reqBtn.disabled = true;
-                reqBtn.style.opacity = '0.7';
-                codeDisplay.style.display = 'none';
-              } else if (state.status === 'received') {
-                reqBtn.innerText = 'تم استلام الكود ✔️';
-                reqBtn.disabled = true;
-                reqBtn.style.opacity = '0.5';
-
-                codeDisplay.style.display = 'block';
-                codeDisplay.innerHTML = `
-                <div style="background:var(--surface-2);padding:14px;border-radius:8px;border:1px solid var(--accent);text-align:center">
-                  <div style="font-size:11px;color:var(--muted);margin-bottom:6px">الكود المستلم</div>
-                  <div style="color:var(--accent);font-family:monospace;font-size:22px;font-weight:bold;letter-spacing:3px;margin-bottom:10px">${state.code}</div>
-                  <button onclick="copyText('${state.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'" style="background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer;transition:0.2s">نسخ الكود</button>
-                </div>
-              `;
-              }
-            } else {
-              const cdKey = `cd_${currentUser.email}`;
-              const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
-              if (Date.now() - lastCd < 2 * 60 * 1000) {
-                const sec = Math.ceil((2 * 60 * 1000 - (Date.now() - lastCd)) / 1000);
-                reqBtn.innerText = `انتظر ${sec} ثانية...`;
-                reqBtn.disabled = true;
-                reqBtn.style.opacity = '0.5';
-              } else {
-                reqBtn.innerText = 'طلب الكود من الإدارة';
-                reqBtn.disabled = false;
-                reqBtn.style.opacity = '1';
-              }
-              codeDisplay.style.display = 'none';
+            const steamReceived = steamUI ? steamUI.refresh() : false;
+            if (socialUI) {
+               socialUI.refresh();
+               // Hide social UI until Steam is received
+               if(!steamReceived) {
+                  socialUI.container.style.display = 'none';
+               } else {
+                  socialUI.container.style.display = 'block';
+               }
             }
           };
-
-          reqBtn.onclick = async () => {
-            if (!currentUser || !loginVal) return;
-
-            const cdKey = `cd_${currentUser.email}`;
-            const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
-            if (Date.now() - lastCd < 2 * 60 * 1000) return;
-
-            // Determine if this account needs a social code (check for Social club info)
-            const extraEl = card.querySelector('.extra-info');
-            const extraText = extraEl ? extraEl.innerText : '';
-            const hasSocial = /social\s*club/i.test(extraText);
-
-            // For social accounts, extract the email from extra info
-            let codeLogin = loginVal;
-            let codeType = 'steam';
-            if (hasSocial) {
-              const emailMatch = extraText.match(/Social\s*club\s*Email\s*[-:]?\s*([^\s]+)/i);
-              if (emailMatch) {
-                codeLogin = emailMatch[1].trim();
-                codeType = 'social';
-              }
-            }
-
-            // Set cooldown
-            localStorage.setItem(cdKey, Date.now().toString());
-
-            // Show loading state
-            reqBtn.classList.add('loading');
-            reqBtn.innerText = 'جارٍ جلب الكود...';
-            reqBtn.disabled = true;
-            codeDisplay.style.display = 'none';
-
-            // Send notification to Telegram (fire-and-forget)
-            tgSend(`🤖 طلب كود تلقائي\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${codeLogin}\n🔑 Type: ${codeType}\n⏰ Time: ${new Date().toLocaleString('en-US')}`);
-
-            try {
-              const result = await requestCodeFromProxy(codeLogin, codeType);
-
-              if (result.ok) {
-                // Save the code
-                const waitingKey = `req_${currentUser.email}_${loginVal}`;
-                localStorage.setItem(waitingKey, JSON.stringify({
-                  status: 'received',
-                  reqTime: Date.now(),
-                  code: result.code
-                }));
-
-                // Show the code
-                reqBtn.classList.remove('loading');
-                reqBtn.innerText = 'تم استلام الكود ✔️';
-                reqBtn.disabled = true;
-                reqBtn.style.opacity = '0.5';
-
-                codeDisplay.style.display = 'block';
-                codeDisplay.innerHTML = `
-                <div class="code-result">
-                  <div class="code-label">الكود المستلم — ${result.identifier || codeLogin}</div>
-                  <div class="code-value">${result.code}</div>
-                  <button class="code-copy-btn" onclick="copyText('${result.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'">نسخ الكود</button>
-                </div>
-              `;
-
-                // Notify via Telegram that code was received
-                tgSend(`✅ كود تلقائي تم استلامه\n📋 ${gameTitle}\n👤 ${codeLogin}\n🔑 ${result.code}`);
-              } else {
-                // Show error
-                reqBtn.classList.remove('loading');
-                reqBtn.innerText = 'طلب الكود من الإدارة';
-                reqBtn.disabled = false;
-                reqBtn.style.opacity = '1';
-
-                codeDisplay.style.display = 'block';
-                codeDisplay.innerHTML = `
-                <div class="code-error">
-                  ❌ فشل جلب الكود: ${result.error || 'خطأ غير معروف'}
-                </div>
-              `;
-                setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
-              }
-            } catch (err) {
-              reqBtn.classList.remove('loading');
-              reqBtn.innerText = 'طلب الكود من الإدارة';
-              reqBtn.disabled = false;
-              reqBtn.style.opacity = '1';
-
-              codeDisplay.style.display = 'block';
-              codeDisplay.innerHTML = `
-              <div class="code-error">
-                ❌ خطأ في الاتصال بالسيرفر — تأكد أن البروكسي شغال
-              </div>
-            `;
-              setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
-            }
-          };
-
-          actionContainer.appendChild(reqBtn);
-          actionContainer.appendChild(codeDisplay);
-
-          const actionsDiv = document.createElement('div');
-          actionsDiv.style.display = 'flex';
-          actionsDiv.style.gap = '10px';
-          actionsDiv.style.marginTop = '12px';
-
-          const copyBtn = document.createElement('div');
-          copyBtn.className = 'req-code-btn';
-          copyBtn.style.marginTop = '0';
-          copyBtn.innerText = 'نسخ الحساب';
-          copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
-
-          actionsDiv.appendChild(copyBtn);
-
-          card.appendChild(actionsDiv);
-          card.appendChild(actionContainer);
 
           card.refreshUI();
         });
