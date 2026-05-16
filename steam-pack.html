@@ -793,9 +793,6 @@
         return hashArray.map(bytes => bytes.toString(16).padStart(2, '0')).join('');
       }
 
-      const BOT_TOKEN = '8668820100:AAFdGX03IKjB6GWVh-BuOANO7OYPQ3HV68A';
-      const CHAT_ID = '8691592034';
-
       const SUPABASE_URL = 'https://nwyuyxailqogjfzspxex.supabase.co'; // <--- PASTE SUPABASE URL HERE
       const SUPABASE_ANON_KEY = 'sb_publishable_sM6H2xuqWjm8bH3v08NDMA_CSFO_GOU'; // <--- PASTE SUPABASE ANON KEY HERE
 
@@ -885,12 +882,12 @@
       // Telegram Helpers
       async function tgSend(text) {
         try {
-          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          await fetch(`/api/notify`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+            body: JSON.stringify({ text: text })
           });
-        } catch (e) { console.error('TG Send error', e); }
+        } catch (e) { console.error('Notify error', e); }
       }
 
       // ── FunPay Proxy Config ──
