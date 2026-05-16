@@ -303,7 +303,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .code-result {
@@ -359,8 +361,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .accounts-grid.list-view {
@@ -533,13 +542,29 @@
     }
 
     @keyframes blink {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+      }
     }
 
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .price-badge {
@@ -580,7 +605,12 @@
   </div>
 
   <div class="price-badge">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+      stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
+    </svg>
     <span>الأسعار قد تختلف — تواصل معنا للتأكد</span>
   </div>
 
@@ -651,7 +681,7 @@
 
     <div class="accounts-grid" id="accountsGrid">
     </div>
-    
+
     <!-- Load PapaParse for CSV parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script>
@@ -659,25 +689,25 @@
         Papa.parse('steam_accounts.csv', {
           download: true,
           header: true,
-          complete: function(results) {
+          complete: function (results) {
             const grid = document.getElementById('accountsGrid');
             grid.innerHTML = '';
             results.data.forEach(acc => {
               if (!acc.Title) return;
-              
+
               const card = document.createElement('div');
               card.className = 'account-card';
               card.setAttribute('data-name', acc.Title.toLowerCase());
-              
+
               let htmlStr = `<div class="game-title">${acc.Title}</div>`;
-              
+
               if (acc.Login) {
                 htmlStr += `<div class="cred-row">
                   <span class="cred-label">Login</span>
                   <span class="cred-val" onclick="copyText('${acc.Login}')" title="${acc.Login}">${acc.Login}</span>
                 </div>`;
               }
-              
+
               if (acc.Password) {
                 // In the original, passwords were raw or masked based on script execution, 
                 // but the original HTML had them as clear text in the value.
@@ -687,11 +717,11 @@
                   <span class="cred-val" onclick="copyText('${acc.Password}')" title="${acc.Password}">${acc.Password}</span>
                 </div>`;
               }
-              
+
               if (acc.ExtraInfo) {
                 htmlStr += `<div class="extra-info">${acc.ExtraInfo}</div>`;
               }
-              
+
               card.innerHTML = htmlStr;
               grid.appendChild(card);
             });
@@ -703,359 +733,357 @@
           }
         });
       }
-      
+
       document.addEventListener('DOMContentLoaded', loadAccounts);
     </script>
 
-  <script>
-    // Password protection & rate limit logic
-    const MAX_ATTEMPTS = 3;
-    let attempts = parseInt(localStorage.getItem('pwd_attempts') || '0');
+    <script>
+      // Password protection & rate limit logic
+      const MAX_ATTEMPTS = 3;
+      let attempts = parseInt(localStorage.getItem('pwd_attempts') || '0');
 
-    async function hash(string) {
-      const utf8 = new TextEncoder().encode(string);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(bytes => bytes.toString(16).padStart(2, '0')).join('');
-    }
-
-    const BOT_TOKEN = '8668820100:AAFdGX03IKjB6GWVh-BuOANO7OYPQ3HV68A';
-    const CHAT_ID = '8691592034';
-
-    const SUPABASE_URL = 'https://nwyuyxailqogjfzspxex.supabase.co'; // <--- PASTE SUPABASE URL HERE
-    const SUPABASE_ANON_KEY = 'sb_publishable_sM6H2xuqWjm8bH3v08NDMA_CSFO_GOU'; // <--- PASTE SUPABASE ANON KEY HERE
-
-    // Auth Logic
-    let currentUser = null;
-
-    async function checkLogin() {
-      const email = document.getElementById('email-input').value.trim().toLowerCase();
-      const pwd = document.getElementById('pwd-input').value;
-      const errEl = document.getElementById('login-error');
-
-      if (!email || !pwd) {
-        errEl.innerText = 'يرجى إدخال البريد الإلكتروني وكلمة المرور';
-        errEl.style.display = 'block';
-        return;
+      async function hash(string) {
+        const utf8 = new TextEncoder().encode(string);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(bytes => bytes.toString(16).padStart(2, '0')).join('');
       }
 
-      document.getElementById('login-btn').innerText = 'جاري التحقق...';
-      document.getElementById('login-btn').disabled = true;
+      const BOT_TOKEN = '8668820100:AAFdGX03IKjB6GWVh-BuOANO7OYPQ3HV68A';
+      const CHAT_ID = '8691592034';
 
-      try {
-        // ==========================================
-        // 1) SUPABASE AUTH FLOW (Production)
-        // ==========================================
-        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && window.supabase) {
-          const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-          const { data, error } = await supabase.auth.signInWithPassword({ email, password: pwd });
+      const SUPABASE_URL = 'https://nwyuyxailqogjfzspxex.supabase.co'; // <--- PASTE SUPABASE URL HERE
+      const SUPABASE_ANON_KEY = 'sb_publishable_sM6H2xuqWjm8bH3v08NDMA_CSFO_GOU'; // <--- PASTE SUPABASE ANON KEY HERE
 
-          if (error) {
-            errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
-            errEl.style.display = 'block';
-            return;
-          }
+      // Auth Logic
+      let currentUser = null;
 
-          currentUser = { email: data.user.email, name: data.user.email }; // Supabase users
-          sessionStorage.setItem('sp_user', JSON.stringify(currentUser));
-        }
-        // ==========================================
-        // 2) USERS.JSON FALLBACK FLOW (Prototype)
-        // ==========================================
-        else {
-          const res = await fetch('data/users.json');
-          const data = await res.json();
-          const pwdHash = await hash(pwd);
+      async function checkLogin() {
+        const email = document.getElementById('email-input').value.trim().toLowerCase();
+        const pwd = document.getElementById('pwd-input').value;
+        const errEl = document.getElementById('login-error');
 
-          const user = data.users.find(u => u.email === email && u.passwordHash === pwdHash);
-
-          if (user) {
-            currentUser = user;
-            sessionStorage.setItem('sp_user', JSON.stringify(user));
-          } else {
-            errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
-            errEl.style.display = 'block';
-            return;
-          }
+        if (!email || !pwd) {
+          errEl.innerText = 'يرجى إدخال البريد الإلكتروني وكلمة المرور';
+          errEl.style.display = 'block';
+          return;
         }
 
-        // Successful login
-        document.getElementById('pwd-overlay').style.display = 'none';
-        errEl.style.display = 'none';
+        document.getElementById('login-btn').innerText = 'جاري التحقق...';
+        document.getElementById('login-btn').disabled = true;
 
-        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(ipData => {
-          tgSend(`🔓 تسجيل دخول ناجح\n👤 ${currentUser.name} (${currentUser.email})\n🌐 IP: ${ipData.ip}\n⏰ ${new Date().toLocaleString('ar-EG')}`);
-        }).catch(() => { });
+        try {
+          // ==========================================
+          // 1) SUPABASE AUTH FLOW (Production)
+          // ==========================================
+          if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && window.supabase) {
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password: pwd });
 
-        bootApp();
+            if (error) {
+              errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+              errEl.style.display = 'block';
+              return;
+            }
 
-      } catch (e) {
-        console.error(e);
-        errEl.innerText = 'حدث خطأ في الاتصال بقاعدة البيانات';
-        errEl.style.display = 'block';
-      } finally {
-        document.getElementById('login-btn').innerText = 'دخول';
-        document.getElementById('login-btn').disabled = false;
-      }
-    }
+            currentUser = { email: data.user.email, name: data.user.email }; // Supabase users
+            sessionStorage.setItem('sp_user', JSON.stringify(currentUser));
+          }
+          // ==========================================
+          // 2) USERS.JSON FALLBACK FLOW (Prototype)
+          // ==========================================
+          else {
+            const res = await fetch('data/users.json');
+            const data = await res.json();
+            const pwdHash = await hash(pwd);
 
-    function initAuth() {
-      const stored = sessionStorage.getItem('sp_user');
-      if (stored) {
-        currentUser = JSON.parse(stored);
-        document.getElementById('pwd-overlay').style.display = 'none';
-        bootApp();
-      }
-    }
+            const user = data.users.find(u => u.email === email && u.passwordHash === pwdHash);
 
-    // Telegram Helpers
-    async function tgSend(text) {
-      try {
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: text })
-        });
-      } catch (e) { console.error('TG Send error', e); }
-    }
-
-    // ── FunPay Proxy Config ──
-    // After deploying to Render, replace with your actual URL like:
-    // https://funpay-proxy-XXXX.onrender.com
-    const FUNPAY_PROXY = 'https://funpay-proxy.onrender.com';
-    const FUNPAY_API_KEY = 'CHANGE_ME_TO_YOUR_SECRET_KEY';
-
-    async function requestCodeFromProxy(login, type = 'steam') {
-      const res = await fetch(`${FUNPAY_PROXY}/get-code`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ login, type, key: FUNPAY_API_KEY })
-      });
-      return await res.json();
-    }
-
-    let isBooted = false;
-    function bootApp() {
-      if (isBooted) return;
-      isBooted = true;
-      injectCardActions();
-    }
-
-    function refreshAllCards() {
-      if (!currentUser) return;
-      document.querySelectorAll('.account-card').forEach(card => {
-        if (card.refreshUI) card.refreshUI();
-      });
-    }
-
-    function injectCardActions() {
-      document.querySelectorAll('.account-card').forEach(card => {
-        const gameTitle = card.querySelector('.game-title').innerText;
-
-        // Extract Email/Password from extra-info if present
-        const extra = card.querySelector('.extra-info');
-        if (extra) {
-          const extraText = extra.innerText;
-          const match = extraText.match(/(?:xbox\s+)?Email\s*[-:]?\s*([^\s]+)\s+Password\s*[-:]?\s*([^\s]+)/i);
-          if (match) {
-            const extEmail = match[1];
-            const extPass = match[2];
-
-            const emailRow = document.createElement('div');
-            emailRow.className = 'cred-row';
-            emailRow.innerHTML = `<span class="cred-label">Xbox Email</span><span class="cred-val">${extEmail}</span>`;
-            extra.parentNode.insertBefore(emailRow, extra);
-
-            const passRow = document.createElement('div');
-            passRow.className = 'cred-row';
-            passRow.innerHTML = `<span class="cred-label">Xbox Password</span><span class="cred-val" title="${extPass}">${extPass}</span>`;
-            extra.parentNode.insertBefore(passRow, extra);
-
-            let remainder = extraText.replace(match[0], '').trim();
-            if (remainder.toLowerCase().replace('xbox', '').trim() === '') {
-              extra.remove();
+            if (user) {
+              currentUser = user;
+              sessionStorage.setItem('sp_user', JSON.stringify(user));
             } else {
-              extra.innerText = remainder;
+              errEl.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+              errEl.style.display = 'block';
+              return;
             }
           }
+
+          // Successful login
+          document.getElementById('pwd-overlay').style.display = 'none';
+          errEl.style.display = 'none';
+
+          fetch('https://api.ipify.org?format=json').then(r => r.json()).then(ipData => {
+            tgSend(`🔓 تسجيل دخول ناجح\n👤 ${currentUser.name} (${currentUser.email})\n🌐 IP: ${ipData.ip}\n⏰ ${new Date().toLocaleString('ar-EG')}`);
+          }).catch(() => { });
+
+          bootApp();
+
+        } catch (e) {
+          console.error(e);
+          errEl.innerText = 'حدث خطأ في الاتصال بقاعدة البيانات';
+          errEl.style.display = 'block';
+        } finally {
+          document.getElementById('login-btn').innerText = 'دخول';
+          document.getElementById('login-btn').disabled = false;
         }
+      }
 
-        let copyStr = `اللعبة: ${gameTitle}\n`;
-        card.querySelectorAll('.cred-row').forEach(row => {
-          const label = row.querySelector('.cred-label').innerText;
-          const valEl = row.querySelector('.cred-val');
-          let val = valEl.innerText;
+      function initAuth() {
+        const stored = sessionStorage.getItem('sp_user');
+        if (stored) {
+          currentUser = JSON.parse(stored);
+          document.getElementById('pwd-overlay').style.display = 'none';
+          bootApp();
+        }
+      }
 
-          // Check if this row is a password (including Email Password)
-          const isPassword = label.toLowerCase().includes('password') || label.includes('كلمة المرور');
-          if (isPassword) {
-            // Get the real value from title if it exists, or use innerText
-            val = valEl.getAttribute('title') || val;
-            valEl.innerText = '••••••••••••';
-            valEl.removeAttribute('title'); // Prevent hover exposing it
-          } else {
-            // Only add NON-password fields to the full "Copy Account" string
-            copyStr += `${label}: ${val}\n`;
-          }
+      // Telegram Helpers
+      async function tgSend(text) {
+        try {
+          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+          });
+        } catch (e) { console.error('TG Send error', e); }
+      }
 
-          if (!row.querySelector('.inline-copy-icon')) {
-            const copyContainer = document.createElement('div');
-            copyContainer.style.display = 'flex';
-            copyContainer.style.alignItems = 'center';
-            copyContainer.style.gap = '8px';
+      // ── FunPay Proxy Config ──
+      const FUNPAY_PROXY = 'https://krachdev-funpay-proxy.hf.space';
+      const FUNPAY_API_KEY = '4f187f8ae6200352d9dfcb6d18d1ca7f'; // Must match your HF secret
 
-            valEl.parentNode.insertBefore(copyContainer, valEl);
-            copyContainer.appendChild(valEl);
-
-            const copyIcon = document.createElement('div');
-            copyIcon.className = 'inline-copy-icon';
-            copyIcon.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
-            copyIcon.style.cssText = 'cursor:pointer; color:var(--muted); display:flex; align-items:center; transition:0.2s';
-            copyIcon.title = 'نسخ';
-            copyIcon.onmouseover = () => copyIcon.style.color = 'var(--accent)';
-            copyIcon.onmouseout = () => copyIcon.style.color = 'var(--muted)';
-            copyIcon.onclick = (e) => {
-              e.stopPropagation();
-              copyText(val, 'تم النسخ بنجاح!');
-
-              // For security, clear the clipboard 15 seconds after copying a password
-              if (isPassword) {
-                setTimeout(() => {
-                  navigator.clipboard.writeText(' ').catch(() => { });
-                }, 15000);
-              }
-            };
-            copyContainer.appendChild(copyIcon);
-          }
+      async function requestCodeFromProxy(login, type = 'steam') {
+        const res = await fetch(`${FUNPAY_PROXY}/get-code`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ login, type, key: FUNPAY_API_KEY })
         });
+        return await res.json();
+      }
 
-        const extraAfter = card.querySelector('.extra-info');
-        if (extraAfter) {
-          copyStr += `تفاصيل إضافية: ${extraAfter.innerText}\n`;
-        }
+      let isBooted = false;
+      function bootApp() {
+        if (isBooted) return;
+        isBooted = true;
+        injectCardActions();
+      }
 
-        const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
-        const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
+      function refreshAllCards() {
+        if (!currentUser) return;
+        document.querySelectorAll('.account-card').forEach(card => {
+          if (card.refreshUI) card.refreshUI();
+        });
+      }
 
-        const actionContainer = document.createElement('div');
-        actionContainer.style.marginTop = '12px';
+      function injectCardActions() {
+        document.querySelectorAll('.account-card').forEach(card => {
+          const gameTitle = card.querySelector('.game-title').innerText;
 
-        const reqBtn = document.createElement('button');
-        reqBtn.className = 'req-code-btn';
-        reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
-        reqBtn.style.color = 'var(--gold)';
-        reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
-        reqBtn.style.borderWidth = '1px';
-        reqBtn.style.borderStyle = 'solid';
+          // Extract Email/Password from extra-info if present
+          const extra = card.querySelector('.extra-info');
+          if (extra) {
+            const extraText = extra.innerText;
+            const match = extraText.match(/(?:xbox\s+)?Email\s*[-:]?\s*([^\s]+)\s+Password\s*[-:]?\s*([^\s]+)/i);
+            if (match) {
+              const extEmail = match[1];
+              const extPass = match[2];
 
-        const codeDisplay = document.createElement('div');
-        codeDisplay.style.display = 'none';
-        codeDisplay.style.marginTop = '10px';
+              const emailRow = document.createElement('div');
+              emailRow.className = 'cred-row';
+              emailRow.innerHTML = `<span class="cred-label">Xbox Email</span><span class="cred-val">${extEmail}</span>`;
+              extra.parentNode.insertBefore(emailRow, extra);
 
-        card.refreshUI = () => {
-          if (!currentUser || !loginVal) return;
-          const waitingKey = `req_${currentUser.email}_${loginVal}`;
-          const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
+              const passRow = document.createElement('div');
+              passRow.className = 'cred-row';
+              passRow.innerHTML = `<span class="cred-label">Xbox Password</span><span class="cred-val" title="${extPass}">${extPass}</span>`;
+              extra.parentNode.insertBefore(passRow, extra);
 
-          if (state) {
-            if (Date.now() - state.reqTime > 30 * 60 * 1000) {
-              localStorage.removeItem(waitingKey);
-              reqBtn.innerText = 'طلب كود جديد';
-              reqBtn.disabled = false;
-              reqBtn.style.opacity = '1';
-              codeDisplay.style.display = 'none';
-            } else if (state.status === 'waiting') {
-              const mins = Math.floor((Date.now() - state.reqTime) / 60000);
-              reqBtn.innerText = `⏳ جاري الانتظار... (${mins} د)`;
-              reqBtn.disabled = true;
-              reqBtn.style.opacity = '0.7';
-              codeDisplay.style.display = 'none';
-            } else if (state.status === 'received') {
-              reqBtn.innerText = 'تم استلام الكود ✔️';
-              reqBtn.disabled = true;
-              reqBtn.style.opacity = '0.5';
+              let remainder = extraText.replace(match[0], '').trim();
+              if (remainder.toLowerCase().replace('xbox', '').trim() === '') {
+                extra.remove();
+              } else {
+                extra.innerText = remainder;
+              }
+            }
+          }
 
-              codeDisplay.style.display = 'block';
-              codeDisplay.innerHTML = `
+          let copyStr = `اللعبة: ${gameTitle}\n`;
+          card.querySelectorAll('.cred-row').forEach(row => {
+            const label = row.querySelector('.cred-label').innerText;
+            const valEl = row.querySelector('.cred-val');
+            let val = valEl.innerText;
+
+            // Check if this row is a password (including Email Password)
+            const isPassword = label.toLowerCase().includes('password') || label.includes('كلمة المرور');
+            if (isPassword) {
+              // Get the real value from title if it exists, or use innerText
+              val = valEl.getAttribute('title') || val;
+              valEl.innerText = '••••••••••••';
+              valEl.removeAttribute('title'); // Prevent hover exposing it
+            } else {
+              // Only add NON-password fields to the full "Copy Account" string
+              copyStr += `${label}: ${val}\n`;
+            }
+
+            if (!row.querySelector('.inline-copy-icon')) {
+              const copyContainer = document.createElement('div');
+              copyContainer.style.display = 'flex';
+              copyContainer.style.alignItems = 'center';
+              copyContainer.style.gap = '8px';
+
+              valEl.parentNode.insertBefore(copyContainer, valEl);
+              copyContainer.appendChild(valEl);
+
+              const copyIcon = document.createElement('div');
+              copyIcon.className = 'inline-copy-icon';
+              copyIcon.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+              copyIcon.style.cssText = 'cursor:pointer; color:var(--muted); display:flex; align-items:center; transition:0.2s';
+              copyIcon.title = 'نسخ';
+              copyIcon.onmouseover = () => copyIcon.style.color = 'var(--accent)';
+              copyIcon.onmouseout = () => copyIcon.style.color = 'var(--muted)';
+              copyIcon.onclick = (e) => {
+                e.stopPropagation();
+                copyText(val, 'تم النسخ بنجاح!');
+
+                // For security, clear the clipboard 15 seconds after copying a password
+                if (isPassword) {
+                  setTimeout(() => {
+                    navigator.clipboard.writeText(' ').catch(() => { });
+                  }, 15000);
+                }
+              };
+              copyContainer.appendChild(copyIcon);
+            }
+          });
+
+          const extraAfter = card.querySelector('.extra-info');
+          if (extraAfter) {
+            copyStr += `تفاصيل إضافية: ${extraAfter.innerText}\n`;
+          }
+
+          const loginEl = Array.from(card.querySelectorAll('.cred-row')).find(r => r.querySelector('.cred-label').innerText.includes('Login'));
+          const loginVal = loginEl ? loginEl.querySelector('.cred-val').innerText : '';
+
+          const actionContainer = document.createElement('div');
+          actionContainer.style.marginTop = '12px';
+
+          const reqBtn = document.createElement('button');
+          reqBtn.className = 'req-code-btn';
+          reqBtn.style.background = 'rgba(245, 200, 66, 0.08)';
+          reqBtn.style.color = 'var(--gold)';
+          reqBtn.style.borderColor = 'rgba(245, 200, 66, 0.25)';
+          reqBtn.style.borderWidth = '1px';
+          reqBtn.style.borderStyle = 'solid';
+
+          const codeDisplay = document.createElement('div');
+          codeDisplay.style.display = 'none';
+          codeDisplay.style.marginTop = '10px';
+
+          card.refreshUI = () => {
+            if (!currentUser || !loginVal) return;
+            const waitingKey = `req_${currentUser.email}_${loginVal}`;
+            const state = JSON.parse(localStorage.getItem(waitingKey) || 'null');
+
+            if (state) {
+              if (Date.now() - state.reqTime > 30 * 60 * 1000) {
+                localStorage.removeItem(waitingKey);
+                reqBtn.innerText = 'طلب كود جديد';
+                reqBtn.disabled = false;
+                reqBtn.style.opacity = '1';
+                codeDisplay.style.display = 'none';
+              } else if (state.status === 'waiting') {
+                const mins = Math.floor((Date.now() - state.reqTime) / 60000);
+                reqBtn.innerText = `⏳ جاري الانتظار... (${mins} د)`;
+                reqBtn.disabled = true;
+                reqBtn.style.opacity = '0.7';
+                codeDisplay.style.display = 'none';
+              } else if (state.status === 'received') {
+                reqBtn.innerText = 'تم استلام الكود ✔️';
+                reqBtn.disabled = true;
+                reqBtn.style.opacity = '0.5';
+
+                codeDisplay.style.display = 'block';
+                codeDisplay.innerHTML = `
                 <div style="background:var(--surface-2);padding:14px;border-radius:8px;border:1px solid var(--accent);text-align:center">
                   <div style="font-size:11px;color:var(--muted);margin-bottom:6px">الكود المستلم</div>
                   <div style="color:var(--accent);font-family:monospace;font-size:22px;font-weight:bold;letter-spacing:3px;margin-bottom:10px">${state.code}</div>
                   <button onclick="copyText('${state.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'" style="background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 16px;border-radius:100px;font-size:12px;cursor:pointer;transition:0.2s">نسخ الكود</button>
                 </div>
               `;
+              }
+            } else {
+              const cdKey = `cd_${currentUser.email}`;
+              const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
+              if (Date.now() - lastCd < 2 * 60 * 1000) {
+                const sec = Math.ceil((2 * 60 * 1000 - (Date.now() - lastCd)) / 1000);
+                reqBtn.innerText = `انتظر ${sec} ثانية...`;
+                reqBtn.disabled = true;
+                reqBtn.style.opacity = '0.5';
+              } else {
+                reqBtn.innerText = 'طلب الكود من الإدارة';
+                reqBtn.disabled = false;
+                reqBtn.style.opacity = '1';
+              }
+              codeDisplay.style.display = 'none';
             }
-          } else {
+          };
+
+          reqBtn.onclick = async () => {
+            if (!currentUser || !loginVal) return;
+
             const cdKey = `cd_${currentUser.email}`;
             const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
-            if (Date.now() - lastCd < 2 * 60 * 1000) {
-              const sec = Math.ceil((2 * 60 * 1000 - (Date.now() - lastCd)) / 1000);
-              reqBtn.innerText = `انتظر ${sec} ثانية...`;
-              reqBtn.disabled = true;
-              reqBtn.style.opacity = '0.5';
-            } else {
-              reqBtn.innerText = 'طلب الكود من الإدارة';
-              reqBtn.disabled = false;
-              reqBtn.style.opacity = '1';
+            if (Date.now() - lastCd < 2 * 60 * 1000) return;
+
+            // Determine if this account needs a social code (check for Social club info)
+            const extraEl = card.querySelector('.extra-info');
+            const extraText = extraEl ? extraEl.innerText : '';
+            const hasSocial = /social\s*club/i.test(extraText);
+
+            // For social accounts, extract the email from extra info
+            let codeLogin = loginVal;
+            let codeType = 'steam';
+            if (hasSocial) {
+              const emailMatch = extraText.match(/Social\s*club\s*Email\s*[-:]?\s*([^\s]+)/i);
+              if (emailMatch) {
+                codeLogin = emailMatch[1].trim();
+                codeType = 'social';
+              }
             }
+
+            // Set cooldown
+            localStorage.setItem(cdKey, Date.now().toString());
+
+            // Show loading state
+            reqBtn.classList.add('loading');
+            reqBtn.innerText = 'جارٍ جلب الكود...';
+            reqBtn.disabled = true;
             codeDisplay.style.display = 'none';
-          }
-        };
 
-        reqBtn.onclick = async () => {
-          if (!currentUser || !loginVal) return;
+            // Send notification to Telegram (fire-and-forget)
+            tgSend(`🤖 طلب كود تلقائي\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${codeLogin}\n🔑 Type: ${codeType}\n⏰ Time: ${new Date().toLocaleString('en-US')}`);
 
-          const cdKey = `cd_${currentUser.email}`;
-          const lastCd = parseInt(localStorage.getItem(cdKey) || '0');
-          if (Date.now() - lastCd < 2 * 60 * 1000) return;
+            try {
+              const result = await requestCodeFromProxy(codeLogin, codeType);
 
-          // Determine if this account needs a social code (check for Social club info)
-          const extraEl = card.querySelector('.extra-info');
-          const extraText = extraEl ? extraEl.innerText : '';
-          const hasSocial = /social\s*club/i.test(extraText);
+              if (result.ok) {
+                // Save the code
+                const waitingKey = `req_${currentUser.email}_${loginVal}`;
+                localStorage.setItem(waitingKey, JSON.stringify({
+                  status: 'received',
+                  reqTime: Date.now(),
+                  code: result.code
+                }));
 
-          // For social accounts, extract the email from extra info
-          let codeLogin = loginVal;
-          let codeType = 'steam';
-          if (hasSocial) {
-            const emailMatch = extraText.match(/Social\s*club\s*Email\s*[-:]?\s*([^\s]+)/i);
-            if (emailMatch) {
-              codeLogin = emailMatch[1].trim();
-              codeType = 'social';
-            }
-          }
+                // Show the code
+                reqBtn.classList.remove('loading');
+                reqBtn.innerText = 'تم استلام الكود ✔️';
+                reqBtn.disabled = true;
+                reqBtn.style.opacity = '0.5';
 
-          // Set cooldown
-          localStorage.setItem(cdKey, Date.now().toString());
-
-          // Show loading state
-          reqBtn.classList.add('loading');
-          reqBtn.innerText = 'جارٍ جلب الكود...';
-          reqBtn.disabled = true;
-          codeDisplay.style.display = 'none';
-
-          // Send notification to Telegram (fire-and-forget)
-          tgSend(`🤖 طلب كود تلقائي\n━━━━━━━━━━━━━━━━━━\n👤 User: ${currentUser.email}\n📋 Game: ${gameTitle}\n👤 Login: ${codeLogin}\n🔑 Type: ${codeType}\n⏰ Time: ${new Date().toLocaleString('en-US')}`);
-
-          try {
-            const result = await requestCodeFromProxy(codeLogin, codeType);
-
-            if (result.ok) {
-              // Save the code
-              const waitingKey = `req_${currentUser.email}_${loginVal}`;
-              localStorage.setItem(waitingKey, JSON.stringify({
-                status: 'received',
-                reqTime: Date.now(),
-                code: result.code
-              }));
-
-              // Show the code
-              reqBtn.classList.remove('loading');
-              reqBtn.innerText = 'تم استلام الكود ✔️';
-              reqBtn.disabled = true;
-              reqBtn.style.opacity = '0.5';
-
-              codeDisplay.style.display = 'block';
-              codeDisplay.innerHTML = `
+                codeDisplay.style.display = 'block';
+                codeDisplay.innerHTML = `
                 <div class="code-result">
                   <div class="code-label">الكود المستلم — ${result.identifier || codeLogin}</div>
                   <div class="code-value">${result.code}</div>
@@ -1063,10 +1091,24 @@
                 </div>
               `;
 
-              // Notify via Telegram that code was received
-              tgSend(`✅ كود تلقائي تم استلامه\n📋 ${gameTitle}\n👤 ${codeLogin}\n🔑 ${result.code}`);
-            } else {
-              // Show error
+                // Notify via Telegram that code was received
+                tgSend(`✅ كود تلقائي تم استلامه\n📋 ${gameTitle}\n👤 ${codeLogin}\n🔑 ${result.code}`);
+              } else {
+                // Show error
+                reqBtn.classList.remove('loading');
+                reqBtn.innerText = 'طلب الكود من الإدارة';
+                reqBtn.disabled = false;
+                reqBtn.style.opacity = '1';
+
+                codeDisplay.style.display = 'block';
+                codeDisplay.innerHTML = `
+                <div class="code-error">
+                  ❌ فشل جلب الكود: ${result.error || 'خطأ غير معروف'}
+                </div>
+              `;
+                setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
+              }
+            } catch (err) {
               reqBtn.classList.remove('loading');
               reqBtn.innerText = 'طلب الكود من الإدارة';
               reqBtn.disabled = false;
@@ -1074,94 +1116,80 @@
 
               codeDisplay.style.display = 'block';
               codeDisplay.innerHTML = `
-                <div class="code-error">
-                  ❌ فشل جلب الكود: ${result.error || 'خطأ غير معروف'}
-                </div>
-              `;
-              setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
-            }
-          } catch (err) {
-            reqBtn.classList.remove('loading');
-            reqBtn.innerText = 'طلب الكود من الإدارة';
-            reqBtn.disabled = false;
-            reqBtn.style.opacity = '1';
-
-            codeDisplay.style.display = 'block';
-            codeDisplay.innerHTML = `
               <div class="code-error">
                 ❌ خطأ في الاتصال بالسيرفر — تأكد أن البروكسي شغال
               </div>
             `;
-            setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
-          }
-        };
+              setTimeout(() => { codeDisplay.style.display = 'none'; }, 8000);
+            }
+          };
 
-        actionContainer.appendChild(reqBtn);
-        actionContainer.appendChild(codeDisplay);
+          actionContainer.appendChild(reqBtn);
+          actionContainer.appendChild(codeDisplay);
 
-        const actionsDiv = document.createElement('div');
-        actionsDiv.style.display = 'flex';
-        actionsDiv.style.gap = '10px';
-        actionsDiv.style.marginTop = '12px';
+          const actionsDiv = document.createElement('div');
+          actionsDiv.style.display = 'flex';
+          actionsDiv.style.gap = '10px';
+          actionsDiv.style.marginTop = '12px';
 
-        const copyBtn = document.createElement('div');
-        copyBtn.className = 'req-code-btn';
-        copyBtn.style.marginTop = '0';
-        copyBtn.innerText = 'نسخ الحساب';
-        copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
+          const copyBtn = document.createElement('div');
+          copyBtn.className = 'req-code-btn';
+          copyBtn.style.marginTop = '0';
+          copyBtn.innerText = 'نسخ الحساب';
+          copyBtn.onclick = () => copyText(copyStr.trim(), 'تم نسخ الحساب بالكامل!');
 
-        actionsDiv.appendChild(copyBtn);
+          actionsDiv.appendChild(copyBtn);
 
-        card.appendChild(actionsDiv);
-        card.appendChild(actionContainer);
+          card.appendChild(actionsDiv);
+          card.appendChild(actionContainer);
 
-        card.refreshUI();
-      });
-    }
-
-    function filterGames() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.account-card');
-
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name');
-        if (name.includes(input)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    function toggleView() {
-      const grid = document.getElementById('accountsGrid');
-      const icon = document.getElementById('viewIcon');
-      if (grid.classList.contains('list-view')) {
-        grid.classList.remove('list-view');
-        icon.innerHTML = '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>';
-      } else {
-        grid.classList.add('list-view');
-        icon.innerHTML = '<line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line>';
+          card.refreshUI();
+        });
       }
-    }
 
-    let toastTimeout;
-    function copyText(text, message = 'تم النسخ بنجاح!') {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        toast.innerText = message;
-        toast.classList.add('show');
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2000);
-      });
-    }
+      function filterGames() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.account-card');
 
-    // document.addEventListener("DOMContentLoaded", initAuth);
-  </script>
-  <div id="toast" class="toast"></div>
-  <script defer src="scripts/analytics.js"></script>
+        cards.forEach(card => {
+          const name = card.getAttribute('data-name');
+          if (name.includes(input)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      function toggleView() {
+        const grid = document.getElementById('accountsGrid');
+        const icon = document.getElementById('viewIcon');
+        if (grid.classList.contains('list-view')) {
+          grid.classList.remove('list-view');
+          icon.innerHTML = '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>';
+        } else {
+          grid.classList.add('list-view');
+          icon.innerHTML = '<line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line>';
+        }
+      }
+
+      let toastTimeout;
+      function copyText(text, message = 'تم النسخ بنجاح!') {
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById('toast');
+          toast.innerText = message;
+          toast.classList.add('show');
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+          }, 2000);
+        });
+      }
+
+      // document.addEventListener("DOMContentLoaded", initAuth);
+    </script>
+    <div id="toast" class="toast"></div>
+    <script defer src="scripts/analytics.js"></script>
 </body>
 
 </html>
