@@ -703,14 +703,16 @@
               card.style.display = 'flex';
               card.style.flexDirection = 'column';
 
-              const safeId = acc.Title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+              const rawTitle = acc.Title || 'unknown';
+              const displayTitle = rawTitle.replace(/---+.*$/, '').trim();
+              const safeId = displayTitle.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
               const coverUrl = `assets/covers/${safeId}.webp`;
 
               let htmlStr = `
                 <div class="card-cover" style="height: 200px; position: relative; border-bottom: 1px solid var(--border);">
-                   <img src="${coverUrl}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(acc.Title)}&background=random'" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: filter 0.3s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'" />
+                   <img src="${coverUrl}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayTitle)}&background=random'" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: filter 0.3s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'" />
                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 30px 15px 15px;">
-                      <h3 class="game-title" style="font-size: 18px; margin:0; text-align: left; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">${acc.Title}</h3>
+                      <h3 class="game-title" style="font-size: 18px; margin:0; text-align: left; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">${displayTitle}</h3>
                    </div>
                 </div>
                 <div class="card-body-content" style="padding: 16px; flex: 1; display: flex; flex-direction: column;">
@@ -727,8 +729,8 @@
                    
                    <div class="data-panel" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border);">
                       <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                         <button onclick="copyText('${(acc.Login || '').replace(/'/g, "\'")}', 'تم نسخ اسم المستخدم!')" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ المستخدم</button>
-                         <button onclick="copyText('${(acc.Password || '').replace(/'/g, "\'")}', 'تم نسخ كلمة المرور!')" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ الباسورد</button>
+                         <button class="copy-login-btn" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ المستخدم</button>
+                         <button class="copy-pass-btn" style="flex: 1; background: rgba(0,217,255,0.1); color: var(--accent); border: 1px solid rgba(0,217,255,0.3); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;">نسخ الباسورد</button>
                       </div>
                       <div class="actions-container"></div>
                    </div>
@@ -739,6 +741,14 @@
 
               const toggleBtn = card.querySelector('.toggle-data-btn');
               const dataPanel = card.querySelector('.data-panel');
+              
+              card.querySelector('.copy-login-btn').onclick = () => {
+                 copyText(acc.Login || '', 'تم نسخ اسم المستخدم!');
+              };
+              card.querySelector('.copy-pass-btn').onclick = () => {
+                 copyText(acc.Password || '', 'تم نسخ كلمة المرور!');
+              };
+
               toggleBtn.onclick = () => {
                  if(dataPanel.style.display === 'none') {
                     dataPanel.style.display = 'block';

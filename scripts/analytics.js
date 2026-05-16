@@ -67,10 +67,10 @@
 
   async function getCountry() {
     try {
-      const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) });
+      const res = await fetch('https://get.geojs.io/v1/ip/country.json', { signal: AbortSignal.timeout(3000) });
       if (res.ok) {
         const data = await res.json();
-        return { country: data.country_name || 'Unknown', country_code: data.country_code || 'XX' };
+        return { country: data.name || 'Unknown', country_code: data.country || 'XX' };
       }
     } catch { /* silent */ }
     return { country: 'Unknown', country_code: 'XX' };
