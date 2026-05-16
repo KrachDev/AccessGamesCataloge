@@ -153,7 +153,15 @@
       width: 100%;
       max-width: 500px;
       margin: 0 auto 40px;
-      position: relative;
+      position: sticky;
+      top: 90px;
+      z-index: 90;
+      padding: 10px;
+      border-radius: 100px;
+      background: rgba(3, 7, 12, 0.7);
+      backdrop-filter: blur(12px) saturate(1.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .search-box input {
@@ -705,13 +713,13 @@
 
               const rawTitle = acc.Title || 'unknown';
               const displayTitle = rawTitle.replace(/---+.*$/, '').trim();
-              const safeId = displayTitle.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+              const safeId = displayTitle.toLowerCase().replace(/[''\u2018\u2019\u0060]/g, '').replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
               const coverUrl = `assets/covers/${safeId}.webp`;
 
               let htmlStr = `
-                <div class="card-cover" style="height: 200px; position: relative; border-bottom: 1px solid var(--border);">
+                <div class="card-cover" style="aspect-ratio: 2 / 3; width: 100%; position: relative; border-bottom: 1px solid var(--border);">
                    <img src="${coverUrl}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayTitle)}&background=random'" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: filter 0.3s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'" />
-                   <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 30px 15px 15px;">
+                   <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.95)); padding: 40px 15px 15px;">
                       <h3 class="game-title" style="font-size: 18px; margin:0; text-align: left; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">${displayTitle}</h3>
                    </div>
                 </div>
@@ -1067,7 +1075,7 @@
                     <div class="code-result">
                       <div class="code-label">الكود المستلم — ${state.identifier || loginToUse}</div>
                       <div class="code-value">${state.code}</div>
-                      <button class="code-copy-btn" onclick="copyText('${state.code}', 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'">نسخ الكود</button>
+                      <button class="code-copy-btn" data-code="${state.code.replace(/"/g, '&quot;')}" onclick="copyText(this.dataset.code, 'تم نسخ الكود!'); this.style.background='var(--accent)'; this.style.color='#000'">نسخ الكود</button>
                     </div>
                   `;
                 }
